@@ -1,8 +1,9 @@
 import java.sql.*;
+import entities.customer;
 
 // To run this example write: 
-// javac dbconfig.java
-// java -cp ".:postgresql-42.2.8.jar" jdbcpostgreSQL.java
+// javac */**.java *.java
+// java -cp ".:postgresql-42.2.8.jar" dbconnectionexample.java
 
 public class dbconnectionexample {
   public static void main(String args[]) {
@@ -19,12 +20,8 @@ public class dbconnectionexample {
     }
     System.out.println("Opened database successfully");
     try {
-      DatabaseMetaData metaData = conn.getMetaData();
-      String[] types = { "TABLE" };
-      ResultSet tables = metaData.getTables(null, null, "%", types);
-      while (tables.next()) {
-        System.out.println(tables.getString("TABLE_NAME"));
-      }
+      customer abdullah = new customer("abdullah", "balbaid", "ahbalbaid@tamu.edu", "8328973664");
+      abdullah.createCustomer(conn);
     } catch (Exception e) {
       System.out.println("Error accessing Database.");
     }
