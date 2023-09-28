@@ -52,16 +52,8 @@ public class employee {
                 pstmt.setString(3, Position);
                 pstmt.setString(4, Passcode);
                 pstmt.setDate(5, HireDate);
-                if (Email != null) {
-                    pstmt.setString(6, Email);
-                } else {
-                    pstmt.setNull(6, Types.VARCHAR);
-                }
-                if (PhoneNumber != null) {
-                    pstmt.setString(7, PhoneNumber);
-                } else {
-                    pstmt.setNull(7, Types.VARCHAR);
-                }
+                pstmt.setString(6, Email);
+                pstmt.setString(7, PhoneNumber);
             } else {
                 String sql = "INSERT INTO employee (first_name, last_name, position, passcode, email, phone_number) VALUES (?, ?, ?, ?, ?, ?)";
                 pstmt = conn.prepareStatement(sql);
@@ -69,16 +61,8 @@ public class employee {
                 pstmt.setString(2, LastName);
                 pstmt.setString(3, Position);
                 pstmt.setString(4, Passcode);
-                if (Email != null) {
-                    pstmt.setString(5, Email);
-                } else {
-                    pstmt.setNull(5, Types.VARCHAR);
-                }
-                if (PhoneNumber != null) {
-                    pstmt.setString(6, PhoneNumber);
-                } else {
-                    pstmt.setNull(6, Types.VARCHAR);
-                }
+                pstmt.setString(5, Email);
+                pstmt.setString(6, PhoneNumber);
             }
 
             int affectedRows = pstmt.executeUpdate();

@@ -7,16 +7,6 @@ import java.text.SimpleDateFormat;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-//OrderID SERIAL PRIMARY KEY,
-//CustomerID INT NOT NULL,
-//EmployeeID INT NOT NULL,
-//OrderDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-//Total DECIMAL(10, 2) NOT NULL,
-//IsPending BOOL DEFAULT TRUE,
-//IsRefunded BOOL DEFAULT FALSE,
-//FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID), 2
-//FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
-
 public class order {
     int CustomerID;
     int EmployeeID;
@@ -51,11 +41,13 @@ public class order {
         try {
             PreparedStatement pstmt;
             if (OrderDate == null) {
-                String sql = "INSERT INTO orders (Customer_ID, Employee_ID, Total) VALUES (?, ?, ?)";
+                String sql = "INSERT INTO orders (Customer_ID, Employee_ID, Total, Is_Pending, IsRefunded ) VALUES (?, ?, ?, ? , ?)";
                 pstmt = conn.prepareStatement(sql);
                 pstmt.setInt(1, CustomerID);
                 pstmt.setInt(2, EmployeeID);
                 pstmt.setBigDecimal(3, Total);
+                pstmt.setBoolean(4, IsPending);
+                pstmt.setBoolean(5, IsRefunded);
             } else {
                 String sql = "INSERT INTO orders (Customer_ID, Employee_ID, Total, Order_Date, Is_Pending, IsRefunded ) VALUES (?, ?, ?, ?, ?, ?)";
                 pstmt = conn.prepareStatement(sql);

@@ -1,6 +1,5 @@
 import java.sql.*;
-import entities.customer;
-import entities.employee;
+import entities.*;
 
 // To run this example write: 
 // javac */**.java *.java
@@ -21,8 +20,8 @@ public class dbconnectionexample {
     }
     System.out.println("Opened database successfully");
     try {
-      employee abdullah = new employee("abdullah", "balbaid", "manager", "111111");
-      abdullah.createEmployee(conn);
+      customer abdullah = new customer();
+      abdullah.createCustomer(conn);
     } catch (Exception e) {
       System.out.println("Error accessing Database.");
     }
