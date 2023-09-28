@@ -20,7 +20,6 @@ public class customer {
 
     public void createCustomer(Connection conn) {
         try {
-
             String sql = "INSERT INTO customer (first_name, last_name, email, phone_number, order_count) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, this.FirstName);
