@@ -3,6 +3,7 @@ package entities;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 
 public class employee {
@@ -13,12 +14,19 @@ public class employee {
     String PhoneNumber = null;
     Date HireDate = null;
     String Passcode = null;
+    Connection conn = null;
+    int EmployeeID = -1;
 
-    public employee(String FirstName, String LastName, String Position, String Passcode) {
+    public employee(Connection conn) {
+        this.conn = conn;
+    }
+
+    public employee(Connection conn, String FirstName, String LastName, String Position, String Passcode) {
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.Position = Position.toUpperCase() == "MANAGER" ? "MANAGER" : "CASHIER";
         this.Passcode = Passcode;
+        this.conn = conn;
     }
 
     public employee(String FirstName, String LastName, String Position, String Email, String PhoneNumber,
@@ -75,5 +83,66 @@ public class employee {
             System.out.println(
                     "Error createEmployee(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
         }
+    }
+
+    public employee getEmployeeByID(int EmployeeID) {
+        employee resultEmployee = null;
+        try {
+            String sql = "SELECT * FROM employee WHERE employee_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, EmployeeID);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                resultEmployee = new employee(
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("position"),
+                        rs.getString("email"),
+                        rs.getString("phone_number"),
+                        rs.getDate("hire_date").toString(),
+                        rs.getString("passcode"));
+                resultEmployee.EmployeeID = EmployeeID;
+            } else {
+                System.out.println("Employee not found.");
+            }
+
+        } catch (Exception e) {
+            System.out.println(
+                    "Error getEmployeeByID(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
+        }
+        return resultEmployee;
+    }
+
+    public employee getEmployeeByName(String FirstName, String LastName) {
+        employee resultEmployee = null;
+        try {
+            String sql = "SELECT * FROM employee WHERE first_name = ? AND last_name = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, FirstName);
+            pstmt.setString(2, LastName);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                resultEmployee = new employee(
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("position"),
+                        rs.getString("email"),
+                        rs.getString("phone_number"),
+                        rs.getDate("hire_date").toString(),
+                        rs.getString("passcode"));
+                resultEmployee.EmployeeID = rs.getInt("employee_id");
+            } else {
+                System.out.println("Employee not found.");
+            }
+
+        } catch (Exception e) {
+            System.out.println(
+                    "Error getEmployeeByName(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
+        }
+        return resultEmployee;
     }
 }

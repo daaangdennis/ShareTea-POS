@@ -20,8 +20,8 @@ public class dbconnectionexample {
     }
     System.out.println("Opened database successfully");
     try {
-      customer abdullah = new customer();
-      abdullah.createCustomer(conn);
+      customer abdullah = new customer(conn);
+      abdullah.createCustomer();
     } catch (Exception e) {
       System.out.println("Error accessing Database.");
     }

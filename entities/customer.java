@@ -1,4 +1,5 @@
 package entities;
+
 import java.sql.*;
 
 public class customer {
@@ -7,18 +8,22 @@ public class customer {
     String Email = null;
     String PhoneNumber = null;
     int OrderCount = 1;
+    Connection conn = null;
+    int CustomerID = -1;
 
-    public customer() {
+    public customer(Connection conn) {
+        this.conn = conn;
     }
 
-    public customer(String FirstName, String LastName, String Email, String PhoneNumber) {
+    public customer(Connection conn, String FirstName, String LastName, String Email, String PhoneNumber) {
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.Email = Email;
         this.PhoneNumber = PhoneNumber;
+        this.conn = conn;
     }
 
-    public void createCustomer(Connection conn) {
+    public void createCustomer() {
         try {
             String sql = "INSERT INTO customer (first_name, last_name, email, phone_number, order_count) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -39,6 +44,60 @@ public class customer {
             System.out.println(
                     "Error createCustomer(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
         }
+    }
+
+    public customer getCustomerByID(int CustomerID) {
+        customer resultCustomer = null;
+        try {
+            String sql = "SELECT * FROM customer WHERE customer_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, CustomerID);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                resultCustomer = new customer(conn,
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("phone_number"));
+                resultCustomer.OrderCount = rs.getInt("order_count");
+                this.CustomerID = CustomerID;
+            } else {
+                System.out.println("Customer not found.");
+            }
+        } catch (Exception e) {
+            System.out.println(
+                    "Error getCustomerByID(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
+        }
+        return resultCustomer;
+    }
+
+    public customer getCustomerByName(String FirstName, String LastName) {
+        customer resultCustomer = null;
+        try {
+            String sql = "SELECT * FROM customer WHERE first_name = ? AND last_name = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, FirstName);
+            pstmt.setString(2, LastName);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                resultCustomer = new customer(conn,
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("email"),
+                        rs.getString("phone_number"));
+                resultCustomer.OrderCount = rs.getInt("order_count");
+                this.CustomerID = rs.getInt("customer_id");
+            } else {
+                System.out.println("Customer not found.");
+            }
+
+        } catch (Exception e) {
+            System.out.println(
+                    "Error getCustomerByName(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
+        }
+        return resultCustomer;
     }
 
 }
