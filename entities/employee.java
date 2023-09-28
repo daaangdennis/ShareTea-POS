@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
-import java.sql.Types;
 
 public class employee {
     String FirstName = null;
