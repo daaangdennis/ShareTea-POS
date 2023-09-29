@@ -1,3 +1,4 @@
 dbconfig.java
 *.class
+*/**.class
 .DS_Store
