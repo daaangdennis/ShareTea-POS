@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle fill="WHITE" height="400.0" layoutX="1.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
+      <ImageView fx:id="backgroundImage" fitHeight="400.0" fitWidth="210.0" pickOnBounds="true">
+         <image>
+            <Image url="@whitebrickwall.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="73.0" fitWidth="270.0" layoutX="5.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@sharetealogo.png" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="270.0" layoutY="143.0" prefHeight="192.0" prefWidth="288.0" vgap="15.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="7" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="4" GridPane.rowIndex="1" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="8" GridPane.columnIndex="1" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="9" GridPane.columnIndex="2" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="1" GridPane.rowIndex="2" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="Clear" GridPane.rowIndex="3" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" style="-fx-background-color: #cf152d; -fx-text-fill: white;" stylesheets="@style.css" text="Enter" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+         </children>
+      </GridPane>
+      <PasswordField alignment="CENTER" layoutX="276.0" layoutY="108.0" prefHeight="25.0" prefWidth="205.0" promptText="Enter your passcode" style="-fx-border-color: #cf152d; -fx-border-radius: 5px; -fx-background-color: white; -fx-prompt-text-fill: #cf152d;" />
+   </children>
+</AnchorPane>
