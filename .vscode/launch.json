@@ -1,7 +1,4 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
@@ -9,7 +6,13 @@
             "name": "Launch App",
             "request": "launch",
             "mainClass": "loginPage.Main",
-            "vmArgs": "--module-path lib/javafx-sdk-21-windows/lib --add-modules javafx.controls,javafx.fxml",
+            "windows": { 
+                "vmArgs": "--module-path lib/javafx-sdk-21-windows/lib --add-modules javafx.controls,javafx.fxml"
+            },
+            "osx": {
+                "vmArgs": "--module-path lib/javafx-sdk-21-macos/lib --add-modules javafx.controls,javafx.fxml"
+            }
+            
         }
-    ]
+    ],
 }
