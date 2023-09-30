@@ -3,6 +3,8 @@ package entities;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -37,20 +39,21 @@ public class order {
 
     }
 
-    public void createOrder(Connection conn) {
+    public int createOrder(Connection conn) {
+        int returnOrderID = -1;
         try {
             PreparedStatement pstmt;
             if (OrderDate == null) {
-                String sql = "INSERT INTO orders (Customer_ID, Employee_ID, Total, Is_Pending, IsRefunded ) VALUES (?, ?, ?, ? , ?)";
-                pstmt = conn.prepareStatement(sql);
+                String sql = "INSERT INTO orders (Customer_ID, Employee_ID, Total, Is_Pending, Is_Refunded ) VALUES (?, ?, ?, ? , ?)";
+                pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 pstmt.setInt(1, CustomerID);
                 pstmt.setInt(2, EmployeeID);
                 pstmt.setBigDecimal(3, Total);
                 pstmt.setBoolean(4, IsPending);
                 pstmt.setBoolean(5, IsRefunded);
             } else {
-                String sql = "INSERT INTO orders (Customer_ID, Employee_ID, Total, Order_Date, Is_Pending, IsRefunded ) VALUES (?, ?, ?, ?, ?, ?)";
-                pstmt = conn.prepareStatement(sql);
+                String sql = "INSERT INTO orders (Customer_ID, Employee_ID, Total, Order_Date, Is_Pending, Is_Refunded ) VALUES (?, ?, ?, ?, ?, ?)";
+                pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 pstmt.setInt(1, CustomerID);
                 pstmt.setInt(2, EmployeeID);
                 pstmt.setBigDecimal(3, Total);
@@ -62,6 +65,10 @@ public class order {
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
                 System.out.println("order added successfully!");
+                ResultSet Keys = pstmt.getGeneratedKeys();
+                if (Keys.next()) {
+                    returnOrderID = Keys.getInt(1);
+                }
             } else {
                 System.out.println("Failed to add the order.");
             }
@@ -70,6 +77,7 @@ public class order {
             System.out.println(
                     "Error createOrder(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
         }
+        return returnOrderID;
 
     }
 
