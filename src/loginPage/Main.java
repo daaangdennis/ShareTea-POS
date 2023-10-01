@@ -38,7 +38,7 @@ public class Main extends Application {
         });
     
         wallImageContainer.heightProperty().addListener((obs, oldHeight, newHeight) -> {
-            logo.setY((newHeight.doubleValue() - logo.getFitHeight()) / 4);
+            logo.setY((newHeight.doubleValue() - logo.getFitHeight()) / 5);
         });
 
         primaryStage.show();
