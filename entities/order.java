@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -16,17 +17,24 @@ public class order {
     BigDecimal Total = null;
     boolean IsPending = true;
     boolean IsRefunded = false;
+    Connection conn = null;
 
-    public order(int CustomerID, int EmployeeID, double Total) {
+    public order(Connection conn) {
+        this.conn = conn;
+    }
+
+    public order(Connection conn, int CustomerID, int EmployeeID, double Total) {
         this.CustomerID = CustomerID;
         this.EmployeeID = EmployeeID;
         this.Total = new BigDecimal(Total).setScale(2, RoundingMode.HALF_UP);
+        this.conn = conn;
     }
 
-    public order(int CustomerID, int EmployeeID, double Total, String OrderDate, boolean IsPending,
+    public order(Connection conn, int CustomerID, int EmployeeID, double Total, String OrderDate, boolean IsPending,
             boolean IsRefunded) {
         this.CustomerID = CustomerID;
         this.EmployeeID = EmployeeID;
+        this.conn = conn;
         this.Total = new BigDecimal(Total).setScale(2, RoundingMode.HALF_UP);
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -39,7 +47,7 @@ public class order {
 
     }
 
-    public int createOrder(Connection conn) {
+    public int createOrder() {
         int returnOrderID = -1;
         try {
             PreparedStatement pstmt;
@@ -79,6 +87,19 @@ public class order {
         }
         return returnOrderID;
 
+    }
+
+    public void updateTotal(int order_id, double orderProduct_price) {
+        String updateQuery = "UPDATE orders SET total = total + ? WHERE order_id = ?";
+        try {
+            PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
+            updateStatement.setDouble(1, orderProduct_price);
+            updateStatement.setInt(2, order_id);
+            updateStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(
+                    "Error createOrder(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
+        }
     }
 
 }

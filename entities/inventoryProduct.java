@@ -9,19 +9,26 @@ public class inventoryProduct {
     int ProductID;
     int InventoryID;
     BigDecimal Quantity = BigDecimal.valueOf(0);
+    Connection conn = null;
 
-    public inventoryProduct(int ProductID, int InventoryID) {
-        this.ProductID = ProductID;
-        this.InventoryID = InventoryID;
+    public inventoryProduct(Connection conn) {
+        this.conn = conn;
     }
 
-    public inventoryProduct(int ProductID, int InventoryID, double Quantity) {
+    public inventoryProduct(Connection conn, int ProductID, int InventoryID) {
+        this.ProductID = ProductID;
+        this.InventoryID = InventoryID;
+        this.conn = conn;
+    }
+
+    public inventoryProduct(Connection conn, int ProductID, int InventoryID, double Quantity) {
         this.ProductID = ProductID;
         this.InventoryID = InventoryID;
         this.Quantity = new BigDecimal(Quantity).setScale(2, RoundingMode.HALF_UP);
+        this.conn = conn;
     }
 
-    public void createInventoryProduct(Connection conn) {
+    public void createInventoryProduct() {
         try {
             String sql = "INSERT INTO inventory_product (Product_ID, inventory_ID, Quantity) VALUES (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);

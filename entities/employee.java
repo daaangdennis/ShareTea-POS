@@ -29,7 +29,8 @@ public class employee {
         this.conn = conn;
     }
 
-    public employee(String FirstName, String LastName, String Position, String Email, String PhoneNumber,
+    public employee(Connection conn, String FirstName, String LastName, String Position, String Email,
+            String PhoneNumber,
             String HireDate, String Passcode) {
         this.FirstName = FirstName;
         this.LastName = LastName;
@@ -37,6 +38,7 @@ public class employee {
         this.Position = Position.toUpperCase() == "MANAGER" ? "MANAGER" : "CASHIER";
         this.PhoneNumber = PhoneNumber;
         this.Passcode = Passcode;
+        this.conn = conn;
 
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -48,7 +50,7 @@ public class employee {
         }
     }
 
-    public void createEmployee(Connection conn) {
+    public void createEmployee() {
         PreparedStatement pstmt;
         try {
             if (HireDate != null) {
@@ -95,7 +97,7 @@ public class employee {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                resultEmployee = new employee(
+                resultEmployee = new employee(conn,
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getString("position"),
@@ -126,7 +128,7 @@ public class employee {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                resultEmployee = new employee(
+                resultEmployee = new employee(conn,
                         rs.getString("first_name"),
                         rs.getString("last_name"),
                         rs.getString("position"),

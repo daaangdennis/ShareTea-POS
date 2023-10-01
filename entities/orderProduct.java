@@ -10,21 +10,29 @@ public class orderProduct {
     int OrderID;
     int Quantity;
     String Note;
+    Connection conn = null;
 
-    public orderProduct(int ProductID, int OrderID, int Quantity) {
+    public orderProduct(Connection conn) {
+        this.conn = conn;
+    }
+
+    public orderProduct(Connection conn, int ProductID, int OrderID, int Quantity) {
         this.ProductID = ProductID;
         this.OrderID = OrderID;
         this.Quantity = Quantity;
+        this.conn = conn;
+
     }
 
-    public orderProduct(int ProductID, int OrderID, int Quantity, String Note) {
+    public orderProduct(Connection conn, int ProductID, int OrderID, int Quantity, String Note) {
         this.ProductID = ProductID;
         this.OrderID = OrderID;
         this.Quantity = Quantity;
         this.Note = Note;
+        this.conn = conn;
     }
 
-    public int createOrderProduct(Connection conn) {
+    public int createOrderProduct() {
         int returnOrderProductID = -1;
         try {
             String sql = "INSERT INTO order_product (Product_ID, Order_ID, Quantity, Note) VALUES (?, ?, ?, ?)";

@@ -10,12 +10,19 @@ public class inventory {
     String Details = null;
     int Quantity = 0;
     Date LastUpdated = null;
+    Connection conn = null;
 
-    public inventory(String Name) {
-        this.Name = Name;
+    public inventory(Connection conn) {
+        this.conn = conn;
     }
 
-    public inventory(String Name, String Details, int Quantity, String LastUpdated) {
+    public inventory(Connection conn, String Name) {
+        this.Name = Name;
+        this.conn = conn;
+
+    }
+
+    public inventory(Connection conn, String Name, String Details, int Quantity, String LastUpdated) {
         this.Name = Name;
         this.Details = Details;
         this.Quantity = Quantity;
@@ -29,7 +36,7 @@ public class inventory {
         }
     }
 
-    public void createInventory(Connection conn) {
+    public void createInventory() {
         try {
             PreparedStatement pstmt;
 
