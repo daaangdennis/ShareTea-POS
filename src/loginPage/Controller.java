@@ -1,11 +1,11 @@
 package loginPage;
 
 import javafx.fxml.FXML;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class Controller {
 
     @FXML
-    private ImageView backgroundImage;
+    private Pane wallImageContainer;
 
 }

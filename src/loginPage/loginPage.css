@@ -1,0 +1,9 @@
+.loginPageBackground {
+    -fx-background-color: white;
+}
+
+.wallImageContainer {
+    -fx-background-image: url('whitebrickwall.jpg');
+    -fx-background-size: cover;
+    -fx-background-repeat: repeat;
+}
