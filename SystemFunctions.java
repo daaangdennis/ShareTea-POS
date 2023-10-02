@@ -1,9 +1,8 @@
-import entities.*;
 import java.sql.*;
 
 public class SystemFunctions {
     
-    public int verify(Connection conn, String PW){
+    public String verify(Connection conn, String PW){
         try {
             String query = "SELECT passcode, position FROM employee";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
@@ -16,18 +15,18 @@ public class SystemFunctions {
                 if (PW.equals(realPW)) {
                     switch (position) {
                         case "CASHIER":
-                            return 1;
+                            return "Cashier";
                         case "MANAGER":
-                            return 2;
+                            return "Manager";
                         default:
-                            return 0;
+                            return "Invalid";
                     }
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return 0;   
+        return "Invalid";   
     }
 
 

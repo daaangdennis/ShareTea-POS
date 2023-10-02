@@ -58,12 +58,18 @@ public class Application {
         Application app = new Application();
         HttpServer server = app.Start(8000);
         
-        server.createContext("/api/login", (exchange -> {
+        server.createContext("/login", (exchange -> {
 
             Map<String, List<String>> params = splitQuery(exchange.getRequestURI().getRawQuery());
-            String noNameText = "Anonymous";
-            String name = params.getOrDefault("name", List.of(noNameText)).stream().findFirst().orElse(noNameText);
-            String respText = String.format("Hello %s!", name);
+            String noNameText = "Invalid";
+            String passcode = params.getOrDefault("passcode", List.of(noNameText)).stream().findFirst().orElse(noNameText);
+            
+            String verification = new SystemFunctions().verify(app.conn, passcode);
+            
+            String respText = "Logged in as: " + verification;
+            if (verification.equals("Invalid")){
+                respText = "Invalid passcode.";
+            }
 
             exchange.sendResponseHeaders(200, respText.getBytes().length);
             OutputStream output = exchange.getResponseBody();
