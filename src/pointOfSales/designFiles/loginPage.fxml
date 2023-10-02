@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="loginPageBackground" stylesheets="@loginPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="loginPageBackground" stylesheets="@../stylesheets/loginPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="286.0" layoutY="118.0" prefHeight="25.0" prefWidth="205.0" promptText="Enter your passcode" />
       <Pane fx:id="wallImageContainer" maxWidth="541.0" prefHeight="400.0" prefWidth="208.0" styleClass="wallImageContainer">
          <children>
             <ImageView fx:id="companyLogo" fitHeight="73.0" fitWidth="214.0" layoutX="4.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@sharetealogo.png" />
+                  <Image url="@../images/sharetealogo.png" />
                </image>
             </ImageView>
          </children></Pane>

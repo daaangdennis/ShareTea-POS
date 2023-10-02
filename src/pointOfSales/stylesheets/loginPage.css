@@ -3,7 +3,7 @@
 }
 
 .wallImageContainer {
-    -fx-background-image: url('whitebrickwall.jpg');
+    -fx-background-image: url('../images/whitebrickwall.jpg');
     -fx-background-size: cover;
     -fx-background-repeat: repeat;
 }

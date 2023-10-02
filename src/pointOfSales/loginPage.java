@@ -15,14 +15,14 @@ public class loginPage extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("designFiles/loginPage.fxml"));
         primaryStage.setTitle("Sharetea Point of Sales System");
         double screenWidth = Screen.getPrimary().getBounds().getWidth();
         double screenHeight = Screen.getPrimary().getBounds().getHeight();
 
         
         //primaryStage.setScene(new Scene(root, 1440, 720));
-        
+
         primaryStage.setScene(new Scene(root, screenWidth, screenHeight));
         primaryStage.setFullScreen(true);
 
