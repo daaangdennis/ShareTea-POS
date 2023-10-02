@@ -43,7 +43,7 @@ public class orderProduct {
             pstmt.setString(4, Note);
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
-                System.out.println("orderProduct added successfully!");
+                System.out.println("OrderProduct added successfully!");
                 ResultSet Keys = pstmt.getGeneratedKeys();
                 if (Keys.next()) {
                     returnOrderProductID = Keys.getInt(1);

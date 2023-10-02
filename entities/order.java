@@ -72,7 +72,7 @@ public class order {
 
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
-                System.out.println("order added successfully!");
+                System.out.println("Order added successfully!");
                 ResultSet Keys = pstmt.getGeneratedKeys();
                 if (Keys.next()) {
                     returnOrderID = Keys.getInt(1);
