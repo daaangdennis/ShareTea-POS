@@ -4,17 +4,18 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.scene.control.PasswordField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("loginPageDemo.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
         primaryStage.setTitle("Sharetea Point of Sales System");
         double screenWidth = Screen.getPrimary().getBounds().getWidth();
         double screenHeight = Screen.getPrimary().getBounds().getHeight();
@@ -41,6 +42,21 @@ public class Main extends Application {
             logo.setY((newHeight.doubleValue() - logo.getFitHeight()) / 5);
         });
 
+
+        // Set position for keypad and password field
+        GridPane keypad = (GridPane) root.lookup("#keypad");
+        keypad.setScaleX((screenWidth * 1.8 / 3.0) / (keypad.getPrefWidth() * 1.6));
+        keypad.setScaleY(keypad.getScaleX());
+        keypad.setLayoutX((screenWidth * 1.8 / 3.0));
+        keypad.setLayoutY(screenHeight / 2);
+
+        PasswordField passwordField = (PasswordField) root.lookup("#passwordField");
+        passwordField.setScaleX(keypad.getScaleX());
+        passwordField.setScaleY(keypad.getScaleX());
+        passwordField.setLayoutX(keypad.getLayoutX() - (18 * keypad.getScaleX()));
+        passwordField.setLayoutY(keypad.getLayoutY() - (85 * keypad.getScaleY()));
+
+        
         primaryStage.show();
     }
 

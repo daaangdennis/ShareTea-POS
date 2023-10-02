@@ -7,52 +7,48 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Rectangle?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="loginPageBackground" stylesheets="@loginPage.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle fill="WHITE" height="400.0" layoutX="1.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
-      <ImageView fx:id="backgroundImage" fitHeight="400.0" fitWidth="210.0" pickOnBounds="true">
-         <image>
-            <Image url="@whitebrickwall.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="73.0" fitWidth="270.0" layoutX="5.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@sharetealogo.png" />
-         </image>
-      </ImageView>
-      <GridPane layoutX="270.0" layoutY="143.0" prefHeight="192.0" prefWidth="288.0" vgap="15.0">
-        <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-        </rowConstraints>
+      <PasswordField fx:id="passwordField" alignment="CENTER" layoutX="286.0" layoutY="118.0" prefHeight="25.0" prefWidth="205.0" promptText="Enter your passcode" />
+      <Pane fx:id="wallImageContainer" maxWidth="541.0" prefHeight="400.0" prefWidth="208.0" styleClass="wallImageContainer">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="7" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="4" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="8" GridPane.columnIndex="1" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="9" GridPane.columnIndex="2" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="1" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="Clear" GridPane.rowIndex="3" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" stylesheets="@style.css" text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" style="-fx-background-color: #cf152d; -fx-text-fill: white;" stylesheets="@style.css" text="Enter" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <ImageView fx:id="companyLogo" fitHeight="73.0" fitWidth="214.0" layoutX="4.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@sharetealogo.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+      <GridPane fx:id="keypad" layoutX="280.0" layoutY="153.0" prefHeight="192.0" prefWidth="288.0" vgap="15.0">
+         <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="keypadSeven" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="7" />
+            <Button fx:id="keypadFour" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="4" GridPane.rowIndex="1" />
+            <Button fx:id="keypadEight" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="8" GridPane.columnIndex="1" />
+            <Button fx:id="keypadFive" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="keypadNine" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="9" GridPane.columnIndex="2" />
+            <Button fx:id="keypadSix" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="keypadOne" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="1" GridPane.rowIndex="2" />
+            <Button fx:id="keypadTwo" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="keypadThree" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="keypadZero" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="keypadClear" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="Clear" GridPane.rowIndex="3" />
+            <Button fx:id="keypadDelete" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="keypadEnter" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="Enter" GridPane.columnIndex="3" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <PasswordField alignment="CENTER" layoutX="276.0" layoutY="108.0" prefHeight="25.0" prefWidth="205.0" promptText="Enter your passcode" style="-fx-border-color: #cf152d; -fx-border-radius: 5px; -fx-background-color: white; -fx-prompt-text-fill: #cf152d;" />
    </children>
 </AnchorPane>

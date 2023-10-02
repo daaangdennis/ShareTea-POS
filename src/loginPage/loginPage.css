@@ -7,3 +7,23 @@
     -fx-background-size: cover;
     -fx-background-repeat: repeat;
 }
+
+.button{
+    -fx-text-fill: #cf152d;
+    -fx-font-weight: bold;
+    -fx-background-color: white;
+    -fx-border-color: #cf152d;
+    -fx-border-radius: 5px;
+}
+
+.button#keypadEnter {
+    -fx-text-fill: white;
+    -fx-background-color:  #cf152d;
+}
+
+#passwordField {
+    -fx-border-color: #cf152d;
+    -fx-border-radius: 5px;
+    -fx-background-color: white;
+    -fx-prompt-text-fill: #cf152d;
+}
