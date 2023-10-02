@@ -1,4 +1,4 @@
-package loginPage;
+package pointOfSales;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;

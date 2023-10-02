@@ -22,7 +22,7 @@ public class loginPage extends Application {
         double screenHeight = Screen.getPrimary().getBounds().getHeight();
 
         //Setting Window Icon will get better if changed to platform specific icons
-        Image icon = new Image(getClass().getResourceAsStream("sharetea_icon.png"));
+        Image icon = new Image(getClass().getResourceAsStream("images/sharetea_icon.png"));
         primaryStage.getIcons().add(icon);
         
         //primaryStage.setScene(new Scene(root, 1440, 720));
