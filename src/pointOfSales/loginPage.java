@@ -1,4 +1,4 @@
-package loginPage;
+package pointOfSales;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -11,7 +11,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 
-public class Main extends Application {
+public class loginPage extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -20,6 +20,8 @@ public class Main extends Application {
         double screenWidth = Screen.getPrimary().getBounds().getWidth();
         double screenHeight = Screen.getPrimary().getBounds().getHeight();
 
+        
+        //primaryStage.setScene(new Scene(root, 1440, 720));
         
         primaryStage.setScene(new Scene(root, screenWidth, screenHeight));
         primaryStage.setFullScreen(true);
@@ -53,7 +55,7 @@ public class Main extends Application {
         PasswordField passwordField = (PasswordField) root.lookup("#passwordField");
         passwordField.setScaleX(keypad.getScaleX());
         passwordField.setScaleY(keypad.getScaleX());
-        passwordField.setLayoutX(keypad.getLayoutX() - (18 * keypad.getScaleX()));
+        passwordField.setLayoutX(keypad.getLayoutX() - (14 * keypad.getScaleX()));
         passwordField.setLayoutY(keypad.getLayoutY() - (85 * keypad.getScaleY()));
 
         
