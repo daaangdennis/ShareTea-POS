@@ -10,8 +10,8 @@ Go to `JAVA PROJECTS` view, find the `Referenced Libraries` node and click the `
 
 ![Reference JAR Files](docs/referenceLibraries.PNG)
 
-Go into the `lib` folder and choose either the `javafx-sdk-21-macos` folder or `javafx-sdk-21-windows` folder depending on your oprating system. Then navigate into `lib` of the
-folder that you selected, select all of the JAR files and click `Select Jar Files`.
+Go into the `lib` folder and choose either the `javafx-sdk-21-macos` or `javafx-sdk-21-windows` depending on your oprating system. Then navigate into the `lib` folder of the
+folder that you selected, select all of the JAR files, and click `Select Jar Libraries`.
 
 ![Adding JAR Files](docs/addingLibraries.PNG)
 
