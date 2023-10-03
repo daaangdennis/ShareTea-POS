@@ -1,4 +1,5 @@
 package routes;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -19,10 +20,8 @@ import services.addOrderFull;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-
-
 public class Application {
-    Connection conn; 
+    Connection conn;
 
     public static Map<String, List<String>> splitQuery(String query) {
         if (query == null || "".equals(query)) {
@@ -60,20 +59,21 @@ public class Application {
     }
 
     public static void main(String[] agrs) throws IOException {
-        
+
         Application app = new Application();
         HttpServer server = app.Start(8000);
-        
+
         server.createContext("/login", (exchange -> {
 
             Map<String, List<String>> params = splitQuery(exchange.getRequestURI().getRawQuery());
             String noNameText = "Invalid";
-            String passcode = params.getOrDefault("passcode", List.of(noNameText)).stream().findFirst().orElse(noNameText);
-            
+            String passcode = params.getOrDefault("passcode", List.of(noNameText)).stream().findFirst()
+                    .orElse(noNameText);
+
             String verification = new SystemFunctions().verify(app.conn, passcode);
-            
+
             String respText = "Logged in as: " + verification;
-            if (verification.equals("Invalid")){
+            if (verification.equals("Invalid")) {
                 respText = "Invalid passcode.";
             }
 
@@ -103,16 +103,21 @@ public class Application {
             if ("POST".equals(exchange.getRequestMethod())) {
                 Map<String, List<String>> params = splitQuery(exchange.getRequestURI().getRawQuery());
                 String noNameText = "N/A";
-                String order_id = params.getOrDefault("orderID", List.of(noNameText)).stream().findFirst().orElse(noNameText);
-                String product_id = params.getOrDefault("productID", List.of(noNameText)).stream().findFirst().orElse(noNameText);
-                String quantity = params.getOrDefault("quantity", List.of(noNameText)).stream().findFirst().orElse(noNameText);
+                String order_id = params.getOrDefault("orderID", List.of(noNameText)).stream().findFirst()
+                        .orElse(noNameText);
+                String product_id = params.getOrDefault("productID", List.of(noNameText)).stream().findFirst()
+                        .orElse(noNameText);
+                String quantity = params.getOrDefault("quantity", List.of(noNameText)).stream().findFirst()
+                        .orElse(noNameText);
 
-                if(order_id.equals(noNameText) || product_id.equals(noNameText) || quantity.equals(noNameText)){
+                if (order_id.equals(noNameText) || product_id.equals(noNameText) || quantity.equals(noNameText)) {
                     exchange.close();
                 }
 
-                new addOrderFull().addOrderProductsToDB(app.conn, Integer.valueOf(order_id) , Integer.valueOf(product_id), Integer.valueOf(quantity));
-                String respText = quantity + " of " + "ProductID:" + product_id + " has been added to OrderID: " + order_id;
+                new addOrderFull().addOrderProductsToDB(app.conn, Integer.valueOf(order_id),
+                        Integer.valueOf(product_id), Integer.valueOf(quantity));
+                String respText = quantity + " of " + "ProductID:" + product_id + " has been added to OrderID: "
+                        + order_id;
 
                 exchange.sendResponseHeaders(200, respText.getBytes().length);
                 OutputStream output = exchange.getResponseBody();
