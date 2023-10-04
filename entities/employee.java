@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 public class employee {
@@ -146,5 +147,34 @@ public class employee {
                     "Error getEmployeeByName(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
         }
         return resultEmployee;
+    }
+
+    public String verifyEmployee(Connection conn, String pw){
+        try {
+            String query = "SELECT first_name, last_name, passcode, position FROM employee";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+    
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String realPW = resultSet.getString("passcode");
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String position = resultSet.getString("position");
+                
+                if (pw.equals(realPW)) {
+                    switch (position) {
+                        case "CASHIER":
+                            return  firstName + " " + lastName + " Cashier";
+                        case "MANAGER":
+                            return firstName + " " + lastName + " Manager";
+                        default:
+                            return "Invalid";
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "Invalid";   
     }
 }
