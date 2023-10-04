@@ -47,7 +47,7 @@
             <Button fx:id="keypad0" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#handleNumberButtonClick"/>
             <Button fx:id="keypadClear" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="Clear" GridPane.rowIndex="3" onAction="#handleClearButtonClick"/>
             <Button fx:id="keypadDelete" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="3" onAction="#handleDelButtonClick"/>
-            <Button fx:id="keypadEnter" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="Enter" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button fx:id="keypadEnter" alignment="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="Enter" GridPane.columnIndex="3" GridPane.rowIndex="3" onAction="#handleEnterButtonClick" />
          </children>
       </GridPane>
    </children>

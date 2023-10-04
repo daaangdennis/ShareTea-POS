@@ -16,7 +16,8 @@ public class loginPage extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("designFiles/loginPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("designFiles/loginPage.fxml"));
+        Parent root = loader.load();
         primaryStage.setTitle("Sharetea Point of Sales System");
         double screenWidth = Screen.getPrimary().getBounds().getWidth();
         double screenHeight = Screen.getPrimary().getBounds().getHeight();
@@ -62,11 +63,18 @@ public class loginPage extends Application {
         passwordField.setLayoutX(keypad.getLayoutX() - (14 * keypad.getScaleX()));
         passwordField.setLayoutY(keypad.getLayoutY() - (85 * keypad.getScaleY()));
 
-        
+        sceneController sceneCtrl = new sceneController(primaryStage);
+        loginPageController loginCtrl = loader.getController();
+        loginCtrl.setController(sceneCtrl);
+
         primaryStage.show();
+
+        //New Code for changing Scenes
+        
+
     }
 
-
+  
     public static void main(String[] args) {
         launch(args);
     }

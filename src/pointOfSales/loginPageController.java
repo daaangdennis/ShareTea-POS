@@ -5,13 +5,19 @@ import javafx.scene.control.PasswordField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
+
 public class loginPageController {
 
     @FXML
     private PasswordField passwordField;
+    private sceneController mySceneController;
  
 
     // Event Handler for keypad numerical buttons
+
+    public void setController(sceneController sceneCtrl){
+        this.mySceneController = sceneCtrl;
+    }
     @FXML
 
     private void handleNumberButtonClick(ActionEvent event){
@@ -30,9 +36,26 @@ public class loginPageController {
     private void handleClearButtonClick(ActionEvent event){
         passwordField.clear();
     }
-
-    // private void handleEnterButtonClick(ActionEvent event){
+    @FXML
+    private void handleEnterButtonClick(ActionEvent event){
             //Run function to check if the password is correct
+
+            mySceneController.changeScene(orderPage.getScene());
+            
+            // if(passwordField.getText() == passwordField.getText()){
+            //     //Call Cashier Switch
+            //     mySceneController.changeScene(orderPage.getScene());
+            // }
+            // else if(passwordField.getText() == "9876")
+            // {
+            //     //Call Manager Switch
+
+            // }
+            // else
+            // {
+            //     passwordField.clear();
+            // }
+
             //Based off of function output:
             //if(output == "Cashier"){
             //  load cashier order scene
@@ -42,7 +65,7 @@ public class loginPageController {
             //}
             //else
             //
-    // }
+    }
     
     //Ideas for further implementation: 
     //Add some sort of error message or reaction to tell the user the password is wrong
