@@ -39,22 +39,20 @@ public class loginPageController {
     @FXML
     private void handleEnterButtonClick(ActionEvent event){
             //Run function to check if the password is correct
-
-            mySceneController.changeScene(orderPage.getScene());
             
-            // if(passwordField.getText() == passwordField.getText()){
-            //     //Call Cashier Switch
-            //     mySceneController.changeScene(orderPage.getScene());
-            // }
-            // else if(passwordField.getText() == "9876")
-            // {
-            //     //Call Manager Switch
-
-            // }
-            // else
-            // {
-            //     passwordField.clear();
-            // }
+            if(passwordField.getText().equals("1234")){
+                //Call Cashier Switch
+                mySceneController.changeScene(orderPage.getScene());
+            }
+            else if(passwordField.getText().equals("4321"))
+            {
+                //Call Manager Switch
+                passwordField.clear();
+            }
+            else
+            {
+                passwordField.clear();
+            }
 
             //Based off of function output:
             //if(output == "Cashier"){

@@ -10,7 +10,7 @@ public class orderPage {
     public static Scene getScene(){
         
         try{
-            FXMLLoader loader = new FXMLLoader(orderPage.class.getResource("designFiles/test.fxml"));
+            FXMLLoader loader = new FXMLLoader(orderPage.class.getResource("designFiles/cashier.fxml"));
             Parent root2 = loader.load();
             double screenWidth = Screen.getPrimary().getBounds().getWidth();
             double screenHeight = Screen.getPrimary().getBounds().getHeight();
