@@ -149,3 +149,25 @@
     -fx-background-insets: 0;
     -fx-background-radius: 8px;
 }
+
+.menu-item-button {
+    -fx-border-color: #cf152d;
+    -fx-border-radius: 8px;
+    -fx-background-color: #cf152d;
+    -fx-text-fill: white;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-pref-width: 180px;
+    -fx-pref-height: 140px;
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8px;
+}
+
+.menu-item-label {
+    -fx-text-fill: white;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+}
