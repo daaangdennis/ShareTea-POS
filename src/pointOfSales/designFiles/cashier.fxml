@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -96,11 +97,11 @@
                                           <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="customerNameLabel" layoutX="229.0" layoutY="9.0" text="Customer Name" textFill="WHITE" AnchorPane.rightAnchor="10.0">
+                                    <TextField fx:id="customerNameTextField" layoutX="224.0" layoutY="10.0" promptText="Enter Customer Name" AnchorPane.rightAnchor="10.0">
                                        <font>
-                                          <Font name="System Bold" size="18.0" />
+                                          <Font name="System Bold" size="12.0" />
                                        </font>
-                                    </Label>
+                                    </TextField>
                                  </children>
                               </AnchorPane>
                               <TableView layoutX="6.0" layoutY="51.0" prefHeight="429.0" prefWidth="381.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
