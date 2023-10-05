@@ -12,7 +12,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
@@ -132,16 +134,7 @@
                         </AnchorPane>
                         <AnchorPane fx:id="menuItems" prefHeight="452.0" prefWidth="564.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="404.0" AnchorPane.topAnchor="20.0">
                            <children>
-                              <ScrollPane fx:id="menuCategoryScrollPane" prefHeight="161.0" prefWidth="708.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                                 <content>
-                                    <GridPane prefHeight="29.0" prefWidth="111.0">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                      </columnConstraints>
-                                    </GridPane>
-                                 </content>
-                              </ScrollPane>
-                              <ScrollPane fx:id="categoryItemsScrollPane" layoutY="189.0" prefHeight="483.0" prefWidth="708.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                              <ScrollPane fx:id="categoryItemsScrollPane" layoutY="189.0" prefHeight="459.0" prefWidth="708.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                  <content>
                                     <GridPane prefHeight="29.0" prefWidth="111.0">
                                        <columnConstraints>
@@ -150,6 +143,28 @@
                                     </GridPane>
                                  </content>
                               </ScrollPane>
+                              <AnchorPane prefHeight="183.0" prefWidth="708.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                                 <children>
+                                    <VBox layoutX="177.0" layoutY="-20.0" prefHeight="178.0" prefWidth="708.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                                             <children>
+                                                <Button fx:id="milkTeaButton" mnemonicParsing="false" styleClass="food-category-button" text="Milk Tea" />
+                                                <Button fx:id="brewedTeaButton" mnemonicParsing="false" styleClass="food-category-button" text="Brewed Tea" />
+                                                <Button fx:id="fruitTeaButton" mnemonicParsing="false" styleClass="food-category-button" text="Fruit Tea" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" prefHeight="92.0" prefWidth="708.0" spacing="50.0">
+                                             <children>
+                                                <Button fx:id="iceBlendedButton" mnemonicParsing="false" styleClass="food-category-button" text="Ice Blended" />
+                                                <Button fx:id="teaMojitoButton" mnemonicParsing="false" styleClass="food-category-button" text="Tea Mojito" />
+                                                <Button fx:id="creamaButton" mnemonicParsing="false" styleClass="food-category-button" text="Creama" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
                            </children></AnchorPane>
                      </children>
                   </AnchorPane>

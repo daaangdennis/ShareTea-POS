@@ -104,3 +104,48 @@
     -fx-font-size: 16px;
     -fx-padding: 5px;
 }
+
+.food-category-button {
+    -fx-border-color: #cf152d;
+    -fx-border-radius: 8px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #cf152d;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-pref-width: 180px;
+    -fx-pref-height: 70px;
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8px;
+}
+
+.food-category-button:hover {
+    -fx-border-color: #cf152d;
+    -fx-border-radius: 8px;
+    -fx-background-color: #cf152d;
+    -fx-text-fill: white;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-pref-width: 180px;
+    -fx-pref-height: 70px;
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8px;
+}
+
+.food-category-button:focused {
+    -fx-border-color: #cf152d;
+    -fx-border-radius: 8px;
+    -fx-background-color: #cf152d;
+    -fx-text-fill: white;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-pref-width: 180px;
+    -fx-pref-height: 70px;
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8px;
+}
