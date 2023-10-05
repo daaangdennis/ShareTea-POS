@@ -14,7 +14,7 @@ public class orderPage {
             Parent root2 = loader.load();
             double screenWidth = Screen.getPrimary().getBounds().getWidth();
             double screenHeight = Screen.getPrimary().getBounds().getHeight();
-            Scene cashierOrderScene = new Scene(root2, screenWidth, screenHeight);
+            Scene cashierOrderScene = new Scene(root2, 1280, 720);
             return cashierOrderScene;
         }
         catch(IOException e){
