@@ -89,16 +89,17 @@ public class product {
     }
 
 
-    public ArrayList<String> getProductsByCategory(String Category) {
+    public ArrayList<String> getProductsPriceByCategory(String Category) {
         ArrayList<String> product_array = new ArrayList<>();
         try {
-            String query = "SELECT name FROM product WHERE category = ?";
+            String query = "SELECT name,price FROM product WHERE category = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, Category);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String Name = resultSet.getString("name");
-                product_array.add(Name);
+                String Price = resultSet.getDouble("price") + "";
+                product_array.add(Name + " " + Price);
             }
             return product_array;
         } catch (SQLException e) {

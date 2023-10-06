@@ -11,11 +11,11 @@ public class SystemFunctions {
         return verify_employee.verifyEmployee(conn, PW);
     }
 
-    public ArrayList<String> productsByCategory(String category){
+    public ArrayList<String> productsAndPriceByCategory(String category){
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
         product products_obj = new product(conn);
-        return products_obj.getProductsByCategory(category);
+        return products_obj.getProductsPriceByCategory(category);
     }
 
     public ArrayList<String> getCategories(){
