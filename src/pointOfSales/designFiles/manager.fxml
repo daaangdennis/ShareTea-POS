@@ -40,7 +40,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <Button fx:id="checkoutButton" contentDisplay="TOP" layoutX="9.0" layoutY="86.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="112.0" styleClass="navbutton" text="Checkout" textFill="WHITE">
+                              <Button fx:id="checkoutButton" contentDisplay="TOP" layoutX="9.0" layoutY="86.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="112.0" styleClass="navbutton" text="Checkout" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
                                  <graphic>
                                     <ImageView fitHeight="77.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -55,7 +55,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="ordersButton" contentDisplay="TOP" layoutX="9.0" layoutY="211.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Orders" textFill="WHITE">
+                              <Button fx:id="ordersButton" contentDisplay="TOP" layoutX="9.0" layoutY="213.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Orders" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -82,7 +82,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="inventoryButton" contentDisplay="TOP" layoutX="9.0" layoutY="326.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Inventory" textFill="WHITE">
+                              <Button fx:id="inventoryButton" contentDisplay="TOP" layoutX="9.0" layoutY="326.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Inventory" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -99,7 +99,7 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                        <Button fx:id="statisticsButton" contentDisplay="TOP" layoutX="9.0" layoutY="451.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Statistics" textFill="WHITE">
+                        <Button fx:id="statisticsButton" contentDisplay="TOP" layoutX="9.0" layoutY="451.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Statistics" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -165,7 +165,7 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="menuItems" prefHeight="452.0" prefWidth="564.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="404.0" AnchorPane.topAnchor="20.0">
+                        <AnchorPane fx:id="menuItems" prefHeight="452.0" prefWidth="564.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="404.0" AnchorPane.topAnchor="20.0">
                            <children>
                               <ScrollPane fx:id="categoryItemsScrollPane" layoutY="189.0" prefHeight="459.0" prefWidth="708.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                  <content>
@@ -199,7 +199,7 @@
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>
-                        <AnchorPane fx:id="orderCustomizationMenu" prefHeight="720.0" prefWidth="752.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="389.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="orderCustomizationMenu" prefHeight="720.0" prefWidth="752.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="389.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="73.0" layoutY="14.0" prefHeight="53.0" prefWidth="763.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
                                  <children>
