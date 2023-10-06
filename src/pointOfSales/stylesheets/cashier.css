@@ -121,33 +121,13 @@
 }
 
 .food-category-button:hover {
-    -fx-border-color: #cf152d;
-    -fx-border-radius: 8px;
     -fx-background-color: #cf152d;
     -fx-text-fill: white;
-    -fx-font-family: 'Poppins', sans-serif;
-    -fx-font-weight: 700;
-    -fx-font-size: 18px;
-    -fx-pref-width: 180px;
-    -fx-pref-height: 70px;
-    -fx-cursor: hand;
-    -fx-background-insets: 0;
-    -fx-background-radius: 8px;
 }
 
-.food-category-button:focused {
-    -fx-border-color: #cf152d;
-    -fx-border-radius: 8px;
+.food-category-button:selected {
     -fx-background-color: #cf152d;
     -fx-text-fill: white;
-    -fx-font-family: 'Poppins', sans-serif;
-    -fx-font-weight: 700;
-    -fx-font-size: 18px;
-    -fx-pref-width: 180px;
-    -fx-pref-height: 70px;
-    -fx-cursor: hand;
-    -fx-background-insets: 0;
-    -fx-background-radius: 8px;
 }
 
 .menu-item-button {
@@ -170,4 +150,66 @@
     -fx-font-family: 'Poppins', sans-serif;
     -fx-font-weight: 700;
     -fx-font-size: 18px;
+}
+
+.close-button {
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close-button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,15), 5,0,0,0);
+}
+
+.add-button {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #cf152d;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0;
+    -fx-cursor: hand;
+    
+}
+
+.add-button:hover {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #cf152d;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,15), 5,0,0,0);
+}
+
+.item-customization-labels {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 20px;
+    -fx-text-fill: #cf152d;
+    -fx-font-weight: 700;
+}
+
+.item-customization-buttons {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #595959;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0;
+    -fx-cursor: hand;
+}
+
+.item-customization-buttons:hover {
+    -fx-background-color: #cf152d;
+}
+
+.item-customization-buttons:selected {
+    -fx-background-color: #cf152d;
 }
