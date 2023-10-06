@@ -1,5 +1,4 @@
 package entities;
-
 import java.sql.*;
 
 public class customer {

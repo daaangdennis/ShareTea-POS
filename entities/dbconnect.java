@@ -1,10 +1,9 @@
 package entities;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class dbconnect {
-    Connection conn = null;
+    public Connection conn;
 
     public dbconnect() {
         try {
