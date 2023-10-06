@@ -40,7 +40,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <Button fx:id="checkoutButton" contentDisplay="TOP" layoutX="8.0" layoutY="86.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="112.0" styleClass="navbutton" text="Checkout" textFill="WHITE">
+                              <Button fx:id="checkoutButton" contentDisplay="TOP" layoutX="9.0" layoutY="86.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="112.0" styleClass="navbutton" text="Checkout" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="77.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -55,7 +55,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="ordersButton" contentDisplay="TOP" layoutX="9.0" layoutY="236.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Orders" textFill="WHITE">
+                              <Button fx:id="ordersButton" contentDisplay="TOP" layoutX="9.0" layoutY="213.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Orders" textFill="WHITE">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
