@@ -1,11 +1,9 @@
 package pointOfSales;
 
 import javafx.application.Application;
-
 import javafx.stage.Stage;
-
 import javafx.scene.image.Image;
-
+import javafx.scene.Scene;
 public class app extends Application {
 
     @Override
@@ -13,9 +11,10 @@ public class app extends Application {
         
         primaryStage.setTitle("Sharetea Point of Sales System");
         sceneController sceneCtrl = new sceneController(primaryStage);
-        loginPage login = new loginPage(sceneCtrl);
-        orderPage order = new orderPage(sceneCtrl);
-        sceneCtrl.changeScene(login.getScene());
+        orderPage.setController(sceneCtrl);
+        loginPage.setController(sceneCtrl);
+        Scene loginpage = loginPage.getScene();
+        sceneCtrl.changeScene(loginpage);
         
         //Setting Window Icon will get better if changed to platform specific icons
         Image icon = new Image(getClass().getResourceAsStream("images/sharetea_icon.png"));

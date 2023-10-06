@@ -42,9 +42,10 @@ public class loginPageController {
             
             if(passwordField.getText().equals("1234")){
                 //Call Cashier Switch
-                orderPage order = new orderPage(mySceneController);
                 
-                mySceneController.changeScene(order.getScene());
+                orderPage.setController(mySceneController);
+                
+                mySceneController.changeScene(orderPage.getScene());
             }
             else if(passwordField.getText().equals("4321"))
             {

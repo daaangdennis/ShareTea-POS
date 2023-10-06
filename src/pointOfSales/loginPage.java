@@ -17,7 +17,9 @@ public class loginPage {
     private static sceneController controller;
 
 
-    public loginPage(sceneController ctrl){
+    public loginPage(){}
+
+    public static void setController(sceneController ctrl){
         controller = ctrl;
     }
 

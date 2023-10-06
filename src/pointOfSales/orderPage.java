@@ -10,11 +10,13 @@ public class orderPage {
 
     private static sceneController controller;
 
-    public orderPage(sceneController ctrl){
-        this.controller = ctrl;
+    public orderPage(){}
+
+    public static void setController(sceneController ctrl){
+        controller = ctrl;
     }
 
-    public Scene getScene(){
+    public static Scene getScene(){
         
         try{
             FXMLLoader loader = new FXMLLoader(orderPage.class.getResource("designFiles/cashier.fxml"));
