@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+
 
 public class product {
     String Name = null;
@@ -66,6 +68,23 @@ public class product {
                     "Error getProductPriceByID(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
         }
         return -1;
+    }
+
+    public ArrayList<String> getProductByCategory(String Category) {
+        ArrayList<String> productsByCategory = new ArrayList<String>();
+        try {
+            String categoryQuery = "SELECT name FROM product WHERE category = ?";
+            PreparedStatement pstmtCategory = this.conn.prepareStatement(categoryQuery);
+            pstmtCategory.setString(1, Category);
+            ResultSet resultSet = pstmtCategory.executeQuery();
+            if (resultSet.next()) {
+                productsByCategory.add(resultSet.getString("name"));
+            }
+            return productsByCategory;
+        } catch (Exception e) {
+            System.out.println("Error");
+        }
+        return productsByCategory;
     }
 
 }
