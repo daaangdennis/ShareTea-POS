@@ -3,6 +3,12 @@
     src: url('../fonts/Poppins-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Poppins-Bold';
+    src: url('../fonts/Poppins-Bold.ttf');
+}
+
+
 .background {
     -fx-background-color: white;
 }
