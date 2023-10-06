@@ -14,6 +14,7 @@ public class app extends Application {
         primaryStage.setTitle("Sharetea Point of Sales System");
         sceneController sceneCtrl = new sceneController(primaryStage);
         loginPage login = new loginPage(sceneCtrl);
+        orderPage order = new orderPage(sceneCtrl);
         sceneCtrl.changeScene(login.getScene());
         
         //Setting Window Icon will get better if changed to platform specific icons

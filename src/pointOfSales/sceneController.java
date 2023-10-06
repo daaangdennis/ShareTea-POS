@@ -25,6 +25,5 @@ public class sceneController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
     }
 }

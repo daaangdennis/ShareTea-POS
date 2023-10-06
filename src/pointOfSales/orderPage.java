@@ -7,7 +7,14 @@ import javafx.scene.Parent;
 import java.io.IOException;
 
 public class orderPage {
-    public static Scene getScene(){
+
+    private static sceneController controller;
+
+    public orderPage(sceneController ctrl){
+        this.controller = ctrl;
+    }
+
+    public Scene getScene(){
         
         try{
             FXMLLoader loader = new FXMLLoader(orderPage.class.getResource("designFiles/cashier.fxml"));
@@ -15,7 +22,8 @@ public class orderPage {
             // double screenWidth = Screen.getPrimary().getBounds().getWidth();
             // double screenHeight = Screen.getPrimary().getBounds().getHeight();
             Scene cashierOrderScene = new Scene(root2, 1280, 720);
-            orderPageController controller;
+            orderPageController orderCtrl = loader.getController();
+            orderCtrl.setController(controller);
             return cashierOrderScene;
         }
         catch(IOException e){

@@ -7,16 +7,16 @@ public class orderPageController {
     @FXML
     private sceneController sceneCtrl;
 
-    public orderPageController(sceneController controller)
+    public void setController(sceneController controller)
     {
         this.sceneCtrl = controller;
     }
 
-    public void handleChangeScene(ActionEvent event){
+    @FXML
+    private void handleChangeScene(ActionEvent event){
         Button pressedButton = (Button) event.getSource();
         if(pressedButton.getId().equals("logoutButton")){
-            //change scene to login page
-            
+            sceneCtrl.changeScene(loginPage.getScene());
         }
         // else if(pressedButton.getId().equals("logoutButton"))
     }

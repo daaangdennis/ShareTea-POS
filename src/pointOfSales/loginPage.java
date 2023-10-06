@@ -18,7 +18,7 @@ public class loginPage {
 
 
     public loginPage(sceneController ctrl){
-        this.controller = ctrl;
+        controller = ctrl;
     }
 
     public static Scene getScene(){
