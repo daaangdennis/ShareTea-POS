@@ -106,7 +106,7 @@
                                     </TextField>
                                  </children>
                               </AnchorPane>
-                              <TableView layoutX="6.0" layoutY="51.0" prefHeight="429.0" prefWidth="381.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+                              <TableView fx:id="orderInfoTable" layoutX="6.0" layoutY="51.0" prefHeight="429.0" prefWidth="381.0" styleClass="order-table-view" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
                                 <columns>
                                   <TableColumn prefWidth="195.0" resizable="false" sortable="false" text="Product Name" />
                                   <TableColumn prefWidth="84.0" resizable="false" sortable="false" text="Quantity" />
