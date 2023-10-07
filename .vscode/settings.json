@@ -1,10 +1,9 @@
 {
     "java.project.sourcePaths": ["src"],
+    "java.project.classpath": ["src", "services", "lib/**/*.jar"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": {
-        "include": [
-            "lib/**/*.jar"
-        ],
+        "include": ["lib/**/*.jar"],
         "exclude": [
             "lib/javafx-swt.jar",
             "lib/javafx.base.jar",
@@ -17,3 +16,4 @@
         ]
     }
 }
+
