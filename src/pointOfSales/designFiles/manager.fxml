@@ -296,7 +296,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="editMenuPage" prefHeight="720.0" prefWidth="1152.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="editMenuPage" prefHeight="720.0" prefWidth="1152.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="370.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                                  <children>
@@ -304,7 +304,7 @@
                                       <columns>
                                         <TableColumn prefWidth="75.0" text="Product ID" />
                                         <TableColumn prefWidth="75.0" text="Product Name" />
-                                          <TableColumn prefWidth="75.0" text="Stock Quantity" />
+                                          <TableColumn prefWidth="75.0" text="Category" />
                                           <TableColumn prefWidth="75.0" text="Price" />
                                           <TableColumn prefWidth="75.0" text="Last Updated" />
                                       </columns>
@@ -320,7 +320,7 @@
                                     <TextField fx:id="productIDTextField" layoutX="317.0" layoutY="61.0" />
                                     <Label layoutX="170.0" layoutY="107.0" styleClass="right-sidebar-labels" text="Product Name:" />
                                     <TextField fx:id="productNameTextField" layoutX="317.0" layoutY="108.0" prefHeight="25.0" prefWidth="192.0" />
-                                    <Label layoutX="577.0" layoutY="60.0" styleClass="right-sidebar-labels" text="Stock Quantity:" />
+                                    <Label layoutX="626.0" layoutY="60.0" styleClass="right-sidebar-labels" text="Category:" />
                                     <TextField fx:id="stockTextField" layoutX="730.0" layoutY="61.0" />
                                     <Label layoutX="635.0" layoutY="107.0" styleClass="right-sidebar-labels" text="Price ($):" />
                                     <TextField fx:id="priceTextField" layoutX="730.0" layoutY="108.0" />
@@ -333,7 +333,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="editInventoryPage" layoutX="10.0" layoutY="10.0" prefHeight="730.0" prefWidth="1162.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="editInventoryPage" layoutX="10.0" layoutY="10.0" prefHeight="730.0" prefWidth="1162.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="370.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                                  <children>
