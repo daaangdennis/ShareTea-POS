@@ -4,7 +4,7 @@ import entities.*;
 import java.util.ArrayList;
 
 public class SystemFunctions {
-    public String verify(String PW){
+    public ArrayList<String> verify(String PW){
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
         employee verify_employee = new employee(conn);
