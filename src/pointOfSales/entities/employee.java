@@ -1,4 +1,4 @@
-package entities;
+package pointOfSales.entities;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -17,7 +17,7 @@ public class employee {
     Date HireDate = null;
     String Passcode = null;
     Connection conn = null;
-    int EmployeeID = -1;
+    public int EmployeeID = -1;
 
     public employee(Connection conn) {
         this.conn = conn;
@@ -139,6 +139,7 @@ public class employee {
                         rs.getDate("hire_date").toString(),
                         rs.getString("passcode"));
                 resultEmployee.EmployeeID = rs.getInt("employee_id");
+                this.EmployeeID = rs.getInt("employee_id");
             } else {
                 System.out.println("Employee not found.");
             }

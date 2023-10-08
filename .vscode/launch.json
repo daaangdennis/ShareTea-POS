@@ -5,7 +5,7 @@
             "type": "java",
             "name": "Launch App",
             "request": "launch",
-            "mainClass": "pointOfSales.loginPage",
+            "mainClass": "pointOfSales.app",
             "windows": { 
                 "vmArgs": "--module-path lib/javafx-sdk-21-windows/lib --add-modules javafx.controls,javafx.fxml"
             },

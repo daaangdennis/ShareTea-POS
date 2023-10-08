@@ -1,4 +1,4 @@
-package entities;
+package pointOfSales.entities;
 import java.sql.*;
 
 public class customer {
@@ -8,7 +8,7 @@ public class customer {
     String PhoneNumber = null;
     int OrderCount = 1;
     Connection conn = null;
-    int CustomerID = -1;
+    public int CustomerID = -1;
 
     public customer(Connection conn) {
         this.conn = conn;

@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import pointOfSales.services.SystemFunctions;
+import java.util.ArrayList;
 
 
 public class loginPageController {
@@ -39,15 +41,20 @@ public class loginPageController {
     @FXML
     private void handleEnterButtonClick(ActionEvent event){
             //Run function to check if the password is correct
+            ArrayList<String> values = SystemFunctions.verify(passwordField.getText());
             
-            if(passwordField.getText().equals("1234")){
+            if(values.get(2).equals("Cashier")){
                 //Call Cashier Switch
+                
+                orderPage.setController(mySceneController);
+                
                 mySceneController.changeScene(orderPage.getScene());
             }
-            else if(passwordField.getText().equals("4321"))
+            else if(values.get(2).equals("Manager"))
             {
                 //Call Manager Switch
-                passwordField.clear();
+                orderPage.setController(mySceneController);
+                mySceneController.changeScene(orderPage.getScene());
             }
             else
             {

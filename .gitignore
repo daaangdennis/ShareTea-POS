@@ -4,3 +4,6 @@ dbconfig.java
 */**.class
 .DS_Store
 bin/
+/entities/dbconfig.java
+
+

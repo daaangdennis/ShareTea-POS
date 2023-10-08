@@ -1,10 +1,10 @@
-package services;
+package pointOfSales.services;
 import java.sql.*;
-import entities.*;
+import pointOfSales.entities.*;
 import java.util.ArrayList;
 
 public class SystemFunctions {
-    public ArrayList<String> verify(String PW){
+    public static ArrayList<String> verify(String PW){
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
         employee verify_employee = new employee(conn);

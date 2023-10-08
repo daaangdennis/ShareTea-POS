@@ -20,7 +20,10 @@ public class sceneController {
     }   
 
     public void changeScene(Scene newScene){
-        mainStage.setScene(newScene);
-        
+        try {
+            mainStage.setScene(newScene); 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
