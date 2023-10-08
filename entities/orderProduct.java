@@ -59,7 +59,7 @@ public class orderProduct {
         return returnOrderProductID;
     }
 
-    public void addOrderProduct(int productID, int orderID, int quantity, String note) {
+    public static void addOrderProduct(Connection conn, int productID, int orderID, int quantity, String note) {
         try {
             String sql = "INSERT INTO order_product (Product_ID, Order_ID, Quantity, Note) VALUES (?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);

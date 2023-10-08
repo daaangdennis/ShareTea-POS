@@ -119,8 +119,8 @@ public class employee {
         return resultEmployee;
     }
 
-    public employee getEmployeeByName(String FirstName, String LastName) {
-        employee resultEmployee = null;
+    public static int getEmployeeByName(Connection conn, String FirstName, String LastName) {
+        int resultEmployee = -1;
         try {
             String sql = "SELECT * FROM employee WHERE first_name = ? AND last_name = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -130,16 +130,8 @@ public class employee {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                resultEmployee = new employee(conn,
-                        rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        rs.getString("position"),
-                        rs.getString("email"),
-                        rs.getString("phone_number"),
-                        rs.getDate("hire_date").toString(),
-                        rs.getString("passcode"));
-                resultEmployee.EmployeeID = rs.getInt("employee_id");
-                this.EmployeeID = rs.getInt("employee_id");
+                resultEmployee = rs.getInt("employee_id");
+                return resultEmployee;
             } else {
                 System.out.println("Employee not found.");
             }
@@ -151,7 +143,7 @@ public class employee {
         return resultEmployee;
     }
 
-    public ArrayList<String> verifyEmployee(Connection conn, String pw){
+    public static ArrayList<String> verifyEmployee(Connection conn, String pw){
         ArrayList<String> employee_verify = new ArrayList<>();
         try {
             String query = "SELECT first_name, last_name, position FROM employee WHERE passcode = ?";

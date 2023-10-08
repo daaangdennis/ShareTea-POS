@@ -14,6 +14,8 @@
     -fx-background-color: white;
     -fx-border-color: #cf152d;
     -fx-border-radius: 5px;
+    -fx-background-insets: 0;
+    -fx-background-radius: 5px;
 }
 
 .button#keypadEnter {

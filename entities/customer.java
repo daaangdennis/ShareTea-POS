@@ -70,8 +70,8 @@ public class customer {
         return resultCustomer;
     }
 
-    public customer getCustomerByName(String FirstName, String LastName) {
-        customer resultCustomer = null;
+    public static int getCustomerByName(Connection conn, String FirstName, String LastName) {
+        int customerID = -1;
         try {
             String sql = "SELECT * FROM customer WHERE first_name = ? AND last_name = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -81,13 +81,8 @@ public class customer {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                resultCustomer = new customer(conn,
-                        rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        rs.getString("email"),
-                        rs.getString("phone_number"));
-                resultCustomer.OrderCount = rs.getInt("order_count");
-                this.CustomerID = rs.getInt("customer_id");
+                customerID = rs.getInt("customer_id");
+                return customerID;
             } else {
                 System.out.println("Customer not found.");
             }
@@ -96,7 +91,7 @@ public class customer {
             System.out.println(
                     "Error getCustomerByName(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
         }
-        return resultCustomer;
+        return customerID;
     }
 
 }

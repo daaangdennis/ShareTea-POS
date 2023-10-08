@@ -101,7 +101,7 @@ public class order {
         }
     }
 
-    public int nextAvailableOrder(){
+    public static int nextAvailableOrder(Connection conn){
         int order_num = -1;
         String query = "SELECT MAX(order_id) FROM orders";
         try {

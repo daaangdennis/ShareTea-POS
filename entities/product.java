@@ -52,10 +52,9 @@ public class product {
         }
     }
 
-    public double getProductPriceByID(int ProductID) {
+    public static double getProductPriceByID(Connection conn, int ProductID) {
         try {
             double product_price = 0;
-            this.ProductID = ProductID;
             String price_query = "SELECT price FROM product WHERE product_id = ?";
             PreparedStatement pstmtPrice = conn.prepareStatement(price_query);
             pstmtPrice.setInt(1, ProductID);
@@ -71,7 +70,7 @@ public class product {
         return -1;
     }
 
-    public int getProductByName(String productName) {
+    public static int getProductByName(Connection conn, String productName) {
         int product_id = -1;
         try {
             String query = "SELECT product_id FROM product WHERE name = ?";
@@ -89,7 +88,7 @@ public class product {
         return -1;
     }
 
-    public ArrayList<String> getCategories() {
+    public static ArrayList<String> getCategories(Connection conn) {
         ArrayList<String> category_array = new ArrayList<>();
         try {
             String query = "SELECT DISTINCT category FROM product";
@@ -107,7 +106,7 @@ public class product {
     }
 
 
-    public ArrayList<String> getProductsPriceByCategory(String Category) {
+    public static ArrayList<String> getProductsPriceByCategory(Connection conn, String Category) {
         ArrayList<String> product_array = new ArrayList<>();
         try {
             String query = "SELECT name,price FROM product WHERE category = ?";
