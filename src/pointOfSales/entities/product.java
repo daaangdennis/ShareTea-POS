@@ -1,5 +1,4 @@
-package entities;
-
+package pointOfSales.entities;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Connection;

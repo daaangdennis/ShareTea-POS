@@ -1,4 +1,4 @@
-package entities;
+package pointOfSales.entities;
 import java.sql.*;
 
 public class customer {

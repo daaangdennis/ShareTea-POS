@@ -1,5 +1,5 @@
-package services;
-import entities.*;
+package pointOfSales.services;
+import pointOfSales.entities.*;
 import java.sql.*;
 import java.util.ArrayList;
 
