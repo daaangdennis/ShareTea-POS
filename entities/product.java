@@ -71,6 +71,24 @@ public class product {
         return -1;
     }
 
+    public int getProductByName(String productName) {
+        int product_id = -1;
+        try {
+            String query = "SELECT product_id FROM product WHERE name = ?";
+            PreparedStatement pstmtPrice = conn.prepareStatement(query);
+            pstmtPrice.setString(1, productName);
+            ResultSet resultSet = pstmtPrice.executeQuery();
+            if (resultSet.next()) {
+                product_id = resultSet.getInt("product_id");
+            }
+            return product_id;
+        } catch (Exception e) {
+            System.out.println(
+                    "Error getProductPriceByID(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
+        }
+        return -1;
+    }
+
     public ArrayList<String> getCategories() {
         ArrayList<String> category_array = new ArrayList<>();
         try {

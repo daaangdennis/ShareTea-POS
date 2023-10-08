@@ -59,4 +59,21 @@ public class orderProduct {
         return returnOrderProductID;
     }
 
+    public void addOrderProduct(int productID, int orderID, int quantity, String note) {
+        try {
+            String sql = "INSERT INTO order_product (Product_ID, Order_ID, Quantity, Note) VALUES (?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, productID);
+            pstmt.setInt(2, orderID);
+            pstmt.setInt(3, quantity);
+            pstmt.setString(4, note);
+            pstmt.executeUpdate();
+
+        } 
+        catch (Exception e) {
+            System.out.println(
+                    "Error createOrderProduct(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
+        }
+    }
+
 }
