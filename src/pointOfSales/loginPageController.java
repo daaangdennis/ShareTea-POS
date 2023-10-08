@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import services.SystemFunctions;
+
 
 
 public class loginPageController {
@@ -41,7 +41,7 @@ public class loginPageController {
     private void handleEnterButtonClick(ActionEvent event){
             //Run function to check if the password is correct
             
-            if(passwordField.getText().equals("Customer")){
+            if(passwordField.getText().equals("1234")){
                 //Call Cashier Switch
                 
                 orderPage.setController(mySceneController);
