@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "pointOfSales.loginPage",
+            "windows": { 
+                "vmArgs": "--module-path lib/javafx-sdk-21-windows/lib --add-modules javafx.controls,javafx.fxml"
+            },
+            "osx": {
+                "vmArgs": "--module-path lib/javafx-sdk-21-macos/lib --add-modules javafx.controls,javafx.fxml"
+            }
+            
+        }
+    ],
+}
