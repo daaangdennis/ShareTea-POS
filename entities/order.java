@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -100,6 +99,23 @@ public class order {
             System.out.println(
                     "Error createOrder(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
         }
+    }
+
+    public int nextAvailableOrder(){
+        int order_num = -1;
+        String query = "SELECT MAX(order_id) FROM orders";
+        try {
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                order_num = resultSet.getInt("max") + 1;
+            }
+            return order_num;
+        } catch (Exception e) {
+            System.out.println(
+                    "Error createOrder(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
+        }
+        return order_num;
     }
 
 }

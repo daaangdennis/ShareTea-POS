@@ -5,6 +5,9 @@ import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 
 public class product {
     String Name = null;
@@ -66,6 +69,43 @@ public class product {
                     "Error getProductPriceByID(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
         }
         return -1;
+    }
+
+    public ArrayList<String> getCategories() {
+        ArrayList<String> category_array = new ArrayList<>();
+        try {
+            String query = "SELECT DISTINCT category FROM product";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String category_name = resultSet.getString("category");
+                category_array.add(category_name);
+            }
+            return category_array;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return category_array;
+    }
+
+
+    public ArrayList<String> getProductsPriceByCategory(String Category) {
+        ArrayList<String> product_array = new ArrayList<>();
+        try {
+            String query = "SELECT name,price FROM product WHERE category = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, Category);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String Name = resultSet.getString("name");
+                String Price = resultSet.getDouble("price") + "";
+                product_array.add(Name + " " + Price);
+            }
+            return product_array;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product_array;
     }
 
 }
