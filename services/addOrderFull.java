@@ -16,12 +16,8 @@ public class addOrderFull {
         Connection conn = dbconn.conn;
 
         int customerID = customer.getCustomerByName(conn, customerFirst, customerLast);
-
         int employeeID = employee.getEmployeeByName(conn, employeeFirst, employeeLast);
-
-        order new_order = new order(conn, customerID, employeeID, 0.00);
-        int order_id = new_order.createOrder();
-
+        int order_id = order.createOrder(conn, customerID, employeeID);
 
         for(int i = 0; i < orderProducts.size(); i+=3){
             int productID = product.getProductByName(conn, orderProducts.get(i));
@@ -30,7 +26,7 @@ public class addOrderFull {
             orderProduct.addOrderProduct(conn, productID, order_id, quantity, note);
 
             double productPrice = product.getProductPriceByID(conn, productID);
-            new_order.updateTotal(order_id, productPrice*quantity);
+            order.updateTotal(conn, order_id, productPrice*quantity);
         }
 
     }

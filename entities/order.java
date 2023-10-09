@@ -46,28 +46,17 @@ public class order {
 
     }
 
-    public int createOrder() {
+    public static int createOrder(Connection conn, int CustomerID, int EmployeeID) {
         int returnOrderID = -1;
         try {
             PreparedStatement pstmt;
-            if (OrderDate == null) {
-                String sql = "INSERT INTO orders (Customer_ID, Employee_ID, Total, Is_Pending, Is_Refunded ) VALUES (?, ?, ?, ? , ?)";
-                pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                pstmt.setInt(1, CustomerID);
-                pstmt.setInt(2, EmployeeID);
-                pstmt.setBigDecimal(3, Total);
-                pstmt.setBoolean(4, IsPending);
-                pstmt.setBoolean(5, IsRefunded);
-            } else {
-                String sql = "INSERT INTO orders (Customer_ID, Employee_ID, Total, Order_Date, Is_Pending, Is_Refunded ) VALUES (?, ?, ?, ?, ?, ?)";
-                pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                pstmt.setInt(1, CustomerID);
-                pstmt.setInt(2, EmployeeID);
-                pstmt.setBigDecimal(3, Total);
-                pstmt.setDate(4, OrderDate);
-                pstmt.setBoolean(5, IsPending);
-                pstmt.setBoolean(6, IsRefunded);
-            }
+            String sql = "INSERT INTO orders (Customer_ID, Employee_ID, Total, Is_Pending, Is_Refunded ) VALUES (?, ?, ?, ? , ?)";
+            pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, CustomerID);
+            pstmt.setInt(2, EmployeeID);
+            pstmt.setBigDecimal(3, BigDecimal.ZERO);
+            pstmt.setBoolean(4, true);
+            pstmt.setBoolean(5, false);
 
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
@@ -88,7 +77,7 @@ public class order {
 
     }
 
-    public void updateTotal(int order_id, double orderProduct_price) {
+    public static void updateTotal(Connection conn, int order_id, double orderProduct_price) {
         String updateQuery = "UPDATE orders SET total = total + ? WHERE order_id = ?";
         try {
             PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
