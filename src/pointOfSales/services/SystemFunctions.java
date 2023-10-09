@@ -11,7 +11,7 @@ public class SystemFunctions {
         return verify_employee.verifyEmployee(conn, PW);
     }
 
-    public ArrayList<String> productsAndPriceByCategory(String category){
+    public static ArrayList<String> productsAndPriceByCategory(String category){
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
         product products_obj = new product(conn);

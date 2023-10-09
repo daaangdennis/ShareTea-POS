@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 
 public class menuItemButtonController {
@@ -18,6 +20,15 @@ public class menuItemButtonController {
 
     @FXML
     private void handleSubButton(ActionEvent event){
+        Button sourceButton = (Button) event.getSource();
+        Label foodType = (Label) sourceButton.getScene().lookup("#foodItemLabel");
+        Label cost = (Label) sourceButton.getScene().lookup("#priceLabel");
+        orderedProduct newItem = new orderedProduct();
+        newItem.setTeaType(foodType.getText());
+        newItem.setQuantity(1);
+        newItem.setPrice(cost.getText());
+        orderPage.items.add(newItem);
+
         AnchorPane subPane = orderPage.getSubMenu();
         subPane.setVisible(!subPane.isVisible());
         AnchorPane mainPane = orderPage.getMainMenu();

@@ -50,7 +50,7 @@ public class loginPageController {
                 
                 mySceneController.changeScene(orderPage.getScene());
             }
-            else if(values.get(2).equals("Manager"))
+            else if(values.get(2).equals("MANAGER"))
             {
                 //Call Manager Switch
                 orderPage.setController(mySceneController);

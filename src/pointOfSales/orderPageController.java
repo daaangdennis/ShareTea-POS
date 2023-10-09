@@ -19,9 +19,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Toggle;
-import java.util.List;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
+import pointOfSales.services.SystemFunctions;
+
 
 public class orderPageController implements Initializable {
     private sceneController sceneCtrl;
@@ -59,9 +60,10 @@ public class orderPageController implements Initializable {
     private ToggleGroup iceGroup = new ToggleGroup();
     private String sugarSelection;
     private String iceSelection;
-    private List<String> toppingArray = new ArrayList<>();
     private ObservableList<Object[]> data = FXCollections.observableArrayList();
     private Double foodLabelCost = 0.0;
+    public ArrayList<orderedProduct> items = new ArrayList<>();
+    
     
 
     
@@ -155,6 +157,7 @@ public class orderPageController implements Initializable {
     @FXML
     private void addButtons(ActionEvent event){
         int num_buttons = 1;
+        int indexCount = 0;
         ToggleButton sourceButton = (ToggleButton) event.getSource();
         if(!sourceButton.isSelected())
         {
@@ -162,37 +165,82 @@ public class orderPageController implements Initializable {
             return;
         }
         //if milktea
-
-        //if brewedtea
-
-        //if fruittea
-
-        //if iceblended 
-
-        //if tea mojito
-
-        //if creama
-        menuItemsGridPane.getChildren().clear();
-        for(int i = 0; i < num_buttons; i++)
+        ArrayList<String> results = new ArrayList<String>();
+        if(sourceButton.getText().equals("Milk Tea"))
         {
+            results = SystemFunctions.productsAndPriceByCategory("Milk Tea");
+            num_buttons = results.size(); 
+        }
+        //if brewedtea
+        if(sourceButton.getText().equals("Brewed Tea"))
+        {
+            results = SystemFunctions.productsAndPriceByCategory("Brewed Tea");
+            num_buttons = results.size(); 
+        }
+        //if fruittea
+        if(sourceButton.getText().equals("Fruit Tea"))
+        {
+            results = SystemFunctions.productsAndPriceByCategory("Fruit Tea");
+            num_buttons = results.size(); 
+        }
+        //if iceblended 
+        if(sourceButton.getText().equals("Ice Blended"))
+        {
+            results = SystemFunctions.productsAndPriceByCategory("Ice Blended");
+            num_buttons = results.size(); 
+        }
+        //if tea mojito
+        if(sourceButton.getText().equals("Tea Mojito"))
+        {
+            results = SystemFunctions.productsAndPriceByCategory("Tea Mojito");
+            num_buttons = results.size(); 
+        }
+        //if creama
+        if(sourceButton.getText().equals("Creama"))
+        {
+            results = SystemFunctions.productsAndPriceByCategory("Creama");
+            num_buttons = results.size(); 
+        }
+        menuItemsGridPane.getChildren().clear();
+        
+        int val1 = 1;
+        int val2 = 1;
+        while(true){
             try {
-
-                //Initialize Buttons
                 FXMLLoader loader2 = new FXMLLoader(getClass().getResource("designFiles/menuItemButton.fxml"));
                 Node buttonNode = loader2.load();
-                // Button button = (Button) buttonNode.lookup("#");
-                // button.setOnAction(pressed ->{
-                //     handleSubButton();
-                // });
-                menuItemsGridPane.add(buttonNode, i % 2, i % 2);
+                
+                Label label = (Label) loader2.getNamespace().get("foodItemLabel");
+                String[] parts = results.get(indexCount).split("\\s+(?=\\d+\\.\\d+$)");;
+                label.setText(parts[0]);
+                label.setPrefWidth(150);
+                Label priceLabel = (Label) loader2.getNamespace().get("priceLabel");
+                priceLabel.setText("$"+parts[1]);
+                
+                GridPane.setRowIndex(buttonNode, val1);
+                GridPane.setColumnIndex(buttonNode, val2);
+                
+                val2++;
+                if(val2 == 4)
+                {
+                    val1++;
+                    val2 = 1;
+                }
+                
+                menuItemsGridPane.getChildren().add(buttonNode);
                 menuItemButtonController buttonController = loader2.getController();
                 buttonController.setOrderControl(this);
-
+                indexCount = indexCount + 1;
+                if(indexCount == num_buttons)
+                {
+                    break;
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        
     }
 
     @FXML
@@ -217,7 +265,7 @@ public class orderPageController implements Initializable {
         if(sugarSelection == "" | iceSelection == ""){
             return;
         }
-
+        Double toppingCost = 0.00;
         ToggleButton pearlButton = (ToggleButton) toppingSelection.lookup("#pearl");
         ToggleButton miniPearlButton = (ToggleButton) toppingSelection.lookup("#miniPearl");
         ToggleButton iceCreamButton = (ToggleButton) toppingSelection.lookup("#iceCream");
@@ -230,41 +278,50 @@ public class orderPageController implements Initializable {
         ToggleButton crystalBobaButton = (ToggleButton) toppingSelection.lookup("#crystalBoba");
 
         if(pearlButton.isSelected()){
-            toppingArray.add(pearlButton.getText());
+            items.get(items.size() -1 ).addToList(pearlButton.getText());
+            toppingCost += 0.75;
         }
         if(miniPearlButton.isSelected()){
-            toppingArray.add(miniPearlButton.getText());
+            items.get(items.size() -1 ).addToList(miniPearlButton.getText());
+            toppingCost += 0.75;
         }
         if(iceCreamButton.isSelected()){
-            toppingArray.add(iceCreamButton.getText());
+            items.get(items.size() -1 ).addToList(iceCreamButton.getText());
+            toppingCost += 0.75;
         }
         if(puddingButton.isSelected()){
-            toppingArray.add(puddingButton.getText());
+            items.get(items.size() -1 ).addToList(puddingButton.getText());
+            toppingCost += 0.75;
         }
         if(aloeVeraButton.isSelected()){
-            toppingArray.add(aloeVeraButton.getText());
+            items.get(items.size() -1 ).addToList(aloeVeraButton.getText());
+            toppingCost += 0.75;
         }
         if(redBeanButton.isSelected()){
-            toppingArray.add(redBeanButton.getText());
+            items.get(items.size() -1 ).addToList(redBeanButton.getText());
+            toppingCost += 0.75;
         }
         if(herbJellyButton.isSelected()){
-            toppingArray.add(herbJellyButton.getText());
+            items.get(items.size() -1 ).addToList(herbJellyButton.getText());
+            toppingCost += 0.75;
         }
         if(aiyuJellyButton.isSelected()){
-            toppingArray.add(aiyuJellyButton.getText());
+            items.get(items.size() -1 ).addToList(aiyuJellyButton.getText());
+            toppingCost += 0.75;
         }
         if(lycheeJellyButton.isSelected()){
-            toppingArray.add(lycheeJellyButton.getText());
+            items.get(items.size() -1 ).addToList(lycheeJellyButton.getText());
+            toppingCost += 0.75;
         }
         if(crystalBobaButton.isSelected()){
-            toppingArray.add(crystalBobaButton.getText());
+            items.get(items.size() -1 ).addToList(crystalBobaButton.getText());
+            toppingCost += 0.75;
         }
-
-        data.add(new Object[]{"MilkTea", "1", "$5.00"}); 
-        data.add(new Object[]{"BrewedTea", "1", "$4.00"});
-        data.add(new Object[]{"FruitTea", "1", "$3.00"});
         
-        ;
+        double calculated_cost = Double.parseDouble(items.get(items.size() -1 ).getPrice().substring(1));
+        calculated_cost += toppingCost;
+        data.add(new Object[]{items.get(items.size() -1 ).getTeaType(), items.get(items.size() -1 ).getQuantity() ,calculated_cost}); 
+        
         checkoutTable.setItems(data);
         menuItems.setVisible(!menuItems.isVisible());
         orderCustomizationMenu.setVisible(!orderCustomizationMenu.isVisible());
