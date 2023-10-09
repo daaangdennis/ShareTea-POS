@@ -116,7 +116,8 @@ public class product {
             while (resultSet.next()) {
                 String Name = resultSet.getString("name");
                 String Price = resultSet.getDouble("price") + "";
-                product_array.add(Name + " " + Price);
+                product_array.add(Name);
+                product_array.add(Price);
             }
             return product_array;
         } catch (SQLException e) {

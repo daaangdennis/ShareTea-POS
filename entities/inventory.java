@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class inventory {
     String Name = null;
@@ -65,5 +68,26 @@ public class inventory {
             System.out.println(
                     "Error createInventory(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
         }
+    }
+
+    public static ArrayList<String> getInventory(Connection conn) {
+        ArrayList<String> inventory_array = new ArrayList<>();
+        try {
+            String query = "SELECT name, quantity FROM inventory";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String inventoryName = resultSet.getString("name");
+                int inventoryQuantity = resultSet.getInt("quantity");
+                inventory_array.add(inventoryName);
+                inventory_array.add(inventoryQuantity + "");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return inventory_array;
+    }
+
+    public void addSubInventory(Connection conn) {
     }
 }

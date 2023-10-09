@@ -22,4 +22,10 @@ public class SystemFunctions {
         return product.getCategories(conn);
     }
 
+    public static ArrayList<String> getInventory(){
+        dbconnect dbconn = new dbconnect();
+        Connection conn = dbconn.conn;
+        return inventory.getInventory(conn);
+    }
+
 }
