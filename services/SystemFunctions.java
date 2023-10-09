@@ -10,7 +10,7 @@ public class SystemFunctions {
         return employee.verifyEmployee(conn, PW);
     }
 
-    public static ArrayList<String> productsAndPriceByCategory(String category){
+    public static ArrayList<ArrayList<String>> productsAndPriceByCategory(String category){
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
         return product.getProductsPriceByCategory(conn, category);

@@ -106,8 +106,12 @@ public class product {
     }
 
 
-    public static ArrayList<String> getProductsPriceByCategory(Connection conn, String Category) {
+    public static ArrayList<ArrayList<String>> getProductsPriceByCategory(Connection conn, String Category) {
+        ArrayList<ArrayList<String>> productPrice_array = new ArrayList<>();
         ArrayList<String> product_array = new ArrayList<>();
+        ArrayList<String> price_array = new ArrayList<>();
+        productPrice_array.add(product_array);
+        productPrice_array.add(price_array);
         try {
             String query = "SELECT name,price FROM product WHERE category = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
@@ -116,14 +120,14 @@ public class product {
             while (resultSet.next()) {
                 String Name = resultSet.getString("name");
                 String Price = resultSet.getDouble("price") + "";
-                product_array.add(Name);
-                product_array.add(Price);
+                productPrice_array.get(0).add(Name);
+                productPrice_array.get(1).add(Price);
             }
-            return product_array;
+            return productPrice_array;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return product_array;
+        return productPrice_array;
     }
 
 }

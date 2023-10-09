@@ -9,9 +9,9 @@ public class addOrderFull {
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
         return (order.nextAvailableOrder(conn)+"");
-
     }
-    public static void addOrder(String customerFirst, String customerLast, String employeeFirst, String employeeLast, ArrayList<String> orderProducts) {
+
+    public static void addOrder(String customerFirst, String customerLast, String employeeFirst, String employeeLast, ArrayList<orderProduct> orderProducts) {
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
 
@@ -19,16 +19,13 @@ public class addOrderFull {
         int employeeID = employee.getEmployeeByName(conn, employeeFirst, employeeLast);
         int order_id = order.createOrder(conn, customerID, employeeID);
 
-        for(int i = 0; i < orderProducts.size(); i+=3){
-            int productID = product.getProductByName(conn, orderProducts.get(i));
-            int quantity = Integer.parseInt(orderProducts.get(i+1));
-            String note = orderProducts.get(i+2);
-            orderProduct.addOrderProduct(conn, productID, order_id, quantity, note);
+        for(int i = 0; i < orderProducts.size(); ++i){
+            int productID = product.getProductByName(conn, orderProducts.get(i).ProductName);
+            orderProducts.get(i).addOrderProduct(conn, productID, order_id);
 
             double productPrice = product.getProductPriceByID(conn, productID);
-            order.updateTotal(conn, order_id, productPrice*quantity);
+            order.updateTotal(conn, order_id, productPrice*orderProducts.get(i).Quantity + orderProducts.get(i).Toppings.size() * 0.75);
         }
-
     }
 
 }
