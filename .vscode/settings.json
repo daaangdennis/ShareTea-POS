@@ -4,7 +4,7 @@
     ],
     "java.project.outputPath": "bin/pointOfSales",
     "java.project.referencedLibraries": {
-        "include": ["lib/**/*.jar"],
+        "include": ["lib/postgresql-42.2.8.jar","lib/**/*.jar"],
         "exclude": [
             "lib/javafx-swt.jar",
             "lib/javafx.base.jar",
