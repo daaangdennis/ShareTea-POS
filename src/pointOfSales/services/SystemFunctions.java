@@ -7,22 +7,36 @@ public class SystemFunctions {
     public static ArrayList<String> verify(String PW){
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
-        employee verify_employee = new employee(conn);
-        return verify_employee.verifyEmployee(conn, PW);
+        return employee.verifyEmployee(conn, PW);
     }
 
-    public static ArrayList<String> productsAndPriceByCategory(String category){
+
+
+    public static ArrayList<ArrayList<String>> productsAndPriceByCategory(String category){
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
-        product products_obj = new product(conn);
-        return products_obj.getProductsPriceByCategory(category);
+        return product.getProductsPriceByCategory(conn, category);
     }
 
-    public ArrayList<String> getCategories(){
+    public static ArrayList<String> getCategories(){
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
-        product products_obj = new product(conn);
-        return products_obj.getCategories();
+        return product.getCategories(conn);
+    }
+
+    public static ArrayList<String> getInventory(){
+        dbconnect dbconn = new dbconnect();
+        Connection conn = dbconn.conn;
+        return inventory.getInventory(conn);
+    }
+
+    public static void updateInventory(ArrayList<String> inventoryList, ArrayList<Integer> inventoryNumber){
+        dbconnect dbconn = new dbconnect();
+        Connection conn = dbconn.conn;
+        for(int i = 0; i < inventoryList.size(); ++i){
+            int inventory_id = inventory.getInventoryByName(conn, inventoryList.get(i));
+            inventory.addSubInventory(conn, inventory_id, inventoryNumber.get(i));
+        }
     }
 
 }

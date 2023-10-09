@@ -5,39 +5,27 @@ import java.util.ArrayList;
 
 public class addOrderFull {
 
-    public String nextOrderID(){
+    public static String nextOrderID(){
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
-        order order_obj = new order(conn);
-        return (order_obj.nextAvailableOrder()+"");
-
+        return (order.nextAvailableOrder(conn)+"");
     }
-    public void addOrder(String customerFirst, String customerLast, String employeeFirst, String employeeLast, ArrayList<String> orderProducts) {
+
+    public static void addOrder(String customerFirst, String customerLast, String employeeFirst, String employeeLast, ArrayList<orderProduct> orderProducts) {
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
 
-        customer customer_obj = new customer(conn);
-        customer_obj.getCustomerByName(customerFirst, customerLast);
+        int customerID = customer.getCustomerByName(conn, customerFirst, customerLast);
+        int employeeID = employee.getEmployeeByName(conn, employeeFirst, employeeLast);
+        int order_id = order.createOrder(conn, customerID, employeeID);
 
-        employee employee_obj = new employee(conn);
-        employee_obj.getEmployeeByName(employeeFirst, employeeLast);
+        for(int i = 0; i < orderProducts.size(); ++i){
+            int productID = product.getProductByName(conn, orderProducts.get(i).ProductName);
+            orderProducts.get(i).addOrderProduct(conn, productID, order_id);
 
-        order new_order = new order(conn, customer_obj.CustomerID, employee_obj.EmployeeID, 0.00);
-        int order_id = new_order.createOrder();
-
-        orderProduct orderProductObj = new orderProduct(conn);
-        product productObj = new product(conn);
-
-        for(int i = 0; i < orderProducts.size(); i+=3){
-            int productID = productObj.getProductByName(orderProducts.get(i));
-            int quantity = Integer.parseInt(orderProducts.get(i+1));
-            String note = orderProducts.get(i+2);
-            orderProductObj.addOrderProduct(productID, order_id, quantity, note);
-
-            double productPrice = productObj.getProductPriceByID(productID);
-            new_order.updateTotal(order_id, productPrice*quantity);
+            double productPrice = product.getProductPriceByID(conn, productID);
+            order.updateTotal(conn, order_id, productPrice*orderProducts.get(i).Quantity + orderProducts.get(i).Toppings.size() * 0.75);
         }
-
     }
 
 }
