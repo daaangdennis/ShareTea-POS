@@ -43,7 +43,7 @@ public class loginPageController {
             //Run function to check if the password is correct
             ArrayList<String> values = SystemFunctions.verify(passwordField.getText());
             
-            if(values.get(2).equals("Cashier")){
+            if(values.get(2).equals("CASHIER")){
                 //Call Cashier Switch
                 
                 orderPage.setController(mySceneController);
