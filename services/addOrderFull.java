@@ -17,13 +17,12 @@ public class addOrderFull {
 
         int customerID = customer.getCustomerByName(conn, customerFirst, customerLast);
         int employeeID = employee.getEmployeeByName(conn, employeeFirst, employeeLast);
-        int order_id = order.createOrder(conn, customerID, employeeID);
+        int order_id = order.createOrder(conn, customerID, employeeID, orderTotal);
 
         for(int i = 0; i < orderProducts.size(); ++i){
             int productID = orderProducts.get(i).ProductID;
             orderProducts.get(i).addOrderProduct(conn, productID, order_id);
         }
-        order.updateTotal(conn, order_id, orderTotal);
     }
 
 }

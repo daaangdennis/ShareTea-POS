@@ -82,11 +82,18 @@ public class customer {
             pstmt.setString(2, LastName);
 
             ResultSet rs = pstmt.executeQuery();
-
             if (rs.next()) {
                 customerID = rs.getInt("customer_id");
+                String addCount = "UPDATE customer SET order_count = order_count + 1 WHERE customer_id = ?";
+                PreparedStatement addCountST = conn.prepareStatement(addCount);
+                addCountST.setInt(1, customerID);
+                addCountST.executeUpdate();
                 return customerID;
-            } else {
+            } 
+            else if(FirstName.isEmpty()){
+                return -2;
+            }
+            else {
                 customerID = customer.createCustomer(conn, FirstName, LastName);
                 return customerID;
             }
