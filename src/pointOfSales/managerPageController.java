@@ -64,9 +64,6 @@ public class managerPageController implements Initializable {
     private TableColumn<Object[], String> menuCategoryColumn;
     @FXML
     private TableColumn<Object[], String> menuPriceColumn;
-    @FXML
-    private TableColumn<Object[], String> menuUpdatedColumn;
-
 
 
     @FXML
@@ -309,7 +306,7 @@ public class managerPageController implements Initializable {
     private void addItem(ActionEvent event){
         sugarSelection = checkToggledButton(sugarGroup);
         iceSelection = checkToggledButton(iceGroup);
-        if(sugarSelection == "" && iceSelection == ""){
+        if(sugarSelection == "" | iceSelection == ""){
             return;
         }
 
@@ -534,6 +531,24 @@ public class managerPageController implements Initializable {
                 return new SimpleStringProperty("Last Updated");
             }
         });
+    }
+
+    @FXML
+    private void checkoutButton(ActionEvent event){
+        if(menuItems.isVisible()){
+            return;
+        }
+        editInventoryPage.setVisible(false);
+        editMenuPage.setVisible(false);
+        orderCustomizationMenu.setVisible(false);
+        orderInfoPane.setVisible(true);
+        menuItems.setVisible(true);
+        if(!items.isEmpty()){
+            orderTotal -= Double.parseDouble(items.get(items.size()-1).getPrice());
+            items.remove(items.size() - 1);
+        }
+        
+        
     }
 
 

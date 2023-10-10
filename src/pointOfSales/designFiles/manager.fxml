@@ -40,7 +40,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <Button fx:id="checkoutButton" contentDisplay="TOP" layoutX="9.0" layoutY="86.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="112.0" styleClass="navbutton" text="Checkout" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
+                              <Button fx:id="checkoutButton" contentDisplay="TOP" layoutX="9.0" layoutY="86.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="112.0" styleClass="navbutton" text="Checkout" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" onAction="#checkoutButton">
                                  <graphic>
                                     <ImageView fitHeight="77.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
