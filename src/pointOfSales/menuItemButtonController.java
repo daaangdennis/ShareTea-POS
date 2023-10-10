@@ -1,28 +1,32 @@
 package pointOfSales;
 
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
+import javafx.scene.Node;
 
 public class menuItemButtonController {
     
     orderPageController orderPage;
+    managerPageController managerPage;
 
     public void setOrderControl(orderPageController order){
         this.orderPage = order;
     }
 
+    public void setManagerControl(managerPageController manage){
+        this.managerPage = manage;
+    }
+
     @FXML
     private void handleSubButton(ActionEvent event){
         Button sourceButton = (Button) event.getSource();
-        Label foodType = (Label) sourceButton.getScene().lookup("#foodItemLabel");
-        Label cost = (Label) sourceButton.getScene().lookup("#priceLabel");
+        Label foodType = orderPage.buttonLabelMap.get(sourceButton);
+        Label cost = orderPage.buttonCostMap.get(sourceButton);
         orderedProduct newItem = new orderedProduct();
         newItem.setTeaType(foodType.getText());
         newItem.setQuantity(1);
@@ -37,11 +41,5 @@ public class menuItemButtonController {
         orderPage.getFoodLabel().setText("Food Item $5.00 ");
     }
 
-    @FXML
-    private void addToTable(ActionEvent event){
-        ObservableList<Object[]> data = FXCollections.observableArrayList(
-            new Object[]{"MilkTea", "1", "$5.00"}, new Object[]{"BrewedTea", "1", "$4.00"}, new Object[]{"FruitTea", "1", "$3.00"}
-        );
-        orderPage.getTable().setItems(data);
-    }
+    
 }

@@ -5,6 +5,9 @@ public class orderedProduct {
     private int quantity;
     private ArrayList<String> toppings = new ArrayList<>();
     private String price;
+    private Double sugarLevel;
+    private String iceLevel;
+    private String note;
 
     public orderedProduct(){
         teaType = "NULL";
@@ -28,6 +31,18 @@ public class orderedProduct {
         return this.price;
     }
 
+    public Double getSugar(){
+        return this.sugarLevel;
+    }
+
+    public String getIce(){
+        return this.iceLevel;
+    }
+
+    public String getNote(){
+        return this.note;
+    }
+
     public void setTeaType(String type){
         teaType = type;
     }
@@ -46,5 +61,17 @@ public class orderedProduct {
 
     public void clearList(){
         toppings.clear();
+    }
+
+    public void setSugar(Double sugar){
+        sugarLevel = sugar;
+    }
+
+    public void setIce(String ice){
+        iceLevel = ice;
+    }
+
+    public void setNote(String message){
+        note = message;
     }
 }

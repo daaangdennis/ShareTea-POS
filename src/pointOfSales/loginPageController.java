@@ -68,7 +68,6 @@ public class loginPageController {
                 setFirstName(values.get(0));
                 setLastName(values.get(1));
                 orderPage.setController(mySceneController);
-                
                 mySceneController.changeScene(orderPage.getScene());
             }
             else if(values.get(2).equals("MANAGER"))
@@ -76,8 +75,8 @@ public class loginPageController {
                 //Call Manager Switch
                 setFirstName(values.get(0));
                 setLastName(values.get(1));
-                orderPage.setController(mySceneController);
-                mySceneController.changeScene(orderPage.getScene());
+                managerPage.setController(mySceneController);
+                mySceneController.changeScene(managerPage.getScene());
             }
             else
             {

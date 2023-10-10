@@ -13,6 +13,7 @@ public class app extends Application {
         sceneController sceneCtrl = new sceneController(primaryStage);
         orderPage.setController(sceneCtrl);
         loginPage.setController(sceneCtrl);
+        managerPage.setController(sceneCtrl);
         Scene loginpage = loginPage.getScene();
         sceneCtrl.changeScene(loginpage);
         
