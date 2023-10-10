@@ -27,7 +27,9 @@ public class menuItemButtonController {
         Button sourceButton = (Button) event.getSource();
         Label foodType = orderPage.buttonLabelMap.get(sourceButton);
         Label cost = orderPage.buttonCostMap.get(sourceButton);
+        String id = orderPage.buttonIdMap.get(sourceButton);
         orderedProduct newItem = new orderedProduct();
+        newItem.setId(id);
         newItem.setTeaType(foodType.getText());
         newItem.setQuantity(1);
         newItem.setPrice(cost.getText());

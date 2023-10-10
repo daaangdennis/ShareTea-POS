@@ -74,6 +74,9 @@ public class orderPageController implements Initializable {
     public ArrayList<orderedProduct> items = new ArrayList<>();
     public Map<Button, Label> buttonLabelMap = new HashMap<>();
     public Map<Button, Label> buttonCostMap = new HashMap<>();
+    public Map<Button, String> buttonIdMap = new HashMap<>();
+    public Double orderTotal = 0.0;
+
     
     
 
@@ -238,8 +241,10 @@ public class orderPageController implements Initializable {
                     val1++;
                     val2 = 1;
                 }
+                String pid = results.get(2).get(indexCount);
                 buttonLabelMap.put(button, label);
                 buttonCostMap.put(button, priceLabel);
+                buttonIdMap.put(button, pid);
                 menuItemsGridPane.getChildren().add(buttonNode);
                 menuItemButtonController buttonController = loader2.getController();
                 buttonController.setOrderControl(this);
@@ -355,10 +360,10 @@ public class orderPageController implements Initializable {
             toppingCost += 0.75;
         }
         
-        double calculated_cost = Double.parseDouble(items.get(items.size() -1 ).getPrice().substring(1));
+        double calculated_cost = Double.parseDouble(items.get(items.size() -1 ).getPrice().substring(8));
         calculated_cost += toppingCost;
         data.add(new Object[]{items.get(items.size() -1 ).getTeaType(), items.get(items.size() -1 ).getQuantity() ,calculated_cost}); 
-        
+        orderTotal+=calculated_cost;
         checkoutTable.setItems(data);
         menuItems.setVisible(!menuItems.isVisible());
         orderCustomizationMenu.setVisible(!orderCustomizationMenu.isVisible());
@@ -400,16 +405,18 @@ public class orderPageController implements Initializable {
         ArrayList<orderProduct> listOfItems = new ArrayList<>();
         //OrderProduct Details String Product, int ProductQuantity, ArrayList<String> ToppingList, double Sugar, String NoteInput
         for(int i = 0; i < items.size(); i++){
+            //String PID, int ProductQuantity, ArrayList<String> ToppingList, double Sugar, String NoteInput
             orderProduct itemProduct = new orderProduct(
-            items.get(i).getTeaType(), items.get(i).getQuantity(), items.get(i).getToppings(), 
+            items.get(i).getId(), items.get(i).getQuantity(), items.get(i).getToppings(), 
             items.get(i).getSugar(), items.get(i).getNote()
             );
             listOfItems.add(itemProduct);
         }
+        
         // System.out.println("Customer Name: " + customerFirstName + " " + customerLastName);
         // System.out.println("Employee Name: " + employeeFirstName + " " + employeeLastName);
         // for(int i = 0; i < listOfItems.size(); i++){
-        //     System.out.println("Product: " + listOfItems.get(i).ProductName);
+        //     System.out.println("Product: " + listOfItems.get(i).ProductID);
         //     System.out.println("Quantity: " + listOfItems.get(i).Quantity);
         //     System.out.println("Sugar: " + listOfItems.get(i).SugarLevel);
         //     System.out.println("Note: " + listOfItems.get(i).Note);
@@ -418,10 +425,12 @@ public class orderPageController implements Initializable {
         //     }
             
         // }
+        // System.out.println("OrderCost: " + orderTotal);
 
         //Customer First Name, Customer Last Name, Employee First Name, Employee Last Name, ArrayList of OrderProduct
-        addOrderFull.addOrder(customerFirstName, customerLastName, employeeFirstName, employeeLastName, listOfItems);
+        addOrderFull.addOrder(customerFirstName, customerLastName, employeeFirstName, employeeLastName, listOfItems, orderTotal);
         data.clear();
+        orderTotal = 0.0;
 
     }
 

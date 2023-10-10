@@ -8,6 +8,7 @@ public class orderedProduct {
     private Double sugarLevel;
     private String iceLevel;
     private String note;
+    private String pid;
 
     public orderedProduct(){
         teaType = "NULL";
@@ -43,6 +44,10 @@ public class orderedProduct {
         return this.note;
     }
 
+    public String getId(){
+        return this.pid;
+    }
+
     public void setTeaType(String type){
         teaType = type;
     }
@@ -73,5 +78,9 @@ public class orderedProduct {
 
     public void setNote(String message){
         note = message;
+    }
+
+    public void setId(String id){
+        pid = id;
     }
 }
