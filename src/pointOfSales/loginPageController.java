@@ -14,6 +14,7 @@ public class loginPageController {
     private sceneController mySceneController;
     private static String employeeFirstName = "";
     private static String employeeLastName = "";
+    private static String employeePosition = "";
  
     
     // Event Handler for keypad numerical buttons
@@ -30,12 +31,20 @@ public class loginPageController {
         employeeLastName = name;
     }
 
+    public static void setPosition(String pos){
+        employeePosition = pos;
+    }
+
     public static String getFirstName(){
         return employeeFirstName;
     }
 
     public static String getLastName(){
         return employeeLastName;
+    }
+
+    public static String getPosition(){
+        return employeePosition;
     }
 
 
@@ -67,6 +76,7 @@ public class loginPageController {
                 //Call Cashier Switch
                 setFirstName(values.get(0));
                 setLastName(values.get(1));
+                setPosition(values.get(2));
                 orderPage.setController(mySceneController);
                 mySceneController.changeScene(orderPage.getScene());
             }
@@ -75,6 +85,7 @@ public class loginPageController {
                 //Call Manager Switch
                 setFirstName(values.get(0));
                 setLastName(values.get(1));
+                setPosition(values.get(2));
                 managerPage.setController(mySceneController);
                 mySceneController.changeScene(managerPage.getScene());
             }

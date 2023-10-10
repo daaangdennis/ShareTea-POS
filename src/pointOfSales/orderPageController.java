@@ -76,6 +76,7 @@ public class orderPageController implements Initializable {
     public Map<Button, Label> buttonCostMap = new HashMap<>();
     public Map<Button, String> buttonIdMap = new HashMap<>();
     public Double orderTotal = 0.0;
+    public String employPosition = "";
 
     
     
@@ -131,6 +132,7 @@ public class orderPageController implements Initializable {
 
         Label orderNumber = (Label) orderInfoPane.lookup("#orderNumberLabel");
         orderNumber.setText("Order #" + addOrderFull.nextOrderID());
+        employPosition = loginPageController.getPosition();
     }
 
     public TableView<Object[]> getTable(){
@@ -166,6 +168,7 @@ public class orderPageController implements Initializable {
     private void handleChangeScene(ActionEvent event){
         Button pressedButton = (Button) event.getSource();
         if(pressedButton.getId().equals("logoutButton")){
+            employPosition = "";
             sceneCtrl.changeScene(loginPage.getScene());
         }
         // else if(pressedButton.getId().equals("logoutButton"))
