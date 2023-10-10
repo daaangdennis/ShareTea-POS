@@ -120,7 +120,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="background" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="orderInfoPane" layoutX="588.0" layoutY="173.0" prefHeight="200.0" prefWidth="384.0" styleClass="right-sidebar" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="orderInfoPane" layoutX="588.0" layoutY="173.0" prefHeight="200.0" prefWidth="384.0" styleClass="right-sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="4.0" layoutY="4.0" prefHeight="47.0" prefWidth="380.0" styleClass="order-infobar" AnchorPane.bottomAnchor="671.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
@@ -165,7 +165,7 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="menuItems" prefHeight="452.0" prefWidth="564.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="404.0" AnchorPane.topAnchor="20.0">
+                        <AnchorPane fx:id="menuItems" prefHeight="452.0" prefWidth="564.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="404.0" AnchorPane.topAnchor="20.0">
                            <children>
                               <ScrollPane fx:id="categoryItemsScrollPane" layoutY="189.0" prefHeight="459.0" prefWidth="708.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                  <content>
@@ -330,7 +330,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="editInventoryPage" layoutX="10.0" layoutY="10.0" prefHeight="730.0" prefWidth="1162.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="editInventoryPage" layoutX="10.0" layoutY="10.0" prefHeight="730.0" prefWidth="1162.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="370.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                                  <children>
