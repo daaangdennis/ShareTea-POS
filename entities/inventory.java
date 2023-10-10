@@ -88,17 +88,30 @@ public class inventory {
         return -1;
     }
 
-    public static ArrayList<String> getInventory(Connection conn) {
-        ArrayList<String> inventory_array = new ArrayList<>();
+    public static ArrayList<ArrayList<String>> getInventory(Connection conn) {
+        ArrayList<ArrayList<String>> inventory_array = new ArrayList<>();
         try {
-            String query = "SELECT name, quantity FROM inventory";
+            String query = "SELECT * FROM inventory";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
+            ArrayList<String> id_array = new ArrayList<>();
+            ArrayList<String> name_array = new ArrayList<>();
+            ArrayList<String> quantity_array = new ArrayList<>();
+            ArrayList<String> updated_array = new ArrayList<>();
+            inventory_array.add(id_array);
+            inventory_array.add(name_array);
+            inventory_array.add(quantity_array);
+            inventory_array.add(updated_array);
             while (resultSet.next()) {
-                String inventoryName = resultSet.getString("name");
-                int inventoryQuantity = resultSet.getInt("quantity");
-                inventory_array.add(inventoryName);
-                inventory_array.add(inventoryQuantity + "");
+                String id = resultSet.getInt("inventory_id") + "";
+                String name = resultSet.getString("name");
+                String quantity = resultSet.getInt("quantity") + "";
+                String update = resultSet.getDate("last_updated") + "";
+                
+                inventory_array.get(0).add(id);
+                inventory_array.get(1).add(name);
+                inventory_array.get(2).add(quantity);
+                inventory_array.get(3).add(update);
             }
         } catch (SQLException e) {
             e.printStackTrace();
