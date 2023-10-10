@@ -9,17 +9,37 @@ import java.util.ArrayList;
 
 
 public class loginPageController {
-
     @FXML
     private PasswordField passwordField;
     private sceneController mySceneController;
+    private static String employeeFirstName = "";
+    private static String employeeLastName = "";
  
-
+    
     // Event Handler for keypad numerical buttons
 
     public void setController(sceneController sceneCtrl){
         this.mySceneController = sceneCtrl;
     }
+
+    public static void setFirstName(String name){
+        employeeFirstName = name;
+    }
+
+    public static void setLastName(String name){
+        employeeLastName = name;
+    }
+
+    public static String getFirstName(){
+        return employeeFirstName;
+    }
+
+    public static String getLastName(){
+        return employeeLastName;
+    }
+
+
+
     @FXML
 
     private void handleNumberButtonClick(ActionEvent event){
@@ -45,7 +65,8 @@ public class loginPageController {
             
             if(values.get(2).equals("CASHIER")){
                 //Call Cashier Switch
-                
+                setFirstName(values.get(0));
+                setLastName(values.get(1));
                 orderPage.setController(mySceneController);
                 
                 mySceneController.changeScene(orderPage.getScene());
@@ -53,6 +74,8 @@ public class loginPageController {
             else if(values.get(2).equals("MANAGER"))
             {
                 //Call Manager Switch
+                setFirstName(values.get(0));
+                setLastName(values.get(1));
                 orderPage.setController(mySceneController);
                 mySceneController.changeScene(orderPage.getScene());
             }

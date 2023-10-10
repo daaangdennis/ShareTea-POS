@@ -9,7 +9,6 @@ import java.io.IOException;
 public class orderPage {
 
     private static sceneController controller;
-
     public orderPage(){}
 
     public static void setController(sceneController ctrl){

@@ -22,7 +22,7 @@ import javafx.scene.control.Toggle;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
 import pointOfSales.services.SystemFunctions;
-
+import pointOfSales.services.addOrderFull;
 
 public class orderPageController implements Initializable {
     private sceneController sceneCtrl;
@@ -50,6 +50,8 @@ public class orderPageController implements Initializable {
     private AnchorPane icePane;
     @FXML
     private AnchorPane toppingSelection;
+    @FXML
+    private AnchorPane orderInfoPane;
     @FXML
     private TextArea additionalNotes;
     @FXML
@@ -114,6 +116,9 @@ public class orderPageController implements Initializable {
         ToggleButton extraIceButton = (ToggleButton) icePane.lookup("#extraIce");
         ToggleButton makeItHotButton = (ToggleButton) icePane.lookup("#hot");
         iceGroup.getToggles().addAll(regularIceButton, lightIceButton, noIceButton, extraIceButton, makeItHotButton);
+
+        Label orderNumber = (Label) orderInfoPane.lookup("#orderNumberLabel");
+        orderNumber.setText("Order #" + addOrderFull.nextOrderID());
     }
 
     public TableView<Object[]> getTable(){
@@ -165,11 +170,11 @@ public class orderPageController implements Initializable {
             return;
         }
         //if milktea
-        ArrayList<String> results = new ArrayList<String>();
+        ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
         if(sourceButton.getText().equals("Milk Tea"))
         {
             results = SystemFunctions.productsAndPriceByCategory("Milk Tea");
-            num_buttons = results.size(); 
+            num_buttons = results.get(0).size(); 
         }
         //if brewedtea
         if(sourceButton.getText().equals("Brewed Tea"))
@@ -205,17 +210,16 @@ public class orderPageController implements Initializable {
         
         int val1 = 1;
         int val2 = 1;
-        while(true){
+        for(int i = 0; i < num_buttons; i++){
             try {
                 FXMLLoader loader2 = new FXMLLoader(getClass().getResource("designFiles/menuItemButton.fxml"));
                 Node buttonNode = loader2.load();
                 
                 Label label = (Label) loader2.getNamespace().get("foodItemLabel");
-                String[] parts = results.get(indexCount).split("\\s+(?=\\d+\\.\\d+$)");;
-                label.setText(parts[0]);
+                label.setText(results.get(0).get(indexCount));
                 label.setPrefWidth(150);
                 Label priceLabel = (Label) loader2.getNamespace().get("priceLabel");
-                priceLabel.setText("$"+parts[1]);
+                priceLabel.setText("$"+results.get(1).get(indexCount));
                 
                 GridPane.setRowIndex(buttonNode, val1);
                 GridPane.setColumnIndex(buttonNode, val2);
@@ -231,10 +235,7 @@ public class orderPageController implements Initializable {
                 menuItemButtonController buttonController = loader2.getController();
                 buttonController.setOrderControl(this);
                 indexCount = indexCount + 1;
-                if(indexCount == num_buttons)
-                {
-                    break;
-                }
+                
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -345,6 +346,15 @@ public class orderPageController implements Initializable {
         foodItemLabel.setText(formattedCost);
     }
 
+    @FXML
+    private void handleProceedButton(ActionEvent event)
+    {
+        //Customer First and Last Name:
+    //     TextField customerName = (TextField) OrderInfoPane.lookup("#customerNameTextField")
+    //     customerName.getText();
+    //     //Customer First Name, Customer Last Name, Employee First Name, Employee Last Name, ArrayList of OrderProduct
+    //     addOrderFull.addOrder()
+    }
 
 
 }
