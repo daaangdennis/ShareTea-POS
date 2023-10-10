@@ -36,4 +36,12 @@ public class SystemFunctions {
         }
     }
 
+    public static void updateProduct(ArrayList<String> productNames, ArrayList<String> productCategory ,ArrayList<Double> productPrices){
+        dbconnect dbconn = new dbconnect();
+        Connection conn = dbconn.conn;
+        for(int i = 0; i < productNames.size(); ++i){
+            product.updateAddProduct(conn, productNames.get(i), productCategory.get(i), productPrices.get(i));
+        }
+    }
+
 }
