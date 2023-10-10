@@ -146,7 +146,7 @@ public class employee {
     public static ArrayList<String> verifyEmployee(Connection conn, String pw){
         ArrayList<String> employee_verify = new ArrayList<>();
         try {
-            String query = "SELECT first_name, last_name, position FROM employee WHERE passcode = ?";
+            String query = "SELECT first_name, last_name, position, employee_id FROM employee WHERE passcode = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, pw);
     
@@ -155,10 +155,12 @@ public class employee {
                 String firstName = resultSet.getString("first_name");
                 String lastName = resultSet.getString("last_name");
                 String position = resultSet.getString("position");
+                String employeeID = resultSet.getString("employee_id");
                 
                 employee_verify.add(firstName);
                 employee_verify.add(lastName);
                 employee_verify.add(position);
+                employee_verify.add(employeeID);
             }
         } catch (SQLException e) {
             e.printStackTrace();
