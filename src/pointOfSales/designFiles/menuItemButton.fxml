@@ -8,7 +8,7 @@
 <AnchorPane stylesheets="@../stylesheets/cashier.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pointOfSales.menuItemButtonController">
    <children>
       <Button fx:id="subButton" mnemonicParsing="false" styleClass="menu-item-button" onAction="#handleSubButton"/>
-      <Label fx:id="foodItemLabel" layoutX="68.0" layoutY="49.0" styleClass="menu-item-label" text="Label" />
+      <Label fx:id="foodItemLabel" layoutX="30.0" layoutY="49.0" styleClass="menu-item-label" alignment="CENTER_LEFT" text="Label" wrapText="true" />
       <Label layoutX="39.0" layoutY="105.0" styleClass="menu-item-label" text="Price:" />
       <Label fx:id="priceLabel" layoutX="90.0" layoutY="105.0" styleClass="menu-item-label" text="\$0.00" />
    </children>

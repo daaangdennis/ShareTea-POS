@@ -1,15 +1,15 @@
 package pointOfSales;
 
-import javafx.scene.Scene;
-// import javafx.stage.Screen;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import java.io.IOException;
 
-public class orderPage {
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
+public class managerPage {
+    
     private static sceneController controller;
-    public orderPage(){}
+    public managerPage(){}
 
     public static void setController(sceneController ctrl){
         controller = ctrl;
@@ -18,14 +18,14 @@ public class orderPage {
     public static Scene getScene(){
         
         try{
-            FXMLLoader loader = new FXMLLoader(orderPage.class.getResource("designFiles/cashier.fxml"));
+            FXMLLoader loader = new FXMLLoader(orderPage.class.getResource("designFiles/manager.fxml"));
             Parent root2 = loader.load();
             // double screenWidth = Screen.getPrimary().getBounds().getWidth();
             // double screenHeight = Screen.getPrimary().getBounds().getHeight();
-            Scene cashierOrderScene = new Scene(root2, 1280, 720);
-            orderPageController orderCtrl = loader.getController();
-            orderCtrl.setController(controller);
-            return cashierOrderScene;
+            Scene managerOrderScene = new Scene(root2, 1280, 720);
+            managerPageController managerCtrl = loader.getController();
+            managerCtrl.setController(controller);
+            return managerOrderScene;
         }
         catch(IOException e){
             e.printStackTrace();

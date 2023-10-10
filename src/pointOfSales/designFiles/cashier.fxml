@@ -125,7 +125,7 @@
                               <Label layoutX="322.0" layoutY="512.0" styleClass="right-sidebar-labels" text="\$0.00" />
                               <Label layoutX="14.0" layoutY="555.0" styleClass="right-sidebar-labels" text="Total:" />
                               <Label layoutX="322.0" layoutY="555.0" styleClass="right-sidebar-labels" text="\$0.00" />
-                              <Button fx:id="proceedButton" layoutX="35.0" layoutY="601.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="319.0" styleClass="proceed-button" text="Proceed">
+                              <Button fx:id="proceedButton" layoutX="35.0" layoutY="601.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="319.0" styleClass="proceed-button" text="Proceed" onAction="#handleProceedButton">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -261,7 +261,7 @@
                                     <Label layoutX="14.0" layoutY="14.0" styleClass="item-customization-labels" text="Toppings (+$0.75 for each)" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="51.0" layoutY="580.0" prefHeight="140.0" prefWidth="743.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                              <AnchorPane fx:id="notesPane" layoutX="51.0" layoutY="580.0" prefHeight="140.0" prefWidth="743.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                  <children>
                                     <Label layoutX="14.0" layoutY="6.0" styleClass="item-customization-labels" text="Additional Notes" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="0.0" />
                                     <TextArea fx:id="additionalNotes" layoutX="22.0" layoutY="39.0" prefHeight="103.0" prefWidth="723.0" promptText="Add any additional order info here" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
