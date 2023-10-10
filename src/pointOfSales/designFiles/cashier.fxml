@@ -125,12 +125,12 @@
                               <Label layoutX="322.0" layoutY="512.0" styleClass="right-sidebar-labels" text="\$0.00" />
                               <Label layoutX="14.0" layoutY="555.0" styleClass="right-sidebar-labels" text="Total:" />
                               <Label layoutX="322.0" layoutY="555.0" styleClass="right-sidebar-labels" text="\$0.00" />
-                              <Button fx:id="proceedButton" layoutX="35.0" layoutY="601.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="319.0" styleClass="proceed-button" text="Proceed" onAction="#handleProceedButton">
+                              <Button fx:id="proceedButton" layoutX="35.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleProceedButton" prefHeight="38.0" prefWidth="319.0" styleClass="proceed-button" text="Proceed">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="cancelButton" layoutX="35.0" layoutY="653.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="319.0" styleClass="cancel-button" text="Cancel" onAction="#handleCancelButton">
+                              <Button fx:id="cancelButton" layoutX="35.0" layoutY="653.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="38.0" prefWidth="319.0" styleClass="cancel-button" text="Cancel">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -141,7 +141,7 @@
                            <children>
                               <ScrollPane fx:id="categoryItemsScrollPane" layoutY="189.0" prefHeight="459.0" prefWidth="708.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                  <content>
-                                    <GridPane fx:id="menuItemsGridPane" prefHeight="20.0" prefWidth="110.0">
+                                    <GridPane fx:id="menuItemsGridPane" hgap="36.0" prefHeight="20.0" prefWidth="110.0" vgap="20.0">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                       </columnConstraints>
@@ -176,7 +176,7 @@
                            <children>
                               <AnchorPane layoutX="73.0" layoutY="14.0" prefHeight="53.0" prefWidth="763.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
                                  <children>
-                                    <Button fx:id="closeButton" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="25.0" styleClass="close-button" AnchorPane.leftAnchor="10.0" onAction="#handleCloseButton">
+                                    <Button fx:id="closeButton" layoutX="14.0" layoutY="9.0" mnemonicParsing="false" onAction="#handleCloseButton" prefHeight="35.0" prefWidth="25.0" styleClass="close-button" AnchorPane.leftAnchor="10.0">
                                        <graphic>
                                           <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -186,7 +186,7 @@
                                        </graphic>
                                     </Button>
                                     <Label fx:id="foodItemLabel" alignment="CENTER" layoutX="277.0" layoutY="12.0" prefHeight="30.0" prefWidth="210.0" styleClass="item-customization-labels" text="Food Item $0.00 " />
-                                    <Button fx:id="addItemButton" layoutX="637.0" layoutY="6.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="112.0" styleClass="add-button" text="Add Item" AnchorPane.rightAnchor="15.0" onAction="#addItem" />
+                                    <Button fx:id="addItemButton" layoutX="637.0" layoutY="6.0" mnemonicParsing="false" onAction="#addItem" prefHeight="41.0" prefWidth="112.0" styleClass="add-button" text="Add Item" AnchorPane.rightAnchor="15.0" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane fx:id="sugarPane" layoutX="14.0" layoutY="63.0" prefHeight="200.0" prefWidth="366.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="387.0" AnchorPane.topAnchor="73.0">
@@ -240,20 +240,20 @@
                                        <children>
                                           <VBox alignment="TOP_CENTER" prefHeight="152.0" prefWidth="366.0" spacing="10.0">
                                              <children>
-                                                <ToggleButton fx:id="pearl" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Pearl" onAction="#handleToppingButtons"/>
-                                                <ToggleButton fx:id="miniPearl" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Mini Pearl" onAction="#handleToppingButtons"/>
-                                                <ToggleButton fx:id="iceCream" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Ice Cream" onAction="#handleToppingButtons"/>
-                                                <ToggleButton fx:id="pudding" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Pudding" onAction="#handleToppingButtons"/>
-                                                <ToggleButton fx:id="aloeVera" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Aloe Vera" onAction="#handleToppingButtons"/>
+                                                <ToggleButton fx:id="pearl" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleToppingButtons" prefWidth="346.0" styleClass="item-customization-buttons" text="Pearl" />
+                                                <ToggleButton fx:id="miniPearl" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleToppingButtons" prefWidth="346.0" styleClass="item-customization-buttons" text="Mini Pearl" />
+                                                <ToggleButton fx:id="iceCream" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleToppingButtons" prefWidth="346.0" styleClass="item-customization-buttons" text="Ice Cream" />
+                                                <ToggleButton fx:id="pudding" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleToppingButtons" prefWidth="346.0" styleClass="item-customization-buttons" text="Pudding" />
+                                                <ToggleButton fx:id="aloeVera" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleToppingButtons" prefWidth="346.0" styleClass="item-customization-buttons" text="Aloe Vera" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="TOP_CENTER" prefHeight="158.0" prefWidth="366.0" spacing="10.0">
                                              <children>
-                                                <ToggleButton fx:id="redBean" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Red Bean" onAction="#handleToppingButtons"/>
-                                                <ToggleButton fx:id="herbJelly" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Herb Jelly" onAction="#handleToppingButtons"/>
-                                                <ToggleButton fx:id="aiyuJelly" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Aiyu Jelly" onAction="#handleToppingButtons"/>
-                                                <ToggleButton fx:id="lycheeJelly" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Lychee Jelly" onAction="#handleToppingButtons"/>
-                                                <ToggleButton fx:id="crystalBoba" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Crystal Boba" onAction="#handleToppingButtons"/>
+                                                <ToggleButton fx:id="redBean" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleToppingButtons" prefWidth="346.0" styleClass="item-customization-buttons" text="Red Bean" />
+                                                <ToggleButton fx:id="herbJelly" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleToppingButtons" prefWidth="346.0" styleClass="item-customization-buttons" text="Herb Jelly" />
+                                                <ToggleButton fx:id="aiyuJelly" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleToppingButtons" prefWidth="346.0" styleClass="item-customization-buttons" text="Aiyu Jelly" />
+                                                <ToggleButton fx:id="lycheeJelly" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleToppingButtons" prefWidth="346.0" styleClass="item-customization-buttons" text="Lychee Jelly" />
+                                                <ToggleButton fx:id="crystalBoba" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#handleToppingButtons" prefWidth="346.0" styleClass="item-customization-buttons" text="Crystal Boba" />
                                              </children>
                                           </VBox>
                                        </children>
