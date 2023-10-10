@@ -8,23 +8,22 @@ import java.util.ArrayList;
 
 
 public class orderProduct {
-    int ProductID;
-    public String ProductName;
+    public int ProductID;
     int OrderID;
     public int Quantity;
     public ArrayList<String> Toppings;
     public String Note = "";
     public double SugarLevel = 1;
 
-    public orderProduct(String Product, int ProductQuantity, ArrayList<String> ToppingList, double Sugar, String NoteInput) {
-        this.ProductName = Product;
+    public orderProduct(String PID, int ProductQuantity, ArrayList<String> ToppingList, double Sugar, String NoteInput) {
+        this.ProductID = Integer.parseInt(PID);
         this.Quantity = ProductQuantity;
         this.Toppings = ToppingList;
         this.SugarLevel = Sugar;
         this.Note = NoteInput;
     }
-    public orderProduct(String Product, int ProductQuantity, int Sugar, String NoteInput) {
-        this.ProductName = Product;
+    public orderProduct(String PID, int ProductQuantity, int Sugar, String NoteInput) {
+        this.ProductID = Integer.parseInt(PID);
         this.Quantity = ProductQuantity;
         this.SugarLevel = Sugar;
         this.Note = NoteInput;

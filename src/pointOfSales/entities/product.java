@@ -51,42 +51,6 @@ public class product {
         }
     }
 
-    public static double getProductPriceByID(Connection conn, int ProductID) {
-        try {
-            double product_price = 0;
-            String price_query = "SELECT price FROM product WHERE product_id = ?";
-            PreparedStatement pstmtPrice = conn.prepareStatement(price_query);
-            pstmtPrice.setInt(1, ProductID);
-            ResultSet resultSet = pstmtPrice.executeQuery();
-            if (resultSet.next()) {
-                product_price = resultSet.getDouble("price");
-            }
-            return product_price;
-        } catch (Exception e) {
-            System.out.println(
-                    "Error getProductPriceByID(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
-        }
-        return -1;
-    }
-
-    public static int getProductByName(Connection conn, String productName) {
-        int product_id = -1;
-        try {
-            String query = "SELECT product_id FROM product WHERE name = ?";
-            PreparedStatement pstmtPrice = conn.prepareStatement(query);
-            pstmtPrice.setString(1, productName);
-            ResultSet resultSet = pstmtPrice.executeQuery();
-            if (resultSet.next()) {
-                product_id = resultSet.getInt("product_id");
-            }
-            return product_id;
-        } catch (Exception e) {
-            System.out.println(
-                    "Error getProductPriceByID(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
-        }
-        return -1;
-    }
-
     public static ArrayList<String> getCategories(Connection conn) {
         ArrayList<String> category_array = new ArrayList<>();
         try {
@@ -109,18 +73,23 @@ public class product {
         ArrayList<ArrayList<String>> productPrice_array = new ArrayList<>();
         ArrayList<String> product_array = new ArrayList<>();
         ArrayList<String> price_array = new ArrayList<>();
+        ArrayList<String> id_array = new ArrayList<>();
         productPrice_array.add(product_array);
         productPrice_array.add(price_array);
+        productPrice_array.add(id_array);
         try {
-            String query = "SELECT name,price FROM product WHERE category = ?";
+            String query = "SELECT name, price, product_id FROM product WHERE category = ?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, Category);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String Name = resultSet.getString("name");
+                String ID = resultSet.getInt("product_id") + "";
                 String Price = String.format("%.2f", resultSet.getDouble("price"));
-                productPrice_array.get(0).add(Name);
+
+              productPrice_array.get(0).add(Name);
                 productPrice_array.get(1).add(Price);
+                productPrice_array.get(2).add(ID);
             }
             return productPrice_array;
         } catch (SQLException e) {

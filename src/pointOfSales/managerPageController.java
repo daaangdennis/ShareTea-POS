@@ -20,9 +20,14 @@ import java.util.ResourceBundle;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Toggle;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.text.DecimalFormat;
 import pointOfSales.services.SystemFunctions;
 import pointOfSales.services.addOrderFull;
+import javafx.scene.control.TextField;
+import pointOfSales.entities.orderProduct;
+
 
 public class managerPageController implements Initializable {
     private sceneController sceneCtrl;
@@ -39,6 +44,32 @@ public class managerPageController implements Initializable {
     private TableColumn<Object[], String> priceTableColumn;
 
     @FXML
+    private TableView<Object[]> inventoryTable;
+    @FXML
+    private TableColumn<Object[], String> InventoryIdColumn;
+    @FXML
+    private TableColumn<Object[], String> InventoryItemColumn;
+    @FXML
+    private TableColumn<Object[], String> InventoryQuantityColumn;
+    @FXML
+    private TableColumn<Object[], String> InventoryUpdatedColumn;
+
+    @FXML
+    private TableView<Object[]> inventoryMenuTable;
+    @FXML
+    private TableColumn<Object[], String> menuIdColumn;
+    @FXML
+    private TableColumn<Object[], String> menuItemColumn;
+    @FXML
+    private TableColumn<Object[], String> menuCategoryColumn;
+    @FXML
+    private TableColumn<Object[], String> menuPriceColumn;
+    @FXML
+    private TableColumn<Object[], String> menuUpdatedColumn;
+
+
+
+    @FXML
     private AnchorPane menuItems;
     @FXML
     private AnchorPane orderCustomizationMenu;
@@ -53,6 +84,12 @@ public class managerPageController implements Initializable {
     @FXML
     private AnchorPane orderInfoPane;
     @FXML
+    private AnchorPane notesPane;
+    @FXML
+    private AnchorPane editInventoryPage;
+    @FXML
+    private AnchorPane editMenuPage;
+    @FXML
     private TextArea additionalNotes;
     @FXML
     private Label foodItemLabel;
@@ -65,6 +102,11 @@ public class managerPageController implements Initializable {
     private ObservableList<Object[]> data = FXCollections.observableArrayList();
     private Double foodLabelCost = 0.0;
     public ArrayList<orderedProduct> items = new ArrayList<>();
+    public Map<Button, Label> buttonLabelMap = new HashMap<>();
+    public Map<Button, Label> buttonCostMap = new HashMap<>();
+    public Map<Button, String> buttonIdMap = new HashMap<>();
+    public Double orderTotal = 0.0;
+    public String employPosition = "";
     
     
 
@@ -119,6 +161,7 @@ public class managerPageController implements Initializable {
 
         Label orderNumber = (Label) orderInfoPane.lookup("#orderNumberLabel");
         orderNumber.setText("Order #" + addOrderFull.nextOrderID());
+        employPosition = loginPageController.getPosition();
     }
 
     public TableView<Object[]> getTable(){
@@ -154,6 +197,7 @@ public class managerPageController implements Initializable {
     private void handleChangeScene(ActionEvent event){
         Button pressedButton = (Button) event.getSource();
         if(pressedButton.getId().equals("logoutButton")){
+            employPosition = "";
             sceneCtrl.changeScene(loginPage.getScene());
         }
         // else if(pressedButton.getId().equals("logoutButton"))
@@ -214,12 +258,11 @@ public class managerPageController implements Initializable {
             try {
                 FXMLLoader loader2 = new FXMLLoader(getClass().getResource("designFiles/menuItemButton.fxml"));
                 Node buttonNode = loader2.load();
-                
+                Button button = (Button) buttonNode.lookup("#subButton");
                 Label label = (Label) loader2.getNamespace().get("foodItemLabel");
                 label.setText(results.get(0).get(indexCount));
-                label.setPrefWidth(150);
                 Label priceLabel = (Label) loader2.getNamespace().get("priceLabel");
-                priceLabel.setText("$"+results.get(1).get(indexCount));
+                priceLabel.setText(String.format("Price: $%.2f", Double.parseDouble(results.get(1).get(indexCount))));
                 
                 GridPane.setRowIndex(buttonNode, val1);
                 GridPane.setColumnIndex(buttonNode, val2);
@@ -230,7 +273,10 @@ public class managerPageController implements Initializable {
                     val1++;
                     val2 = 1;
                 }
-                
+                String pid = results.get(2).get(indexCount);
+                buttonLabelMap.put(button, label);
+                buttonCostMap.put(button, priceLabel);
+                buttonIdMap.put(button, pid);
                 menuItemsGridPane.getChildren().add(buttonNode);
                 menuItemButtonController buttonController = loader2.getController();
                 buttonController.setManagerControl(this);
@@ -263,9 +309,36 @@ public class managerPageController implements Initializable {
     private void addItem(ActionEvent event){
         sugarSelection = checkToggledButton(sugarGroup);
         iceSelection = checkToggledButton(iceGroup);
-        if(sugarSelection == "" | iceSelection == ""){
+        if(sugarSelection == "" && iceSelection == ""){
             return;
         }
+
+        items.get(items.size()-1).setIce(iceSelection);
+        Double sugarLevel = 0.0;
+        if(sugarSelection.equals("100% Sugar")){
+            sugarLevel = 100.0;
+        }
+        else if(sugarSelection.equals("50% Sugar")){
+            sugarLevel = 50.0;
+        }
+        else if(sugarSelection.equals("No Sugar")){
+            sugarLevel = 0.0;
+        }
+        else if(sugarSelection.equals("120% Sugar")){
+            sugarLevel = 120.0;
+        }
+        else if(sugarSelection.equals("80% Sugar")){
+            sugarLevel = 80.0;
+        }
+        else if(sugarSelection.equals("30% Sugar")){
+            sugarLevel = 30.0;
+        }
+
+
+        items.get(items.size()-1).setSugar(sugarLevel);
+        TextArea additionalNotes = (TextArea) notesPane.lookup("#additionalNotes");
+        items.get(items.size()-1).setNote(additionalNotes.getText());
+
         Double toppingCost = 0.00;
         ToggleButton pearlButton = (ToggleButton) toppingSelection.lookup("#pearl");
         ToggleButton miniPearlButton = (ToggleButton) toppingSelection.lookup("#miniPearl");
@@ -319,10 +392,10 @@ public class managerPageController implements Initializable {
             toppingCost += 0.75;
         }
         
-        double calculated_cost = Double.parseDouble(items.get(items.size() -1 ).getPrice().substring(1));
+        double calculated_cost = Double.parseDouble(items.get(items.size() -1 ).getPrice().substring(8));
         calculated_cost += toppingCost;
         data.add(new Object[]{items.get(items.size() -1 ).getTeaType(), items.get(items.size() -1 ).getQuantity() ,calculated_cost}); 
-        
+        orderTotal+=calculated_cost;
         checkoutTable.setItems(data);
         menuItems.setVisible(!menuItems.isVisible());
         orderCustomizationMenu.setVisible(!orderCustomizationMenu.isVisible());
@@ -350,13 +423,118 @@ public class managerPageController implements Initializable {
     private void handleProceedButton(ActionEvent event)
     {
         //Customer First and Last Name:
-    //     TextField customerName = (TextField) OrderInfoPane.lookup("#customerNameTextField")
-    //     customerName.getText();
-    //     //Customer First Name, Customer Last Name, Employee First Name, Employee Last Name, ArrayList of OrderProduct
-    //     addOrderFull.addOrder()
+        TextField customerName = (TextField) orderInfoPane.lookup("#customerNameTextField");
+        String[] names = customerName.getText().split(" ");
+        String customerFirstName = "";
+        String customerLastName = "";
+        customerFirstName = names[0];
+        if(names.length == 2){
+            customerLastName = names[1];
+        }
+        String employeeFirstName = loginPageController.getFirstName();
+        String employeeLastName = loginPageController.getLastName();
+
+        ArrayList<orderProduct> listOfItems = new ArrayList<>();
+        //OrderProduct Details String Product, int ProductQuantity, ArrayList<String> ToppingList, double Sugar, String NoteInput
+        for(int i = 0; i < items.size(); i++){
+            //String PID, int ProductQuantity, ArrayList<String> ToppingList, double Sugar, String NoteInput
+            orderProduct itemProduct = new orderProduct(
+            items.get(i).getId(), items.get(i).getQuantity(), items.get(i).getToppings(), 
+            items.get(i).getSugar(), items.get(i).getNote()
+            );
+            listOfItems.add(itemProduct);
+        }
+        
+        // System.out.println("Customer Name: " + customerFirstName + " " + customerLastName);
+        // System.out.println("Employee Name: " + employeeFirstName + " " + employeeLastName);
+        // for(int i = 0; i < listOfItems.size(); i++){
+        //     System.out.println("Product: " + listOfItems.get(i).ProductID);
+        //     System.out.println("Quantity: " + listOfItems.get(i).Quantity);
+        //     System.out.println("Sugar: " + listOfItems.get(i).SugarLevel);
+        //     System.out.println("Note: " + listOfItems.get(i).Note);
+        //     for(int j = 0; j < (items.get(i).getToppings().size()); j++){
+        //         System.out.println("Topping: " + listOfItems.get(i).Toppings.get(j));
+        //     }
+            
+        // }
+        // System.out.println("OrderCost: " + orderTotal);
+
+        //Customer First Name, Customer Last Name, Employee First Name, Employee Last Name, ArrayList of OrderProduct
+        addOrderFull.addOrder(customerFirstName, customerLastName, employeeFirstName, employeeLastName, listOfItems, orderTotal);
+        data.clear();
+        orderTotal = 0.0;
+
+    }
+
+    @FXML
+    private void handleInventoryButton(ActionEvent event){
+        //Toggle Visibility of pretty much everything on the page (OrderInfoPane, menuItems Pane, ordercustomization Pane)
+        if(orderCustomizationMenu.isVisible()){
+            return;
+        }
+        else if(editMenuPage.isVisible())
+        {
+            return;
+        }
+        else{
+            orderInfoPane.setVisible(false);
+            menuItems.setVisible(false);
+            //Toggle Visibility for editInventory Page
+            editInventoryPage.setVisible(true);
+            initializeInventoryEditTable();
+            ArrayList<String> inventory = new ArrayList<>();
+            inventory = SystemFunctions.getInventory();
+            //System.out.println(inventory.get(0));
+        }
+
+       
+    }
+
+    @FXML
+    private void handleEditMenuButton(ActionEvent event){
+        editInventoryPage.setVisible(false);
+        editMenuPage.setVisible(true);
+    }
+
+    @FXML
+    private void handleEditInventoryButton(ActionEvent event){
+        editMenuPage.setVisible(false);
+        editInventoryPage.setVisible(true);
+    }
+
+    private void initializeInventoryEditTable(){
+        InventoryIdColumn.setCellValueFactory(cellData -> {
+        if (cellData.getValue() != null && cellData.getValue().length > 0) {
+                return new SimpleStringProperty(cellData.getValue()[0].toString());
+        } else {
+                    return new SimpleStringProperty("Inventory ID");
+            }
+        });
+            
+        InventoryItemColumn.setCellValueFactory(cellData -> {
+        if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use index 1 for quantity
+                return new SimpleStringProperty(cellData.getValue()[1].toString());
+        } else {
+                return new SimpleStringProperty("Item Name");
+            }
+        });
+            
+        InventoryQuantityColumn.setCellValueFactory(cellData -> {
+        if (cellData.getValue() != null && cellData.getValue().length > 2) { // Use index 2 for price
+                return new SimpleStringProperty(cellData.getValue()[2].toString());
+        } else {
+                return new SimpleStringProperty("Stock Quantity");
+            }
+        });
+
+        InventoryUpdatedColumn.setCellValueFactory(cellData -> {
+        if (cellData.getValue() != null && cellData.getValue().length > 3) { // Use index 2 for price
+                return new SimpleStringProperty(cellData.getValue()[3].toString());
+        } else {
+                return new SimpleStringProperty("Last Updated");
+            }
+        });
     }
 
 
 }
-
-
