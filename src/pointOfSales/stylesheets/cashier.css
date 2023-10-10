@@ -156,6 +156,7 @@
     -fx-font-family: 'Poppins', sans-serif;
     -fx-font-weight: 700;
     -fx-font-size: 18px;
+    -fx-opacity: 1;
 }
 
 .close-button {
