@@ -233,7 +233,7 @@ public class orderPageController implements Initializable {
                 Label label = (Label) loader2.getNamespace().get("foodItemLabel");
                 label.setText(results.get(0).get(indexCount));
                 Label priceLabel = (Label) loader2.getNamespace().get("priceLabel");
-                priceLabel.setText(String.format("Price: $%.2f", Double.parseDouble(results.get(1).get(indexCount))));
+                priceLabel.setText("Price: $" + results.get(1).get(indexCount));
                 
                 GridPane.setRowIndex(buttonNode, val1);
                 GridPane.setColumnIndex(buttonNode, val2);

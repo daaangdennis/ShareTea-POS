@@ -84,9 +84,10 @@ public class product {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String Name = resultSet.getString("name");
-                String Price = resultSet.getDouble("price") + "";
                 String ID = resultSet.getInt("product_id") + "";
-                productPrice_array.get(0).add(Name);
+                String Price = String.format("%.2f", resultSet.getDouble("price"));
+
+              productPrice_array.get(0).add(Name);
                 productPrice_array.get(1).add(Price);
                 productPrice_array.get(2).add(ID);
             }
