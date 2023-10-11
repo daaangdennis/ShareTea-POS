@@ -16,6 +16,14 @@ public class SystemFunctions {
         return product.getProductInfo(conn);
     }
 
+    public static ArrayList<ArrayList<String>> productsAndPriceByCategory(String Category){
+        dbconnect dbconn = new dbconnect();
+        Connection conn = dbconn.conn;
+        return product.getProductsPriceByCategory(conn, Category);
+    }
+
+
+
     public static ArrayList<String> getCategories(){
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
