@@ -88,6 +88,8 @@ public class managerPageController implements Initializable {
     private AnchorPane editMenuPage;
     @FXML
     private AnchorPane inventoryPane;
+    @FXML 
+    private AnchorPane editProductPage;
 
     @FXML
     private TextArea additionalNotes;
@@ -101,6 +103,7 @@ public class managerPageController implements Initializable {
     private String iceSelection;
     private ObservableList<Object[]> data = FXCollections.observableArrayList();
     private ObservableList<Object[]> inventoryData = FXCollections.observableArrayList();
+    private ObservableList<Object[]> productData = FXCollections.observableArrayList();
     private Double foodLabelCost = 0.0;
     public ArrayList<orderedProduct> items = new ArrayList<>();
     public Map<Button, Label> buttonLabelMap = new HashMap<>();
@@ -108,6 +111,7 @@ public class managerPageController implements Initializable {
     public Map<Button, String> buttonIdMap = new HashMap<>();
     public Double orderTotal = 0.0;
     public String employPosition = "";
+    
 
     
     
@@ -491,7 +495,8 @@ public class managerPageController implements Initializable {
             ArrayList<ArrayList<String>> inventory = new ArrayList<>();
             inventory = SystemFunctions.getInventory(); // id, name, quantity, last updated
             for(int i = 0; i < inventory.get(0).size(); i++){
-                inventoryData.add(new Object[]{inventory.get(0).get(i),inventory.get(1).get(i), inventory.get(2).get(i), inventory.get(3).get(i)}); 
+                inventoryData.add(new Object[]{inventory.get(0).get(i),inventory.get(1).get(i),
+                inventory.get(2).get(i), inventory.get(3).get(i)}); 
             }
             inventoryTable.setItems(inventoryData);
             //System.out.println(inventory.get(0));
@@ -504,6 +509,15 @@ public class managerPageController implements Initializable {
     private void handleEditMenuButton(ActionEvent event){
         editInventoryPage.setVisible(false);
         editMenuPage.setVisible(true);
+        initializeMenuEditTable();
+        ArrayList<ArrayList<String>> productInventory = new ArrayList<>();
+
+        
+        for(int i = 0; i < productInventory.get(0).size(); i++){
+            productData.add(new Object[]{productInventory.get(0).get(i),productInventory.get(1).get(i), 
+            productInventory.get(2).get(i), productInventory.get(3).get(i)});
+        }
+        inventoryMenuTable.setItems(productData);
     }
 
     @FXML
@@ -546,6 +560,40 @@ public class managerPageController implements Initializable {
         });
     }
 
+    private void initializeMenuEditTable(){
+        menuIdColumn.setCellValueFactory(cellData -> {
+        if (cellData.getValue() != null && cellData.getValue().length > 0) {
+                return new SimpleStringProperty(cellData.getValue()[0].toString());
+        } else {
+                    return new SimpleStringProperty("Product ID");
+            }
+        });
+            
+        menuItemColumn.setCellValueFactory(cellData -> {
+        if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use index 1 for quantity
+                return new SimpleStringProperty(cellData.getValue()[1].toString());
+        } else {
+                return new SimpleStringProperty("Product Name");
+            }
+        });
+            
+        menuCategoryColumn.setCellValueFactory(cellData -> {
+        if (cellData.getValue() != null && cellData.getValue().length > 2) { // Use index 2 for price
+                return new SimpleStringProperty(cellData.getValue()[2].toString());
+        } else {
+                return new SimpleStringProperty("Category");
+            }
+        });
+
+        menuPriceColumn.setCellValueFactory(cellData -> {
+        if (cellData.getValue() != null && cellData.getValue().length > 3) { // Use index 2 for price
+                return new SimpleStringProperty(cellData.getValue()[3].toString());
+        } else {
+                return new SimpleStringProperty("Price");
+            }
+        });
+    }
+
     @FXML
     private void checkoutButton(ActionEvent event){
         if(menuItems.isVisible()){
@@ -571,16 +619,44 @@ public class managerPageController implements Initializable {
             value = Integer.parseInt(itemQuantity.getText());
             SystemFunctions.updateInventory(itemName.getText(), value);
             ArrayList<ArrayList<String>> inventory = new ArrayList<>();
+            inventoryData.clear();
             inventory = SystemFunctions.getInventory(); // id, name, quantity, last updated
             for(int i = 0; i < inventory.get(0).size(); i++){
                 inventoryData.add(new Object[]{inventory.get(0).get(i),inventory.get(1).get(i), inventory.get(2).get(i), inventory.get(3).get(i)}); 
             }
             inventoryTable.setItems(inventoryData);
+            itemName.clear();
+            itemQuantity.clear();
         } catch (NumberFormatException e) {
             System.err.println("Invalid input. Couldn't convert to a double.");
         }
         
     }
+
+    @FXML
+    private void handleDeleteInventory(ActionEvent event){
+        TextField itemName = (TextField) inventoryPane.lookup("#itemNameTextField");
+        TextField itemQuantity = (TextField) inventoryPane.lookup("#invQuantityTextField");
+        SystemFunctions.deleteInventory(itemName.getText());
+        inventoryData.clear();
+        ArrayList<ArrayList<String>> inventory = new ArrayList<>();
+        inventory = SystemFunctions.getInventory(); // id, name, quantity, last updated
+        for(int i = 0; i < inventory.get(0).size(); i++){
+            inventoryData.add(new Object[]{inventory.get(0).get(i),inventory.get(1).get(i), inventory.get(2).get(i), inventory.get(3).get(i)}); 
+        }
+        inventoryTable.setItems(inventoryData);
+        itemName.clear();
+        itemQuantity.clear();
+        inventoryTable.refresh();
+    }
+
+    @FXML
+    private void handleAddProduct(ActionEvent event){
+        TextField name = (TextField) editProductPage.lookup("#productNameTextField");
+        TextField category = (TextField) editProductPage.lookup("#stockTextField");
+        TextField price = (TextField) editProductPage.lookup("#priceTextField");
+    }
+
 
 
 }

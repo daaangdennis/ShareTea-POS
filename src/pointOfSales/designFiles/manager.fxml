@@ -313,7 +313,7 @@
                                     </TableView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="370.0">
+                              <AnchorPane fx:id = "editProductPage" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="370.0">
                                  <children>
                                     <Label layoutX="170.0" layoutY="60.0" styleClass="right-sidebar-labels" text="Product Name:" />
                                     <TextField fx:id="productNameTextField" layoutX="317.0" layoutY="61.0" prefHeight="25.0" prefWidth="192.0" />
@@ -355,7 +355,7 @@
                                     <TextField fx:id="invQuantityTextField" layoutX="730.0" layoutY="91.0" />
                                     <Button fx:id="inventoryAddButton" layoutX="349.0" layoutY="206.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Add" AnchorPane.bottomAnchor="60.0" onAction="#handleAddInventory" />
                                     <Button fx:id="inventoryClearButton" layoutX="497.0" layoutY="206.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Clear" AnchorPane.bottomAnchor="60.0" />
-                                    <Button fx:id="inventoryDeleteButton1" layoutX="645.0" layoutY="206.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Delete" AnchorPane.bottomAnchor="60.0" />
+                                    <Button fx:id="inventoryDeleteButton1" layoutX="645.0" layoutY="206.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Delete" AnchorPane.bottomAnchor="60.0" onAction="#handleDeleteInventory" />
                                     <Button fx:id="editInventoryButton1" layoutX="958.0" layoutY="275.0" mnemonicParsing="false" onAction="#handleEditMenuButton" prefHeight="41.0" prefWidth="140.0" styleClass="inventory-button" text="Edit Menu" />
                                  </children>
                               </AnchorPane>
