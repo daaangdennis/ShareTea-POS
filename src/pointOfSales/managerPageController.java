@@ -97,6 +97,7 @@ public class managerPageController implements Initializable {
     private String sugarSelection;
     private String iceSelection;
     private ObservableList<Object[]> data = FXCollections.observableArrayList();
+    private ObservableList<Object[]> inventoryData = FXCollections.observableArrayList();
     private Double foodLabelCost = 0.0;
     public ArrayList<orderedProduct> items = new ArrayList<>();
     public Map<Button, Label> buttonLabelMap = new HashMap<>();
@@ -104,6 +105,7 @@ public class managerPageController implements Initializable {
     public Map<Button, String> buttonIdMap = new HashMap<>();
     public Double orderTotal = 0.0;
     public String employPosition = "";
+
     
     
 
@@ -460,6 +462,8 @@ public class managerPageController implements Initializable {
         addOrderFull.addOrder(customerFirstName, customerLastName, employeeFirstName, employeeLastName, listOfItems, orderTotal);
         data.clear();
         orderTotal = 0.0;
+        Label orderNumber = (Label) orderInfoPane.lookup("#orderNumberLabel");
+        orderNumber.setText("Order #" + addOrderFull.nextOrderID());
 
     }
 
@@ -474,13 +478,18 @@ public class managerPageController implements Initializable {
             return;
         }
         else{
+            inventoryData.clear();
             orderInfoPane.setVisible(false);
             menuItems.setVisible(false);
             //Toggle Visibility for editInventory Page
             editInventoryPage.setVisible(true);
             initializeInventoryEditTable();
-            ArrayList<String> inventory = new ArrayList<>();
-            inventory = SystemFunctions.getInventory();
+            ArrayList<ArrayList<String>> inventory = new ArrayList<>();
+            inventory = SystemFunctions.getInventory(); // id, name, quantity, last updated
+            for(int i = 0; i < inventory.get(0).size(); i++){
+                inventoryData.add(new Object[]{inventory.get(0).get(i),inventory.get(1).get(i), inventory.get(2).get(i), inventory.get(3).get(i)}); 
+            }
+            inventoryTable.setItems(inventoryData);
             //System.out.println(inventory.get(0));
         }
 
