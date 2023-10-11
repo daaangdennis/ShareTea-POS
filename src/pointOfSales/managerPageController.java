@@ -87,6 +87,9 @@ public class managerPageController implements Initializable {
     @FXML
     private AnchorPane editMenuPage;
     @FXML
+    private AnchorPane inventoryPane;
+
+    @FXML
     private TextArea additionalNotes;
     @FXML
     private Label foodItemLabel;
@@ -398,6 +401,7 @@ public class managerPageController implements Initializable {
         checkoutTable.setItems(data);
         menuItems.setVisible(!menuItems.isVisible());
         orderCustomizationMenu.setVisible(!orderCustomizationMenu.isVisible());
+
     }
     @FXML 
     private void handleCancelButton(ActionEvent event){
@@ -556,7 +560,25 @@ public class managerPageController implements Initializable {
             orderTotal -= Double.parseDouble(items.get(items.size()-1).getPrice());
             items.remove(items.size() - 1);
         }
-        
+    }
+
+    @FXML
+    private void handleAddInventory(ActionEvent event){
+        TextField itemName = (TextField) inventoryPane.lookup("#itemNameTextField");
+        TextField itemQuantity = (TextField) inventoryPane.lookup("#invQuantityTextField");
+        try{
+            int value = 0;
+            value = Integer.parseInt(itemQuantity.getText());
+            SystemFunctions.updateInventory(itemName.getText(), value);
+            ArrayList<ArrayList<String>> inventory = new ArrayList<>();
+            inventory = SystemFunctions.getInventory(); // id, name, quantity, last updated
+            for(int i = 0; i < inventory.get(0).size(); i++){
+                inventoryData.add(new Object[]{inventory.get(0).get(i),inventory.get(1).get(i), inventory.get(2).get(i), inventory.get(3).get(i)}); 
+            }
+            inventoryTable.setItems(inventoryData);
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid input. Couldn't convert to a double.");
+        }
         
     }
 
