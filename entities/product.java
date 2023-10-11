@@ -102,6 +102,34 @@ public class product {
         return product_info;
     }
 
+    public static ArrayList<ArrayList<String>> getProductsPriceByCategory(Connection conn, String Category) {
+        ArrayList<ArrayList<String>> productPrice_array = new ArrayList<>();
+        ArrayList<String> product_array = new ArrayList<>();
+        ArrayList<String> price_array = new ArrayList<>();
+        ArrayList<String> id_array = new ArrayList<>();
+        productPrice_array.add(product_array);
+        productPrice_array.add(price_array);
+        productPrice_array.add(id_array);
+        try {
+            String query = "SELECT name, price, product_id FROM product WHERE category = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, Category);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String Name = resultSet.getString("name");
+                String Price = String.format("%.2f", resultSet.getDouble("price"));
+                String ID = resultSet.getInt("product_id") + "";
+                productPrice_array.get(0).add(Name);
+                productPrice_array.get(1).add(Price);
+                productPrice_array.get(2).add(ID);
+            }
+            return productPrice_array;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return productPrice_array;
+    }
+
     public static void updateAddProduct(Connection conn, String name, String category , Double price) {
         String updateQuery = "UPDATE product SET price = ? WHERE name = ?";
         try {
