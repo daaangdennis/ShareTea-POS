@@ -30,12 +30,16 @@ public class SystemFunctions {
         return inventory.getInventory(conn);
     }
 
-    public static void updateInventory(ArrayList<String> inventoryList, ArrayList<Integer> inventoryNumber){
+    public static void updateInventory(String inventoryList, Integer inventoryNumber){
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
-        for(int i = 0; i < inventoryList.size(); ++i){
-            inventory.addSubInventory(conn, inventoryList.get(i), inventoryNumber.get(i));
-        }
+        inventory.addSubInventory(conn, inventoryList, inventoryNumber);
     }
 
+    public static void updateAddProduct(String productName, String productCategory , Double productPrice){
+        dbconnect dbconn = new dbconnect();
+        Connection conn = dbconn.conn;
+        product.updateAddProduct(conn, productName, productCategory, productPrice);
+    }
+    
 }

@@ -31,13 +31,13 @@ public class product {
         this.conn = conn;
     }
 
-    public void createProduct() {
+    public static void createProduct(Connection conn, String name, String category, double price) {
         try {
             String sql = "INSERT INTO product (name, category, price) VALUES (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, Name);
-            pstmt.setString(2, Category);
-            pstmt.setBigDecimal(3, Price);
+            pstmt.setString(1, name);
+            pstmt.setString(2, category);
+            pstmt.setBigDecimal(3, BigDecimal.valueOf(price));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
                 System.out.println("product added successfully!");
@@ -97,6 +97,22 @@ public class product {
             e.printStackTrace();
         }
         return productPrice_array;
+    }
+
+    public static void updateAddProduct(Connection conn, String name, String category , Double price) {
+        String updateQuery = "UPDATE product SET price = ? WHERE name = ?";
+        try {
+            PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
+            updateStatement.setDouble(1, price);
+            updateStatement.setString(2, name);
+            int count = updateStatement.executeUpdate();
+            if(count < 1){
+                product.createProduct(conn, name, category, price);
+            }
+        } catch (Exception e) {
+            System.out.println(
+                    "Error createOrder(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
+        }
     }
 
 }
