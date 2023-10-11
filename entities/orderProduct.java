@@ -54,6 +54,7 @@ public class orderProduct {
             pstmt.setString(5, toppingList);
             pstmt.executeUpdate();
             subtractInventory(conn);
+            subtractToppings(conn);
         } 
 
         catch (Exception e) {
@@ -75,4 +76,18 @@ public class orderProduct {
         }
     }
 
+    public void subtractToppings(Connection conn){
+        try {
+            String sql = "UPDATE inventory SET quantity = quantity - 1 WHERE name = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            for(int i = 0; i < this.Toppings.size(); ++i){
+                pstmt.setString(1, this.Toppings.get(i));
+                pstmt.addBatch();
+            }
+            pstmt.executeBatch();
+        } 
+        catch (Exception e) {
+            System.out.println("Error in subtracting inventory from order_product.");
+        }
+    }
 }

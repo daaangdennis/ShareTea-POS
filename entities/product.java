@@ -156,8 +156,7 @@ public class product {
                 System.out.println("Deleted product.");
             }
         } catch (Exception e) {
-            System.out.println(
-                    "Error");
+            System.out.println("Error");
         }
     }
 
