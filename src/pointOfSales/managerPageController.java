@@ -300,6 +300,35 @@ public class managerPageController implements Initializable {
     private void handleCloseButton(ActionEvent event){
         menuItems.setVisible(!menuItems.isVisible());
         orderCustomizationMenu.setVisible(!orderCustomizationMenu.isVisible());
+        if(items.size() > 0){
+            items.remove(items.size()-1);
+        }
+        Toggle iceToggle = iceGroup.getSelectedToggle();
+        Toggle sugarToggle = sugarGroup.getSelectedToggle();
+        iceToggle.setSelected(false);
+        sugarToggle.setSelected(false);
+
+        ToggleButton pearlButton = (ToggleButton) toppingSelection.lookup("#pearl");
+        ToggleButton miniPearlButton = (ToggleButton) toppingSelection.lookup("#miniPearl");
+        ToggleButton iceCreamButton = (ToggleButton) toppingSelection.lookup("#iceCream");
+        ToggleButton puddingButton = (ToggleButton) toppingSelection.lookup("#pudding");
+        ToggleButton aloeVeraButton = (ToggleButton) toppingSelection.lookup("#aloeVera");
+        ToggleButton redBeanButton = (ToggleButton) toppingSelection.lookup("#redBean");
+        ToggleButton herbJellyButton = (ToggleButton) toppingSelection.lookup("#herbJelly");
+        ToggleButton aiyuJellyButton = (ToggleButton) toppingSelection.lookup("#aiyuJelly");
+        ToggleButton lycheeJellyButton = (ToggleButton) toppingSelection.lookup("#lycheeJelly");
+        ToggleButton crystalBobaButton = (ToggleButton) toppingSelection.lookup("#crystalBoba");
+
+        pearlButton.setSelected(false);
+        miniPearlButton.setSelected(false);
+        iceCreamButton.setSelected(false);
+        puddingButton.setSelected(false);
+        aloeVeraButton.setSelected(false);   
+        redBeanButton.setSelected(false);   
+        herbJellyButton.setSelected(false);
+        aiyuJellyButton.setSelected(false);
+        lycheeJellyButton.setSelected(false);
+        crystalBobaButton.setSelected(false);   
     }
 
     public String checkToggledButton(ToggleGroup toggleGroup) {
@@ -345,6 +374,11 @@ public class managerPageController implements Initializable {
         TextArea additionalNotes = (TextArea) notesPane.lookup("#additionalNotes");
         items.get(items.size()-1).setNote(additionalNotes.getText());
 
+        Toggle iceToggle = iceGroup.getSelectedToggle();
+        Toggle sugarToggle = sugarGroup.getSelectedToggle();
+        iceToggle.setSelected(false);
+        sugarToggle.setSelected(false);
+
         Double toppingCost = 0.00;
         ToggleButton pearlButton = (ToggleButton) toppingSelection.lookup("#pearl");
         ToggleButton miniPearlButton = (ToggleButton) toppingSelection.lookup("#miniPearl");
@@ -360,56 +394,80 @@ public class managerPageController implements Initializable {
         if(pearlButton.isSelected()){
             items.get(items.size() -1 ).addToList(pearlButton.getText());
             toppingCost += 0.75;
+            pearlButton.setSelected(false);
         }
         if(miniPearlButton.isSelected()){
             items.get(items.size() -1 ).addToList(miniPearlButton.getText());
             toppingCost += 0.75;
+            miniPearlButton.setSelected(false);
         }
         if(iceCreamButton.isSelected()){
             items.get(items.size() -1 ).addToList(iceCreamButton.getText());
             toppingCost += 0.75;
+            iceCreamButton.setSelected(false);
         }
         if(puddingButton.isSelected()){
             items.get(items.size() -1 ).addToList(puddingButton.getText());
             toppingCost += 0.75;
+            puddingButton.setSelected(false);
         }
         if(aloeVeraButton.isSelected()){
             items.get(items.size() -1 ).addToList(aloeVeraButton.getText());
             toppingCost += 0.75;
+            aloeVeraButton.setSelected(false);
         }
         if(redBeanButton.isSelected()){
             items.get(items.size() -1 ).addToList(redBeanButton.getText());
             toppingCost += 0.75;
+            redBeanButton.setSelected(false);
         }
         if(herbJellyButton.isSelected()){
             items.get(items.size() -1 ).addToList(herbJellyButton.getText());
             toppingCost += 0.75;
+            herbJellyButton.setSelected(false);
         }
         if(aiyuJellyButton.isSelected()){
             items.get(items.size() -1 ).addToList(aiyuJellyButton.getText());
             toppingCost += 0.75;
+            aiyuJellyButton.setSelected(false);
         }
         if(lycheeJellyButton.isSelected()){
             items.get(items.size() -1 ).addToList(lycheeJellyButton.getText());
             toppingCost += 0.75;
+            lycheeJellyButton.setSelected(false);
         }
         if(crystalBobaButton.isSelected()){
             items.get(items.size() -1 ).addToList(crystalBobaButton.getText());
             toppingCost += 0.75;
+            crystalBobaButton.setSelected(false);
         }
         
         double calculated_cost = Double.parseDouble(items.get(items.size() -1 ).getPrice().substring(8));
         calculated_cost += toppingCost;
-        data.add(new Object[]{items.get(items.size() -1 ).getTeaType(), items.get(items.size() -1 ).getQuantity() ,calculated_cost}); 
+        
+        data.add(new Object[]{items.get(items.size() -1 ).getTeaType(), items.get(items.size() -1 ).getQuantity() ,String.format("%.2f", calculated_cost)}); 
         orderTotal+=calculated_cost;
         checkoutTable.setItems(data);
         menuItems.setVisible(!menuItems.isVisible());
         orderCustomizationMenu.setVisible(!orderCustomizationMenu.isVisible());
+        //String formattedNumber = String.format("%.2f", number);
+        Label checkoutSubTotal = (Label) orderInfoPane.lookup("#checkoutSubTotal");
+        checkoutSubTotal.setText("$"+ String.format("%.2f", orderTotal));
+        Label checkoutTax = (Label) orderInfoPane.lookup("#checkoutTax");
+        checkoutTax.setText("$"+ String.format("%.2f", (orderTotal * 0.0825)));
+        Label checkoutTrueTotal = (Label) orderInfoPane.lookup("#checkoutTrueTotal");
+        checkoutTrueTotal.setText("$"+ String.format("%.2f", (orderTotal + (orderTotal * 0.0825))));
 
     }
     @FXML 
     private void handleCancelButton(ActionEvent event){
         data.clear();
+        Label checkoutSubTotal = (Label) orderInfoPane.lookup("#checkoutSubTotal");
+        checkoutSubTotal.setText("$0.00");
+        Label checkoutTax = (Label) orderInfoPane.lookup("#checkoutTax");
+        checkoutTax.setText("$0.00");
+        Label checkoutTrueTotal = (Label) orderInfoPane.lookup("#checkoutTrueTotal");
+        checkoutTrueTotal.setText("$0.00");
     }
 
     @FXML
@@ -465,14 +523,19 @@ public class managerPageController implements Initializable {
             
         // }
         // System.out.println("OrderCost: " + orderTotal);
-
+        orderTotal += orderTotal * 0.0825;
         //Customer First Name, Customer Last Name, Employee First Name, Employee Last Name, ArrayList of OrderProduct
         addOrderFull.addOrder(customerFirstName, customerLastName, employeeFirstName, employeeLastName, listOfItems, orderTotal);
         data.clear();
         orderTotal = 0.0;
         Label orderNumber = (Label) orderInfoPane.lookup("#orderNumberLabel");
         orderNumber.setText("Order #" + addOrderFull.nextOrderID());
-
+        Label checkoutSubTotal = (Label) orderInfoPane.lookup("#checkoutSubTotal");
+        checkoutSubTotal.setText("$0.00");
+        Label checkoutTax = (Label) orderInfoPane.lookup("#checkoutTax");
+        checkoutTax.setText("$0.00");
+        Label checkoutTrueTotal = (Label) orderInfoPane.lookup("#checkoutTrueTotal");
+        checkoutTrueTotal.setText("$0.00");
     }
 
     @FXML
@@ -511,7 +574,7 @@ public class managerPageController implements Initializable {
         editMenuPage.setVisible(true);
         initializeMenuEditTable();
         ArrayList<ArrayList<String>> productInventory = new ArrayList<>();
-
+        productInventory = SystemFunctions.getProducts();
         
         for(int i = 0; i < productInventory.get(0).size(); i++){
             productData.add(new Object[]{productInventory.get(0).get(i),productInventory.get(1).get(i), 
@@ -655,6 +718,66 @@ public class managerPageController implements Initializable {
         TextField name = (TextField) editProductPage.lookup("#productNameTextField");
         TextField category = (TextField) editProductPage.lookup("#stockTextField");
         TextField price = (TextField) editProductPage.lookup("#priceTextField");
+        try{
+            SystemFunctions.updateAddProduct(name.getText(), category.getText(), Double.parseDouble(price.getText()));
+            ArrayList<ArrayList<String>> productInventory = new ArrayList<>();
+            productInventory = SystemFunctions.getProducts();
+            productData.clear();
+            for(int i = 0; i < productInventory.get(0).size(); i++){
+                productData.add(new Object[]{productInventory.get(0).get(i),productInventory.get(1).get(i), 
+                productInventory.get(2).get(i), productInventory.get(3).get(i)});
+            }
+            inventoryMenuTable.setItems(productData);
+            name.clear();
+            category.clear();
+            price.clear();
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid input. Couldn't convert to a double.");
+        }
+    }
+
+    @FXML
+    private void handleDeleteProduct(ActionEvent event){
+        TextField name = (TextField) editProductPage.lookup("#productNameTextField");
+        TextField category = (TextField) editProductPage.lookup("#stockTextField");
+        TextField price = (TextField) editProductPage.lookup("#priceTextField");
+        
+        try{
+            SystemFunctions.deleteProduct(name.getText());
+            ArrayList<ArrayList<String>> productInventory = new ArrayList<>();
+            productInventory = SystemFunctions.getProducts();
+            productData.clear();
+            for(int i = 0; i < productInventory.get(0).size(); i++){
+                productData.add(new Object[]{productInventory.get(0).get(i),productInventory.get(1).get(i), 
+                productInventory.get(2).get(i), productInventory.get(3).get(i)});
+            }
+            inventoryMenuTable.setItems(productData);
+            name.clear();
+            category.clear();
+            price.clear();
+        } catch (NumberFormatException e) {
+            System.err.println("Invalid input. Couldn't convert to a double.");
+        }
+    }
+
+    @FXML
+    private void handleClearInventory(){
+        TextField itemName = (TextField) inventoryPane.lookup("#itemNameTextField");
+        TextField itemQuantity = (TextField) inventoryPane.lookup("#invQuantityTextField");
+
+        itemName.clear();
+        itemQuantity.clear();
+    }
+
+    @FXML
+    private void handleClearProduct(){
+        TextField name = (TextField) editProductPage.lookup("#productNameTextField");
+        TextField category = (TextField) editProductPage.lookup("#stockTextField");
+        TextField price = (TextField) editProductPage.lookup("#priceTextField");
+
+        name.clear();
+        category.clear();
+        price.clear();
     }
 
 

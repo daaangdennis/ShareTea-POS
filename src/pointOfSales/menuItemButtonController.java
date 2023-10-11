@@ -51,7 +51,7 @@ public class menuItemButtonController {
             AnchorPane mainPane = orderPage.getMainMenu();
             mainPane.setVisible(!mainPane.isVisible());
             orderPage.setFoodCost(5.00);
-            orderPage.getFoodLabel().setText("Food Item $5.00 ");
+            orderPage.getFoodLabel().setText("Food Item $" + cost.getText().substring(8));
         }
         else if(managerPage != null){
             managerPage.items.add(newItem);
@@ -60,7 +60,7 @@ public class menuItemButtonController {
             AnchorPane mainPane = managerPage.getMainMenu();
             mainPane.setVisible(!mainPane.isVisible());
             managerPage.setFoodCost(5.00);
-            managerPage.getFoodLabel().setText("Food Item $5.00 ");
+            managerPage.getFoodLabel().setText("Food Item $" + cost.getText().substring(8));
         }
         
 
