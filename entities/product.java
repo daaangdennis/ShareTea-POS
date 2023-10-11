@@ -114,4 +114,19 @@ public class product {
         }
     }
 
+    public static void deletePro(Connection conn, String productName){
+        String updateQuery = "DELETE FROM product WHERE name = ?";
+        try {
+            PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
+            updateStatement.setString(1, productName);
+            int count = updateStatement.executeUpdate();
+            if(count > 0){
+                System.out.println("Deleted product.");
+            }
+        } catch (Exception e) {
+            System.out.println(
+                    "Error");
+        }
+    }
+
 }
