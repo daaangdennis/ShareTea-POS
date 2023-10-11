@@ -116,9 +116,23 @@ public class inventory {
         }
         return inventory_array;
     }
+    
+    public static void deleteInv(Connection conn, String inventoryName){
+        String updateQuery = "DELETE FROM inventory WHERE name = ?";
+        try {
+            PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
+            updateStatement.setString(1, inventoryName);
+            int count = updateStatement.executeUpdate();
+            if(count > 0){
+                System.out.println("Deleted item.");
+            }
+        } catch (Exception e) {
+            System.out.println(
+                    "Error");
+        }
+    }
 
     public static void addSubInventory(Connection conn, String inventoryName, int inventoryNumber) {
-
         java.util.Date currentDateUtil = new java.util.Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDateStr = sdf.format(currentDateUtil);

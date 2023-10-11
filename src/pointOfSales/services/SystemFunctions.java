@@ -30,10 +30,16 @@ public class SystemFunctions {
         return inventory.getInventory(conn);
     }
 
-    public static void updateInventory(String inventoryList, Integer inventoryNumber){
+    public static void updateInventory(String inventoryName, Integer inventoryNumber){
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
-        inventory.addSubInventory(conn, inventoryList, inventoryNumber);
+        inventory.addSubInventory(conn, inventoryName, inventoryNumber);
+    }
+
+    public static void deleteInventory(String inventoryName){
+        dbconnect dbconn = new dbconnect();
+        Connection conn = dbconn.conn;
+        inventory.deleteInv(conn, inventoryName);
     }
 
     public static void updateAddProduct(String productName, String productCategory , Double productPrice){
@@ -41,5 +47,11 @@ public class SystemFunctions {
         Connection conn = dbconn.conn;
         product.updateAddProduct(conn, productName, productCategory, productPrice);
     }
-    
+
+    public static void deleteProduct(String productName){
+        dbconnect dbconn = new dbconnect();
+        Connection conn = dbconn.conn;
+        product.deletePro(conn, productName);
+    }
+
 }
