@@ -40,7 +40,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <Button fx:id="checkoutButton" contentDisplay="TOP" layoutX="9.0" layoutY="86.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="112.0" styleClass="navbutton" text="Checkout" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
+                              <Button fx:id="checkoutButton" contentDisplay="TOP" layoutX="9.0" layoutY="86.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="112.0" styleClass="navbutton" text="Checkout" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" onAction="#checkoutButton">
                                  <graphic>
                                     <ImageView fitHeight="77.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -149,10 +149,10 @@
                               <Label layoutX="14.0" layoutY="484.0" styleClass="right-sidebar-labels" text="Subtotal:" />
                               <Line endX="271.0" endY="-1.0" layoutX="117.0" layoutY="549.0" startX="-113.0" startY="-1.0" style="-fx-stroke-dash-array: 7;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                               <Label layoutX="14.0" layoutY="512.0" styleClass="right-sidebar-labels" text="Tax:" />
-                              <Label layoutX="322.0" layoutY="484.0" styleClass="right-sidebar-labels" text="\$0.00" />
-                              <Label layoutX="322.0" layoutY="512.0" styleClass="right-sidebar-labels" text="\$0.00" />
+                              <Label fx:id = "checkoutSubTotal" layoutX="322.0" layoutY="484.0" styleClass="right-sidebar-labels" text="\$0.00" />
+                              <Label fx:id = "checkoutTax" layoutX="322.0" layoutY="512.0" styleClass="right-sidebar-labels" text="\$0.00" />
                               <Label layoutX="14.0" layoutY="555.0" styleClass="right-sidebar-labels" text="Total:" />
-                              <Label layoutX="322.0" layoutY="555.0" styleClass="right-sidebar-labels" text="\$0.00" />
+                              <Label fx:id = "checkoutTrueTotal" layoutX="322.0" layoutY="555.0" styleClass="right-sidebar-labels" text="\$0.00" />
                               <Button fx:id="proceedButton" layoutX="35.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleProceedButton" prefHeight="38.0" prefWidth="319.0" styleClass="proceed-button" text="Proceed">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -313,7 +313,7 @@
                                     </TableView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="370.0">
+                              <AnchorPane fx:id = "editProductPage" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="370.0">
                                  <children>
                                     <Label layoutX="170.0" layoutY="60.0" styleClass="right-sidebar-labels" text="Product Name:" />
                                     <TextField fx:id="productNameTextField" layoutX="317.0" layoutY="61.0" prefHeight="25.0" prefWidth="192.0" />
@@ -321,10 +321,10 @@
                                     <TextField fx:id="stockTextField" layoutX="730.0" layoutY="61.0" />
                                     <Label layoutX="223.0" layoutY="107.0" styleClass="right-sidebar-labels" text="Price ($):" />
                                     <TextField fx:id="priceTextField" layoutX="317.0" layoutY="108.0" />
-                                    <Button fx:id="productAddButton" layoutX="275.0" layoutY="209.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Add" AnchorPane.bottomAnchor="60.0" />
-                                    <Button fx:id="productUpdateButton" layoutX="423.0" layoutY="209.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Update" AnchorPane.bottomAnchor="60.0" />
-                                    <Button fx:id="productClearButton" layoutX="571.0" layoutY="209.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Clear" AnchorPane.bottomAnchor="60.0" />
-                                    <Button fx:id="productDeleteButton" layoutX="719.0" layoutY="209.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Delete" AnchorPane.bottomAnchor="60.0" />
+                                    <Button fx:id="productAddButton" layoutX="275.0" layoutY="209.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Add" AnchorPane.bottomAnchor="60.0" onAction="#handleAddProduct"/>
+                                    <Button fx:id="productUpdateButton" layoutX="423.0" layoutY="209.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Update" AnchorPane.bottomAnchor="60.0" onAction="#handleAddProduct" />
+                                    <Button fx:id="productClearButton" layoutX="571.0" layoutY="209.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Clear" AnchorPane.bottomAnchor="60.0" onAction="#handleClearProduct"/>
+                                    <Button fx:id="productDeleteButton" layoutX="719.0" layoutY="209.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Delete" AnchorPane.bottomAnchor="60.0" onAction="#handleDeleteProduct" />
                                     <Button fx:id="editInventoryButton" layoutX="958.0" layoutY="275.0" mnemonicParsing="false" onAction="#handleEditInventoryButton" prefHeight="41.0" prefWidth="140.0" styleClass="inventory-button" text="Edit Inventory" />
                                  </children>
                               </AnchorPane>
@@ -347,15 +347,15 @@
                                     </TableView>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="370.0">
+                              <AnchorPane fx:id = "inventoryPane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="370.0">
                                  <children>
                                     <Label layoutX="200.0" layoutY="90.0" styleClass="right-sidebar-labels" text="Item Name:" />
                                     <TextField fx:id="itemNameTextField" layoutX="317.0" layoutY="91.0" prefHeight="25.0" prefWidth="192.0" />
                                     <Label layoutX="577.0" layoutY="90.0" styleClass="right-sidebar-labels" text="Stock Quantity:" />
                                     <TextField fx:id="invQuantityTextField" layoutX="730.0" layoutY="91.0" />
-                                    <Button fx:id="inventoryAddButton" layoutX="349.0" layoutY="206.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Add" AnchorPane.bottomAnchor="60.0" />
-                                    <Button fx:id="inventoryClearButton" layoutX="497.0" layoutY="206.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Clear" AnchorPane.bottomAnchor="60.0" />
-                                    <Button fx:id="inventoryDeleteButton1" layoutX="645.0" layoutY="206.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Delete" AnchorPane.bottomAnchor="60.0" />
+                                    <Button fx:id="inventoryAddButton" layoutX="349.0" layoutY="206.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Add" AnchorPane.bottomAnchor="60.0" onAction="#handleAddInventory" />
+                                    <Button fx:id="inventoryClearButton" layoutX="497.0" layoutY="206.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Clear" AnchorPane.bottomAnchor="60.0" onAction="#handleClearInventory"/>
+                                    <Button fx:id="inventoryDeleteButton1" layoutX="645.0" layoutY="206.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Delete" AnchorPane.bottomAnchor="60.0" onAction="#handleDeleteInventory" />
                                     <Button fx:id="editInventoryButton1" layoutX="958.0" layoutY="275.0" mnemonicParsing="false" onAction="#handleEditMenuButton" prefHeight="41.0" prefWidth="140.0" styleClass="inventory-button" text="Edit Menu" />
                                  </children>
                               </AnchorPane>

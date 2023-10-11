@@ -31,13 +31,13 @@ public class product {
         this.conn = conn;
     }
 
-    public void createProduct() {
+    public static void createProduct(Connection conn, String name, String category, double price) {
         try {
             String sql = "INSERT INTO product (name, category, price) VALUES (?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, Name);
-            pstmt.setString(2, Category);
-            pstmt.setBigDecimal(3, Price);
+            pstmt.setString(1, name);
+            pstmt.setString(2, category);
+            pstmt.setBigDecimal(3, BigDecimal.valueOf(price));
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
                 System.out.println("product added successfully!");
@@ -69,6 +69,38 @@ public class product {
     }
 
 
+    public static ArrayList<ArrayList<String>> getProductInfo(Connection conn) {
+        ArrayList<ArrayList<String>> product_info = new ArrayList<>();
+        ArrayList<String> id_array = new ArrayList<>();
+        ArrayList<String> product_array = new ArrayList<>();
+        ArrayList<String> category_array = new ArrayList<>();
+        ArrayList<String> price_array = new ArrayList<>();
+        product_info.add(id_array);
+        product_info.add(product_array);
+        product_info.add(category_array);
+        product_info.add(price_array);
+        try {
+            String query = "SELECT product_id, name, category, price FROM product";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String ID = resultSet.getInt("product_id") + "";
+                String Name = resultSet.getString("name");
+                String cat = resultSet.getString("category");
+                String Price = String.format("%.2f", resultSet.getDouble("price"));
+
+                product_info.get(0).add(ID);
+                product_info.get(1).add(Name);
+                product_info.get(2).add(cat);
+                product_info.get(3).add(Price);
+            }
+            return product_info;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product_info;
+    }
+
     public static ArrayList<ArrayList<String>> getProductsPriceByCategory(Connection conn, String Category) {
         ArrayList<ArrayList<String>> productPrice_array = new ArrayList<>();
         ArrayList<String> product_array = new ArrayList<>();
@@ -84,10 +116,9 @@ public class product {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String Name = resultSet.getString("name");
-                String ID = resultSet.getInt("product_id") + "";
                 String Price = String.format("%.2f", resultSet.getDouble("price"));
-
-              productPrice_array.get(0).add(Name);
+                String ID = resultSet.getInt("product_id") + "";
+                productPrice_array.get(0).add(Name);
                 productPrice_array.get(1).add(Price);
                 productPrice_array.get(2).add(ID);
             }
@@ -96,6 +127,37 @@ public class product {
             e.printStackTrace();
         }
         return productPrice_array;
+    }
+
+    public static void updateAddProduct(Connection conn, String name, String category , Double price) {
+        String updateQuery = "UPDATE product SET price = ? WHERE name = ?";
+        try {
+            PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
+            updateStatement.setDouble(1, price);
+            updateStatement.setString(2, name);
+            int count = updateStatement.executeUpdate();
+            if(count < 1){
+                product.createProduct(conn, name, category, price);
+            }
+        } catch (Exception e) {
+            System.out.println(
+                    "Error createOrder(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
+        }
+    }
+
+    public static void deletePro(Connection conn, String productName){
+        String updateQuery = "DELETE FROM product WHERE name = ?";
+        try {
+            PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
+            updateStatement.setString(1, productName);
+            int count = updateStatement.executeUpdate();
+            if(count > 0){
+                System.out.println("Deleted product.");
+            }
+        } catch (Exception e) {
+            System.out.println(
+                    "Error");
+        }
     }
 
 }

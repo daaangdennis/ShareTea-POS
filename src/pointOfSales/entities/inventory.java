@@ -40,25 +40,23 @@ public class inventory {
         }
     }
 
-    public void createInventory() {
+    public static void createInventory(Connection conn, String name, int inventoryQuantity) {
         try {
-            PreparedStatement pstmt;
-
-            if (LastUpdated == null) {
-                String sql = "INSERT INTO inventory (name, details, quantity) VALUES (?, ?, ?)";
-                pstmt = conn.prepareStatement(sql);
-                pstmt.setString(1, Name);
-                pstmt.setString(2, Details);
-                pstmt.setInt(3, Quantity);
-
-            } else {
-                String sql = "INSERT INTO inventory (name, details, quantity, last_updated ) VALUES (?, ?, ?, ?)";
-                pstmt = conn.prepareStatement(sql);
-                pstmt.setString(1, Name);
-                pstmt.setString(2, Details);
-                pstmt.setInt(3, Quantity);
-                pstmt.setDate(4, LastUpdated);
+            String query = "SELECT MAX(inventory_id) FROM inventory";
+            PreparedStatement statement = conn.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            int id = -1;
+            while(resultSet.next()){
+                id = resultSet.getInt("max") + 1;
             }
+
+            String sql = "INSERT INTO inventory (inventory_id, name, details, quantity) VALUES (?, ?, ?, ?)";
+            PreparedStatement pstmt;
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.setString(2, name);
+            pstmt.setString(3, "");
+            pstmt.setInt(4, inventoryQuantity);
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
                 System.out.println("inventory added successfully!");
@@ -88,41 +86,72 @@ public class inventory {
         return -1;
     }
 
-    public static ArrayList<String> getInventory(Connection conn) {
-        ArrayList<String> inventory_array = new ArrayList<>();
+    public static ArrayList<ArrayList<String>> getInventory(Connection conn) {
+        ArrayList<ArrayList<String>> inventory_array = new ArrayList<>();
         try {
-            String query = "SELECT name, quantity FROM inventory";
+            String query = "SELECT * FROM inventory";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
+            ArrayList<String> id_array = new ArrayList<>();
+            ArrayList<String> name_array = new ArrayList<>();
+            ArrayList<String> quantity_array = new ArrayList<>();
+            ArrayList<String> updated_array = new ArrayList<>();
+            inventory_array.add(id_array);
+            inventory_array.add(name_array);
+            inventory_array.add(quantity_array);
+            inventory_array.add(updated_array);
             while (resultSet.next()) {
-                String inventoryName = resultSet.getString("name");
-                int inventoryQuantity = resultSet.getInt("quantity");
-                inventory_array.add(inventoryName);
-                inventory_array.add(inventoryQuantity + "");
+                String id = resultSet.getInt("inventory_id") + "";
+                String name = resultSet.getString("name");
+                String quantity = resultSet.getInt("quantity") + "";
+                String update = resultSet.getDate("last_updated") + "";
+                
+                inventory_array.get(0).add(id);
+                inventory_array.get(1).add(name);
+                inventory_array.get(2).add(quantity);
+                inventory_array.get(3).add(update);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return inventory_array;
     }
+    
+    public static void deleteInv(Connection conn, String inventoryName){
+        String updateQuery = "DELETE FROM inventory WHERE name = ?";
+        try {
+            PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
+            updateStatement.setString(1, inventoryName);
+            int count = updateStatement.executeUpdate();
+            if(count > 0){
+                System.out.println("Deleted item.");
+            }
+        } catch (Exception e) {
+            System.out.println(
+                    "Error");
+        }
+    }
 
-    public static void addSubInventory(Connection conn, int inventoryID, int inventoryNumber) {
-
+    public static void addSubInventory(Connection conn, String inventoryName, int inventoryNumber) {
         java.util.Date currentDateUtil = new java.util.Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDateStr = sdf.format(currentDateUtil);
         Date currentDateSql = Date.valueOf(formattedDateStr);
 
-        String updateQuery = "UPDATE inventory SET quantity = quantity + ? WHERE inventory_id = ?";
-        String updateDateQuery = "UPDATE inventory SET last_updated = ? WHERE inventory_id = ?";
+        String updateQuery = "UPDATE inventory SET quantity = quantity + ? WHERE name = ?";
+        String updateDateQuery = "UPDATE inventory SET last_updated = ? WHERE name = ?";
+
         try {
             PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
             PreparedStatement updateDateStatement = conn.prepareStatement(updateDateQuery);
             updateStatement.setInt(1, inventoryNumber);
-            updateStatement.setInt(2, inventoryID);
+            updateStatement.setString(2, inventoryName);
             updateDateStatement.setDate(1, currentDateSql);
-            updateDateStatement.setInt(2, inventoryID);
-            updateStatement.executeUpdate();
+            updateDateStatement.setString(2, inventoryName);
+            int count = updateStatement.executeUpdate();
+            if(count < 1){
+                createInventory(conn, inventoryName, inventoryNumber);
+            }
             updateDateStatement.executeUpdate();
         } catch (Exception e) {
             System.out.println(

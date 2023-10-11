@@ -45,17 +45,27 @@ public class order {
 
     }
 
-    public static int createOrder(Connection conn, int CustomerID, int EmployeeID) {
+    public static int createOrder(Connection conn, int CustomerID, int EmployeeID, double Total) {
         int returnOrderID = -1;
         try {
             PreparedStatement pstmt;
-            String sql = "INSERT INTO orders (Customer_ID, Employee_ID, Total, Is_Pending, Is_Refunded ) VALUES (?, ?, ?, ? , ?)";
-            pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            pstmt.setInt(1, CustomerID);
-            pstmt.setInt(2, EmployeeID);
-            pstmt.setBigDecimal(3, BigDecimal.ZERO);
-            pstmt.setBoolean(4, true);
-            pstmt.setBoolean(5, false);
+            if(CustomerID == -2){
+                String sql = "INSERT INTO orders (Employee_ID, Total, Is_Pending, Is_Refunded ) VALUES (?, ?, ? , ?)";
+                pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                pstmt.setInt(1, EmployeeID);
+                pstmt.setBigDecimal(2, BigDecimal.valueOf(Total));
+                pstmt.setBoolean(3, true);
+                pstmt.setBoolean(4, false);
+            }
+            else{
+                String sql = "INSERT INTO orders (Customer_ID, Employee_ID, Total, Is_Pending, Is_Refunded ) VALUES (?, ?, ?, ? , ?)";
+                pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                pstmt.setInt(1, CustomerID);
+                pstmt.setInt(2, EmployeeID);
+                pstmt.setBigDecimal(3, BigDecimal.valueOf(Total));
+                pstmt.setBoolean(4, true);
+                pstmt.setBoolean(5, false);
+            }
 
             int affectedRows = pstmt.executeUpdate();
             if (affectedRows > 0) {
