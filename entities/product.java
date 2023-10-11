@@ -70,32 +70,36 @@ public class product {
     }
 
 
-    public static ArrayList<ArrayList<String>> getProductsPriceByCategory(Connection conn, String Category) {
-        ArrayList<ArrayList<String>> productPrice_array = new ArrayList<>();
-        ArrayList<String> product_array = new ArrayList<>();
-        ArrayList<String> price_array = new ArrayList<>();
+    public static ArrayList<ArrayList<String>> getProductInfo(Connection conn) {
+        ArrayList<ArrayList<String>> product_info = new ArrayList<>();
         ArrayList<String> id_array = new ArrayList<>();
-        productPrice_array.add(product_array);
-        productPrice_array.add(price_array);
-        productPrice_array.add(id_array);
+        ArrayList<String> product_array = new ArrayList<>();
+        ArrayList<String> category_array = new ArrayList<>();
+        ArrayList<String> price_array = new ArrayList<>();
+        product_info.add(id_array);
+        product_info.add(product_array);
+        product_info.add(category_array);
+        product_info.add(price_array);
         try {
-            String query = "SELECT name, price, product_id FROM product WHERE category = ?";
+            String query = "SELECT product_id, name, category, price FROM product";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, Category);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String Name = resultSet.getString("name");
-                String Price = String.format("%.2f", resultSet.getDouble("price"));
                 String ID = resultSet.getInt("product_id") + "";
-                productPrice_array.get(0).add(Name);
-                productPrice_array.get(1).add(Price);
-                productPrice_array.get(2).add(ID);
+                String Name = resultSet.getString("name");
+                String cat = resultSet.getString("category");
+                String Price = String.format("%.2f", resultSet.getDouble("price"));
+
+                product_info.get(0).add(ID);
+                product_info.get(1).add(Name);
+                product_info.get(2).add(cat);
+                product_info.get(3).add(Price);
             }
-            return productPrice_array;
+            return product_info;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return productPrice_array;
+        return product_info;
     }
 
     public static void updateAddProduct(Connection conn, String name, String category , Double price) {
