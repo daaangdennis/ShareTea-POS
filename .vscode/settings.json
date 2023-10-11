@@ -2,9 +2,7 @@
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": {
-        "include": [
-            "lib/**/*.jar"
-        ],
+        "include": ["lib/postgresql-42.2.8.jar","lib/**/*.jar"],
         "exclude": [
             "lib/javafx-swt.jar",
             "lib/javafx.base.jar",
@@ -17,3 +15,4 @@
         ]
     }
 }
+
