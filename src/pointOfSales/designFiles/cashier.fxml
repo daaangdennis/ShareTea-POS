@@ -121,10 +121,10 @@
                               <Label layoutX="14.0" layoutY="484.0" styleClass="right-sidebar-labels" text="Subtotal:" />
                               <Line endX="271.0" endY="-1.0" layoutX="117.0" layoutY="549.0" startX="-113.0" startY="-1.0" style="-fx-stroke-dash-array: 7;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                               <Label layoutX="14.0" layoutY="512.0" styleClass="right-sidebar-labels" text="Tax:" />
-                              <Label fx:id = "checkoutSubTotal" layoutX="322.0" layoutY="484.0" styleClass="right-sidebar-labels" text="\$0.00" />
-                              <Label fx:id = "checkoutTax" layoutX="322.0" layoutY="512.0" styleClass="right-sidebar-labels" text="\$0.00" />
+                              <Label fx:id="checkoutSubTotal" layoutX="322.0" layoutY="484.0" styleClass="right-sidebar-labels" text="\$0.00" />
+                              <Label fx:id="checkoutTax" layoutX="322.0" layoutY="512.0" styleClass="right-sidebar-labels" text="\$0.00" />
                               <Label layoutX="14.0" layoutY="555.0" styleClass="right-sidebar-labels" text="Total:" />
-                              <Label fx:id = "checkoutTrueTotal" layoutX="322.0" layoutY="555.0" styleClass="right-sidebar-labels" text="\$0.00" />
+                              <Label fx:id="checkoutTrueTotal" layoutX="322.0" layoutY="555.0" styleClass="right-sidebar-labels" text="\$0.00" />
                               <Button fx:id="proceedButton" layoutX="35.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleProceedButton" prefHeight="38.0" prefWidth="319.0" styleClass="proceed-button" text="Proceed">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
@@ -150,25 +150,15 @@
                               </ScrollPane>
                               <AnchorPane fx:id="teaPane" prefHeight="183.0" prefWidth="708.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                  <children>
-                                    <VBox layoutX="177.0" layoutY="-20.0" prefHeight="178.0" prefWidth="708.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
-                                             <children>
-                                                <ToggleButton fx:id="milkTeaButton" mnemonicParsing="false" onAction="#addButtons" styleClass="food-category-button" text="Milk Tea" />
-                                                <ToggleButton fx:id="brewedTeaButton" mnemonicParsing="false" onAction="#addButtons" styleClass="food-category-button" text="Brewed Tea" />
-                                                <ToggleButton fx:id="fruitTeaButton" mnemonicParsing="false" onAction="#addButtons" styleClass="food-category-button" text="Fruit Tea" />
-
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="CENTER" prefHeight="92.0" prefWidth="708.0" spacing="50.0">
-                                             <children>
-                                                <ToggleButton fx:id="iceBlendedButton" mnemonicParsing="false" onAction="#addButtons" styleClass="food-category-button" text="Ice Blended" />
-                                                <ToggleButton fx:id="teaMojitoButton" mnemonicParsing="false" onAction="#addButtons" styleClass="food-category-button" text="Tea Mojito" />
-                                                <ToggleButton fx:id="creamaButton" mnemonicParsing="false" onAction="#addButtons" styleClass="food-category-button" text="Creama" />
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
+                                    <ScrollPane prefHeight="200.0" prefWidth="708.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <content>
+                                          <GridPane fx:id="foodCategoryGridPane" prefHeight="55.0" prefWidth="132.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                          </GridPane>
+                                       </content>
+                                    </ScrollPane>
                                  </children>
                               </AnchorPane>
                            </children></AnchorPane>
