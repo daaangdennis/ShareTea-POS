@@ -39,10 +39,10 @@ public class orderProduct {
         }
         if(this.SugarLevel != 1){
             if(Note.equals("")){
-                Note += (SugarLevel*100) + "%" + " sugar.";
+                Note += (SugarLevel) + "%" + " sugar.";
             } 
             else{
-                Note += " " + (SugarLevel*100) + "%" + " sugar.";
+                Note += " " + (SugarLevel) + "%" + " sugar.";
             }
         }
         try {
