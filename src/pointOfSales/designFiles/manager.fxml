@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -120,7 +124,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="background" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="orderInfoPane" layoutX="588.0" layoutY="173.0" prefHeight="200.0" prefWidth="384.0" styleClass="right-sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="orderInfoPane" layoutX="588.0" layoutY="173.0" prefHeight="200.0" prefWidth="384.0" styleClass="right-sidebar" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="4.0" layoutY="4.0" prefHeight="47.0" prefWidth="380.0" styleClass="order-infobar" AnchorPane.bottomAnchor="671.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
@@ -165,7 +169,7 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="menuItems" prefHeight="452.0" prefWidth="564.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="404.0" AnchorPane.topAnchor="20.0">
+                        <AnchorPane fx:id="menuItems" prefHeight="452.0" prefWidth="564.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="404.0" AnchorPane.topAnchor="20.0">
                            <children>
                               <ScrollPane fx:id="categoryItemsScrollPane" layoutY="189.0" prefHeight="459.0" prefWidth="708.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                  <content>
@@ -357,6 +361,66 @@
                                     <Button fx:id="inventoryClearButton" layoutX="497.0" layoutY="206.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Clear" AnchorPane.bottomAnchor="60.0" />
                                     <Button fx:id="inventoryDeleteButton1" layoutX="645.0" layoutY="206.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Delete" AnchorPane.bottomAnchor="60.0" />
                                     <Button fx:id="editInventoryButton1" layoutX="958.0" layoutY="275.0" mnemonicParsing="false" onAction="#handleEditMenuButton" prefHeight="41.0" prefWidth="140.0" styleClass="inventory-button" text="Edit Menu" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane fx:id="statisticsPage" layoutX="86.0" layoutY="59.0" prefHeight="720.0" prefWidth="1152.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="350.0" prefWidth="754.0" styleClass="container" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="20.0">
+                                 <children>
+                                    <BarChart fx:id="salesReportGraph" layoutX="54.0" layoutY="-26.0" styleClass="sales-report" title="Sales Report" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                      <xAxis>
+                                        <CategoryAxis label="Products" prefWidth="466.0" side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis label="Items Sold" side="LEFT" />
+                                      </yAxis>
+                                    </BarChart>
+                                    <DatePicker fx:id="startDate" layoutX="197.0" layoutY="321.0" promptText="Select Date" />
+                                    <Label layoutX="90.0" layoutY="320.0" styleClass="right-sidebar-labels" text="Start Date:" />
+                                    <DatePicker fx:id="endDate" layoutX="511.0" layoutY="321.0" promptText="Select Date" />
+                                    <Label layoutX="415.0" layoutY="320.0" styleClass="right-sidebar-labels" text="End Date:" />
+                                    <Button fx:id="generateReportButton" layoutX="309.0" layoutY="356.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" styleClass="generate-report-button" text="Generate Report" AnchorPane.bottomAnchor="10.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="20.0" layoutY="451.0" prefHeight="249.0" prefWidth="754.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="440.0">
+                                 <children>
+                                    <TableView fx:id="excessReportTable" layoutX="193.0" layoutY="40.0" prefHeight="206.0" prefWidth="368.0" styleClass="restock-report-table" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+                                       <columns>
+                                          <TableColumn fx:id="excessIDColumn" prefWidth="75.0" text="Inventory ID" />
+                                          <TableColumn fx:id="excessNameColumn" prefWidth="75.0" text="Item Name" />
+                                          <TableColumn fx:id="excessQuantityColumn" prefWidth="75.0" text="Stock Quantity" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <Label layoutX="313.0" layoutY="14.0" styleClass="right-sidebar-labels" text="Excess Report" AnchorPane.topAnchor="10.0" />
+                                    <DatePicker fx:id="timestamp" layoutX="351.0" layoutY="220.0" promptText="Select Date" />
+                                    <Label layoutX="230.0" layoutY="219.0" styleClass="right-sidebar-labels" text="Timestamp:" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="775.0" layoutY="29.0" prefHeight="680.0" prefWidth="357.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="795.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                                 <children>
+                                    <TableView fx:id="restockReportTable" layoutX="-50.0" layoutY="-7.0" prefHeight="330.0" prefWidth="368.0" styleClass="restock-report-table" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+                                       <columns>
+                                          <TableColumn fx:id="restockIDColumn" prefWidth="75.0" text="Inventory ID" />
+                                          <TableColumn fx:id="restockNameColumn" prefWidth="75.0" text="Item Name" />
+                                          <TableColumn fx:id="restockQuantityColumn" prefWidth="75.0" text="Stock Quantity" />
+                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <Label alignment="CENTER" layoutX="99.0" layoutY="14.0" styleClass="right-sidebar-labels" text="Restock Report" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                                    <TableView fx:id="popularPairsTable" layoutX="-31.0" layoutY="340.0" prefHeight="330.0" prefWidth="368.0" styleClass="restock-report-table" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="390.0">
+                                       <columns>
+                                          <TableColumn fx:id="rankingColumn" prefWidth="75.0" text="Ranking" />
+                                          <TableColumn fx:id="pairingColumn" prefWidth="241.0" text="Pairing" />
+                                       </columns>
+                                    </TableView>
+                                    <Label alignment="CENTER" layoutX="10.0" layoutY="359.0" styleClass="right-sidebar-labels" text="Popular Pairings" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
                                  </children>
                               </AnchorPane>
                            </children>
