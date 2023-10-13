@@ -1,10 +1,12 @@
-package entities;
+package pointOfSales.entities;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class employee {
     String FirstName = null;
@@ -15,7 +17,7 @@ public class employee {
     Date HireDate = null;
     String Passcode = null;
     Connection conn = null;
-    int EmployeeID = -1;
+    public int EmployeeID = -1;
 
     public employee(Connection conn) {
         this.conn = conn;
@@ -117,8 +119,8 @@ public class employee {
         return resultEmployee;
     }
 
-    public employee getEmployeeByName(String FirstName, String LastName) {
-        employee resultEmployee = null;
+    public static int getEmployeeByName(Connection conn, String FirstName, String LastName) {
+        int resultEmployee = -1;
         try {
             String sql = "SELECT * FROM employee WHERE first_name = ? AND last_name = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -128,15 +130,8 @@ public class employee {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
-                resultEmployee = new employee(conn,
-                        rs.getString("first_name"),
-                        rs.getString("last_name"),
-                        rs.getString("position"),
-                        rs.getString("email"),
-                        rs.getString("phone_number"),
-                        rs.getDate("hire_date").toString(),
-                        rs.getString("passcode"));
-                resultEmployee.EmployeeID = rs.getInt("employee_id");
+                resultEmployee = rs.getInt("employee_id");
+                return resultEmployee;
             } else {
                 System.out.println("Employee not found.");
             }
@@ -146,5 +141,30 @@ public class employee {
                     "Error getEmployeeByName(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
         }
         return resultEmployee;
+    }
+
+    public static ArrayList<String> verifyEmployee(Connection conn, String pw){
+        ArrayList<String> employee_verify = new ArrayList<>();
+        try {
+            String query = "SELECT first_name, last_name, position, employee_id FROM employee WHERE passcode = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, pw);
+    
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+                String position = resultSet.getString("position");
+                String employeeID = resultSet.getString("employee_id");
+                
+                employee_verify.add(firstName);
+                employee_verify.add(lastName);
+                employee_verify.add(position);
+                employee_verify.add(employeeID);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employee_verify;   
     }
 }

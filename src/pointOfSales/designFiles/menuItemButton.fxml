@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane stylesheets="@../stylesheets/cashier.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pointOfSales.menuItemButtonController">
+   <children>
+      <Button fx:id="subButton" mnemonicParsing="false" onAction="#handleSubButton" styleClass="menu-item-button" />
+      <Label fx:id="foodItemLabel" alignment="CENTER" disable="true" layoutX="30.0" layoutY="49.0" styleClass="menu-item-label" text="Label" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0" />
+      <Label fx:id="priceLabel" alignment="CENTER" disable="true" layoutX="64.0" layoutY="105.0" styleClass="menu-item-label" text="Price: $0.00" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+   </children>
+</AnchorPane>
