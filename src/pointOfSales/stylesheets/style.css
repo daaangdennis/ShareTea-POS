@@ -7,3 +7,13 @@
     font-family: 'Poppins-Bold';
     src: url('../fonts/Poppins-Bold.ttf');
 }
+
+.background {
+    -fx-background-color: white;
+}
+
+.wallImageContainer {
+    -fx-background-image: url('../images/whitebrickwall.jpg');
+    -fx-background-size: cover;
+    -fx-background-repeat: repeat;
+}
