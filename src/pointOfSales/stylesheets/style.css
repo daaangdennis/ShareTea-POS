@@ -183,6 +183,7 @@
 
 .add-button {
     -fx-cursor: hand;
+    -fx-border-color: transparent;
 }
 
 .add-button:hover {
