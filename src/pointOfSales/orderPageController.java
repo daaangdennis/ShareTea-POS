@@ -35,6 +35,8 @@ public class orderPageController implements Initializable {
     @FXML
     private GridPane menuItemsGridPane;
     @FXML
+    private GridPane foodCategoryGridPane;
+    @FXML
     private TableView<Object[]> checkoutTable;
     @FXML
     private TableColumn<Object[], String> productTableColumn;
@@ -130,6 +132,7 @@ public class orderPageController implements Initializable {
         Label orderNumber = (Label) orderInfoPane.lookup("#orderNumberLabel");
         orderNumber.setText("Order #" + addOrderFull.nextOrderID());
         employPosition = loginPageController.getPosition();
+        setUpTeaPane();
     }
 
     public TableView<Object[]> getTable() {
@@ -169,6 +172,17 @@ public class orderPageController implements Initializable {
         }
         // else if(pressedButton.getId().equals("logoutButton"))
     }
+
+    /* #################UNDERCONSTRUCTION#################### */
+    // This function needs to grab the gridpane @foodCategoryGridPane
+    // to add categories gained from SystemFunctions.getCategories()
+    // There should only be 2 rows but infinite columns
+    // Possible implementation: add from columns until num of categories.
+    // Do not forget about the sidebar button
+    private void setUpTeaPane() {
+
+    }
+    /* #################UNDERCONSTRUCTION#################### */
 
     @FXML
     private void addButtons(ActionEvent event) {

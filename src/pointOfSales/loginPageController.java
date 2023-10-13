@@ -2,12 +2,8 @@ package pointOfSales;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
-import javafx.scene.image.Image;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 import pointOfSales.services.SystemFunctions;
-
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 public class loginPageController {
@@ -34,6 +30,18 @@ public class loginPageController {
 
     public static void setPosition(String pos) {
         employeePosition = pos;
+    }
+
+    public static String getFirstName() {
+        return employeeFirstName;
+    }
+
+    public static String getLastName() {
+        return employeeLastName;
+    }
+
+    public static String getPosition() {
+        return employeePosition;
     }
 
     @FXML
