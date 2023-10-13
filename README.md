@@ -1,5 +1,22 @@
 # Point of Sales System For Sharetea.
 
+## How to compile through terminal
+
+Type the following commands in the terminal to compile and run the application.
+
+**For Windows:**
+
+To Compile: `javac --module-path "lib/javafx-sdk-21-windows/lib" --add-modules javafx.controls,javafx.fxml src/pointOfSales/*.java src/pointOfSales/services/*.java src/pointOfSales/entities/*.java`
+
+To Run: `java --module-path "lib/javafx-sdk-21-windows/lib" --add-modules javafx.controls,javafx.fxml -cp "lib/javafx-sdk-21-windows/lib/*;src;lib/postgresql-42.2.8.jar" pointOfSales.app`
+
+
+**For MacOS:**
+
+To Compile: `javac --module-path "lib/javafx-sdk-21-macos/lib" --add-modules javafx.controls,javafx.fxml src/pointOfSales/*.java src/pointOfSales/*/**.java `
+
+To Run: `java --module-path "lib/javafx-sdk-21-macos/lib" --add-modules javafx.controls,javafx.fxml -cp "lib/javafx-sdk-21-macos/lib/*:src:lib/postgresql-42.2.8.jar" pointOfSales.app`
+
 
 ## User Interface
 
