@@ -20,12 +20,14 @@ public class orderProduct {
         this.Quantity = ProductQuantity;
         this.Toppings = ToppingList;
         this.SugarLevel = Sugar;
+        this.IceLevel = ice;
         this.Note = NoteInput;
     }
     public orderProduct(String PID, int ProductQuantity, double Sugar, double ice, String NoteInput) {
         this.ProductID = Integer.parseInt(PID);
         this.Quantity = ProductQuantity;
         this.SugarLevel = Sugar;
+        this.IceLevel = ice;
         this.Note = NoteInput;
     }
 
