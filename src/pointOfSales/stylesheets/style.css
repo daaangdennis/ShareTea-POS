@@ -12,8 +12,33 @@
     -fx-background-color: white;
 }
 
-.wallImageContainer {
+/* START OF LOGIN PAGE STYLING */
+
+.wall-image-container {
     -fx-background-image: url('../images/whitebrickwall.jpg');
     -fx-background-size: cover;
-    -fx-background-repeat: repeat;
 }
+
+.keypad-buttons{
+    -fx-text-fill: #cf152d;
+    -fx-font-weight: bold;
+    -fx-background-color: white;
+    -fx-border-color: #cf152d;
+    -fx-border-radius: 5px;
+    -fx-background-insets: 0;
+    -fx-background-radius: 5px;
+}
+
+.keypad-buttons#keypadEnter{
+    -fx-text-fill: white;
+    -fx-background-color:  #cf152d;
+}
+
+.password-field {
+    -fx-border-color: #cf152d;
+    -fx-border-radius: 5px;
+    -fx-background-color: white;
+    -fx-prompt-text-fill: #cf152d;
+}
+
+/* END OF LOGIN PAGE STYLING */
