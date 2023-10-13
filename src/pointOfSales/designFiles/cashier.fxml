@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -21,13 +22,13 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../stylesheets/cashier.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pointOfSales.orderPageController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../stylesheets/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pointOfSales.orderPageController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane layoutX="-1.0" prefHeight="773.0" prefWidth="1298.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <left>
-                  <AnchorPane prefHeight="200.0" prefWidth="128.0" styleClass="navbar" BorderPane.alignment="CENTER">
+                  <AnchorPane prefHeight="200.0" prefWidth="128.0" styleClass="navbar-background" BorderPane.alignment="CENTER">
                      <children>
                         <AnchorPane layoutX="-56.0" layoutY="95.0" prefHeight="720.0" prefWidth="144.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -40,7 +41,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <Button fx:id="checkoutButton" contentDisplay="TOP" layoutX="9.0" layoutY="86.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="112.0" styleClass="navbutton" text="Checkout" textFill="WHITE">
+                              <Button fx:id="checkoutButton" contentDisplay="TOP" layoutX="9.0" layoutY="86.0" mnemonicParsing="false" prefHeight="114.0" prefWidth="112.0" styleClass="navbar-button" text="Checkout" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="77.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -55,7 +56,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="ordersButton" contentDisplay="TOP" layoutX="9.0" layoutY="213.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Orders" textFill="WHITE">
+                              <Button fx:id="ordersButton" contentDisplay="TOP" layoutX="9.0" layoutY="213.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="112.0" styleClass="navbar-button" text="Orders" textFill="WHITE">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -70,7 +71,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="logoutButton" layoutX="26.0" layoutY="642.0" mnemonicParsing="false" onAction="#handleChangeScene" prefHeight="53.0" prefWidth="43.0" styleClass="navbutton">
+                              <Button fx:id="logoutButton" layoutX="26.0" layoutY="642.0" mnemonicParsing="false" onAction="#handleChangeScene" prefHeight="53.0" prefWidth="43.0" styleClass="navbar-button">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -90,7 +91,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="background" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="orderInfoPane" layoutX="588.0" layoutY="173.0" prefHeight="200.0" prefWidth="384.0" styleClass="right-sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="orderInfoPane" layoutX="588.0" layoutY="173.0" prefHeight="200.0" prefWidth="384.0" styleClass="right-sidebar-container" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="4.0" layoutY="4.0" prefHeight="47.0" prefWidth="380.0" styleClass="order-infobar" AnchorPane.bottomAnchor="671.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
@@ -118,19 +119,19 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
-                              <Label layoutX="14.0" layoutY="484.0" styleClass="right-sidebar-labels" text="Subtotal:" />
+                              <Label layoutX="14.0" layoutY="484.0" styleClass="red-main-labels" text="Subtotal:" />
                               <Line endX="271.0" endY="-1.0" layoutX="117.0" layoutY="549.0" startX="-113.0" startY="-1.0" style="-fx-stroke-dash-array: 7;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                              <Label layoutX="14.0" layoutY="512.0" styleClass="right-sidebar-labels" text="Tax:" />
-                              <Label fx:id="checkoutSubTotal" layoutX="322.0" layoutY="484.0" styleClass="right-sidebar-labels" text="\$0.00" />
-                              <Label fx:id="checkoutTax" layoutX="322.0" layoutY="512.0" styleClass="right-sidebar-labels" text="\$0.00" />
-                              <Label layoutX="14.0" layoutY="555.0" styleClass="right-sidebar-labels" text="Total:" />
-                              <Label fx:id="checkoutTrueTotal" layoutX="322.0" layoutY="555.0" styleClass="right-sidebar-labels" text="\$0.00" />
-                              <Button fx:id="proceedButton" layoutX="35.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleProceedButton" prefHeight="38.0" prefWidth="319.0" styleClass="proceed-button" text="Proceed">
+                              <Label layoutX="14.0" layoutY="512.0" styleClass="red-main-labels" text="Tax:" />
+                              <Label fx:id="checkoutSubTotal" layoutX="322.0" layoutY="484.0" styleClass="red-main-labels" text="\$0.00" />
+                              <Label fx:id="checkoutTax" layoutX="322.0" layoutY="512.0" styleClass="red-main-labels" text="\$0.00" />
+                              <Label layoutX="14.0" layoutY="555.0" styleClass="red-main-labels" text="Total:" />
+                              <Label fx:id="checkoutTrueTotal" layoutX="322.0" layoutY="555.0" styleClass="red-main-labels" text="\$0.00" />
+                              <Button fx:id="proceedButton" layoutX="35.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleProceedButton" prefHeight="38.0" prefWidth="319.0" styleClass="red-button" text="Proceed">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="cancelButton" layoutX="35.0" layoutY="653.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="38.0" prefWidth="319.0" styleClass="cancel-button" text="Cancel">
+                              <Button fx:id="cancelButton" layoutX="35.0" layoutY="653.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="38.0" prefWidth="319.0" styleClass="white-button" text="Cancel">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -176,7 +177,11 @@
                                        </graphic>
                                     </Button>
                                     <Label fx:id="foodItemLabel" alignment="CENTER" layoutX="277.0" layoutY="12.0" prefHeight="30.0" prefWidth="210.0" styleClass="item-customization-labels" text="Food Item $0.00 " />
-                                    <Button fx:id="addItemButton" layoutX="637.0" layoutY="6.0" mnemonicParsing="false" onAction="#addItem" prefHeight="41.0" prefWidth="112.0" styleClass="add-button" text="Add Item" AnchorPane.rightAnchor="15.0" />
+                                    <Button fx:id="addItemButton" layoutX="637.0" layoutY="6.0" mnemonicParsing="false" onAction="#addItem" prefHeight="41.0" prefWidth="112.0" text="Add Item" AnchorPane.rightAnchor="15.0">
+                                       <styleClass>
+                                          <String fx:value="red-button" />
+                                          <String fx:value="add-button" />
+                                       </styleClass></Button>
                                  </children>
                               </AnchorPane>
                               <AnchorPane fx:id="sugarPane" layoutX="14.0" layoutY="63.0" prefHeight="200.0" prefWidth="366.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="387.0" AnchorPane.topAnchor="73.0">

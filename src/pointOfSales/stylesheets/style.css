@@ -8,12 +8,53 @@
     src: url('../fonts/Poppins-Bold.ttf');
 }
 
+/* START OF DEFAULT STYLINGS */
 .background {
     -fx-background-color: white;
 }
 
-/* START OF LOGIN PAGE STYLING */
+.red-main-labels {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 18px;
+    -fx-text-fill: #cf152d;
+    -fx-font-weight: 700;
+}
 
+.red-button {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-background-color: #cf152d;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0;
+}
+
+.red-button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,15), 5,0,0,0);
+}
+
+.white-button {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-background-color: white;
+    -fx-text-fill: #cf152d;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0;
+}
+
+.white-button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,15), 5,0,0,0);
+}
+/* END OF DEFAULT STYLINGS */
+
+
+/* START OF LOGIN PAGE STYLING */
 .wall-image-container {
     -fx-background-image: url('../images/whitebrickwall.jpg');
     -fx-background-size: cover;
@@ -40,5 +81,138 @@
     -fx-background-color: white;
     -fx-prompt-text-fill: #cf152d;
 }
-
 /* END OF LOGIN PAGE STYLING */
+
+
+/* START OF MAIN APPLICATION STYLING */
+.navbar-background {
+    -fx-background-color: #cf152d;
+}
+
+.navbar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 16px;
+}
+
+.navbar-button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,15), 5,0,0,0);
+}
+
+.right-sidebar-container {
+    -fx-border-color: #595959;
+    -fx-border-width: 2px;
+    -fx-background-color: #eeeeee;
+}
+
+.order-infobar {
+    -fx-background-color: #595959;
+    -fx-border-color: #595959;
+    -fx-border-width: 2px;
+}
+
+.order-table-view {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.order-table-view .column-header .label {
+    -fx-text-fill: #cf152d;
+    -fx-font-size: 16px;
+    -fx-padding: 5px;
+}
+
+.food-category-button {
+    -fx-border-color: #cf152d;
+    -fx-border-radius: 8px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #cf152d;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-pref-width: 180px;
+    -fx-pref-height: 70px;
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8px;
+}
+
+.food-category-button:hover {
+    -fx-background-color: #cf152d;
+    -fx-text-fill: white;
+}
+
+.food-category-button:selected {
+    -fx-background-color: #cf152d;
+    -fx-text-fill: white;
+}
+
+.menu-item-button {
+    -fx-border-color: #cf152d;
+    -fx-border-radius: 8px;
+    -fx-background-color: #cf152d;
+    -fx-text-fill: white;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-pref-width: 180px;
+    -fx-pref-height: 140px;
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+    -fx-background-radius: 8px;
+}
+
+.menu-item-label {
+    -fx-text-fill: white;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 16px;
+    -fx-opacity: 1;
+}
+
+.close-button {
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close-button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,15), 5,0,0,0);
+}
+
+.add-button {
+    -fx-cursor: hand;
+}
+
+.add-button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,15), 5,0,0,0);
+}
+
+.item-customization-labels {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-size: 20px;
+    -fx-text-fill: #cf152d;
+    -fx-font-weight: 700;
+}
+
+.item-customization-buttons {
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 18px;
+    -fx-border-radius: 5px;
+    -fx-background-color: #595959;
+    -fx-text-fill: white;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0;
+    -fx-cursor: hand;
+}
+
+.item-customization-buttons:hover {
+    -fx-background-color: #cf152d;
+}
+
+.item-customization-buttons:selected {
+    -fx-background-color: #cf152d;
+}
+/* END OF MAIN APPLICATION STYLING */
