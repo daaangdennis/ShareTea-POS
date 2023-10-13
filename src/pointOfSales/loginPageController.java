@@ -48,7 +48,6 @@ public class loginPageController {
     }
 
 
-
     @FXML
 
     private void handleNumberButtonClick(ActionEvent event){
@@ -67,6 +66,7 @@ public class loginPageController {
     private void handleClearButtonClick(ActionEvent event){
         passwordField.clear();
     }
+
     @FXML
     private void handleEnterButtonClick(ActionEvent event){
             //Run function to check if the password is correct
