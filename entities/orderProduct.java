@@ -13,15 +13,16 @@ public class orderProduct {
     public ArrayList<String> Toppings;
     public String Note = "";
     public double SugarLevel = 100;
+    public double IceLevel = 100;
 
-    public orderProduct(String PID, int ProductQuantity, ArrayList<String> ToppingList, double Sugar, String NoteInput) {
+    public orderProduct(String PID, int ProductQuantity, ArrayList<String> ToppingList, double Sugar, double ice ,String NoteInput) {
         this.ProductID = Integer.parseInt(PID);
         this.Quantity = ProductQuantity;
         this.Toppings = ToppingList;
         this.SugarLevel = Sugar;
         this.Note = NoteInput;
     }
-    public orderProduct(String PID, int ProductQuantity, int Sugar, String NoteInput) {
+    public orderProduct(String PID, int ProductQuantity, double Sugar, double ice, String NoteInput) {
         this.ProductID = Integer.parseInt(PID);
         this.Quantity = ProductQuantity;
         this.SugarLevel = Sugar;
@@ -36,7 +37,7 @@ public class orderProduct {
             }
             toppingList += Toppings.get(Toppings.size() - 1);
         }
-        if(this.SugarLevel != 1){
+        if(this.SugarLevel != 100){
             if(Note.equals("")){
                 Note += (SugarLevel) + "%" + " sugar.";
             } 
@@ -44,6 +45,15 @@ public class orderProduct {
                 Note += " " + (SugarLevel) + "%" + " sugar.";
             }
         }
+        if(this.IceLevel != 100){
+            if(Note.equals("")){
+                Note += (IceLevel) + "%" + " ice.";
+            } 
+            else{
+                Note += " " + (IceLevel) + "%" + " ice.";
+            }
+        }
+
         try {
             String sql = "INSERT INTO order_product (Product_ID, Order_ID, Quantity, Note, toppings) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
