@@ -3,4 +3,4 @@
 <?import javafx.scene.control.Button?>
 
 
-<Button mnemonicParsing="false" styleClass="food-category-button" stylesheets="@../stylesheets/manager.css" text="Button" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<Button mnemonicParsing="false" styleClass="food-category-button" stylesheets="@../stylesheets/style.css" text="Button" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" />
