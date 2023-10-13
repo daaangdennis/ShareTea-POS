@@ -1,4 +1,5 @@
 package pointOfSales.entities;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -49,15 +50,14 @@ public class order {
         int returnOrderID = -1;
         try {
             PreparedStatement pstmt;
-            if(CustomerID == -2){
+            if (CustomerID == -2) {
                 String sql = "INSERT INTO orders (Employee_ID, Total, Is_Pending, Is_Refunded ) VALUES (?, ?, ? , ?)";
                 pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 pstmt.setInt(1, EmployeeID);
                 pstmt.setBigDecimal(2, BigDecimal.valueOf(Total));
                 pstmt.setBoolean(3, true);
                 pstmt.setBoolean(4, false);
-            }
-            else{
+            } else {
                 String sql = "INSERT INTO orders (Customer_ID, Employee_ID, Total, Is_Pending, Is_Refunded ) VALUES (?, ?, ?, ? , ?)";
                 pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 pstmt.setInt(1, CustomerID);
@@ -99,13 +99,13 @@ public class order {
         }
     }
 
-    public static int nextAvailableOrder(Connection conn){
+    public static int nextAvailableOrder(Connection conn) {
         int order_num = -1;
         String query = "SELECT MAX(order_id) FROM orders";
         try {
             PreparedStatement statement = conn.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 order_num = resultSet.getInt("max") + 1;
             }
             return order_num;

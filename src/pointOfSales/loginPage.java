@@ -11,26 +11,25 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 
-
 public class loginPage {
 
     private static sceneController controller;
 
+    public loginPage() {
+    }
 
-    public loginPage(){}
-
-    public static void setController(sceneController ctrl){
+    public static void setController(sceneController ctrl) {
         controller = ctrl;
     }
 
-    public static Scene getScene(){
-        
-        try{
+    public static Scene getScene() {
+
+        try {
             FXMLLoader loader = new FXMLLoader(orderPage.class.getResource("designFiles/loginPage.fxml"));
             Parent root = loader.load();
             double screenWidth = Screen.getPrimary().getBounds().getWidth();
             double screenHeight = Screen.getPrimary().getBounds().getHeight();
-            
+
             Pane wallImageContainer = (Pane) root.lookup("#wallImageContainer");
             wallImageContainer.setPrefWidth(screenWidth / 3.0);
             wallImageContainer.setPrefHeight(screenHeight);
@@ -43,11 +42,10 @@ public class loginPage {
                 logo.setScaleX(newWidth.doubleValue() / logo.getFitWidth());
                 logo.setScaleY(logo.getScaleX());
             });
-        
+
             wallImageContainer.heightProperty().addListener((obs, oldHeight, newHeight) -> {
                 logo.setY((newHeight.doubleValue() - logo.getFitHeight()) / 5);
             });
-
 
             // Set position for keypad and password field
             GridPane keypad = (GridPane) root.lookup("#keypad");
@@ -64,17 +62,14 @@ public class loginPage {
 
             Scene loginScene = new Scene(root, screenWidth, screenHeight);
 
-            
             loginPageController loginCtrl = loader.getController();
             loginCtrl.setController(controller);
 
-            
-            
             return loginScene;
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
+
 }

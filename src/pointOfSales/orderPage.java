@@ -9,15 +9,17 @@ import java.io.IOException;
 public class orderPage {
 
     private static sceneController controller;
-    public orderPage(){}
 
-    public static void setController(sceneController ctrl){
+    public orderPage() {
+    }
+
+    public static void setController(sceneController ctrl) {
         controller = ctrl;
     }
 
-    public static Scene getScene(){
-        
-        try{
+    public static Scene getScene() {
+
+        try {
             FXMLLoader loader = new FXMLLoader(orderPage.class.getResource("designFiles/cashier.fxml"));
             Parent root2 = loader.load();
             // double screenWidth = Screen.getPrimary().getBounds().getWidth();
@@ -26,8 +28,7 @@ public class orderPage {
             orderPageController orderCtrl = loader.getController();
             orderCtrl.setController(controller);
             return cashierOrderScene;
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }

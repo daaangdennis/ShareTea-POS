@@ -1,4 +1,5 @@
 package pointOfSales.entities;
+
 import java.sql.*;
 
 public class customer {
@@ -39,7 +40,7 @@ public class customer {
             while (resultSet.next()) {
                 customer_id = resultSet.getInt("max");
                 return customer_id;
-            } 
+            }
 
         } catch (Exception e) {
             System.out.println(
@@ -89,11 +90,9 @@ public class customer {
                 addCountST.setInt(1, customerID);
                 addCountST.executeUpdate();
                 return customerID;
-            } 
-            else if(FirstName.isEmpty()){
+            } else if (FirstName.isEmpty()) {
                 return -2;
-            }
-            else {
+            } else {
                 customerID = customer.createCustomer(conn, FirstName, LastName);
                 return customerID;
             }
