@@ -131,11 +131,12 @@
     -fx-font-family: 'Poppins', sans-serif;
     -fx-font-weight: 700;
     -fx-font-size: 18px;
-    -fx-pref-width: 180px;
+    -fx-min-width: 180px;
     -fx-pref-height: 70px;
     -fx-cursor: hand;
     -fx-background-insets: 0;
     -fx-background-radius: 8px;
+    -fx-background-color: white;
 }
 
 .food-category-button:hover {

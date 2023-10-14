@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -103,7 +104,7 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                        <Button fx:id="statisticsButton" contentDisplay="TOP" layoutX="9.0" layoutY="451.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Statistics" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0" onAction="#handleStatPage">
+                        <Button fx:id="statisticsButton" contentDisplay="TOP" layoutX="9.0" layoutY="451.0" mnemonicParsing="false" onAction="#handleStatPage" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Statistics" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -182,12 +183,15 @@
                               </ScrollPane>
                               <AnchorPane fx:id="teaPane" prefHeight="183.0" prefWidth="708.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                                  <children>
-                                    <ScrollPane prefHeight="200.0" prefWidth="708.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" fitToWidth="true" fitToHeight="true">
+                                    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" prefHeight="200.0" prefWidth="708.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <content>
-                                          <GridPane fx:id="foodCategoryGridPane" prefHeight="55.0" prefWidth="132.0">
+                                          <GridPane fx:id="foodCategoryGridPane" hgap="20.0" prefHeight="108.0" prefWidth="414.0" vgap="20.0">
                                             <columnConstraints>
                                               <ColumnConstraints hgrow="ALWAYS" percentWidth="25" />
                                             </columnConstraints>
+                                             <padding>
+                                                <Insets bottom="10.0" left="20.0" top="10.0" />
+                                             </padding>
                                           </GridPane>
                                        </content>
                                     </ScrollPane>
