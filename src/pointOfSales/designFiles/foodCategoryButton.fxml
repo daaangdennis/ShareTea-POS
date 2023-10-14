@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToggleButton?>
 
 
-<Button mnemonicParsing="false" styleClass="food-category-button" stylesheets="@../stylesheets/style.css" text="Button" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<ToggleButton mnemonicParsing="false" styleClass="food-category-button" stylesheets="@../stylesheets/style.css" text="ToggleButton" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" />
