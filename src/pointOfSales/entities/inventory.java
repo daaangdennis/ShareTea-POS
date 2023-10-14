@@ -46,7 +46,7 @@ public class inventory {
             PreparedStatement statement = conn.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             int id = -1;
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 id = resultSet.getInt("max") + 1;
             }
 
@@ -105,7 +105,7 @@ public class inventory {
                 String name = resultSet.getString("name");
                 String quantity = resultSet.getInt("quantity") + "";
                 String update = resultSet.getDate("last_updated") + "";
-                
+
                 inventory_array.get(0).add(id);
                 inventory_array.get(1).add(name);
                 inventory_array.get(2).add(quantity);
@@ -116,14 +116,14 @@ public class inventory {
         }
         return inventory_array;
     }
-    
-    public static void deleteInv(Connection conn, String inventoryName){
+
+    public static void deleteInv(Connection conn, String inventoryName) {
         String updateQuery = "DELETE FROM inventory WHERE name = ?";
         try {
             PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
             updateStatement.setString(1, inventoryName);
             int count = updateStatement.executeUpdate();
-            if(count > 0){
+            if (count > 0) {
                 System.out.println("Deleted item.");
             }
         } catch (Exception e) {
@@ -149,7 +149,7 @@ public class inventory {
             updateDateStatement.setDate(1, currentDateSql);
             updateDateStatement.setString(2, inventoryName);
             int count = updateStatement.executeUpdate();
-            if(count < 1){
+            if (count < 1) {
                 createInventory(conn, inventoryName, inventoryNumber);
             }
             updateDateStatement.executeUpdate();
@@ -158,4 +158,5 @@ public class inventory {
                     "Error createOrder(): Name: " + e.getClass().getName() + " , Message: " + e.getMessage());
         }
     }
+
 }

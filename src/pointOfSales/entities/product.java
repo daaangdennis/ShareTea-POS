@@ -1,4 +1,5 @@
 package pointOfSales.entities;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Connection;
@@ -6,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 
 public class product {
     String Name = null;
@@ -68,7 +68,6 @@ public class product {
         return category_array;
     }
 
-
     public static ArrayList<ArrayList<String>> getProductInfo(Connection conn) {
         ArrayList<ArrayList<String>> product_info = new ArrayList<>();
         ArrayList<String> id_array = new ArrayList<>();
@@ -129,14 +128,14 @@ public class product {
         return productPrice_array;
     }
 
-    public static void updateAddProduct(Connection conn, String name, String category , Double price) {
+    public static void updateAddProduct(Connection conn, String name, String category, Double price) {
         String updateQuery = "UPDATE product SET price = ? WHERE name = ?";
         try {
             PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
             updateStatement.setDouble(1, price);
             updateStatement.setString(2, name);
             int count = updateStatement.executeUpdate();
-            if(count < 1){
+            if (count < 1) {
                 product.createProduct(conn, name, category, price);
             }
         } catch (Exception e) {
@@ -145,18 +144,17 @@ public class product {
         }
     }
 
-    public static void deletePro(Connection conn, String productName){
+    public static void deletePro(Connection conn, String productName) {
         String updateQuery = "DELETE FROM product WHERE name = ?";
         try {
             PreparedStatement updateStatement = conn.prepareStatement(updateQuery);
             updateStatement.setString(1, productName);
             int count = updateStatement.executeUpdate();
-            if(count > 0){
+            if (count > 0) {
                 System.out.println("Deleted product.");
             }
         } catch (Exception e) {
-            System.out.println(
-                    "Error");
+            System.out.println("Error");
         }
     }
 

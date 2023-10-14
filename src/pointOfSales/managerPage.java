@@ -7,17 +7,19 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 public class managerPage {
-    
-    private static sceneController controller;
-    public managerPage(){}
 
-    public static void setController(sceneController ctrl){
+    private static sceneController controller;
+
+    public managerPage() {
+    }
+
+    public static void setController(sceneController ctrl) {
         controller = ctrl;
     }
 
-    public static Scene getScene(){
-        
-        try{
+    public static Scene getScene() {
+
+        try {
             FXMLLoader loader = new FXMLLoader(orderPage.class.getResource("designFiles/manager.fxml"));
             Parent root2 = loader.load();
             // double screenWidth = Screen.getPrimary().getBounds().getWidth();
@@ -26,10 +28,10 @@ public class managerPage {
             managerPageController managerCtrl = loader.getController();
             managerCtrl.setController(controller);
             return managerOrderScene;
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
+
 }
