@@ -1,6 +1,7 @@
 package pointOfSales;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.event.ActionEvent;
 import pointOfSales.services.SystemFunctions;
@@ -45,6 +46,14 @@ public class loginPageController {
     }
 
     @FXML
+    private void handleNumberButtonClick(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        String buttonName = clickedButton.getId();
+        char value = buttonName.charAt(buttonName.length() - 1);
+        passwordField.appendText(String.valueOf(value));
+    }
+
+    @FXML
     private void handleDelButtonClick(ActionEvent event) {
         passwordField.deleteText(passwordField.getLength() - 1, passwordField.getLength());
     }
@@ -59,14 +68,14 @@ public class loginPageController {
         // Run function to check if the password is correct
         ArrayList<String> values = SystemFunctions.verify(passwordField.getText());
 
-        if (values.get(2).equals("CASHIER")) {
+        if (values.size() > 0 && values.get(2).equals("CASHIER")) {
             // Call Cashier Switch
             setFirstName(values.get(0));
             setLastName(values.get(1));
             setPosition(values.get(2));
             orderPage.setController(mySceneController);
             mySceneController.changeScene(orderPage.getScene());
-        } else if (values.get(2).equals("MANAGER")) {
+        } else if (values.size() > 0 && values.get(2).equals("MANAGER")) {
             // Call Manager Switch
             setFirstName(values.get(0));
             setLastName(values.get(1));

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
@@ -16,6 +17,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.layout.AnchorPane;
@@ -33,7 +36,7 @@ public class orderPageController implements Initializable {
     private sceneController sceneCtrl;
 
     @FXML
-    private GridPane menuItemsGridPane;
+    public GridPane menuItemsGridPane;
     @FXML
     private GridPane foodCategoryGridPane;
     @FXML
@@ -74,6 +77,7 @@ public class orderPageController implements Initializable {
     private ObservableList<Object[]> data = FXCollections.observableArrayList();
     private Double foodLabelCost = 0.0;
     public ArrayList<orderedProduct> items = new ArrayList<>();
+    public ArrayList<String> categories = new ArrayList<>();
     public Map<Button, Label> buttonLabelMap = new HashMap<>();
     public Map<Button, Label> buttonCostMap = new HashMap<>();
     public Map<Button, String> buttonIdMap = new HashMap<>();
@@ -104,14 +108,6 @@ public class orderPageController implements Initializable {
                 return new SimpleStringProperty("price");
             }
         });
-
-        ToggleButton milkButton = (ToggleButton) teaPane.lookup("#milkTeaButton");
-        ToggleButton brewedButton = (ToggleButton) teaPane.lookup("#brewedTeaButton");
-        ToggleButton fruitButton = (ToggleButton) teaPane.lookup("#fruitTeaButton");
-        ToggleButton iceBlendButton = (ToggleButton) teaPane.lookup("#iceBlendedButton");
-        ToggleButton mojitoButton = (ToggleButton) teaPane.lookup("#teaMojitoButton");
-        ToggleButton creamButton = (ToggleButton) teaPane.lookup("#creamaButton");
-        teaGroup.getToggles().addAll(milkButton, brewedButton, fruitButton, iceBlendButton, mojitoButton, creamButton);
 
         ToggleButton toggleButton1 = (ToggleButton) sugarPane.lookup("#hundredSugar");
         ToggleButton toggleButton2 = (ToggleButton) sugarPane.lookup("#fiftySugar");
@@ -180,6 +176,41 @@ public class orderPageController implements Initializable {
     // Possible implementation: add from columns until num of categories.
     // Do not forget about the sidebar button
     private void setUpTeaPane() {
+        int numButtons = 1;
+        categories.clear();
+        categories = SystemFunctions.getCategories();
+        numButtons = categories.size();
+        foodCategoryGridPane.getChildren().clear();
+
+        int index = 0;
+        int swapper = 0;
+        for (int i = 0; i < numButtons; i++) {
+            try {
+                FXMLLoader loader2 = new FXMLLoader(getClass().getResource("designFiles/foodCategoryButton.fxml"));
+                Node buttonNode = loader2.load();
+                Button button = (Button) buttonNode.lookup("#categoryButton");
+                button.setText(categories.get(i));
+
+                GridPane.setRowIndex(buttonNode, swapper);
+                GridPane.setColumnIndex(buttonNode, index);
+
+                // foodCategoryGridPane.add(buttonNode, index, swapper);
+                foodCategoryGridPane.getChildren().add(buttonNode);
+                GridPane.setHalignment(buttonNode, HPos.CENTER);
+                // Set Toggle Group to Tea Group When they become togglebuttons
+                if (swapper == 1) {
+                    swapper = 0;
+                    index++;
+                } else if (swapper == 0) {
+                    swapper = 1;
+                }
+
+                foodItemButtonController buttonController = loader2.getController();
+                buttonController.setOrderControl(this);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
     }
     /* #################UNDERCONSTRUCTION#################### */

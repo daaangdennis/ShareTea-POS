@@ -16,6 +16,8 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.layout.AnchorPane;
@@ -33,7 +35,9 @@ public class managerPageController implements Initializable {
     private sceneController sceneCtrl;
 
     @FXML
-    private GridPane menuItemsGridPane;
+    public GridPane menuItemsGridPane;
+    @FXML
+    private GridPane foodCategoryGridPane;
     @FXML
     private TableView<Object[]> checkoutTable;
     @FXML
@@ -89,6 +93,8 @@ public class managerPageController implements Initializable {
     private AnchorPane inventoryPane;
     @FXML
     private AnchorPane editProductPage;
+    @FXML
+    private AnchorPane statisticsPage;
 
     @FXML
     private TextArea additionalNotes;
@@ -105,6 +111,7 @@ public class managerPageController implements Initializable {
     private ObservableList<Object[]> productData = FXCollections.observableArrayList();
     private Double foodLabelCost = 0.0;
     public ArrayList<orderedProduct> items = new ArrayList<>();
+    public ArrayList<String> categories = new ArrayList<>();
     public Map<Button, Label> buttonLabelMap = new HashMap<>();
     public Map<Button, Label> buttonCostMap = new HashMap<>();
     public Map<Button, String> buttonIdMap = new HashMap<>();
@@ -136,14 +143,6 @@ public class managerPageController implements Initializable {
             }
         });
 
-        ToggleButton milkButton = (ToggleButton) teaPane.lookup("#milkTeaButton");
-        ToggleButton brewedButton = (ToggleButton) teaPane.lookup("#brewedTeaButton");
-        ToggleButton fruitButton = (ToggleButton) teaPane.lookup("#fruitTeaButton");
-        ToggleButton iceBlendButton = (ToggleButton) teaPane.lookup("#iceBlendedButton");
-        ToggleButton mojitoButton = (ToggleButton) teaPane.lookup("#teaMojitoButton");
-        ToggleButton creamButton = (ToggleButton) teaPane.lookup("#creamaButton");
-        teaGroup.getToggles().addAll(milkButton, brewedButton, fruitButton, iceBlendButton, mojitoButton, creamButton);
-
         ToggleButton toggleButton1 = (ToggleButton) sugarPane.lookup("#hundredSugar");
         ToggleButton toggleButton2 = (ToggleButton) sugarPane.lookup("#fiftySugar");
         ToggleButton toggleButton3 = (ToggleButton) sugarPane.lookup("#noSugar");
@@ -163,6 +162,7 @@ public class managerPageController implements Initializable {
         Label orderNumber = (Label) orderInfoPane.lookup("#orderNumberLabel");
         orderNumber.setText("Order #" + addOrderFull.nextOrderID());
         employPosition = loginPageController.getPosition();
+        setUpTeaPane();
     }
 
     public TableView<Object[]> getTable() {
@@ -203,83 +203,131 @@ public class managerPageController implements Initializable {
         // else if(pressedButton.getId().equals("logoutButton"))
     }
 
-    @FXML
-    private void addButtons(ActionEvent event) {
-        int num_buttons = 1;
-        int indexCount = 0;
-        ToggleButton sourceButton = (ToggleButton) event.getSource();
-        if (!sourceButton.isSelected()) {
-            menuItemsGridPane.getChildren().clear();
-            return;
-        }
-        // if milktea
-        ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
-        if (sourceButton.getText().equals("Milk Tea")) {
-            results = SystemFunctions.productsAndPriceByCategory("Milk Tea");
-            num_buttons = results.get(0).size();
-        }
-        // if brewedtea
-        if (sourceButton.getText().equals("Brewed Tea")) {
-            results = SystemFunctions.productsAndPriceByCategory("Brewed Tea");
-            num_buttons = results.size();
-        }
-        // if fruittea
-        if (sourceButton.getText().equals("Fruit Tea")) {
-            results = SystemFunctions.productsAndPriceByCategory("Fruit Tea");
-            num_buttons = results.size();
-        }
-        // if iceblended
-        if (sourceButton.getText().equals("Ice Blended")) {
-            results = SystemFunctions.productsAndPriceByCategory("Ice Blended");
-            num_buttons = results.size();
-        }
-        // if tea mojito
-        if (sourceButton.getText().equals("Tea Mojito")) {
-            results = SystemFunctions.productsAndPriceByCategory("Tea Mojito");
-            num_buttons = results.size();
-        }
-        // if creama
-        if (sourceButton.getText().equals("Creama")) {
-            results = SystemFunctions.productsAndPriceByCategory("Creama");
-            num_buttons = results.size();
-        }
-        menuItemsGridPane.getChildren().clear();
+    /* #################UNDERCONSTRUCTION#################### */
+    // This function needs to grab the gridpane @foodCategoryGridPane
+    // to add categories gained from SystemFunctions.getCategories()
+    // There should only be 2 rows but infinite columns
+    // Possible implementation: add from columns until num of categories.
+    // Do not forget about the sidebar button
+    private void setUpTeaPane() {
+        int numButtons = 1;
+        categories.clear();
+        categories = SystemFunctions.getCategories();
+        numButtons = categories.size();
+        foodCategoryGridPane.getChildren().clear();
 
-        int val1 = 1;
-        int val2 = 1;
-        for (int i = 0; i < num_buttons; i++) {
+        int index = 0;
+        int swapper = 0;
+        for (int i = 0; i < numButtons; i++) {
             try {
-                FXMLLoader loader2 = new FXMLLoader(getClass().getResource("designFiles/menuItemButton.fxml"));
+                FXMLLoader loader2 = new FXMLLoader(getClass().getResource("designFiles/foodCategoryButton.fxml"));
                 Node buttonNode = loader2.load();
-                Button button = (Button) buttonNode.lookup("#subButton");
-                Label label = (Label) loader2.getNamespace().get("foodItemLabel");
-                label.setText(results.get(0).get(indexCount));
-                Label priceLabel = (Label) loader2.getNamespace().get("priceLabel");
-                priceLabel.setText(String.format("Price: $%.2f", Double.parseDouble(results.get(1).get(indexCount))));
+                Button button = (Button) buttonNode.lookup("#categoryButton");
+                button.setText(categories.get(i));
 
-                GridPane.setRowIndex(buttonNode, val1);
-                GridPane.setColumnIndex(buttonNode, val2);
+                GridPane.setRowIndex(buttonNode, swapper);
+                GridPane.setColumnIndex(buttonNode, index);
 
-                val2++;
-                if (val2 == 4) {
-                    val1++;
-                    val2 = 1;
+                // foodCategoryGridPane.add(buttonNode, index, swapper);
+                foodCategoryGridPane.getChildren().add(buttonNode);
+                GridPane.setHalignment(buttonNode, HPos.CENTER);
+                // Set Toggle Group to Tea Group When they become togglebuttons
+                if (swapper == 1) {
+                    swapper = 0;
+                    index++;
+                } else if (swapper == 0) {
+                    swapper = 1;
                 }
-                String pid = results.get(2).get(indexCount);
-                buttonLabelMap.put(button, label);
-                buttonCostMap.put(button, priceLabel);
-                buttonIdMap.put(button, pid);
-                menuItemsGridPane.getChildren().add(buttonNode);
-                menuItemButtonController buttonController = loader2.getController();
-                buttonController.setManagerControl(this);
-                indexCount = indexCount + 1;
 
+                foodItemButtonController buttonController = loader2.getController();
+                buttonController.setManagerControl(this);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
     }
+    /* #################UNDERCONSTRUCTION#################### */
+
+    // @FXML
+    // private void addButtons(ActionEvent event) {
+    // int num_buttons = 1;
+    // int indexCount = 0;
+    // ToggleButton sourceButton = (ToggleButton) event.getSource();
+    // if (!sourceButton.isSelected()) {
+    // menuItemsGridPane.getChildren().clear();
+    // return;
+    // }
+    // // if milktea
+    // ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
+    // if (sourceButton.getText().equals("Milk Tea")) {
+    // results = SystemFunctions.productsAndPriceByCategory("Milk Tea");
+    // num_buttons = results.get(0).size();
+    // }
+    // // if brewedtea
+    // if (sourceButton.getText().equals("Brewed Tea")) {
+    // results = SystemFunctions.productsAndPriceByCategory("Brewed Tea");
+    // num_buttons = results.size();
+    // }
+    // // if fruittea
+    // if (sourceButton.getText().equals("Fruit Tea")) {
+    // results = SystemFunctions.productsAndPriceByCategory("Fruit Tea");
+    // num_buttons = results.size();
+    // }
+    // // if iceblended
+    // if (sourceButton.getText().equals("Ice Blended")) {
+    // results = SystemFunctions.productsAndPriceByCategory("Ice Blended");
+    // num_buttons = results.size();
+    // }
+    // // if tea mojito
+    // if (sourceButton.getText().equals("Tea Mojito")) {
+    // results = SystemFunctions.productsAndPriceByCategory("Tea Mojito");
+    // num_buttons = results.size();
+    // }
+    // // if creama
+    // if (sourceButton.getText().equals("Creama")) {
+    // results = SystemFunctions.productsAndPriceByCategory("Creama");
+    // num_buttons = results.size();
+    // }
+    // menuItemsGridPane.getChildren().clear();
+
+    // int val1 = 1;
+    // int val2 = 1;
+    // for (int i = 0; i < num_buttons; i++) {
+    // try {
+    // FXMLLoader loader2 = new
+    // FXMLLoader(getClass().getResource("designFiles/menuItemButton.fxml"));
+    // Node buttonNode = loader2.load();
+    // Button button = (Button) buttonNode.lookup("#subButton");
+    // Label label = (Label) loader2.getNamespace().get("foodItemLabel");
+    // label.setText(results.get(0).get(indexCount));
+    // Label priceLabel = (Label) loader2.getNamespace().get("priceLabel");
+    // priceLabel.setText(String.format("Price: $%.2f",
+    // Double.parseDouble(results.get(1).get(indexCount))));
+
+    // GridPane.setRowIndex(buttonNode, val1);
+    // GridPane.setColumnIndex(buttonNode, val2);
+
+    // val2++;
+    // if (val2 == 4) {
+    // val1++;
+    // val2 = 1;
+    // }
+    // String pid = results.get(2).get(indexCount);
+    // buttonLabelMap.put(button, label);
+    // buttonCostMap.put(button, priceLabel);
+    // buttonIdMap.put(button, pid);
+    // menuItemsGridPane.getChildren().add(buttonNode);
+    // menuItemButtonController buttonController = loader2.getController();
+    // buttonController.setManagerControl(this);
+    // indexCount = indexCount + 1;
+
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
+    // }
+
+    // }
 
     @FXML
     private void handleCloseButton(ActionEvent event) {
@@ -534,6 +582,7 @@ public class managerPageController implements Initializable {
         } else {
             inventoryData.clear();
             orderInfoPane.setVisible(false);
+            statisticsPage.setVisible(false);
             menuItems.setVisible(false);
             // Toggle Visibility for editInventory Page
             editInventoryPage.setVisible(true);
@@ -644,6 +693,10 @@ public class managerPageController implements Initializable {
         if (menuItems.isVisible()) {
             return;
         }
+        menuItemsGridPane.getChildren().clear();
+        foodCategoryGridPane.getChildren().clear();
+        setUpTeaPane();
+        statisticsPage.setVisible(false);
         editInventoryPage.setVisible(false);
         editMenuPage.setVisible(false);
         orderCustomizationMenu.setVisible(false);
@@ -762,6 +815,16 @@ public class managerPageController implements Initializable {
         name.clear();
         category.clear();
         price.clear();
+    }
+
+    @FXML
+    private void handleStatPage() {
+        editInventoryPage.setVisible(false);
+        editMenuPage.setVisible(false);
+        orderCustomizationMenu.setVisible(false);
+        orderInfoPane.setVisible(false);
+        menuItems.setVisible(false);
+        statisticsPage.setVisible(true);
     }
 
 }
