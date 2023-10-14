@@ -33,7 +33,7 @@ public class foodItemButtonController {
         // menuItemsGridPane.getChildren().clear();
         // return;
         // }
-        Button sourceButton = (Button) event.getSource();
+        ToggleButton sourceButton = (ToggleButton) event.getSource();
 
         ArrayList<ArrayList<String>> results = new ArrayList<ArrayList<String>>();
         results = SystemFunctions.productsAndPriceByCategory(sourceButton.getText());

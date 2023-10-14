@@ -3,4 +3,4 @@
 <?import javafx.scene.control.ToggleButton?>
 
 
-<ToggleButton mnemonicParsing="false" styleClass="food-category-button" stylesheets="@../stylesheets/style.css" text="ToggleButton" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<ToggleButton fx:id="categoryButton" mnemonicParsing="false" onAction="#handleProductButton" styleClass="food-category-button" stylesheets="@../stylesheets/style.css" text="ToggleButton" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pointOfSales.foodItemButtonController"/>

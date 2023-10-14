@@ -222,7 +222,7 @@ public class managerPageController implements Initializable {
             try {
                 FXMLLoader loader2 = new FXMLLoader(getClass().getResource("designFiles/foodCategoryButton.fxml"));
                 Node buttonNode = loader2.load();
-                Button button = (Button) buttonNode.lookup("#categoryButton");
+                ToggleButton button = (ToggleButton) buttonNode.lookup("#categoryButton");
                 button.setText(categories.get(i));
 
                 GridPane.setRowIndex(buttonNode, swapper);
@@ -232,6 +232,7 @@ public class managerPageController implements Initializable {
                 foodCategoryGridPane.getChildren().add(buttonNode);
                 GridPane.setHalignment(buttonNode, HPos.CENTER);
                 // Set Toggle Group to Tea Group When they become togglebuttons
+                button.setToggleGroup(teaGroup);
                 if (swapper == 1) {
                     swapper = 0;
                     index++;
