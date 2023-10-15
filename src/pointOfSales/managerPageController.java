@@ -71,22 +71,21 @@ public class managerPageController implements Initializable {
     private TableColumn<Object[], String> menuCategoryColumn;
     @FXML
     private TableColumn<Object[], String> menuPriceColumn;
-    
+
     @FXML
     private TableView<Object[]> excessReportTable;
-    
+
     @FXML
     private TableColumn<Object[], String> excessIDColumn;
-    
+
     @FXML
     private TableColumn<Object[], String> excessNameColumn;
-    
+
     @FXML
     private TableColumn<Object[], String> excessStockUsedColumn;
-     
+
     @FXML
     private TableColumn<Object[], String> excessCurrentStockColumn;
-     
 
     @FXML
     private TableView<Object[]> popularPairsTable;
@@ -134,10 +133,10 @@ public class managerPageController implements Initializable {
     private DatePicker saleStartDate;
     @FXML
     private DatePicker saleEndDate;
-    /*
-     * @FXML
-     * private DatePicker excessTimestamp;
-     */
+    
+    @FXML
+    private DatePicker excessTimestamp;
+    
 
     private ToggleGroup teaGroup = new ToggleGroup();
     private ToggleGroup sugarGroup = new ToggleGroup();
