@@ -71,7 +71,7 @@ public class managerPageController implements Initializable {
     private TableColumn<Object[], String> menuCategoryColumn;
     @FXML
     private TableColumn<Object[], String> menuPriceColumn;
-
+    /* 
     @FXML
     private TableColumn<Object[], String> excessReportTable;
     @FXML
@@ -81,7 +81,7 @@ public class managerPageController implements Initializable {
     @FXML
     private TableColumn<Object[], String> excessStockUsedColumn;
     @FXML
-    private TableColumn<Object[], String> excessCurrentStockColumn;
+    private TableColumn<Object[], String> excessCurrentStockColumn;*/
 
     @FXML
     private AnchorPane menuItems;
@@ -122,8 +122,8 @@ public class managerPageController implements Initializable {
     private DatePicker saleStartDate;
     @FXML
     private DatePicker saleEndDate;
-    @FXML
-    private DatePicker excessTimestamp;
+    /*@FXML
+    private DatePicker excessTimestamp;*/
 
     private ToggleGroup teaGroup = new ToggleGroup();
     private ToggleGroup sugarGroup = new ToggleGroup();
@@ -851,7 +851,7 @@ public class managerPageController implements Initializable {
         orderInfoPane.setVisible(false);
         menuItems.setVisible(false);
         statisticsPage.setVisible(true);
-        initializeExcessTable();
+        //initializeExcessTable();
 
     }
 
@@ -865,7 +865,7 @@ public class managerPageController implements Initializable {
 
         ArrayList<ArrayList<Object>> values = new ArrayList<>();
         values = SystemFunctions.getProductSales(startText, endText);
-        ArrayList<String> uniqueCategory = new ArrayList<>();
+        /*ArrayList<String> uniqueCategory = new ArrayList<>();
         for (int i = 0; i < values.get(0).size(); i++) {
             uniqueCategory.add(values.get(0).get(i).toString());
         }
@@ -873,17 +873,19 @@ public class managerPageController implements Initializable {
         xAxis.setCategories(FXCollections.observableArrayList(uniqueCategory));
         // NumberAxis yAxis = (NumberAxis) salesReportGraph.getYAxis();
         // yAxis.setLowerBound(0);
-        // yAxis.setUpperBound(1000);
+        // yAxis.setUpperBound(1000);*/
         try {
-
+            XYChart.Series<String, Integer> series = new XYChart.Series<>();
+            
             for (int i = 0; i < values.get(0).size(); i++) {
                 String products = values.get(0).get(i).toString();
                 int itemsSold = Integer.parseInt(values.get(1).get(i).toString());
-                XYChart.Series<String, Integer> series = new XYChart.Series<>();
+                //XYChart.Series<String, Integer> series = new XYChart.Series<>();
                 series.getData().add(new XYChart.Data<>(products, itemsSold));
-                series.setName(products);
-                salesReportGraph.getData().add(series);
+                //series.setName(products);
+                //salesReportGraph.getData().add(series);
             }
+            salesReportGraph.getData().add(series);
 
         } catch (NumberFormatException e) {
             System.out.println("Error in formatting info in @handleSalesReport");
@@ -894,6 +896,7 @@ public class managerPageController implements Initializable {
     private void handleRestockReport() {
     }
 
+    /* 
     @FXML
     private void handleExcessReport() {
         excessData.clear();
@@ -938,6 +941,6 @@ public class managerPageController implements Initializable {
                 return new SimpleStringProperty("Current Stock");
             }
         });
-    }
+    }*/
 
 }
