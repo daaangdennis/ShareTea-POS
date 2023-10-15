@@ -1,4 +1,5 @@
-package entities;
+package pointOfSales.entities;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Connection;
@@ -10,10 +11,9 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.text.DecimalFormat;
 
-
 public class sales {
-    
-    public static ArrayList<ArrayList<Object>> ProductSales(Connection conn, String startDate, String endDate){
+
+    public static ArrayList<ArrayList<Object>> ProductSales(Connection conn, String startDate, String endDate) {
         ArrayList<ArrayList<Object>> productSaleList = new ArrayList<>();
         ArrayList<Object> nameList = new ArrayList<>();
         ArrayList<Object> soldList = new ArrayList<>();
@@ -34,14 +34,14 @@ public class sales {
                 productSaleList.get(1).add(sold);
             }
             return productSaleList;
-            
+
         } catch (Exception e) {
             System.out.println("Couldn't display product sales.");
         }
         return productSaleList;
     }
 
-    public static ArrayList<ArrayList<Object>> lowStock(Connection conn){
+    public static ArrayList<ArrayList<Object>> lowStock(Connection conn) {
         ArrayList<ArrayList<Object>> lowStockList = new ArrayList<>();
         ArrayList<Object> nameList = new ArrayList<>();
         ArrayList<Object> lowList = new ArrayList<>();
@@ -60,14 +60,14 @@ public class sales {
                 lowStockList.get(1).add(num);
             }
             return lowStockList;
-            
+
         } catch (Exception e) {
             System.out.println("Couldn't display low stock.");
         }
         return lowStockList;
     }
 
-    public static ArrayList<ArrayList<Object>> excessStock(Connection conn, String startDate){
+    public static ArrayList<ArrayList<Object>> excessStock(Connection conn, String startDate) {
         ArrayList<ArrayList<Object>> inventoryUsage = new ArrayList<>();
         ArrayList<Object> nameList = new ArrayList<>();
         ArrayList<Object> usedList = new ArrayList<>();
@@ -84,14 +84,14 @@ public class sales {
                 String name = resultSet.getString("inventory_name");
                 Double used = resultSet.getInt("quantity_used") * 1.00;
                 Double current = resultSet.getInt("current_quantity") * 1.00;
-                Double percentUsed =  used / (current+used);     
+                Double percentUsed = used / (current + used);
                 percentUsed = Math.floor(percentUsed * 100) / 100;
 
                 inventoryUsage.get(0).add(name);
                 inventoryUsage.get(1).add(percentUsed);
             }
             return inventoryUsage;
-            
+
         } catch (Exception e) {
             System.out.println("Couldn't display excess stock.");
         }
