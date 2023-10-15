@@ -84,6 +84,13 @@ public class managerPageController implements Initializable {
     // private TableColumn<Object[], String> excessCurrentStockColumn;
 
     @FXML
+    private TableView<Object[]> popularPairsTable;
+    @FXML
+    private TableColumn<Object[], String> rankingColumn;
+    @FXML
+    private TableColumn<Object[], String> pairingColumn;
+
+    @FXML
     private AnchorPane menuItems;
     @FXML
     private AnchorPane orderCustomizationMenu;
@@ -901,46 +908,46 @@ public class managerPageController implements Initializable {
         // ArrayList<ArrayList<Object>> excessStock = new ArrayList<>();
         // excessStock = SystemFunctions.getExcessStock(excessTime);
         // for (int i = 0; i < excessStock.get(0).size(); i++) {
-        //     excessData.add(new Object[] { excessStock.get(0) });
+        // excessData.add(new Object[] { excessStock.get(0) });
         // }
         // inventoryTable.setItems(inventoryData);
     }
 
-    private void initializeExcessTable() {
-        // excessIDColumn.setCellValueFactory(cellData -> {
-        // if (cellData.getValue() != null && cellData.getValue().length > 0) {
-        // return new SimpleStringProperty(cellData.getValue()[0].toString());
-        // } else {
-        // return new SimpleStringProperty("Inventory ID");
-        // }
-        // });
+    private void initializeExcessTable(){
+    // excessIDColumn.setCellValueFactory(cellData -> {
+    // if (cellData.getValue() != null && cellData.getValue().length > 0) {
+    // return new SimpleStringProperty(cellData.getValue()[0].toString());
+    // } else {
+    // return new SimpleStringProperty("Inventory ID");
+    // }
+    // });
 
-        // excessNameColumn.setCellValueFactory(cellData -> {
-        // if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use
-        // index 1 for quantity
-        // return new SimpleStringProperty(cellData.getValue()[1].toString());
-        // } else {
-        // return new SimpleStringProperty("Item Name");
-        // }
-        // });
+    // excessNameColumn.setCellValueFactory(cellData -> {
+    // if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use
+    // index 1 for quantity
+    // return new SimpleStringProperty(cellData.getValue()[1].toString());
+    // } else {
+    // return new SimpleStringProperty("Item Name");
+    // }
+    // });
 
-        // excessStockUsedColumn.setCellValueFactory(cellData -> {
-        // if (cellData.getValue() != null && cellData.getValue().length > 2) { // Use
-        // index 2 for price
-        // return new SimpleStringProperty(cellData.getValue()[2].toString());
-        // } else {
-        // return new SimpleStringProperty("Stock Used");
-        // }
-        // });
+    // excessStockUsedColumn.setCellValueFactory(cellData -> {
+    // if (cellData.getValue() != null && cellData.getValue().length > 2) { // Use
+    // index 2 for price
+    // return new SimpleStringProperty(cellData.getValue()[2].toString());
+    // } else {
+    // return new SimpleStringProperty("Stock Used");
+    // }
+    // });
 
-        // excessCurrentStockColumn.setCellValueFactory(cellData -> {
-        // if (cellData.getValue() != null && cellData.getValue().length > 3) { // Use
-        // index 2 for price
-        // return new SimpleStringProperty(cellData.getValue()[3].toString());
-        // } else {
-        // return new SimpleStringProperty("Current Stock");
-        // }
-        // });
+    // excessCurrentStockColumn.setCellValueFactory(cellData -> {
+    // if (cellData.getValue() != null && cellData.getValue().length > 3) { // Use
+    // index 2 for price
+    // return new SimpleStringProperty(cellData.getValue
+    }
+
+    private void initializePairTable() {
+
     }
 
 }

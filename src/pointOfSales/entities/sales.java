@@ -97,7 +97,7 @@ public class sales {
         return inventoryUsage;
     }
 
-    public static ArrayList<ArrayList<Object>> commonPairs(Connection conn, String startDate, String endDate){
+    public static ArrayList<ArrayList<Object>> commonPairs(Connection conn, String startDate, String endDate) {
         ArrayList<ArrayList<Object>> pairList = new ArrayList<>();
         ArrayList<Object> product1 = new ArrayList<>();
         ArrayList<Object> product2 = new ArrayList<>();
@@ -120,10 +120,10 @@ public class sales {
                 pairList.get(0).add(name2);
                 pairList.get(1).add(name2);
                 pairList.get(2).add(combination_count);
-                
+
             }
             return pairList;
-            
+
         } catch (Exception e) {
             System.out.println("Couldn't display common pairings.");
         }
