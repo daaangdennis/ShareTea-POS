@@ -86,9 +86,10 @@ public class sales {
                 Double current = resultSet.getInt("current_quantity") * 1.00;
                 Double percentUsed =  used / (current+used);     
                 percentUsed = Math.floor(percentUsed * 100) / 100;
-
-                inventoryUsage.get(0).add(name);
-                inventoryUsage.get(1).add(percentUsed);
+                if(percentUsed <= 0.10){
+                    inventoryUsage.get(0).add(name);
+                    inventoryUsage.get(1).add(percentUsed);
+                }
             }
             return inventoryUsage;
             
