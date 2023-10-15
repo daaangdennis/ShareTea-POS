@@ -49,7 +49,7 @@ public class sales {
         lowStockList.add(lowList);
 
         try {
-            String query = "SELECT (SELECT name FROM inventory WHERE inventory_id = inv.inventory_id), quantity AS remaining FROM inventory inv WHERE quantity < 25";
+            String query = "SELECT name, quantity AS remaining FROM inventory inv WHERE quantity < 25";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -86,10 +86,8 @@ public class sales {
                 Double current = resultSet.getInt("current_quantity") * 1.00;
                 Double percentUsed =  used / (current+used);     
                 percentUsed = Math.floor(percentUsed * 100) / 100;
-                if(percentUsed <= 0.10){
-                    inventoryUsage.get(0).add(name);
-                    inventoryUsage.get(1).add(percentUsed);
-                }
+                inventoryUsage.get(0).add(name);
+                inventoryUsage.get(1).add(percentUsed);
             }
             return inventoryUsage;
             
@@ -97,5 +95,38 @@ public class sales {
             System.out.println("Couldn't display excess stock.");
         }
         return inventoryUsage;
+    }
+
+    public static ArrayList<ArrayList<Object>> commonPairs(Connection conn, String startDate, String endDate){
+        ArrayList<ArrayList<Object>> pairList = new ArrayList<>();
+        ArrayList<Object> product1 = new ArrayList<>();
+        ArrayList<Object> product2 = new ArrayList<>();
+        ArrayList<Object> count = new ArrayList<>();
+        pairList.add(product1);
+        pairList.add(product2);
+        pairList.add(count);
+
+        try {
+            String query = "SELECT p1.name AS product1, p2.name AS product2, COUNT(DISTINCT op1.order_id) AS combination_count FROM order_product AS op1 JOIN order_product AS op2 ON op1.order_id = op2.order_id AND op1.product_id < op2.product_id JOIN orders AS o ON op1.order_id = o.order_id JOIN product AS p1 ON op1.product_id = p1.product_id JOIN product AS p2 ON op2.product_id = p2.product_id WHERE o.order_date >= ? AND o.order_date <= ? GROUP BY p1.name, p2.name ORDER BY combination_count desc";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setDate(1, Date.valueOf(startDate));
+            preparedStatement.setDate(2, Date.valueOf(endDate));
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String name1 = resultSet.getString("product1");
+                String name2 = resultSet.getString("product2");
+                Integer combination_count = resultSet.getInt("combination_count");
+                pairList.get(0).add(name2);
+                pairList.get(1).add(name2);
+                pairList.get(2).add(combination_count);
+                
+            }
+            return pairList;
+            
+        } catch (Exception e) {
+            System.out.println("Couldn't display common pairings.");
+        }
+        return pairList;
     }
 }

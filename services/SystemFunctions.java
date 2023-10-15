@@ -108,4 +108,10 @@ public class SystemFunctions {
         return sales.excessStock(conn, startDate);
     }
 
+    public static ArrayList<ArrayList<Object>> getPairs(String startDate, String endDate){
+        dbconnect dbconn = new dbconnect();
+        Connection conn = dbconn.conn;
+        return sales.commonPairs(conn, startDate, endDate);
+    }
+
 }
