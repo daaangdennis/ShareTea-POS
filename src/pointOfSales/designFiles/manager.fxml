@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.BarChart?>
@@ -26,13 +27,13 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../stylesheets/manager.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pointOfSales.managerPageController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../stylesheets/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pointOfSales.managerPageController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane layoutX="-1.0" prefHeight="773.0" prefWidth="1298.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <left>
-                  <AnchorPane prefHeight="200.0" prefWidth="128.0" styleClass="navbar" BorderPane.alignment="CENTER">
+                  <AnchorPane prefHeight="200.0" prefWidth="128.0" styleClass="navbar-background" BorderPane.alignment="CENTER">
                      <children>
                         <AnchorPane layoutX="-56.0" layoutY="95.0" prefHeight="720.0" prefWidth="144.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -45,7 +46,7 @@
                                     </ImageView>
                                  </children>
                               </AnchorPane>
-                              <Button fx:id="checkoutButton" contentDisplay="TOP" layoutX="9.0" layoutY="86.0" mnemonicParsing="false" onAction="#checkoutButton" prefHeight="114.0" prefWidth="112.0" styleClass="navbutton" text="Checkout" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
+                              <Button fx:id="checkoutButton" contentDisplay="TOP" layoutX="9.0" layoutY="86.0" mnemonicParsing="false" onAction="#checkoutButton" prefHeight="114.0" prefWidth="112.0" styleClass="navbar-button" text="Checkout" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
                                  <graphic>
                                     <ImageView fitHeight="77.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -60,7 +61,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="ordersButton" contentDisplay="TOP" layoutX="9.0" layoutY="213.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Orders" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
+                              <Button fx:id="ordersButton" contentDisplay="TOP" layoutX="9.0" layoutY="213.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="112.0" styleClass="navbar-button" text="Orders" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -75,7 +76,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="logoutButton" layoutX="26.0" layoutY="642.0" mnemonicParsing="false" onAction="#handleChangeScene" prefHeight="53.0" prefWidth="43.0" styleClass="navbutton">
+                              <Button fx:id="logoutButton" layoutX="26.0" layoutY="642.0" mnemonicParsing="false" onAction="#handleChangeScene" prefHeight="53.0" prefWidth="43.0" styleClass="navbar-button">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
@@ -87,7 +88,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="inventoryButton" contentDisplay="TOP" layoutX="9.0" layoutY="326.0" mnemonicParsing="false" onAction="#handleInventoryButton" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Inventory" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
+                              <Button fx:id="inventoryButton" contentDisplay="TOP" layoutX="9.0" layoutY="326.0" mnemonicParsing="false" onAction="#handleInventoryButton" prefHeight="92.0" prefWidth="112.0" styleClass="navbar-button" text="Inventory" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -104,7 +105,7 @@
                               </Button>
                            </children>
                         </AnchorPane>
-                        <Button fx:id="statisticsButton" contentDisplay="TOP" layoutX="9.0" layoutY="451.0" mnemonicParsing="false" onAction="#handleStatPage" prefHeight="92.0" prefWidth="112.0" styleClass="navbutton" text="Statistics" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
+                        <Button fx:id="statisticsButton" contentDisplay="TOP" layoutX="9.0" layoutY="451.0" mnemonicParsing="false" onAction="#handleStatPage" prefHeight="92.0" prefWidth="112.0" styleClass="navbar-button" text="Statistics" textFill="WHITE" AnchorPane.leftAnchor="8.0" AnchorPane.rightAnchor="8.0">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -125,7 +126,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="background" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="orderInfoPane" layoutX="588.0" layoutY="173.0" prefHeight="200.0" prefWidth="384.0" styleClass="right-sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="orderInfoPane" layoutX="588.0" layoutY="173.0" prefHeight="200.0" prefWidth="384.0" styleClass="right-sidebar-container" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="4.0" layoutY="4.0" prefHeight="47.0" prefWidth="380.0" styleClass="order-infobar" AnchorPane.bottomAnchor="671.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
@@ -151,26 +152,26 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
-                              <Label layoutX="14.0" layoutY="484.0" styleClass="right-sidebar-labels" text="Subtotal:" />
+                              <Label layoutX="14.0" layoutY="484.0" styleClass="red-main-labels" text="Subtotal:" />
                               <Line endX="271.0" endY="-1.0" layoutX="117.0" layoutY="549.0" startX="-113.0" startY="-1.0" style="-fx-stroke-dash-array: 7;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-                              <Label layoutX="14.0" layoutY="512.0" styleClass="right-sidebar-labels" text="Tax:" />
-                              <Label fx:id="checkoutSubTotal" layoutX="322.0" layoutY="484.0" styleClass="right-sidebar-labels" text="\$0.00" />
-                              <Label fx:id="checkoutTax" layoutX="322.0" layoutY="512.0" styleClass="right-sidebar-labels" text="\$0.00" />
-                              <Label layoutX="14.0" layoutY="555.0" styleClass="right-sidebar-labels" text="Total:" />
-                              <Label fx:id="checkoutTrueTotal" layoutX="322.0" layoutY="555.0" styleClass="right-sidebar-labels" text="\$0.00" />
-                              <Button fx:id="proceedButton" layoutX="35.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleProceedButton" prefHeight="38.0" prefWidth="319.0" styleClass="proceed-button" text="Proceed">
+                              <Label layoutX="14.0" layoutY="512.0" styleClass="red-main-labels" text="Tax:" />
+                              <Label fx:id="checkoutSubTotal" layoutX="322.0" layoutY="484.0" styleClass="red-main-labels" text="\$0.00" />
+                              <Label fx:id="checkoutTax" layoutX="322.0" layoutY="512.0" styleClass="red-main-labels" text="\$0.00" />
+                              <Label layoutX="14.0" layoutY="555.0" styleClass="red-main-labels" text="Total:" />
+                              <Label fx:id="checkoutTrueTotal" layoutX="322.0" layoutY="555.0" styleClass="red-main-labels" text="\$0.00" />
+                              <Button fx:id="proceedButton" layoutX="35.0" layoutY="601.0" mnemonicParsing="false" onAction="#handleProceedButton" prefHeight="38.0" prefWidth="319.0" styleClass="red-button" text="Proceed">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
-                              <Button fx:id="cancelButton" layoutX="35.0" layoutY="653.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="38.0" prefWidth="319.0" styleClass="cancel-button" text="Cancel">
+                              <Button fx:id="cancelButton" layoutX="35.0" layoutY="653.0" mnemonicParsing="false" onAction="#handleCancelButton" prefHeight="38.0" prefWidth="319.0" styleClass="white-button" text="Cancel">
                                  <cursor>
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </Button>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="menuItems" prefHeight="452.0" prefWidth="564.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="404.0" AnchorPane.topAnchor="20.0">
+                        <AnchorPane fx:id="menuItems" prefHeight="452.0" prefWidth="564.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="404.0" AnchorPane.topAnchor="20.0">
                            <children>
                               <ScrollPane fx:id="categoryItemsScrollPane" layoutY="189.0" prefHeight="459.0" prefWidth="708.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                  <content>
@@ -212,7 +213,11 @@
                                        </graphic>
                                     </Button>
                                     <Label fx:id="foodItemLabel" alignment="CENTER" layoutX="277.0" layoutY="12.0" prefHeight="30.0" prefWidth="210.0" styleClass="item-customization-labels" text="Food Item $0.00 " />
-                                    <Button fx:id="addItemButton" layoutX="637.0" layoutY="6.0" mnemonicParsing="false" onAction="#addItem" prefHeight="41.0" prefWidth="112.0" styleClass="add-button" text="Add Item" AnchorPane.rightAnchor="15.0" />
+                                    <Button fx:id="addItemButton" layoutX="637.0" layoutY="6.0" mnemonicParsing="false" onAction="#addItem" prefHeight="41.0" prefWidth="112.0" text="Add Item" AnchorPane.rightAnchor="15.0">
+                                       <styleClass>
+                                          <String fx:value="red-button" />
+                                          <String fx:value="add-button" />
+                                       </styleClass></Button>
                                  </children>
                               </AnchorPane>
                               <AnchorPane fx:id="sugarPane" layoutX="14.0" layoutY="63.0" prefHeight="200.0" prefWidth="366.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="387.0" AnchorPane.topAnchor="73.0">
@@ -314,17 +319,37 @@
                               </AnchorPane>
                               <AnchorPane fx:id="editProductPage" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="370.0">
                                  <children>
-                                    <Label layoutX="170.0" layoutY="60.0" styleClass="right-sidebar-labels" text="Product Name:" />
+                                    <Label layoutX="170.0" layoutY="60.0" styleClass="red-main-labels" text="Product Name:" />
                                     <TextField fx:id="productNameTextField" layoutX="317.0" layoutY="61.0" prefHeight="25.0" prefWidth="192.0" />
-                                    <Label layoutX="626.0" layoutY="60.0" styleClass="right-sidebar-labels" text="Category:" />
+                                    <Label layoutX="626.0" layoutY="60.0" styleClass="red-main-labels" text="Category:" />
                                     <TextField fx:id="stockTextField" layoutX="730.0" layoutY="61.0" />
-                                    <Label layoutX="223.0" layoutY="107.0" styleClass="right-sidebar-labels" text="Price ($):" />
+                                    <Label layoutX="223.0" layoutY="107.0" styleClass="red-main-labels" text="Price ($):" />
                                     <TextField fx:id="priceTextField" layoutX="317.0" layoutY="108.0" />
-                                    <Button fx:id="productAddButton" layoutX="275.0" layoutY="209.0" mnemonicParsing="false" onAction="#handleAddProduct" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Add" AnchorPane.bottomAnchor="60.0" />
-                                    <Button fx:id="productUpdateButton" layoutX="423.0" layoutY="209.0" mnemonicParsing="false" onAction="#handleAddProduct" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Update" AnchorPane.bottomAnchor="60.0" />
-                                    <Button fx:id="productClearButton" layoutX="571.0" layoutY="209.0" mnemonicParsing="false" onAction="#handleClearProduct" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Clear" AnchorPane.bottomAnchor="60.0" />
-                                    <Button fx:id="productDeleteButton" layoutX="719.0" layoutY="209.0" mnemonicParsing="false" onAction="#handleDeleteProduct" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Delete" AnchorPane.bottomAnchor="60.0" />
-                                    <Button fx:id="editInventoryButton" layoutX="958.0" layoutY="275.0" mnemonicParsing="false" onAction="#handleEditInventoryButton" prefHeight="41.0" prefWidth="140.0" styleClass="inventory-button" text="Edit Inventory" />
+                                    <Button fx:id="productAddButton" layoutX="275.0" layoutY="209.0" mnemonicParsing="false" onAction="#handleAddProduct" prefHeight="64.0" prefWidth="119.0" text="Add" AnchorPane.bottomAnchor="60.0">
+                                       <styleClass>
+                                          <String fx:value="inventory-button" />
+                                          <String fx:value="red-button" />
+                                       </styleClass></Button>
+                                    <Button fx:id="productUpdateButton" layoutX="423.0" layoutY="209.0" mnemonicParsing="false" onAction="#handleAddProduct" prefHeight="64.0" prefWidth="119.0" text="Update" AnchorPane.bottomAnchor="60.0">
+                                       <styleClass>
+                                          <String fx:value="inventory-button" />
+                                          <String fx:value="red-button" />
+                                       </styleClass></Button>
+                                    <Button fx:id="productClearButton" layoutX="571.0" layoutY="209.0" mnemonicParsing="false" onAction="#handleClearProduct" prefHeight="64.0" prefWidth="119.0" text="Clear" AnchorPane.bottomAnchor="60.0">
+                                       <styleClass>
+                                          <String fx:value="inventory-button" />
+                                          <String fx:value="red-button" />
+                                       </styleClass></Button>
+                                    <Button fx:id="productDeleteButton" layoutX="719.0" layoutY="209.0" mnemonicParsing="false" onAction="#handleDeleteProduct" prefHeight="64.0" prefWidth="119.0" text="Delete" AnchorPane.bottomAnchor="60.0">
+                                       <styleClass>
+                                          <String fx:value="inventory-button" />
+                                          <String fx:value="red-button" />
+                                       </styleClass></Button>
+                                    <Button fx:id="editInventoryButton" layoutX="958.0" layoutY="275.0" mnemonicParsing="false" onAction="#handleEditInventoryButton" prefHeight="41.0" prefWidth="140.0" text="Edit Inventory">
+                                       <styleClass>
+                                          <String fx:value="inventory-button" />
+                                          <String fx:value="red-button" />
+                                       </styleClass></Button>
                                  </children>
                               </AnchorPane>
                            </children>
@@ -348,19 +373,35 @@
                               </AnchorPane>
                               <AnchorPane fx:id="inventoryPane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="370.0">
                                  <children>
-                                    <Label layoutX="200.0" layoutY="90.0" styleClass="right-sidebar-labels" text="Item Name:" />
+                                    <Label layoutX="200.0" layoutY="90.0" styleClass="red-main-labels" text="Item Name:" />
                                     <TextField fx:id="itemNameTextField" layoutX="317.0" layoutY="91.0" prefHeight="25.0" prefWidth="192.0" />
-                                    <Label layoutX="577.0" layoutY="90.0" styleClass="right-sidebar-labels" text="Stock Quantity:" />
+                                    <Label layoutX="577.0" layoutY="90.0" styleClass="red-main-labels" text="Stock Quantity:" />
                                     <TextField fx:id="invQuantityTextField" layoutX="730.0" layoutY="91.0" />
-                                    <Button fx:id="inventoryAddButton" layoutX="349.0" layoutY="206.0" mnemonicParsing="false" onAction="#handleAddInventory" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Add" AnchorPane.bottomAnchor="60.0" />
-                                    <Button fx:id="inventoryClearButton" layoutX="497.0" layoutY="206.0" mnemonicParsing="false" onAction="#handleClearInventory" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Clear" AnchorPane.bottomAnchor="60.0" />
-                                    <Button fx:id="inventoryDeleteButton1" layoutX="645.0" layoutY="206.0" mnemonicParsing="false" onAction="#handleDeleteInventory" prefHeight="64.0" prefWidth="119.0" styleClass="inventory-button" text="Delete" AnchorPane.bottomAnchor="60.0" />
-                                    <Button fx:id="editInventoryButton1" layoutX="958.0" layoutY="275.0" mnemonicParsing="false" onAction="#handleEditMenuButton" prefHeight="41.0" prefWidth="140.0" styleClass="inventory-button" text="Edit Menu" />
+                                    <Button fx:id="inventoryAddButton" layoutX="349.0" layoutY="206.0" mnemonicParsing="false" onAction="#handleAddInventory" prefHeight="64.0" prefWidth="119.0" text="Add" AnchorPane.bottomAnchor="60.0">
+                                       <styleClass>
+                                          <String fx:value="inventory-button" />
+                                          <String fx:value="red-button" />
+                                       </styleClass></Button>
+                                    <Button fx:id="inventoryClearButton" layoutX="497.0" layoutY="206.0" mnemonicParsing="false" onAction="#handleClearInventory" prefHeight="64.0" prefWidth="119.0" text="Clear" AnchorPane.bottomAnchor="60.0">
+                                       <styleClass>
+                                          <String fx:value="inventory-button" />
+                                          <String fx:value="red-button" />
+                                       </styleClass></Button>
+                                    <Button fx:id="inventoryDeleteButton1" layoutX="645.0" layoutY="206.0" mnemonicParsing="false" onAction="#handleDeleteInventory" prefHeight="64.0" prefWidth="119.0" text="Delete" AnchorPane.bottomAnchor="60.0">
+                                       <styleClass>
+                                          <String fx:value="inventory-button" />
+                                          <String fx:value="red-button" />
+                                       </styleClass></Button>
+                                    <Button fx:id="editInventoryButton1" layoutX="958.0" layoutY="275.0" mnemonicParsing="false" onAction="#handleEditMenuButton" prefHeight="41.0" prefWidth="140.0" text="Edit Menu">
+                                       <styleClass>
+                                          <String fx:value="inventory-button" />
+                                          <String fx:value="red-button" />
+                                       </styleClass></Button>
                                  </children>
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="statisticsPage" layoutX="86.0" layoutY="59.0" prefHeight="720.0" prefWidth="1152.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="statisticsPage" layoutX="86.0" layoutY="59.0" prefHeight="720.0" prefWidth="1152.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="350.0" prefWidth="754.0" styleClass="container" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="20.0">
                                  <children>
@@ -373,9 +414,9 @@
                                       </yAxis>
                                     </BarChart>
                                     <DatePicker fx:id="startDate" layoutX="197.0" layoutY="321.0" promptText="Select Date" />
-                                    <Label layoutX="90.0" layoutY="320.0" styleClass="right-sidebar-labels" text="Start Date:" />
+                                    <Label layoutX="90.0" layoutY="320.0" styleClass="red-main-labels" text="Start Date:" />
                                     <DatePicker fx:id="endDate" layoutX="511.0" layoutY="321.0" promptText="Select Date" />
-                                    <Label layoutX="415.0" layoutY="320.0" styleClass="right-sidebar-labels" text="End Date:" />
+                                    <Label layoutX="415.0" layoutY="320.0" styleClass="red-main-labels" text="End Date:" />
                                     <Button fx:id="generateReportButton" layoutX="309.0" layoutY="356.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" styleClass="generate-report-button" text="Generate Report" AnchorPane.bottomAnchor="10.0" />
                                  </children>
                               </AnchorPane>
@@ -392,9 +433,9 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <Label layoutX="313.0" layoutY="14.0" styleClass="right-sidebar-labels" text="Excess Report" AnchorPane.topAnchor="10.0" />
-                                    <DatePicker fx:id="timestamp" layoutX="351.0" layoutY="220.0" promptText="Select Date" />
-                                    <Label layoutX="230.0" layoutY="219.0" styleClass="right-sidebar-labels" text="Timestamp:" />
+                                    <Label layoutX="313.0" layoutY="14.0" styleClass="red-main-labels" text="Excess Report" AnchorPane.topAnchor="10.0" />
+                                    <DatePicker fx:id="excessTimestamp" layoutX="351.0" layoutY="220.0" promptText="Select Date" />
+                                    <Label layoutX="230.0" layoutY="219.0" styleClass="red-main-labels" text="Timestamp:" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="775.0" layoutY="29.0" prefHeight="680.0" prefWidth="357.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="795.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
@@ -409,14 +450,16 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <Label alignment="CENTER" layoutX="99.0" layoutY="14.0" styleClass="right-sidebar-labels" text="Restock Report" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                                    <TableView fx:id="popularPairsTable" layoutX="-31.0" layoutY="340.0" prefHeight="330.0" prefWidth="368.0" styleClass="restock-report-table" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="390.0">
+                                    <Label alignment="CENTER" layoutX="99.0" layoutY="14.0" styleClass="red-main-labels" text="Restock Report" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                                    <TableView fx:id="popularPairsTable" layoutX="-31.0" layoutY="340.0" prefHeight="219.0" prefWidth="317.0" styleClass="restock-report-table" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="390.0">
                                        <columns>
                                           <TableColumn fx:id="rankingColumn" prefWidth="75.0" text="Ranking" />
                                           <TableColumn fx:id="pairingColumn" prefWidth="241.0" text="Pairing" />
                                        </columns>
                                     </TableView>
-                                    <Label alignment="CENTER" layoutX="10.0" layoutY="359.0" styleClass="right-sidebar-labels" text="Popular Pairings" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                                    <Label alignment="CENTER" layoutX="10.0" layoutY="359.0" styleClass="red-main-labels" text="Popular Pairings" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+                                    <DatePicker fx:id="pairingTimestamp" layoutX="142.0" layoutY="627.0" promptText="Select Date" />
+                                    <Label layoutX="21.0" layoutY="626.0" styleClass="red-main-labels" text="Timestamp:" />
                                  </children>
                               </AnchorPane>
                            </children>

@@ -13,6 +13,13 @@
     -fx-background-color: white;
 }
 
+.container {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,15), 5,0,0,0);
+}
+
 .red-main-labels {
     -fx-font-family: 'Poppins', sans-serif;
     -fx-font-size: 18px;
@@ -216,5 +223,77 @@
 
 .item-customization-buttons:selected {
     -fx-background-color: #cf152d;
+}
+
+.inventory-button {
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+}
+
+.inventory-button:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #cf152d;
+    -fx-border-color: #cf152d;
+}
+
+.inventory-table-view {
+    -fx-background-color: white;
+    -fx-border-color: #cf152d;
+    -fx-padding: 0;    
+}
+
+.inventory-table-view .column-header {
+    -fx-background-color: #cf152d;
+}
+
+.inventory-table-view .label {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 5px;
+}
+
+
+.sales-report {
+    -fx-background-color: transparent;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 14px;
+}
+
+.sales-report .chart-title, .axis-label, .bar {
+    -fx-text-fill: #cf152d;
+}
+
+.generate-report-button {
+    -fx-background-color: #cf152d;
+    -fx-text-fill: white;
+    -fx-font-family: 'Poppins', sans-serif;
+    -fx-font-weight: 700;
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0;
+    -fx-cursor: hand;
+}
+
+.generate-report-button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,15), 5,0,0,0);
+}
+
+.restock-report-table {
+    -fx-background-color: white;
+    -fx-border-color: #cf152d;
+    -fx-padding: 0; 
+}
+
+.restock-report-table .column-header {
+    -fx-background-color: #cf152d;
+}
+
+.restock-report-table .label {
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 5px;
 }
 /* END OF MAIN APPLICATION STYLING */
