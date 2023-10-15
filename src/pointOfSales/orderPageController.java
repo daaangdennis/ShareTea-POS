@@ -498,7 +498,7 @@ public class orderPageController implements Initializable {
             // String NoteInput
             orderProduct itemProduct = new orderProduct(
                     items.get(i).getId(), items.get(i).getQuantity(), items.get(i).getToppings(),
-                    items.get(i).getSugar(), 0.0, items.get(i).getNote());
+                    items.get(i).getSugar(), items.get(i).getIce(), items.get(i).getNote());
             listOfItems.add(itemProduct);
         }
 
