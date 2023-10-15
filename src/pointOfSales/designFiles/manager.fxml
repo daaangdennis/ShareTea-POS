@@ -405,7 +405,7 @@
                            <children>
                               <AnchorPane fx:id="salesPane" layoutX="14.0" layoutY="14.0" prefHeight="350.0" prefWidth="754.0" styleClass="container" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="20.0">
                                  <children>
-                                    <BarChart fx:id="salesReportGraph" layoutX="54.0" layoutY="-26.0" legendVisible="false" styleClass="sales-report" title="Sales Report" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                    <BarChart fx:id="salesReportGraph" layoutX="54.0" layoutY="-26.0" legendVisible="false" prefHeight="299.0" prefWidth="714.0" styleClass="sales-report" title="Sales Report" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                       <xAxis>
                                         <CategoryAxis animated="false" label="Products" prefWidth="466.0" side="BOTTOM" />
                                       </xAxis>
