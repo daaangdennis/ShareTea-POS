@@ -281,19 +281,18 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,15), 5,0,0,0);
 }
 
-.restock-report-table {
+.report-table {
     -fx-background-color: white;
     -fx-border-color: #cf152d;
     -fx-padding: 0; 
 }
 
-.restock-report-table .column-header {
+.report-table .column-header {
     -fx-background-color: #cf152d;
 }
 
-.restock-report-table .label {
+.report-table .label {
     -fx-text-fill: white;
     -fx-font-size: 12px;
-    -fx-padding: 5px;
 }
 /* END OF MAIN APPLICATION STYLING */

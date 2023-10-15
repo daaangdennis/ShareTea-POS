@@ -422,7 +422,7 @@
                               </AnchorPane>
                               <AnchorPane layoutX="20.0" layoutY="451.0" prefHeight="249.0" prefWidth="754.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="440.0">
                                  <children>
-                                    <TableView fx:id="excessReportTable" layoutX="193.0" layoutY="40.0" prefHeight="206.0" prefWidth="368.0" styleClass="restock-report-table" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+                                    <TableView fx:id="excessReportTable" layoutX="193.0" layoutY="40.0" prefHeight="206.0" prefWidth="368.0" styleClass="report-table" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
                                        <columns>
                                           <TableColumn fx:id="excessIDColumn" prefWidth="75.0" text="Inventory ID" />
                                           <TableColumn fx:id="excessNameColumn" prefWidth="75.0" text="Item Name" />
@@ -440,7 +440,7 @@
                               </AnchorPane>
                               <AnchorPane layoutX="775.0" layoutY="29.0" prefHeight="680.0" prefWidth="357.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="795.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                                  <children>
-                                    <TableView fx:id="restockReportTable" layoutX="-50.0" layoutY="-7.0" prefHeight="330.0" prefWidth="368.0" styleClass="restock-report-table" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+                                    <TableView fx:id="restockReportTable" layoutX="-50.0" layoutY="-7.0" prefHeight="330.0" prefWidth="368.0" styleClass="report-table" AnchorPane.bottomAnchor="340.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
                                        <columns>
                                           <TableColumn fx:id="restockIDColumn" prefWidth="75.0" text="Inventory ID" />
                                           <TableColumn fx:id="restockNameColumn" prefWidth="75.0" text="Item Name" />
@@ -451,7 +451,7 @@
                                        </columnResizePolicy>
                                     </TableView>
                                     <Label alignment="CENTER" layoutX="99.0" layoutY="14.0" styleClass="red-main-labels" text="Restock Report" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                                    <TableView fx:id="popularPairsTable" layoutX="-31.0" layoutY="340.0" prefHeight="219.0" prefWidth="317.0" styleClass="restock-report-table" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="390.0">
+                                    <TableView fx:id="popularPairsTable" layoutX="-31.0" layoutY="340.0" prefHeight="219.0" prefWidth="317.0" styleClass="report-table" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="390.0">
                                        <columns>
                                           <TableColumn fx:id="rankingColumn" prefWidth="75.0" text="Ranking" />
                                           <TableColumn fx:id="pairingColumn" prefWidth="241.0" text="Pairing" />
