@@ -17,7 +17,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
-
+import javafx.scene.control.DatePicker;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.layout.AnchorPane;
@@ -27,9 +27,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.text.DecimalFormat;
 import pointOfSales.services.SystemFunctions;
-import pointOfSales.services.addOrderFull;
 import javafx.scene.control.TextField;
+import javafx.scene.chart.XYChart;
 import pointOfSales.entities.orderProduct;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 
 public class managerPageController implements Initializable {
     private sceneController sceneCtrl;
@@ -70,6 +73,17 @@ public class managerPageController implements Initializable {
     private TableColumn<Object[], String> menuPriceColumn;
 
     @FXML
+    private TableColumn<Object[], String> excessReportTable;
+    @FXML
+    private TableColumn<Object[], String> excessIDColumn;
+    @FXML
+    private TableColumn<Object[], String> excessNameColumn;
+    @FXML
+    private TableColumn<Object[], String> excessStockUsedColumn;
+    @FXML
+    private TableColumn<Object[], String> excessCurrentStockColumn;
+
+    @FXML
     private AnchorPane menuItems;
     @FXML
     private AnchorPane orderCustomizationMenu;
@@ -95,11 +109,21 @@ public class managerPageController implements Initializable {
     private AnchorPane editProductPage;
     @FXML
     private AnchorPane statisticsPage;
+    @FXML
+    private AnchorPane salesPane;
 
     @FXML
     private TextArea additionalNotes;
     @FXML
     private Label foodItemLabel;
+    @FXML
+    private BarChart<String, Integer> salesReportGraph;
+    @FXML
+    private DatePicker saleStartDate;
+    @FXML
+    private DatePicker saleEndDate;
+    @FXML
+    private DatePicker excessTimestamp;
 
     private ToggleGroup teaGroup = new ToggleGroup();
     private ToggleGroup sugarGroup = new ToggleGroup();
@@ -109,6 +133,7 @@ public class managerPageController implements Initializable {
     private ObservableList<Object[]> data = FXCollections.observableArrayList();
     private ObservableList<Object[]> inventoryData = FXCollections.observableArrayList();
     private ObservableList<Object[]> productData = FXCollections.observableArrayList();
+    private ObservableList<Object[]> excessData = FXCollections.observableArrayList();
     private Double foodLabelCost = 0.0;
     public ArrayList<orderedProduct> items = new ArrayList<>();
     public ArrayList<String> categories = new ArrayList<>();
@@ -160,7 +185,7 @@ public class managerPageController implements Initializable {
         iceGroup.getToggles().addAll(regularIceButton, lightIceButton, noIceButton, extraIceButton, makeItHotButton);
 
         Label orderNumber = (Label) orderInfoPane.lookup("#orderNumberLabel");
-        orderNumber.setText("Order #" + addOrderFull.nextOrderID());
+        orderNumber.setText("Order #" + SystemFunctions.nextOrderID());
         employPosition = loginPageController.getPosition();
         setUpTeaPane();
     }
@@ -536,7 +561,7 @@ public class managerPageController implements Initializable {
             // String NoteInput
             orderProduct itemProduct = new orderProduct(
                     items.get(i).getId(), items.get(i).getQuantity(), items.get(i).getToppings(),
-                    items.get(i).getSugar(), items.get(i).getNote());
+                    items.get(i).getSugar(), items.get(i).getIce(), items.get(i).getNote());
             listOfItems.add(itemProduct);
         }
 
@@ -558,12 +583,12 @@ public class managerPageController implements Initializable {
         orderTotal += orderTotal * 0.0825;
         // Customer First Name, Customer Last Name, Employee First Name, Employee Last
         // Name, ArrayList of OrderProduct
-        addOrderFull.addOrder(customerFirstName, customerLastName, employeeFirstName, employeeLastName, listOfItems,
+        SystemFunctions.addOrder(customerFirstName, customerLastName, employeeFirstName, employeeLastName, listOfItems,
                 orderTotal);
         data.clear();
         orderTotal = 0.0;
         Label orderNumber = (Label) orderInfoPane.lookup("#orderNumberLabel");
-        orderNumber.setText("Order #" + addOrderFull.nextOrderID());
+        orderNumber.setText("Order #" + SystemFunctions.nextOrderID());
         Label checkoutSubTotal = (Label) orderInfoPane.lookup("#checkoutSubTotal");
         checkoutSubTotal.setText("$0.00");
         Label checkoutTax = (Label) orderInfoPane.lookup("#checkoutTax");
@@ -826,6 +851,93 @@ public class managerPageController implements Initializable {
         orderInfoPane.setVisible(false);
         menuItems.setVisible(false);
         statisticsPage.setVisible(true);
+        initializeExcessTable();
+
+    }
+
+    @FXML
+    private void handleSalesReport(ActionEvent event) {
+        String startText = saleStartDate.getValue().toString();
+        String endText = saleEndDate.getValue().toString();
+        salesReportGraph.getData().clear();
+        // System.out.println("This is the start date: " + startText);
+        // System.out.println("This is the end date: " + endText);
+
+        ArrayList<ArrayList<Object>> values = new ArrayList<>();
+        values = SystemFunctions.getProductSales(startText, endText);
+        ArrayList<String> uniqueCategory = new ArrayList<>();
+        for (int i = 0; i < values.get(0).size(); i++) {
+            uniqueCategory.add(values.get(0).get(i).toString());
+        }
+        CategoryAxis xAxis = (CategoryAxis) salesReportGraph.getXAxis();
+        xAxis.setCategories(FXCollections.observableArrayList(uniqueCategory));
+        // NumberAxis yAxis = (NumberAxis) salesReportGraph.getYAxis();
+        // yAxis.setLowerBound(0);
+        // yAxis.setUpperBound(1000);
+        try {
+
+            for (int i = 0; i < values.get(0).size(); i++) {
+                String products = values.get(0).get(i).toString();
+                int itemsSold = Integer.parseInt(values.get(1).get(i).toString());
+                XYChart.Series<String, Integer> series = new XYChart.Series<>();
+                series.getData().add(new XYChart.Data<>(products, itemsSold));
+                series.setName(products);
+                salesReportGraph.getData().add(series);
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("Error in formatting info in @handleSalesReport");
+        }
+    }
+
+    @FXML
+    private void handleRestockReport() {
+    }
+
+    @FXML
+    private void handleExcessReport() {
+        excessData.clear();
+        String excessTime = excessTimestamp.getValue().toString();
+        ArrayList<ArrayList<Object>> excessStock = new ArrayList<>();
+        excessStock = SystemFunctions.getExcessStock(excessTime);
+        for (int i = 0; i < excessStock.get(0).size(); i++) {
+            excessData.add(new Object[] { excessStock.get(0) });
+        }
+        inventoryTable.setItems(inventoryData);
+    }
+
+    private void initializeExcessTable() {
+        excessIDColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 0) {
+                return new SimpleStringProperty(cellData.getValue()[0].toString());
+            } else {
+                return new SimpleStringProperty("Inventory ID");
+            }
+        });
+
+        excessNameColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use index 1 for quantity
+                return new SimpleStringProperty(cellData.getValue()[1].toString());
+            } else {
+                return new SimpleStringProperty("Item Name");
+            }
+        });
+
+        excessStockUsedColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 2) { // Use index 2 for price
+                return new SimpleStringProperty(cellData.getValue()[2].toString());
+            } else {
+                return new SimpleStringProperty("Stock Used");
+            }
+        });
+
+        excessCurrentStockColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 3) { // Use index 2 for price
+                return new SimpleStringProperty(cellData.getValue()[3].toString());
+            } else {
+                return new SimpleStringProperty("Current Stock");
+            }
+        });
     }
 
 }

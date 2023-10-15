@@ -403,7 +403,7 @@
                         </AnchorPane>
                         <AnchorPane fx:id="statisticsPage" layoutX="86.0" layoutY="59.0" prefHeight="720.0" prefWidth="1152.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="350.0" prefWidth="754.0" styleClass="container" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="20.0">
+                              <AnchorPane fx:id="salesPane" layoutX="14.0" layoutY="14.0" prefHeight="350.0" prefWidth="754.0" styleClass="container" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="20.0">
                                  <children>
                                     <BarChart fx:id="salesReportGraph" layoutX="54.0" layoutY="-26.0" styleClass="sales-report" title="Sales Report" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                       <xAxis>
@@ -413,11 +413,11 @@
                                         <NumberAxis label="Items Sold" side="LEFT" />
                                       </yAxis>
                                     </BarChart>
-                                    <DatePicker fx:id="startDate" layoutX="197.0" layoutY="321.0" promptText="Select Date" />
+                                    <DatePicker fx:id="saleStartDate" layoutX="197.0" layoutY="321.0" promptText="Select Date" />
                                     <Label layoutX="90.0" layoutY="320.0" styleClass="red-main-labels" text="Start Date:" />
-                                    <DatePicker fx:id="endDate" layoutX="511.0" layoutY="321.0" promptText="Select Date" />
+                                    <DatePicker fx:id="saleEndDate" layoutX="511.0" layoutY="321.0" promptText="Select Date" />
                                     <Label layoutX="415.0" layoutY="320.0" styleClass="red-main-labels" text="End Date:" />
-                                    <Button fx:id="generateReportButton" layoutX="309.0" layoutY="356.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" styleClass="generate-report-button" text="Generate Report" AnchorPane.bottomAnchor="10.0" />
+                                    <Button fx:id="generateReportButton" layoutX="309.0" layoutY="356.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" styleClass="generate-report-button" text="Generate Report" AnchorPane.bottomAnchor="10.0" onAction="#handleSalesReport" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="20.0" layoutY="451.0" prefHeight="249.0" prefWidth="754.0" styleClass="container" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="440.0">

@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.text.DecimalFormat;
 import pointOfSales.services.SystemFunctions;
-import pointOfSales.services.addOrderFull;
 import javafx.scene.control.TextField;
 import pointOfSales.entities.orderProduct;
 
@@ -126,7 +125,7 @@ public class orderPageController implements Initializable {
         iceGroup.getToggles().addAll(regularIceButton, lightIceButton, noIceButton, extraIceButton, makeItHotButton);
 
         Label orderNumber = (Label) orderInfoPane.lookup("#orderNumberLabel");
-        orderNumber.setText("Order #" + addOrderFull.nextOrderID());
+        orderNumber.setText("Order #" + SystemFunctions.nextOrderID());
         employPosition = loginPageController.getPosition();
         setUpTeaPane();
     }
@@ -499,7 +498,7 @@ public class orderPageController implements Initializable {
             // String NoteInput
             orderProduct itemProduct = new orderProduct(
                     items.get(i).getId(), items.get(i).getQuantity(), items.get(i).getToppings(),
-                    items.get(i).getSugar(), items.get(i).getNote());
+                    items.get(i).getSugar(), items.get(i).getIce(), items.get(i).getNote());
             listOfItems.add(itemProduct);
         }
 
@@ -521,12 +520,12 @@ public class orderPageController implements Initializable {
         orderTotal += orderTotal * 0.0825;
         // Customer First Name, Customer Last Name, Employee First Name, Employee Last
         // Name, ArrayList of OrderProduct
-        addOrderFull.addOrder(customerFirstName, customerLastName, employeeFirstName, employeeLastName, listOfItems,
+        SystemFunctions.addOrder(customerFirstName, customerLastName, employeeFirstName, employeeLastName, listOfItems,
                 orderTotal);
         data.clear();
         orderTotal = 0.0;
         Label orderNumber = (Label) orderInfoPane.lookup("#orderNumberLabel");
-        orderNumber.setText("Order #" + addOrderFull.nextOrderID());
+        orderNumber.setText("Order #" + SystemFunctions.nextOrderID());
         Label checkoutSubTotal = (Label) orderInfoPane.lookup("#checkoutSubTotal");
         checkoutSubTotal.setText("$0.00");
         Label checkoutTax = (Label) orderInfoPane.lookup("#checkoutTax");
