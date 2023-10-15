@@ -413,9 +413,9 @@
                                         <NumberAxis label="Items Sold" side="LEFT" />
                                       </yAxis>
                                     </BarChart>
-                                    <DatePicker fx:id="startDate" layoutX="197.0" layoutY="321.0" promptText="Select Date" />
+                                    <DatePicker fx:id="saleStartDate" layoutX="197.0" layoutY="321.0" promptText="Select Date" />
                                     <Label layoutX="90.0" layoutY="320.0" styleClass="red-main-labels" text="Start Date:" />
-                                    <DatePicker fx:id="endDate" layoutX="511.0" layoutY="321.0" promptText="Select Date" />
+                                    <DatePicker fx:id="saleEndDate" layoutX="511.0" layoutY="321.0" promptText="Select Date" />
                                     <Label layoutX="415.0" layoutY="320.0" styleClass="red-main-labels" text="End Date:" />
                                     <Button fx:id="generateReportButton" layoutX="309.0" layoutY="356.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" styleClass="generate-report-button" text="Generate Report" AnchorPane.bottomAnchor="10.0" onAction="#handleSalesReport" />
                                  </children>
