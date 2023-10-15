@@ -43,21 +43,25 @@ public class sales {
 
     public static ArrayList<ArrayList<Object>> lowStock(Connection conn){
         ArrayList<ArrayList<Object>> lowStockList = new ArrayList<>();
+        ArrayList<Object> idList = new ArrayList<>();
         ArrayList<Object> nameList = new ArrayList<>();
         ArrayList<Object> lowList = new ArrayList<>();
+        lowStockList.add(idList);
         lowStockList.add(nameList);
         lowStockList.add(lowList);
 
         try {
-            String query = "SELECT name, quantity AS remaining FROM inventory inv WHERE quantity < 25";
+            String query = "SELECT inventory_id, name, quantity AS remaining FROM inventory inv WHERE quantity < 25";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                Integer id = resultSet.getInt("inventory_id");
                 String name = resultSet.getString("name");
                 Integer num = resultSet.getInt("remaining");
-                lowStockList.get(0).add(name);
-                lowStockList.get(1).add(num);
+                lowStockList.get(0).add(id);
+                lowStockList.get(1).add(name);
+                lowStockList.get(2).add(num);
             }
             return lowStockList;
             
@@ -69,25 +73,34 @@ public class sales {
 
     public static ArrayList<ArrayList<Object>> excessStock(Connection conn, String startDate){
         ArrayList<ArrayList<Object>> inventoryUsage = new ArrayList<>();
+        ArrayList<Object> idList = new ArrayList<>();
         ArrayList<Object> nameList = new ArrayList<>();
         ArrayList<Object> usedList = new ArrayList<>();
+        ArrayList<Object> totalList = new ArrayList<>();
+        inventoryUsage.add(idList);
         inventoryUsage.add(nameList);
         inventoryUsage.add(usedList);
+        inventoryUsage.add(totalList);
 
         try {
-            String query = "SELECT (SELECT i.name FROM inventory i WHERE i.inventory_id = ip.inventory_id) AS inventory_name,  SUM((SELECT COALESCE(SUM(op.quantity),0) FROM order_product op WHERE op.product_id = ip.product_id AND op.order_id IN(SELECT o.order_id FROM orders o WHERE o.order_date >= ?))) AS quantity_used, (SELECT COALESCE(SUM(i.quantity),0) FROM inventory i WHERE i.inventory_id = ip.inventory_id) AS current_quantity FROM inventory_product ip GROUP BY ip.inventory_id, inventory_name";
+            String query = "SELECT ip.inventory_id, (SELECT i.name FROM inventory i WHERE i.inventory_id = ip.inventory_id) AS inventory_name,  SUM((SELECT COALESCE(SUM(op.quantity),0) FROM order_product op WHERE op.product_id = ip.product_id AND op.order_id IN(SELECT o.order_id FROM orders o WHERE o.order_date >= ?))) AS quantity_used, (SELECT COALESCE(SUM(i.quantity),0) FROM inventory i WHERE i.inventory_id = ip.inventory_id) AS current_quantity FROM inventory_product ip GROUP BY ip.inventory_id, inventory_name";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setDate(1, Date.valueOf(startDate));
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                Integer id = resultSet.getInt("inventory_id");
                 String name = resultSet.getString("inventory_name");
-                Double used = resultSet.getInt("quantity_used") * 1.00;
-                Double current = resultSet.getInt("current_quantity") * 1.00;
-                Double percentUsed =  used / (current+used);     
+                Integer used = resultSet.getInt("quantity_used");
+                Integer current = resultSet.getInt("current_quantity");
+                Double percentUsed =  (used*1.00) / ((current*1.00)+(used*1.00));     
                 percentUsed = Math.floor(percentUsed * 100) / 100;
-                inventoryUsage.get(0).add(name);
-                inventoryUsage.get(1).add(percentUsed);
+                if(percentUsed <= 0.10){
+                    inventoryUsage.get(0).add(id);
+                    inventoryUsage.get(1).add(name);
+                    inventoryUsage.get(2).add(used);
+                    inventoryUsage.get(3).add(current);
+                }
             }
             return inventoryUsage;
             
