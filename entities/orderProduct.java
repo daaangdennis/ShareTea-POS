@@ -13,9 +13,9 @@ public class orderProduct {
     public ArrayList<String> Toppings;
     public String Note = "";
     public double SugarLevel = 100;
-    public double IceLevel = 100;
+    public String IceLevel = "";
 
-    public orderProduct(String PID, int ProductQuantity, ArrayList<String> ToppingList, double Sugar, double ice ,String NoteInput) {
+    public orderProduct(String PID, int ProductQuantity, ArrayList<String> ToppingList, double Sugar, String ice ,String NoteInput) {
         this.ProductID = Integer.parseInt(PID);
         this.Quantity = ProductQuantity;
         this.Toppings = ToppingList;
@@ -23,7 +23,7 @@ public class orderProduct {
         this.IceLevel = ice;
         this.Note = NoteInput;
     }
-    public orderProduct(String PID, int ProductQuantity, double Sugar, double ice, String NoteInput) {
+    public orderProduct(String PID, int ProductQuantity, double Sugar, String ice, String NoteInput) {
         this.ProductID = Integer.parseInt(PID);
         this.Quantity = ProductQuantity;
         this.SugarLevel = Sugar;
@@ -47,12 +47,12 @@ public class orderProduct {
                 Note += " " + (SugarLevel) + "%" + " sugar.";
             }
         }
-        if(this.IceLevel != 100){
+        if(this.IceLevel != ""){
             if(Note.equals("")){
-                Note += (IceLevel) + "%" + " ice.";
+                Note += (IceLevel);
             } 
             else{
-                Note += " " + (IceLevel) + "%" + " ice.";
+                Note += " " + (IceLevel);
             }
         }
 
