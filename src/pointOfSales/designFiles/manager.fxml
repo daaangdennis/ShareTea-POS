@@ -434,7 +434,7 @@
                                        </columnResizePolicy>
                                     </TableView>
                                     <Label layoutX="313.0" layoutY="14.0" styleClass="red-main-labels" text="Excess Report" AnchorPane.topAnchor="10.0" />
-                                    <DatePicker fx:id="excessTimestamp" layoutX="351.0" layoutY="220.0" promptText="Select Date" />
+                                    <DatePicker fx:id="excessTimestamp" layoutX="351.0" layoutY="220.0" promptText="Select Date" onAction="#handleExcessReport"/>
                                     <Label layoutX="230.0" layoutY="219.0" styleClass="red-main-labels" text="Timestamp:" />
                                  </children>
                               </AnchorPane>

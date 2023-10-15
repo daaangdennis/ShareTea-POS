@@ -72,16 +72,16 @@ public class managerPageController implements Initializable {
     @FXML
     private TableColumn<Object[], String> menuPriceColumn;
 
-    // @FXML
-    // private TableColumn<Object[], String> excessReportTable;
-    // @FXML
-    // private TableColumn<Object[], String> excessIDColumn;
-    // @FXML
-    // private TableColumn<Object[], String> excessNameColumn;
-    // @FXML
-    // private TableColumn<Object[], String> excessStockUsedColumn;
-    // @FXML
-    // private TableColumn<Object[], String> excessCurrentStockColumn;
+    @FXML
+    private TableView<Object[]> excessReportTable;
+    @FXML
+    private TableColumn<Object[], String> excessIDColumn;
+    @FXML
+    private TableColumn<Object[], String> excessNameColumn;
+    @FXML
+    private TableColumn<Object[], String> excessStockUsedColumn;
+    @FXML
+    private TableColumn<Object[], String> excessCurrentStockColumn;
 
     @FXML
     private TableView<Object[]> popularPairsTable;
@@ -872,26 +872,27 @@ public class managerPageController implements Initializable {
 
         ArrayList<ArrayList<Object>> values = new ArrayList<>();
         values = SystemFunctions.getProductSales(startText, endText);
-        ArrayList<String> uniqueCategory = new ArrayList<>();
-        for (int i = 0; i < values.get(0).size(); i++) {
-            uniqueCategory.add(values.get(0).get(i).toString());
-        }
-        CategoryAxis xAxis = (CategoryAxis) salesReportGraph.getXAxis();
-        xAxis.setCategories(FXCollections.observableArrayList(uniqueCategory));
+        // ArrayList<String> uniqueCategory = new ArrayList<>();
+        // for (int i = 0; i < values.get(0).size(); i++) {
+        //     uniqueCategory.add(values.get(0).get(i).toString());
+        // }
+        // CategoryAxis xAxis = (CategoryAxis) salesReportGraph.getXAxis();
+        // xAxis.setCategories(FXCollections.observableArrayList(uniqueCategory));
         // NumberAxis yAxis = (NumberAxis) salesReportGraph.getYAxis();
         // yAxis.setLowerBound(0);
         // yAxis.setUpperBound(1000);
+        XYChart.Series<String, Integer> series = new XYChart.Series<>();
         try {
 
             for (int i = 0; i < values.get(0).size(); i++) {
                 String products = values.get(0).get(i).toString();
                 int itemsSold = Integer.parseInt(values.get(1).get(i).toString());
-                XYChart.Series<String, Integer> series = new XYChart.Series<>();
-                series.getData().add(new XYChart.Data<>(products, itemsSold));
-                series.setName(products);
-                salesReportGraph.getData().add(series);
-            }
 
+                series.getData().add(new XYChart.Data<>(products, itemsSold));
+                // series.setName(products);
+
+            }
+            salesReportGraph.getData().add(series);
         } catch (NumberFormatException e) {
             System.out.println("Error in formatting info in @handleSalesReport");
         }
@@ -903,47 +904,50 @@ public class managerPageController implements Initializable {
 
     @FXML
     private void handleExcessReport() {
-        // excessData.clear();
-        // String excessTime = excessTimestamp.getValue().toString();
-        // ArrayList<ArrayList<Object>> excessStock = new ArrayList<>();
-        // excessStock = SystemFunctions.getExcessStock(excessTime);
-        // for (int i = 0; i < excessStock.get(0).size(); i++) {
-        // excessData.add(new Object[] { excessStock.get(0) });
-        // }
-        // inventoryTable.setItems(inventoryData);
+        excessData.clear();
+        String excessTime = excessTimestamp.getValue().toString();
+        ArrayList<ArrayList<Object>> excessStock = new ArrayList<>();
+        excessStock = SystemFunctions.getExcessStock(excessTime);
+        for (int i = 0; i < excessStock.get(0).size(); i++) {
+            excessData.add(new Object[] { excessStock.get(0).get(i), excessStock.get(1).get(i),
+                    excessStock.get(2).get(i), excessStock.get(3).get(i) });
+        }
+        excessReportTable.setItems(excessData);
     }
 
-    private void initializeExcessTable(){
-    // excessIDColumn.setCellValueFactory(cellData -> {
-    // if (cellData.getValue() != null && cellData.getValue().length > 0) {
-    // return new SimpleStringProperty(cellData.getValue()[0].toString());
-    // } else {
-    // return new SimpleStringProperty("Inventory ID");
-    // }
-    // });
+    private void initializeExcessTable() {
+        excessIDColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 0) {
+                return new SimpleStringProperty(cellData.getValue()[0].toString());
+            } else {
+                return new SimpleStringProperty("Inventory ID");
+            }
+        });
 
-    // excessNameColumn.setCellValueFactory(cellData -> {
-    // if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use
-    // index 1 for quantity
-    // return new SimpleStringProperty(cellData.getValue()[1].toString());
-    // } else {
-    // return new SimpleStringProperty("Item Name");
-    // }
-    // });
+        excessNameColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use index 1 for quantity
+                return new SimpleStringProperty(cellData.getValue()[1].toString());
+            } else {
+                return new SimpleStringProperty("Item Name");
+            }
+        });
 
-    // excessStockUsedColumn.setCellValueFactory(cellData -> {
-    // if (cellData.getValue() != null && cellData.getValue().length > 2) { // Use
-    // index 2 for price
-    // return new SimpleStringProperty(cellData.getValue()[2].toString());
-    // } else {
-    // return new SimpleStringProperty("Stock Used");
-    // }
-    // });
+        excessStockUsedColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 2) { // Useindex 2 for price
+                return new SimpleStringProperty(cellData.getValue()[2].toString());
+            } else {
+                return new SimpleStringProperty("Stock Used");
+            }
+        });
 
-    // excessCurrentStockColumn.setCellValueFactory(cellData -> {
-    // if (cellData.getValue() != null && cellData.getValue().length > 3) { // Use
-    // index 2 for price
-    // return new SimpleStringProperty(cellData.getValue
+        excessCurrentStockColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 3) { // Use index 3 for price
+                return new SimpleStringProperty(cellData.getValue()[3].toString());
+            } else {
+                return new SimpleStringProperty("Stock Used");
+            }
+        });
+
     }
 
     private void initializePairTable() {
