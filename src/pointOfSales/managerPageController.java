@@ -934,6 +934,12 @@ public class managerPageController implements Initializable {
                 // salesReportGraph.getData().add(series);
             }
             salesReportGraph.getData().add(series);
+
+            // Change the bar colors to match theme
+            for (XYChart.Data<String, Integer> datapoint : series.getData()) {
+                datapoint.getNode().setStyle("-fx-bar-fill: #cf152d;");
+            }
+            
             // series.setName(products);
         } catch (NumberFormatException e) {
             System.out.println("Error in formatting info in @handleSalesReport");

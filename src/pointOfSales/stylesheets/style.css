@@ -261,7 +261,7 @@
     -fx-font-size: 14px;
 }
 
-.sales-report .chart-title, .axis-label, .bar {
+.sales-report .chart-title, .axis-label {
     -fx-text-fill: #cf152d;
 }
 
