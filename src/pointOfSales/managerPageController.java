@@ -133,10 +133,14 @@ public class managerPageController implements Initializable {
     private DatePicker saleStartDate;
     @FXML
     private DatePicker saleEndDate;
-    
+
     @FXML
     private DatePicker excessTimestamp;
-    
+
+    @FXML
+    private DatePicker pairingStartDate;
+    @FXML
+    private DatePicker pairingEndDate;
 
     private ToggleGroup teaGroup = new ToggleGroup();
     private ToggleGroup sugarGroup = new ToggleGroup();
@@ -147,6 +151,7 @@ public class managerPageController implements Initializable {
     private ObservableList<Object[]> inventoryData = FXCollections.observableArrayList();
     private ObservableList<Object[]> productData = FXCollections.observableArrayList();
     private ObservableList<Object[]> excessData = FXCollections.observableArrayList();
+    private ObservableList<Object[]> pairData = FXCollections.observableArrayList();
     private Double foodLabelCost = 0.0;
     public ArrayList<orderedProduct> items = new ArrayList<>();
     public ArrayList<String> categories = new ArrayList<>();
@@ -864,7 +869,8 @@ public class managerPageController implements Initializable {
         orderInfoPane.setVisible(false);
         menuItems.setVisible(false);
         statisticsPage.setVisible(true);
-        // initializeExcessTable();
+        initializeExcessTable();
+        initializePairTable();
 
     }
 
@@ -921,6 +927,19 @@ public class managerPageController implements Initializable {
         excessReportTable.setItems(excessData);
     }
 
+    @FXML
+    private void handlePopularPair() {
+        String pairStartText = pairingStartDate.getValue().toString();
+        String pairEndText = pairingEndDate.getValue().toString();
+        ArrayList<ArrayList<Object>> pairList = new ArrayList<>();
+        pairList = SystemFunctions.getPairs(pairStartText, pairEndText);
+        for (int i = 0; i < pairList.get(0).size(); i++) {
+            pairData.add(new Object[] { (i + 1), pairList.get(0).get(i) + " " + pairList.get(1).get(i)});
+        }
+        popularPairsTable.setItems(pairData);
+    }
+    
+
     private void initializeExcessTable() {
         excessIDColumn.setCellValueFactory(cellData -> {
             if (cellData.getValue() != null && cellData.getValue().length > 0) {
@@ -950,13 +969,28 @@ public class managerPageController implements Initializable {
             if (cellData.getValue() != null && cellData.getValue().length > 3) { // Use index 3 for price
                 return new SimpleStringProperty(cellData.getValue()[3].toString());
             } else {
-                return new SimpleStringProperty("Stock Used");
+                return new SimpleStringProperty("Current Stock");
             }
         });
 
     }
 
     private void initializePairTable() {
+        rankingColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 0) {
+                return new SimpleStringProperty(cellData.getValue()[0].toString());
+            } else {
+                return new SimpleStringProperty("Ranking");
+            }
+        });
+
+        pairingColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use index 1 for quantity
+                return new SimpleStringProperty(cellData.getValue()[1].toString());
+            } else {
+                return new SimpleStringProperty("Pairing");
+            }
+        });
 
     }
 }

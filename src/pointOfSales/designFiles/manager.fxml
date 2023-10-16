@@ -460,7 +460,7 @@
                                     <Label alignment="CENTER" layoutX="10.0" layoutY="359.0" styleClass="red-main-labels" text="Popular Pairings" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
                                     <DatePicker fx:id="pairingStartDate" layoutX="134.0" layoutY="584.0" promptText="Select Date" />
                                     <Label layoutX="27.0" layoutY="583.0" styleClass="red-main-labels" text="Start Date:" />
-                                    <DatePicker fx:id="pairingEndDate" layoutX="134.0" layoutY="631.0" promptText="Select Date" />
+                                    <DatePicker fx:id="pairingEndDate" layoutX="134.0" layoutY="631.0" promptText="Select Date" onAction="#handlePopularPair"/>
                                     <Label layoutX="38.0" layoutY="630.0" styleClass="red-main-labels" text="End Date:" />
                                  </children>
                               </AnchorPane>
