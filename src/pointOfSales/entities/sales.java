@@ -130,7 +130,7 @@ public class sales {
                 String name1 = resultSet.getString("product1");
                 String name2 = resultSet.getString("product2");
                 Integer combination_count = resultSet.getInt("combination_count");
-                pairList.get(0).add(name2);
+                pairList.get(0).add(name1);
                 pairList.get(1).add(name2);
                 pairList.get(2).add(combination_count);
 
