@@ -11,6 +11,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 
+/**
+ * The loginPage class loads the UI elements from the loginPage.fxml file, and performs some modifications to it.
+ * 
+ * This class has no logic for the loginPage in it, for the logic @see pointOfSales.loginPageController
+ * 
+ * @author Sam Trythall
+ * @version v0.0.3
+ * @since v0.0.1
+ */
+
 public class loginPage {
 
     private static sceneController controller;
@@ -21,15 +31,22 @@ public class loginPage {
     public static void setController(sceneController ctrl) {
         controller = ctrl;
     }
-
+    /**
+     * Loads the loginPage onto a scene object with all modifications set
+     * 
+     * @return a scene type with everything loaded from the loginPage.fxml file
+     * @throws Exception in case the fxml file fails to load.
+     */
     public static Scene getScene() {
 
         try {
+            //loads the fxml onto a Parent node
             FXMLLoader loader = new FXMLLoader(orderPage.class.getResource("designFiles/loginPage.fxml"));
             Parent root = loader.load();
             double screenWidth = Screen.getPrimary().getBounds().getWidth();
             double screenHeight = Screen.getPrimary().getBounds().getHeight();
 
+            //loads and modifies the wall image from the fxml
             Pane wallImageContainer = (Pane) root.lookup("#wallImageContainer");
             wallImageContainer.setPrefWidth(screenWidth / 3.0);
             wallImageContainer.setPrefHeight(screenHeight);
