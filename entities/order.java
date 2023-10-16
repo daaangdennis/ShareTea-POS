@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -116,5 +117,39 @@ public class order {
         }
         return order_num;
     }
+
+    public static ArrayList<ArrayList<String>> OrdersByDates(Connection conn, String startDate, String endDate){
+        ArrayList<ArrayList<String>> ordersByDatesList = new ArrayList<>();
+        ArrayList<String> ids = new ArrayList<>();
+        ArrayList<String> customerName = new ArrayList<>();
+        ArrayList<String> orderDate = new ArrayList<>();
+        ordersByDatesList.add(ids);
+        ordersByDatesList.add(customerName);
+        ordersByDatesList.add(orderDate);
+
+        String query = "select order_id, concat_ws(' ',first_name, last_name), order_date from orders join customer on orders.customer_id = customer.customer_id where order_date >= ? and order_date <= ? order by order_date desc";
+        try {
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setDate(1, Date.valueOf(startDate));
+            statement.setDate(2, Date.valueOf(endDate));
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                String id = resultSet.getInt("order_id") + "";
+                String name = resultSet.getString("concat_ws");
+                String date = resultSet.getDate("order_date") + "";
+                ordersByDatesList.get(0).add(id);
+                ordersByDatesList.get(1).add(name);
+                ordersByDatesList.get(2).add(date);
+            }
+
+            return ordersByDatesList;
+        } catch (Exception e) {
+            System.out.println("Error getting orders between date");
+        }
+        return ordersByDatesList;
+    }
+
+
+    
 
 }

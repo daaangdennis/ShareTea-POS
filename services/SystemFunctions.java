@@ -86,6 +86,18 @@ public class SystemFunctions {
         product.deletePro(conn, productName);
     }
 
+    public static ArrayList<ArrayList<String>> getOrdersByDates(String startDate, String endDate){
+        dbconnect dbconn = new dbconnect();
+        Connection conn = dbconn.conn;
+        return order.OrdersByDates(conn, startDate, endDate);
+    }
+
+    public static ArrayList<ArrayList<String>> getOrderProductByID(Integer order_id){
+        dbconnect dbconn = new dbconnect();
+        Connection conn = dbconn.conn;
+        return orderProduct.OrderProductByID(conn, order_id);
+    }
+
 
 
     // ------------------ SALE REPORTS FUNCTIONS ----------------------// 

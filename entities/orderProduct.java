@@ -102,4 +102,34 @@ public class orderProduct {
             System.out.println("Error in subtracting inventory from order_product.");
         }
     }
+
+    public static ArrayList<ArrayList<String>> OrderProductByID(Connection conn, Integer order_id){
+        ArrayList<ArrayList<String>> OrderProductList = new ArrayList<>();
+        ArrayList<String> names = new ArrayList<>();
+        ArrayList<String> quantities = new ArrayList<>();
+        ArrayList<String> prices = new ArrayList<>();
+        OrderProductList.add(names);
+        OrderProductList.add(quantities);
+        OrderProductList.add(prices);
+
+        String query = "select name, quantity, price from order_product op join product pro on op.product_id = pro.product_id where order_id = ?";
+        try {
+            PreparedStatement statement = conn.prepareStatement(query);
+            statement.setInt(2, order_id);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                String name = resultSet.getString("name");
+                String quantity = resultSet.getInt("quantity") + "";
+                String price = resultSet.getDouble("price") + "";
+                OrderProductList.get(0).add(name);
+                OrderProductList.get(1).add(quantity);
+                OrderProductList.get(2).add(price);
+            }
+
+            return OrderProductList;
+        } catch (Exception e) {
+            System.out.println("Error getting order_product given an order_id");
+        }
+        return OrderProductList;
+    }
 }
