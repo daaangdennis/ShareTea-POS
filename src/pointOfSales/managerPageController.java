@@ -71,17 +71,37 @@ public class managerPageController implements Initializable {
     private TableColumn<Object[], String> menuCategoryColumn;
     @FXML
     private TableColumn<Object[], String> menuPriceColumn;
-    /* 
+
     @FXML
-    private TableColumn<Object[], String> excessReportTable;
+    private TableView<Object[]> excessReportTable;
+
     @FXML
     private TableColumn<Object[], String> excessIDColumn;
+
     @FXML
     private TableColumn<Object[], String> excessNameColumn;
+
     @FXML
     private TableColumn<Object[], String> excessStockUsedColumn;
+
     @FXML
-    private TableColumn<Object[], String> excessCurrentStockColumn;*/
+    private TableColumn<Object[], String> excessCurrentStockColumn;
+
+    @FXML
+    private TableView<Object[]> restockReportTable;
+    @FXML
+    private TableColumn<Object[], String> restockIDColumn;
+    @FXML
+    private TableColumn<Object[], String> restockNameColumn;
+    @FXML
+    private TableColumn<Object[], String> restockQuantityColumn;
+
+    @FXML
+    private TableView<Object[]> popularPairsTable;
+    @FXML
+    private TableColumn<Object[], String> rankingColumn;
+    @FXML
+    private TableColumn<Object[], String> pairingColumn;
 
     @FXML
     private AnchorPane menuItems;
@@ -122,8 +142,14 @@ public class managerPageController implements Initializable {
     private DatePicker saleStartDate;
     @FXML
     private DatePicker saleEndDate;
-    /*@FXML
-    private DatePicker excessTimestamp;*/
+
+    @FXML
+    private DatePicker excessTimestamp;
+
+    @FXML
+    private DatePicker pairingStartDate;
+    @FXML
+    private DatePicker pairingEndDate;
 
     private ToggleGroup teaGroup = new ToggleGroup();
     private ToggleGroup sugarGroup = new ToggleGroup();
@@ -134,6 +160,8 @@ public class managerPageController implements Initializable {
     private ObservableList<Object[]> inventoryData = FXCollections.observableArrayList();
     private ObservableList<Object[]> productData = FXCollections.observableArrayList();
     private ObservableList<Object[]> excessData = FXCollections.observableArrayList();
+    private ObservableList<Object[]> pairData = FXCollections.observableArrayList();
+    private ObservableList<Object[]> restockData = FXCollections.observableArrayList();
     private Double foodLabelCost = 0.0;
     public ArrayList<orderedProduct> items = new ArrayList<>();
     public ArrayList<String> categories = new ArrayList<>();
@@ -362,11 +390,16 @@ public class managerPageController implements Initializable {
         if (items.size() > 0) {
             items.remove(items.size() - 1);
         }
+        
         Toggle iceToggle = iceGroup.getSelectedToggle();
         Toggle sugarToggle = sugarGroup.getSelectedToggle();
-        iceToggle.setSelected(false);
-        sugarToggle.setSelected(false);
-
+        if(iceToggle != null){
+            iceToggle.setSelected(false);
+        }
+        if(sugarToggle != null){
+            sugarToggle.setSelected(false);
+        }
+        
         ToggleButton pearlButton = (ToggleButton) toppingSelection.lookup("#pearl");
         ToggleButton miniPearlButton = (ToggleButton) toppingSelection.lookup("#miniPearl");
         ToggleButton iceCreamButton = (ToggleButton) toppingSelection.lookup("#iceCream");
@@ -518,6 +551,7 @@ public class managerPageController implements Initializable {
     @FXML
     private void handleCancelButton(ActionEvent event) {
         data.clear();
+        orderTotal = 0.0;
         Label checkoutSubTotal = (Label) orderInfoPane.lookup("#checkoutSubTotal");
         checkoutSubTotal.setText("$0.00");
         Label checkoutTax = (Label) orderInfoPane.lookup("#checkoutTax");
@@ -595,6 +629,7 @@ public class managerPageController implements Initializable {
         checkoutTax.setText("$0.00");
         Label checkoutTrueTotal = (Label) orderInfoPane.lookup("#checkoutTrueTotal");
         checkoutTrueTotal.setText("$0.00");
+        
     }
 
     @FXML
@@ -851,7 +886,10 @@ public class managerPageController implements Initializable {
         orderInfoPane.setVisible(false);
         menuItems.setVisible(false);
         statisticsPage.setVisible(true);
-        //initializeExcessTable();
+        initializeExcessTable();
+        initializePairTable();
+        initializeRestockTable();
+        handleRestockReport();
 
     }
 
@@ -865,38 +903,43 @@ public class managerPageController implements Initializable {
 
         ArrayList<ArrayList<Object>> values = new ArrayList<>();
         values = SystemFunctions.getProductSales(startText, endText);
-        /*ArrayList<String> uniqueCategory = new ArrayList<>();
-        for (int i = 0; i < values.get(0).size(); i++) {
-            uniqueCategory.add(values.get(0).get(i).toString());
-        }
-        CategoryAxis xAxis = (CategoryAxis) salesReportGraph.getXAxis();
-        xAxis.setCategories(FXCollections.observableArrayList(uniqueCategory));
-        // NumberAxis yAxis = (NumberAxis) salesReportGraph.getYAxis();
-        // yAxis.setLowerBound(0);
-        // yAxis.setUpperBound(1000);*/
+        /*
+         * ArrayList<String> uniqueCategory = new ArrayList<>();
+         * for (int i = 0; i < values.get(0).size(); i++) {
+         * uniqueCategory.add(values.get(0).get(i).toString());
+         * }
+         * CategoryAxis xAxis = (CategoryAxis) salesReportGraph.getXAxis();
+         * xAxis.setCategories(FXCollections.observableArrayList(uniqueCategory));
+         * // NumberAxis yAxis = (NumberAxis) salesReportGraph.getYAxis();
+         * // yAxis.setLowerBound(0);
+         * // yAxis.setUpperBound(1000);
+         */
         try {
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
-            
+
             for (int i = 0; i < values.get(0).size(); i++) {
-                String products = values.get(0).get(i).toString();
+                String products = "";
+                if((values.get(0).get(i).toString()).length() > 12){
+                    products = (values.get(0).get(i).toString()).substring(0, 11) + "...";
+                }
+                else{
+                    products = (values.get(0).get(i).toString());
+                }
+                
                 int itemsSold = Integer.parseInt(values.get(1).get(i).toString());
-                //XYChart.Series<String, Integer> series = new XYChart.Series<>();
+                // XYChart.Series<String, Integer> series = new XYChart.Series<>();
                 series.getData().add(new XYChart.Data<>(products, itemsSold));
-                //series.setName(products);
-                //salesReportGraph.getData().add(series);
+                // series.setName(products);
+                // salesReportGraph.getData().add(series);
             }
             salesReportGraph.getData().add(series);
-
+            // series.setName(products);
         } catch (NumberFormatException e) {
             System.out.println("Error in formatting info in @handleSalesReport");
         }
+
     }
 
-    @FXML
-    private void handleRestockReport() {
-    }
-
-    /* 
     @FXML
     private void handleExcessReport() {
         excessData.clear();
@@ -904,9 +947,33 @@ public class managerPageController implements Initializable {
         ArrayList<ArrayList<Object>> excessStock = new ArrayList<>();
         excessStock = SystemFunctions.getExcessStock(excessTime);
         for (int i = 0; i < excessStock.get(0).size(); i++) {
-            excessData.add(new Object[] { excessStock.get(0) });
+            excessData.add(new Object[] { excessStock.get(0).get(i), excessStock.get(1).get(i),
+                    excessStock.get(2).get(i), excessStock.get(3).get(i) });
         }
-        inventoryTable.setItems(inventoryData);
+        excessReportTable.setItems(excessData);
+    }
+
+    @FXML
+    private void handlePopularPair() {
+        pairData.clear();
+        String pairStartText = pairingStartDate.getValue().toString();
+        String pairEndText = pairingEndDate.getValue().toString();
+        ArrayList<ArrayList<Object>> pairList = new ArrayList<>();
+        pairList = SystemFunctions.getPairs(pairStartText, pairEndText);
+        for (int i = 0; i < pairList.get(0).size(); i++) {
+            pairData.add(new Object[] { (i + 1), pairList.get(0).get(i) + " " + pairList.get(1).get(i)});
+        }
+        popularPairsTable.setItems(pairData);
+    }
+    
+    private void handleRestockReport(){
+        restockData.clear();
+        ArrayList<ArrayList<Object>> restockList = new ArrayList<>();
+        restockList = SystemFunctions.getLowStock();
+        for (int i = 0; i < restockList.get(0).size(); i++) {
+            restockData.add(new Object[] { restockList.get(0).get(i), restockList.get(1).get(i), restockList.get(2).get(i)});
+        }
+        restockReportTable.setItems(restockData);
     }
 
     private void initializeExcessTable() {
@@ -927,7 +994,7 @@ public class managerPageController implements Initializable {
         });
 
         excessStockUsedColumn.setCellValueFactory(cellData -> {
-            if (cellData.getValue() != null && cellData.getValue().length > 2) { // Use index 2 for price
+            if (cellData.getValue() != null && cellData.getValue().length > 2) { // Useindex 2 for price
                 return new SimpleStringProperty(cellData.getValue()[2].toString());
             } else {
                 return new SimpleStringProperty("Stock Used");
@@ -935,12 +1002,57 @@ public class managerPageController implements Initializable {
         });
 
         excessCurrentStockColumn.setCellValueFactory(cellData -> {
-            if (cellData.getValue() != null && cellData.getValue().length > 3) { // Use index 2 for price
+            if (cellData.getValue() != null && cellData.getValue().length > 3) { // Use index 3 for price
                 return new SimpleStringProperty(cellData.getValue()[3].toString());
             } else {
                 return new SimpleStringProperty("Current Stock");
             }
         });
-    }*/
 
+    }
+
+    private void initializePairTable() {
+        rankingColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 0) {
+                return new SimpleStringProperty(cellData.getValue()[0].toString());
+            } else {
+                return new SimpleStringProperty("Ranking");
+            }
+        });
+
+        pairingColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use index 1 for quantity
+                return new SimpleStringProperty(cellData.getValue()[1].toString());
+            } else {
+                return new SimpleStringProperty("Pairing");
+            }
+        });
+
+    }
+
+    private void initializeRestockTable(){
+        restockIDColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 0) {
+                return new SimpleStringProperty(cellData.getValue()[0].toString());
+            } else {
+                return new SimpleStringProperty("Inventory ID");
+            }
+        });
+
+        restockNameColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use index 1 for quantity
+                return new SimpleStringProperty(cellData.getValue()[1].toString());
+            } else {
+                return new SimpleStringProperty("Item Name");
+            }
+        });
+
+        restockQuantityColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 2) { // Useindex 2 for price
+                return new SimpleStringProperty(cellData.getValue()[2].toString());
+            } else {
+                return new SimpleStringProperty("Stock Quantity");
+            }
+        });
+    }
 }
