@@ -104,6 +104,9 @@ public class managerPageController implements Initializable {
     private TableColumn<Object[], String> pairingColumn;
 
     @FXML
+    private TableView<Object[]> orderHistoryInfoTable;
+
+    @FXML
     private AnchorPane menuItems;
     @FXML
     private AnchorPane orderCustomizationMenu;
@@ -131,6 +134,10 @@ public class managerPageController implements Initializable {
     private AnchorPane statisticsPage;
     @FXML
     private AnchorPane salesPane;
+    @FXML
+    private AnchorPane orderHistoryInfo;
+    @FXML
+    private AnchorPane orderHistoryPage;
 
     @FXML
     private TextArea additionalNotes;
@@ -644,6 +651,8 @@ public class managerPageController implements Initializable {
             inventoryData.clear();
             orderInfoPane.setVisible(false);
             statisticsPage.setVisible(false);
+            orderHistoryInfo.setVisible(false);
+            orderHistoryPage.setVisible(false);
             menuItems.setVisible(false);
             // Toggle Visibility for editInventory Page
             editInventoryPage.setVisible(true);
@@ -762,6 +771,8 @@ public class managerPageController implements Initializable {
         editInventoryPage.setVisible(false);
         editMenuPage.setVisible(false);
         orderCustomizationMenu.setVisible(false);
+        orderHistoryInfo.setVisible(false);
+        orderHistoryPage.setVisible(false);
         orderInfoPane.setVisible(true);
         menuItems.setVisible(true);
         if (!items.isEmpty()) {
@@ -886,6 +897,8 @@ public class managerPageController implements Initializable {
         orderCustomizationMenu.setVisible(false);
         orderInfoPane.setVisible(false);
         menuItems.setVisible(false);
+        orderHistoryInfo.setVisible(false);
+        orderHistoryPage.setVisible(false);
         statisticsPage.setVisible(true);
         initializeExcessTable();
         initializePairTable();
@@ -1055,5 +1068,17 @@ public class managerPageController implements Initializable {
                 return new SimpleStringProperty("Stock Quantity");
             }
         });
+    }
+
+    @FXML 
+    private void handleOrdersButton(){
+        statisticsPage.setVisible(false);
+        editInventoryPage.setVisible(false);
+        editMenuPage.setVisible(false);
+        orderCustomizationMenu.setVisible(false);
+        orderInfoPane.setVisible(false);
+        menuItems.setVisible(false);
+        orderHistoryInfo.setVisible(true);
+        orderHistoryPage.setVisible(true);
     }
 }
