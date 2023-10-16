@@ -168,7 +168,6 @@ public class orderPageController implements Initializable {
         // else if(pressedButton.getId().equals("logoutButton"))
     }
 
-    /* #################UNDERCONSTRUCTION#################### */
     // This function needs to grab the gridpane @foodCategoryGridPane
     // to add categories gained from SystemFunctions.getCategories()
     // There should only be 2 rows but infinite columns
@@ -213,7 +212,6 @@ public class orderPageController implements Initializable {
         }
 
     }
-    /* #################UNDERCONSTRUCTION#################### */
 
     @FXML
     private void addButtons(ActionEvent event) {
@@ -300,10 +298,17 @@ public class orderPageController implements Initializable {
         if (items.size() > 0) {
             items.remove(items.size() - 1);
         }
+        
         Toggle iceToggle = iceGroup.getSelectedToggle();
         Toggle sugarToggle = sugarGroup.getSelectedToggle();
-        iceToggle.setSelected(false);
-        sugarToggle.setSelected(false);
+        if(iceToggle != null){
+            iceToggle.setSelected(false);
+        }
+        if(sugarToggle != null){
+            sugarToggle.setSelected(false);
+        }
+        
+        
 
         ToggleButton pearlButton = (ToggleButton) toppingSelection.lookup("#pearl");
         ToggleButton miniPearlButton = (ToggleButton) toppingSelection.lookup("#miniPearl");
@@ -461,6 +466,7 @@ public class orderPageController implements Initializable {
         checkoutTax.setText("$0.00");
         Label checkoutTrueTotal = (Label) orderInfoPane.lookup("#checkoutTrueTotal");
         checkoutTrueTotal.setText("$0.00");
+        orderTotal = 0.0;
     }
 
     @FXML

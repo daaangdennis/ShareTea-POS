@@ -88,6 +88,15 @@ public class managerPageController implements Initializable {
     private TableColumn<Object[], String> excessCurrentStockColumn;
 
     @FXML
+    private TableView<Object[]> restockReportTable;
+    @FXML
+    private TableColumn<Object[], String> restockIDColumn;
+    @FXML
+    private TableColumn<Object[], String> restockNameColumn;
+    @FXML
+    private TableColumn<Object[], String> restockQuantityColumn;
+
+    @FXML
     private TableView<Object[]> popularPairsTable;
     @FXML
     private TableColumn<Object[], String> rankingColumn;
@@ -152,6 +161,7 @@ public class managerPageController implements Initializable {
     private ObservableList<Object[]> productData = FXCollections.observableArrayList();
     private ObservableList<Object[]> excessData = FXCollections.observableArrayList();
     private ObservableList<Object[]> pairData = FXCollections.observableArrayList();
+    private ObservableList<Object[]> restockData = FXCollections.observableArrayList();
     private Double foodLabelCost = 0.0;
     public ArrayList<orderedProduct> items = new ArrayList<>();
     public ArrayList<String> categories = new ArrayList<>();
@@ -380,11 +390,16 @@ public class managerPageController implements Initializable {
         if (items.size() > 0) {
             items.remove(items.size() - 1);
         }
+        
         Toggle iceToggle = iceGroup.getSelectedToggle();
         Toggle sugarToggle = sugarGroup.getSelectedToggle();
-        iceToggle.setSelected(false);
-        sugarToggle.setSelected(false);
-
+        if(iceToggle != null){
+            iceToggle.setSelected(false);
+        }
+        if(sugarToggle != null){
+            sugarToggle.setSelected(false);
+        }
+        
         ToggleButton pearlButton = (ToggleButton) toppingSelection.lookup("#pearl");
         ToggleButton miniPearlButton = (ToggleButton) toppingSelection.lookup("#miniPearl");
         ToggleButton iceCreamButton = (ToggleButton) toppingSelection.lookup("#iceCream");
@@ -536,6 +551,7 @@ public class managerPageController implements Initializable {
     @FXML
     private void handleCancelButton(ActionEvent event) {
         data.clear();
+        orderTotal = 0.0;
         Label checkoutSubTotal = (Label) orderInfoPane.lookup("#checkoutSubTotal");
         checkoutSubTotal.setText("$0.00");
         Label checkoutTax = (Label) orderInfoPane.lookup("#checkoutTax");
@@ -613,6 +629,7 @@ public class managerPageController implements Initializable {
         checkoutTax.setText("$0.00");
         Label checkoutTrueTotal = (Label) orderInfoPane.lookup("#checkoutTrueTotal");
         checkoutTrueTotal.setText("$0.00");
+        
     }
 
     @FXML
@@ -871,6 +888,8 @@ public class managerPageController implements Initializable {
         statisticsPage.setVisible(true);
         initializeExcessTable();
         initializePairTable();
+        initializeRestockTable();
+        handleRestockReport();
 
     }
 
@@ -899,7 +918,14 @@ public class managerPageController implements Initializable {
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
 
             for (int i = 0; i < values.get(0).size(); i++) {
-                String products = values.get(0).get(i).toString();
+                String products = "";
+                if((values.get(0).get(i).toString()).length() > 12){
+                    products = (values.get(0).get(i).toString()).substring(0, 11) + "...";
+                }
+                else{
+                    products = (values.get(0).get(i).toString());
+                }
+                
                 int itemsSold = Integer.parseInt(values.get(1).get(i).toString());
                 // XYChart.Series<String, Integer> series = new XYChart.Series<>();
                 series.getData().add(new XYChart.Data<>(products, itemsSold));
@@ -929,6 +955,7 @@ public class managerPageController implements Initializable {
 
     @FXML
     private void handlePopularPair() {
+        pairData.clear();
         String pairStartText = pairingStartDate.getValue().toString();
         String pairEndText = pairingEndDate.getValue().toString();
         ArrayList<ArrayList<Object>> pairList = new ArrayList<>();
@@ -939,6 +966,15 @@ public class managerPageController implements Initializable {
         popularPairsTable.setItems(pairData);
     }
     
+    private void handleRestockReport(){
+        restockData.clear();
+        ArrayList<ArrayList<Object>> restockList = new ArrayList<>();
+        restockList = SystemFunctions.getLowStock();
+        for (int i = 0; i < restockList.get(0).size(); i++) {
+            restockData.add(new Object[] { restockList.get(0).get(i), restockList.get(1).get(i), restockList.get(2).get(i)});
+        }
+        restockReportTable.setItems(restockData);
+    }
 
     private void initializeExcessTable() {
         excessIDColumn.setCellValueFactory(cellData -> {
@@ -992,5 +1028,31 @@ public class managerPageController implements Initializable {
             }
         });
 
+    }
+
+    private void initializeRestockTable(){
+        restockIDColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 0) {
+                return new SimpleStringProperty(cellData.getValue()[0].toString());
+            } else {
+                return new SimpleStringProperty("Inventory ID");
+            }
+        });
+
+        restockNameColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use index 1 for quantity
+                return new SimpleStringProperty(cellData.getValue()[1].toString());
+            } else {
+                return new SimpleStringProperty("Item Name");
+            }
+        });
+
+        restockQuantityColumn.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 2) { // Useindex 2 for price
+                return new SimpleStringProperty(cellData.getValue()[2].toString());
+            } else {
+                return new SimpleStringProperty("Stock Quantity");
+            }
+        });
     }
 }
