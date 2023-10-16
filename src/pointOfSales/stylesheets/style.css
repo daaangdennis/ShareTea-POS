@@ -291,6 +291,10 @@
     -fx-background-color: #cf152d;
 }
 
+.report-table .column-header-background .filler {
+    -fx-background-color: #cf152d;
+}
+
 .report-table .label {
     -fx-text-fill: white;
     -fx-font-size: 12px;
