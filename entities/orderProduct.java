@@ -108,23 +108,28 @@ public class orderProduct {
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String> quantities = new ArrayList<>();
         ArrayList<String> prices = new ArrayList<>();
+        ArrayList<String> totalPrice = new ArrayList<>();
         OrderProductList.add(names);
         OrderProductList.add(quantities);
         OrderProductList.add(prices);
+        OrderProductList.add(totalPrice);
+        double total = 0;
 
         String query = "select name, quantity, price from order_product op join product pro on op.product_id = pro.product_id where order_id = ?";
         try {
             PreparedStatement statement = conn.prepareStatement(query);
-            statement.setInt(2, order_id);
+            statement.setInt(1, order_id);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 String name = resultSet.getString("name");
                 String quantity = resultSet.getInt("quantity") + "";
+                total += resultSet.getDouble("price");
                 String price = resultSet.getDouble("price") + "";
                 OrderProductList.get(0).add(name);
                 OrderProductList.get(1).add(quantity);
                 OrderProductList.get(2).add(price);
             }
+            OrderProductList.get(3).add(String.format("%.2f", total));
 
             return OrderProductList;
         } catch (Exception e) {
