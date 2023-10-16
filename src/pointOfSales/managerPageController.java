@@ -662,6 +662,7 @@ public class managerPageController implements Initializable {
 
     @FXML
     private void handleEditMenuButton(ActionEvent event) {
+        productData.clear();
         editInventoryPage.setVisible(false);
         editMenuPage.setVisible(true);
         initializeMenuEditTable();
