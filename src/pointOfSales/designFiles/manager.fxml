@@ -22,6 +22,7 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -179,6 +180,9 @@
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                       </columnConstraints>
+                                       <padding>
+                                          <Insets bottom="20.0" />
+                                       </padding>
                                     </GridPane>
                                  </content>
                               </ScrollPane>
@@ -186,13 +190,14 @@
                                  <children>
                                     <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" prefHeight="200.0" prefWidth="708.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <content>
-                                          <GridPane fx:id="foodCategoryGridPane" hgap="20.0" prefHeight="108.0" prefWidth="414.0" vgap="20.0">
-                                            <columnConstraints>
-                                              <ColumnConstraints hgrow="ALWAYS" percentWidth="25" />
-                                            </columnConstraints>
+                                          <GridPane fx:id="foodCategoryGridPane" hgap="20.0" prefHeight="108.0" vgap="20.0">
                                              <padding>
-                                                <Insets bottom="10.0" left="20.0" top="10.0" />
+                                                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                                              </padding>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                                             </rowConstraints>
                                           </GridPane>
                                        </content>
                                     </ScrollPane>
@@ -405,7 +410,7 @@
                            <children>
                               <AnchorPane fx:id="salesPane" layoutX="14.0" layoutY="14.0" prefHeight="350.0" prefWidth="754.0" styleClass="container" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="20.0">
                                  <children>
-                                    <BarChart fx:id="salesReportGraph" layoutX="54.0" layoutY="-26.0" legendVisible="false" styleClass="sales-report" title="Sales Report" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+                                    <BarChart fx:id="salesReportGraph" layoutX="54.0" layoutY="-26.0" legendVisible="false" prefHeight="299.0" prefWidth="714.0" styleClass="sales-report" title="Sales Report" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
                                       <xAxis>
                                         <CategoryAxis animated="false" label="Products" prefWidth="466.0" side="BOTTOM" />
                                       </xAxis>
@@ -434,7 +439,7 @@
                                        </columnResizePolicy>
                                     </TableView>
                                     <Label layoutX="313.0" layoutY="14.0" styleClass="red-main-labels" text="Excess Report" AnchorPane.topAnchor="10.0" />
-                                    <DatePicker fx:id="excessTimestamp" layoutX="351.0" layoutY="220.0" promptText="Select Date" onAction="#handleExcessReport"/>
+                                    <DatePicker fx:id="excessTimestamp" layoutX="351.0" layoutY="220.0" onAction="#handleExcessReport" promptText="Select Date" />
                                     <Label layoutX="230.0" layoutY="219.0" styleClass="red-main-labels" text="Timestamp:" />
                                  </children>
                               </AnchorPane>
@@ -451,17 +456,18 @@
                                        </columnResizePolicy>
                                     </TableView>
                                     <Label alignment="CENTER" layoutX="99.0" layoutY="14.0" styleClass="red-main-labels" text="Restock Report" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-                                    <TableView fx:id="popularPairsTable" layoutX="-31.0" layoutY="340.0" prefHeight="176.0" prefWidth="317.0" styleClass="report-table" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="390.0">
+                                    <TableView fx:id="popularPairsTable" layoutX="-31.0" layoutY="340.0" prefHeight="141.0" prefWidth="317.0" styleClass="report-table" AnchorPane.bottomAnchor="149.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="390.0">
                                        <columns>
                                           <TableColumn fx:id="rankingColumn" prefWidth="75.0" text="Ranking" />
                                           <TableColumn fx:id="pairingColumn" prefWidth="241.0" text="Pairing" />
                                        </columns>
                                     </TableView>
                                     <Label alignment="CENTER" layoutX="10.0" layoutY="359.0" styleClass="red-main-labels" text="Popular Pairings" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-                                    <DatePicker fx:id="pairingStartDate" layoutX="134.0" layoutY="584.0" promptText="Select Date" />
-                                    <Label layoutX="27.0" layoutY="583.0" styleClass="red-main-labels" text="Start Date:" />
-                                    <DatePicker fx:id="pairingEndDate" layoutX="134.0" layoutY="631.0" promptText="Select Date" onAction="#handlePopularPair"/>
-                                    <Label layoutX="38.0" layoutY="630.0" styleClass="red-main-labels" text="End Date:" />
+                                    <DatePicker fx:id="pairingStartDate" layoutX="134.0" layoutY="550.0" promptText="Select Date" />
+                                    <Label layoutX="27.0" layoutY="549.0" styleClass="red-main-labels" text="Start Date:" />
+                                    <DatePicker fx:id="pairingEndDate" layoutX="134.0" layoutY="597.0" promptText="Select Date" />
+                                    <Label layoutX="38.0" layoutY="596.0" styleClass="red-main-labels" text="End Date:" />
+                                    <Button fx:id="pairingGenerateButton" layoutX="100.0" layoutY="636.0" mnemonicParsing="false" onAction="#handleSalesReport" prefHeight="25.0" prefWidth="137.0" styleClass="generate-report-button" text="Generate Report" />
                                  </children>
                               </AnchorPane>
                            </children>

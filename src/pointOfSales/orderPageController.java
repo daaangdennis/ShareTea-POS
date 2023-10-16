@@ -194,7 +194,7 @@ public class orderPageController implements Initializable {
 
                 // foodCategoryGridPane.add(buttonNode, index, swapper);
                 foodCategoryGridPane.getChildren().add(buttonNode);
-                GridPane.setHalignment(buttonNode, HPos.CENTER);
+                // GridPane.setHalignment(buttonNode, HPos.CENTER);
                 // Set Toggle Group to Tea Group When they become togglebuttons
                 button.setToggleGroup(teaGroup);
                 if (swapper == 1) {
