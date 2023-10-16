@@ -1030,7 +1030,7 @@ public class managerPageController implements Initializable {
         });
 
     }
-
+    
     private void initializeRestockTable(){
         restockIDColumn.setCellValueFactory(cellData -> {
             if (cellData.getValue() != null && cellData.getValue().length > 0) {

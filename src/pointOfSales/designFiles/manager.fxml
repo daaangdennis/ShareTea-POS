@@ -467,7 +467,7 @@
                                     <Label layoutX="27.0" layoutY="549.0" styleClass="red-main-labels" text="Start Date:" />
                                     <DatePicker fx:id="pairingEndDate" layoutX="134.0" layoutY="597.0" promptText="Select Date" />
                                     <Label layoutX="38.0" layoutY="596.0" styleClass="red-main-labels" text="End Date:" />
-                                    <Button fx:id="pairingGenerateButton" layoutX="100.0" layoutY="636.0" mnemonicParsing="false" onAction="#handleSalesReport" prefHeight="25.0" prefWidth="137.0" styleClass="generate-report-button" text="Generate Report" />
+                                    <Button fx:id="pairingGenerateButton" layoutX="100.0" layoutY="636.0" mnemonicParsing="false" onAction="#handlePopularPair" prefHeight="25.0" prefWidth="137.0" styleClass="generate-report-button" text="Generate Report" />
                                  </children>
                               </AnchorPane>
                            </children>
