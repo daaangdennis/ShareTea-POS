@@ -9,23 +9,54 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
+/**
+ * Represents an inventory with details such as name, details, quantity, and the
+ * last updated date.
+ */
 public class inventory {
+    /** The name of the inventory item. */
     String Name = null;
+    /** Detailed description of the inventory item. */
     String Details = null;
+    /** Quantity of the inventory item. */
     int Quantity = 0;
+    /** The last updated date of the inventory item. */
     Date LastUpdated = null;
+    /** Connection to the database. */
     Connection conn = null;
 
+    /**
+     * Initializes a new instance of the inventory class with a database connection.
+     *
+     * @param conn Database connection.
+     */
     public inventory(Connection conn) {
         this.conn = conn;
     }
 
+    /**
+     * Initializes a new instance of the inventory class with a database connection
+     * and a name.
+     *
+     * @param conn Database connection.
+     * @param Name Name of the inventory item.
+     */
     public inventory(Connection conn, String Name) {
         this.Name = Name;
         this.conn = conn;
 
     }
 
+    /**
+     * Initializes a new instance of the inventory class with detailed parameters.
+     *
+     * @param conn        Database connection.
+     * @param Name        Name of the inventory item.
+     * @param Details     Detailed description of the inventory item.
+     * @param Quantity    Quantity of the inventory item.
+     * @param LastUpdated The last updated date of the inventory item in
+     *                    "yyyy-MM-dd" format.
+     */
     public inventory(Connection conn, String Name, String Details, int Quantity, String LastUpdated) {
         this.Name = Name;
         this.Details = Details;
@@ -40,6 +71,13 @@ public class inventory {
         }
     }
 
+    /**
+     * Creates a new inventory item in the database.
+     *
+     * @param conn              Database connection.
+     * @param name              Name of the inventory item.
+     * @param inventoryQuantity Quantity of the inventory item.
+     */
     public static void createInventory(Connection conn, String name, int inventoryQuantity) {
         try {
             String query = "SELECT MAX(inventory_id) FROM inventory";
@@ -69,6 +107,13 @@ public class inventory {
         }
     }
 
+    /**
+     * Retrieves the ID of the inventory item by its name.
+     *
+     * @param conn          Database connection.
+     * @param inventoryName Name of the inventory item.
+     * @return The ID of the inventory item, or -1 if not found.
+     */
     public static int getInventoryByName(Connection conn, String inventoryName) {
         int inventory_id = -1;
         try {
@@ -86,6 +131,12 @@ public class inventory {
         return -1;
     }
 
+    /**
+     * Retrieves all inventory items from the database.
+     *
+     * @param conn Database connection.
+     * @return A list containing details of all inventory items.
+     */
     public static ArrayList<ArrayList<String>> getInventory(Connection conn) {
         ArrayList<ArrayList<String>> inventory_array = new ArrayList<>();
         try {
@@ -117,6 +168,12 @@ public class inventory {
         return inventory_array;
     }
 
+    /**
+     * Deletes an inventory item by its name from the database.
+     *
+     * @param conn          Database connection.
+     * @param inventoryName Name of the inventory item.
+     */
     public static void deleteInv(Connection conn, String inventoryName) {
         String updateQuery = "DELETE FROM inventory WHERE name = ?";
         try {
@@ -132,6 +189,14 @@ public class inventory {
         }
     }
 
+    /**
+     * Adds or subtracts the quantity of an inventory item.
+     * If the item doesn't exist, it creates a new entry.
+     *
+     * @param conn            Database connection.
+     * @param inventoryName   Name of the inventory item.
+     * @param inventoryNumber Quantity to be added/subtracted.
+     */
     public static void addSubInventory(Connection conn, String inventoryName, int inventoryNumber) {
         java.util.Date currentDateUtil = new java.util.Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
