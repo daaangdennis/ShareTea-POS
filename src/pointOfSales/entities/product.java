@@ -8,22 +8,51 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Represents a product with associated details such as name, price, and
+ * category.
+ */
 public class product {
+    /** Product name. */
     String Name = null;
+    /** Product price. */
     BigDecimal Price = new BigDecimal(0);
+    /** Product category. */
     String Category = null;
+    /** Product ID. */
     int ProductID = -1;
+    /** Database connection object. */
     Connection conn = null;
 
+    /**
+     * Constructs a product object initializing the database connection.
+     *
+     * @param conn The database connection.
+     */
     public product(Connection conn) {
         this.conn = conn;
     }
 
+    /**
+     * Constructs a product object with name and category.
+     *
+     * @param conn     The database connection.
+     * @param Name     Product name.
+     * @param Category Product category.
+     */
     public product(Connection conn, String Name, String Category) {
         this.Name = Name;
         this.Category = Category;
     }
 
+    /**
+     * Constructs a product object with name, category, and price.
+     *
+     * @param conn     The database connection.
+     * @param Name     Product name.
+     * @param Category Product category.
+     * @param Price    Product price.
+     */
     public product(Connection conn, String Name, String Category, Double Price) {
         this.Name = Name;
         this.Category = Category;
@@ -31,6 +60,14 @@ public class product {
         this.conn = conn;
     }
 
+    /**
+     * Adds a new product to the database.
+     *
+     * @param conn     The database connection.
+     * @param name     Product name.
+     * @param category Product category.
+     * @param price    Product price.
+     */
     public static void createProduct(Connection conn, String name, String category, double price) {
         try {
             String sql = "INSERT INTO product (name, category, price) VALUES (?, ?, ?)";
@@ -51,6 +88,12 @@ public class product {
         }
     }
 
+    /**
+     * Fetches a list of distinct product categories.
+     *
+     * @param conn The database connection.
+     * @return List of product categories.
+     */
     public static ArrayList<String> getCategories(Connection conn) {
         ArrayList<String> category_array = new ArrayList<>();
         try {
@@ -68,6 +111,12 @@ public class product {
         return category_array;
     }
 
+    /**
+     * Fetches information about all products.
+     *
+     * @param conn The database connection.
+     * @return List containing product details.
+     */
     public static ArrayList<ArrayList<String>> getProductInfo(Connection conn) {
         ArrayList<ArrayList<String>> product_info = new ArrayList<>();
         ArrayList<String> id_array = new ArrayList<>();
@@ -100,6 +149,13 @@ public class product {
         return product_info;
     }
 
+    /**
+     * Fetches information about products based on a specified category.
+     *
+     * @param conn     The database connection.
+     * @param Category The product category.
+     * @return List containing product details by category.
+     */
     public static ArrayList<ArrayList<String>> getProductsPriceByCategory(Connection conn, String Category) {
         ArrayList<ArrayList<String>> productPrice_array = new ArrayList<>();
         ArrayList<String> product_array = new ArrayList<>();
@@ -128,6 +184,14 @@ public class product {
         return productPrice_array;
     }
 
+    /**
+     * Updates an existing product or adds a new product if not exists.
+     *
+     * @param conn     The database connection.
+     * @param name     Product name.
+     * @param category Product category.
+     * @param price    Product price.
+     */
     public static void updateAddProduct(Connection conn, String name, String category, Double price) {
         String updateQuery = "UPDATE product SET price = ? WHERE name = ?";
         try {
@@ -144,6 +208,12 @@ public class product {
         }
     }
 
+    /**
+     * Deletes a product based on the product name.
+     *
+     * @param conn        The database connection.
+     * @param productName The product name.
+     */
     public static void deletePro(Connection conn, String productName) {
         String updateQuery = "DELETE FROM product WHERE name = ?";
         try {
