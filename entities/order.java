@@ -127,11 +127,11 @@ public class order {
         ordersByDatesList.add(customerName);
         ordersByDatesList.add(orderDate);
 
-        String query = "select order_id, concat_ws(' ',first_name, last_name), order_date from orders join customer on orders.customer_id = customer.customer_id where order_date >= ? and order_date <= ? order by order_date desc";
+        String query = "select order_id, concat_ws(' ',first_name, last_name), order_date from orders join customer on orders.customer_id = customer.customer_id where order_date >= ? and order_date < date (?) + 1 order by order_date desc";
         try {
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setDate(1, Date.valueOf(startDate));
-            statement.setDate(2, Date.valueOf(endDate));
+            statement.setString(2, endDate);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 String id = resultSet.getInt("order_id") + "";
