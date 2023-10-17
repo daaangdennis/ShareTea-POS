@@ -6,15 +6,36 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+/**
+ * Represents an item in an order with details about product, quantity, and
+ * customizations.
+ */
 public class orderProduct {
+    /** The Product ID associated with the order item. */
     public int ProductID;
+    /** The Order ID associated with the order item. */
     public int OrderID;
+    /** The Quantity of the product ordered. */
     public int Quantity;
+    /** List of Toppings added to the product. */
     public ArrayList<String> Toppings;
+    /** Special notes or instructions for the product. */
     public String Note = "";
+    /** Percentage of sugar to be added. Default is 100%. */
     public double SugarLevel = 100;
+    /** Level of ice to be added to the product. */
     public String IceLevel = "";
 
+    /**
+     * Constructs an orderProduct object with all customizations.
+     *
+     * @param PID             Product ID as a string.
+     * @param ProductQuantity Quantity of product ordered.
+     * @param ToppingList     List of toppings.
+     * @param Sugar           Sugar percentage.
+     * @param ice             Ice level.
+     * @param NoteInput       Special notes or instructions.
+     */
     public orderProduct(String PID, int ProductQuantity, ArrayList<String> ToppingList, double Sugar, String ice,
             String NoteInput) {
         this.ProductID = Integer.parseInt(PID);
@@ -25,6 +46,15 @@ public class orderProduct {
         this.Note = NoteInput;
     }
 
+    /**
+     * Constructs an orderProduct object without toppings.
+     *
+     * @param PID             Product ID as a string.
+     * @param ProductQuantity Quantity of product ordered.
+     * @param Sugar           Sugar percentage.
+     * @param ice             Ice level.
+     * @param NoteInput       Special notes or instructions.
+     */
     public orderProduct(String PID, int ProductQuantity, double Sugar, String ice, String NoteInput) {
         this.ProductID = Integer.parseInt(PID);
         this.Quantity = ProductQuantity;
@@ -33,6 +63,13 @@ public class orderProduct {
         this.Note = NoteInput;
     }
 
+    /**
+     * Inserts a new order product into the database.
+     *
+     * @param conn      Database connection.
+     * @param productID Product ID.
+     * @param orderID   Order ID.
+     */
     public void addOrderProduct(Connection conn, int productID, int orderID) {
         String toppingList = "";
         if (!Toppings.isEmpty()) {
@@ -75,6 +112,11 @@ public class orderProduct {
         }
     }
 
+    /**
+     * Subtracts the inventory for the ordered product.
+     *
+     * @param conn Database connection.
+     */
     public void subtractInventory(Connection conn) {
         try {
             String sql = "UPDATE inventory SET quantity = quantity - ? WHERE inventory_id IN (SELECT inventory_id FROM inventory_product WHERE product_id = ?)";
@@ -87,6 +129,11 @@ public class orderProduct {
         }
     }
 
+    /**
+     * Subtracts the inventory for the toppings of the ordered product.
+     *
+     * @param conn Database connection.
+     */
     public void subtractToppings(Connection conn) {
         try {
             String sql = "UPDATE inventory SET quantity = quantity - 1 WHERE name = ?";
@@ -101,7 +148,14 @@ public class orderProduct {
         }
     }
 
-    public static ArrayList<ArrayList<String>> OrderProductByID(Connection conn, Integer order_id){
+    /**
+     * Retrieves a list of order products associated with a given order ID.
+     *
+     * @param conn     Database connection.
+     * @param order_id Order ID.
+     * @return List containing details of order products for the given order ID.
+     */
+    public static ArrayList<ArrayList<String>> OrderProductByID(Connection conn, Integer order_id) {
         ArrayList<ArrayList<String>> OrderProductList = new ArrayList<>();
         ArrayList<String> names = new ArrayList<>();
         ArrayList<String> quantities = new ArrayList<>();
@@ -118,7 +172,7 @@ public class orderProduct {
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setInt(1, order_id);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 String name = resultSet.getString("name");
                 String quantity = resultSet.getInt("quantity") + "";
                 total += resultSet.getDouble("price");
