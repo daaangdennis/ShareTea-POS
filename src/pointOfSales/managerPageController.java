@@ -1,5 +1,5 @@
 package pointOfSales;
-
+import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -112,6 +112,16 @@ public class managerPageController implements Initializable {
     @FXML 
     private TableColumn<Object[], String> historyOrderDate;
 
+    @FXML
+    private TableView<Object[]> orderHistoryInfoTable;
+    @FXML 
+    private TableColumn<Object[], String> productTableColumn1;
+    @FXML 
+    private TableColumn<Object[], String> quantityTableColumn1;
+    @FXML 
+    private TableColumn<Object[], String> priceTableColumn1;
+
+
 
     @FXML
     private AnchorPane menuItems;
@@ -170,6 +180,9 @@ public class managerPageController implements Initializable {
     @FXML
     private DatePicker orderHistoryEndDate;
 
+    @FXML
+    public Label orderHistoryTotal;
+
     private ToggleGroup teaGroup = new ToggleGroup();
     private ToggleGroup sugarGroup = new ToggleGroup();
     private ToggleGroup iceGroup = new ToggleGroup();
@@ -182,6 +195,7 @@ public class managerPageController implements Initializable {
     private ObservableList<Object[]> pairData = FXCollections.observableArrayList();
     private ObservableList<Object[]> restockData = FXCollections.observableArrayList();
     private ObservableList<Object[]> historyData = FXCollections.observableArrayList();
+    private ObservableList<Object[]> selectedHistoryData = FXCollections.observableArrayList();
     private Double foodLabelCost = 0.0;
     public ArrayList<orderedProduct> items = new ArrayList<>();
     public ArrayList<String> categories = new ArrayList<>();
@@ -192,6 +206,7 @@ public class managerPageController implements Initializable {
     public String employPosition = "";
     private int historyCounter = 0;
     private ArrayList<ArrayList<String>> historyList = new ArrayList<>();
+    
 
     public void initialize(URL location, ResourceBundle resources) {
         productTableColumn.setCellValueFactory(cellData -> {
@@ -1128,6 +1143,7 @@ public class managerPageController implements Initializable {
         orderHistoryInfo.setVisible(true);
         orderHistoryPage.setVisible(true);
         initializeOrderHistoryTable();
+        initializeHistoryInfoTable();
     }
 
     @FXML
@@ -1187,6 +1203,52 @@ public class managerPageController implements Initializable {
         orderHistoryTable.setItems(historyData);
     }
 
+    private void initializeHistoryInfoTable(){
+        productTableColumn1.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 0) {
+                return new SimpleStringProperty(cellData.getValue()[0].toString());
+            } else {
+                return new SimpleStringProperty("Product Name");
+            }
+        });
 
+        quantityTableColumn1.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use index 1 for quantity
+                return new SimpleStringProperty(cellData.getValue()[1].toString());
+            } else {
+                return new SimpleStringProperty("Quantity");
+            }
+        });
+
+        priceTableColumn1.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 2) { // Useindex 2 for price
+                return new SimpleStringProperty(cellData.getValue()[2].toString());
+            } else {
+                return new SimpleStringProperty("Price ($)");
+            }
+        });
+    }
+
+    @FXML
+    private void handleHistoryTableClick(MouseEvent event){
+        selectedHistoryData.clear();
+        Object[] selectedRow = null;
+        if(event.getClickCount() == 1){
+            selectedRow = orderHistoryTable.getSelectionModel().getSelectedItem();
+            //Check if null
+        }
+        if(selectedRow != null)
+        {
+            ArrayList <ArrayList<String>> values = new ArrayList<>();
+            values = SystemFunctions.getOrderProductByID(Integer.parseInt(selectedRow[0].toString()));
+            for (int i = 0; i < values.get(0).size(); i++) {
+                selectedHistoryData.add(new Object[] { values.get(0).get(i), values.get(1).get(i), values.get(2).get(i)});
+            }
+            orderHistoryInfoTable.setItems(selectedHistoryData);
+          
+            orderHistoryTotal.setText("$"+ values.get(3).get(0));
+        }
+        
+    }
 
 }
