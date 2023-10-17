@@ -167,7 +167,7 @@ public class orderProduct {
         OrderProductList.add(totalPrice);
         double total = 0;
 
-        String query = "select name, quantity, price from order_product op join product pro on op.product_id = pro.product_id where order_id = ?";
+        String query = "select name, quantity, price, toppings from order_product op join product pro on op.product_id = pro.product_id where order_id = ?";
         try {
             PreparedStatement statement = conn.prepareStatement(query);
             statement.setInt(1, order_id);
@@ -175,8 +175,15 @@ public class orderProduct {
             while (resultSet.next()) {
                 String name = resultSet.getString("name");
                 Integer quantity = resultSet.getInt("quantity");
-                total += resultSet.getDouble("price") * quantity;
-                String price = String.format("%.2f", resultSet.getDouble("price") * quantity);
+                String tops = resultSet.getString("toppings");
+                Double topsPrice = 0.00;
+                if(tops != null){
+                    long count = tops.chars().filter(ch -> ch == ',').count();
+                    topsPrice = (count+1)*0.75;
+                }
+                total += (resultSet.getDouble("price") * quantity) + topsPrice;
+                String price = String.format("%.2f", resultSet.getDouble("price") * quantity + topsPrice);
+
                 OrderProductList.get(0).add(name);
                 OrderProductList.get(1).add(quantity + "");
                 OrderProductList.get(2).add(price);
