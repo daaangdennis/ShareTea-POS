@@ -104,7 +104,14 @@ public class managerPageController implements Initializable {
     private TableColumn<Object[], String> pairingColumn;
 
     @FXML
-    private TableView<Object[]> orderHistoryInfoTable;
+    private TableView<Object[]> orderHistoryTable;
+    @FXML 
+    private TableColumn<Object[], String> historyOrderID;
+    @FXML 
+    private TableColumn<Object[], String> historyCustomerName;
+    @FXML 
+    private TableColumn<Object[], String> historyOrderDate;
+
 
     @FXML
     private AnchorPane menuItems;
@@ -158,6 +165,11 @@ public class managerPageController implements Initializable {
     @FXML
     private DatePicker pairingEndDate;
 
+    @FXML
+    private DatePicker orderHistoryStartDate;
+    @FXML
+    private DatePicker orderHistoryEndDate;
+
     private ToggleGroup teaGroup = new ToggleGroup();
     private ToggleGroup sugarGroup = new ToggleGroup();
     private ToggleGroup iceGroup = new ToggleGroup();
@@ -169,6 +181,7 @@ public class managerPageController implements Initializable {
     private ObservableList<Object[]> excessData = FXCollections.observableArrayList();
     private ObservableList<Object[]> pairData = FXCollections.observableArrayList();
     private ObservableList<Object[]> restockData = FXCollections.observableArrayList();
+    private ObservableList<Object[]> historyData = FXCollections.observableArrayList();
     private Double foodLabelCost = 0.0;
     public ArrayList<orderedProduct> items = new ArrayList<>();
     public ArrayList<String> categories = new ArrayList<>();
@@ -177,6 +190,8 @@ public class managerPageController implements Initializable {
     public Map<Button, String> buttonIdMap = new HashMap<>();
     public Double orderTotal = 0.0;
     public String employPosition = "";
+    private int historyCounter = 0;
+    private ArrayList<ArrayList<String>> historyList = new ArrayList<>();
 
     public void initialize(URL location, ResourceBundle resources) {
         productTableColumn.setCellValueFactory(cellData -> {
@@ -1076,6 +1091,32 @@ public class managerPageController implements Initializable {
         });
     }
 
+    private void initializeOrderHistoryTable(){
+        historyOrderID.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 0) {
+                return new SimpleStringProperty(cellData.getValue()[0].toString());
+            } else {
+                return new SimpleStringProperty("Order ID");
+            }
+        });
+
+        historyCustomerName.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use index 1 for quantity
+                return new SimpleStringProperty(cellData.getValue()[1].toString());
+            } else {
+                return new SimpleStringProperty("Customer Name");
+            }
+        });
+
+        historyOrderDate.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 2) { // Useindex 2 for price
+                return new SimpleStringProperty(cellData.getValue()[2].toString());
+            } else {
+                return new SimpleStringProperty("Order Date");
+            }
+        });
+    }
+
     @FXML 
     private void handleOrdersButton(){
         statisticsPage.setVisible(false);
@@ -1086,5 +1127,66 @@ public class managerPageController implements Initializable {
         menuItems.setVisible(false);
         orderHistoryInfo.setVisible(true);
         orderHistoryPage.setVisible(true);
+        initializeOrderHistoryTable();
     }
+
+    @FXML
+    private void handleGenerateOrderHistory(){
+        historyData.clear();
+        historyList.clear();
+        historyCounter = 0;
+        String orderHistoryStart = orderHistoryStartDate.getValue().toString();
+        String orderHistoryEnd = orderHistoryEndDate.getValue().toString();
+        historyList = SystemFunctions.getOrdersByDates(orderHistoryStart, orderHistoryEnd);
+        int buffer = 25;
+        if(buffer > historyList.get(0).size()){
+            buffer = historyList.get(0).size();
+        }
+        for (int i = 0; i < buffer; i++) {
+            historyData.add(new Object[] { historyList.get(0).get(i), historyList.get(1).get(i), historyList.get(2).get(i)});
+        }
+        orderHistoryTable.setItems(historyData);
+        // System.out.println("Amount of entries: " + historyList.get(0).size());
+    }
+
+    @FXML
+    private void handleForwardHistory(){
+        historyCounter++;
+        int bufferArray = (historyCounter + 1) * 25;
+        int indexMod = 25;
+        if(historyList.get(0).size() / 25 < historyCounter){
+            historyCounter--;
+            return;
+        }
+        if(bufferArray > historyList.get(0).size()){
+            bufferArray -= 25;
+            indexMod = historyList.get(0).size() - bufferArray;
+            bufferArray = historyList.get(0).size();
+        }
+        historyData.clear();
+        // System.out.println("Buffer is at: " + bufferArray);
+        for (int i = bufferArray - indexMod; i < bufferArray; i++) {
+            historyData.add(new Object[] { historyList.get(0).get(i), historyList.get(1).get(i), historyList.get(2).get(i)});
+        }
+        orderHistoryTable.setItems(historyData);
+    }
+
+    @FXML
+    private void handleBackwardHistory(){
+        historyCounter--;
+        if(historyCounter < 0){
+            historyCounter++;
+            return;
+        }
+        int bufferArray = (historyCounter + 1) * 25;
+        
+        historyData.clear();
+        for (int i = bufferArray - 25; i < bufferArray; i++) {
+            historyData.add(new Object[] { historyList.get(0).get(i), historyList.get(1).get(i), historyList.get(2).get(i)});
+        }
+        orderHistoryTable.setItems(historyData);
+    }
+
+
+
 }
