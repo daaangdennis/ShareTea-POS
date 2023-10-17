@@ -176,7 +176,7 @@ public class orderProduct {
                 String name = resultSet.getString("name");
                 String quantity = resultSet.getInt("quantity") + "";
                 total += resultSet.getDouble("price");
-                String price = resultSet.getDouble("price") + "";
+                String price = String.format("%.2f", resultSet.getDouble("price"));
                 OrderProductList.get(0).add(name);
                 OrderProductList.get(1).add(quantity);
                 OrderProductList.get(2).add(price);
