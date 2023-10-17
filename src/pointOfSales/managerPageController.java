@@ -184,6 +184,8 @@ public class managerPageController implements Initializable {
     public Label orderHistoryTotal;
     @FXML
     public Label orderHistoryNameLabel;
+    @FXML
+    public Label orderHistoryNumberLabel;
 
     private ToggleGroup teaGroup = new ToggleGroup();
     private ToggleGroup sugarGroup = new ToggleGroup();
@@ -1013,7 +1015,7 @@ public class managerPageController implements Initializable {
         ArrayList<ArrayList<Object>> pairList = new ArrayList<>();
         pairList = SystemFunctions.getPairs(pairStartText, pairEndText);
         for (int i = 0; i < pairList.get(0).size(); i++) {
-            pairData.add(new Object[] { (i + 1), pairList.get(0).get(i) + " " + pairList.get(1).get(i)});
+            pairData.add(new Object[] { (i + 1), pairList.get(0).get(i) + ", " + pairList.get(1).get(i)});
         }
         popularPairsTable.setItems(pairData);
     }
@@ -1242,6 +1244,7 @@ public class managerPageController implements Initializable {
         if(selectedRow != null)
         {
             orderHistoryNameLabel.setText(selectedRow[1].toString());
+            orderHistoryNumberLabel.setText("Order #" + selectedRow[0].toString());
             ArrayList <ArrayList<String>> values = new ArrayList<>();
             values = SystemFunctions.getOrderProductByID(Integer.parseInt(selectedRow[0].toString()));
             for (int i = 0; i < values.get(0).size(); i++) {
