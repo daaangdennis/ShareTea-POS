@@ -461,6 +461,9 @@
                                           <TableColumn fx:id="rankingColumn" prefWidth="75.0" text="Ranking" />
                                           <TableColumn fx:id="pairingColumn" prefWidth="241.0" text="Pairing" />
                                        </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
                                     </TableView>
                                     <Label alignment="CENTER" layoutX="10.0" layoutY="359.0" styleClass="red-main-labels" text="Popular Pairings" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
                                     <DatePicker fx:id="pairingStartDate" layoutX="134.0" layoutY="550.0" promptText="Select Date" />

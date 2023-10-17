@@ -247,6 +247,10 @@
     -fx-background-color: #cf152d;
 }
 
+.inventory-table-view .column-header-background .filler {
+    -fx-background-color: #cf152d;
+}
+
 .inventory-table-view .label {
     -fx-text-fill: white;
     -fx-font-size: 16px;
@@ -261,7 +265,7 @@
     -fx-font-size: 14px;
 }
 
-.sales-report .chart-title, .axis-label, .bar {
+.sales-report .chart-title, .axis-label {
     -fx-text-fill: #cf152d;
 }
 
@@ -288,6 +292,10 @@
 }
 
 .report-table .column-header {
+    -fx-background-color: #cf152d;
+}
+
+.report-table .column-header-background .filler {
     -fx-background-color: #cf152d;
 }
 
