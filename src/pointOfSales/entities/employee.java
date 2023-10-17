@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+/**
+ * Represents an employee in the point of sales system.
+ */
 public class employee {
     String FirstName = null;
     String LastName = null;
@@ -19,10 +22,24 @@ public class employee {
     Connection conn = null;
     public int EmployeeID = -1;
 
+    /**
+     * Initializes an employee with a database connection.
+     *
+     * @param conn The database connection to be used.
+     */
     public employee(Connection conn) {
         this.conn = conn;
     }
 
+    /**
+     * Initializes an employee with essential details.
+     *
+     * @param conn      The database connection to be used.
+     * @param FirstName First name of the employee.
+     * @param LastName  Last name of the employee.
+     * @param Position  Position of the employee (e.g., MANAGER, CASHIER).
+     * @param Passcode  Unique passcode for the employee.
+     */
     public employee(Connection conn, String FirstName, String LastName, String Position, String Passcode) {
         this.FirstName = FirstName;
         this.LastName = LastName;
@@ -31,6 +48,18 @@ public class employee {
         this.conn = conn;
     }
 
+    /**
+     * Initializes an employee with detailed attributes.
+     *
+     * @param conn        The database connection to be used.
+     * @param FirstName   First name of the employee.
+     * @param LastName    Last name of the employee.
+     * @param Position    Position of the employee (e.g., MANAGER, CASHIER).
+     * @param Email       Email of the employee.
+     * @param PhoneNumber Phone number of the employee.
+     * @param HireDate    The date the employee was hired.
+     * @param Passcode    Unique passcode for the employee.
+     */
     public employee(Connection conn, String FirstName, String LastName, String Position, String Email,
             String PhoneNumber,
             String HireDate, String Passcode) {
@@ -52,6 +81,9 @@ public class employee {
         }
     }
 
+    /**
+     * Adds the employee to the database.
+     */
     public void createEmployee() {
         PreparedStatement pstmt;
         try {
@@ -89,6 +121,12 @@ public class employee {
         }
     }
 
+    /**
+     * Retrieves an employee from the database by their unique ID.
+     *
+     * @param EmployeeID The unique identifier for the employee.
+     * @return An employee object if found; null otherwise.
+     */
     public employee getEmployeeByID(int EmployeeID) {
         employee resultEmployee = null;
         try {
@@ -119,6 +157,14 @@ public class employee {
         return resultEmployee;
     }
 
+    /**
+     * Retrieves an employee's unique ID by their first and last name.
+     *
+     * @param conn      The database connection to be used.
+     * @param FirstName First name of the employee.
+     * @param LastName  Last name of the employee.
+     * @return The unique identifier for the employee if found; -1 otherwise.
+     */
     public static int getEmployeeByName(Connection conn, String FirstName, String LastName) {
         int resultEmployee = -1;
         try {
@@ -143,6 +189,14 @@ public class employee {
         return resultEmployee;
     }
 
+    /**
+     * Verifies an employee's credentials based on their passcode.
+     *
+     * @param conn The database connection to be used.
+     * @param pw   The passcode to verify.
+     * @return A list containing the verified employee's first name, last name,
+     *         position, and ID.
+     */
     public static ArrayList<String> verifyEmployee(Connection conn, String pw) {
         ArrayList<String> employee_verify = new ArrayList<>();
         try {
