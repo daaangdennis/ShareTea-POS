@@ -11,8 +11,19 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.text.DecimalFormat;
 
+/**
+ * Represents sales-related functionalities in the Point of Sale system.
+ */
 public class sales {
 
+    /**
+     * Fetches the product sales between the given start and end dates.
+     *
+     * @param conn      Database connection.
+     * @param startDate Start date of the range.
+     * @param endDate   End date of the range.
+     * @return A list of product names and their respective sold quantities.
+     */
     public static ArrayList<ArrayList<Object>> ProductSales(Connection conn, String startDate, String endDate) {
         ArrayList<ArrayList<Object>> productSaleList = new ArrayList<>();
         ArrayList<Object> nameList = new ArrayList<>();
@@ -41,6 +52,12 @@ public class sales {
         return productSaleList;
     }
 
+    /**
+     * Retrieves products that have low stock in inventory.
+     *
+     * @param conn Database connection.
+     * @return A list of product IDs, names, and the remaining quantities.
+     */
     public static ArrayList<ArrayList<Object>> lowStock(Connection conn) {
         ArrayList<ArrayList<Object>> lowStockList = new ArrayList<>();
         ArrayList<Object> idList = new ArrayList<>();
@@ -71,6 +88,14 @@ public class sales {
         return lowStockList;
     }
 
+    /**
+     * Calculates inventory products that are excessively stocked based on
+     * the usage since the provided start date.
+     *
+     * @param conn      Database connection.
+     * @param startDate The start date for the inventory usage evaluation.
+     * @return A list of inventory products that are under-utilized.
+     */
     public static ArrayList<ArrayList<Object>> excessStock(Connection conn, String startDate) {
         ArrayList<ArrayList<Object>> inventoryUsage = new ArrayList<>();
         ArrayList<Object> idList = new ArrayList<>();
@@ -110,6 +135,16 @@ public class sales {
         return inventoryUsage;
     }
 
+    /**
+     * Identifies commonly bought product pairings between the given start
+     * and end dates.
+     *
+     * @param conn      Database connection.
+     * @param startDate Start date of the range.
+     * @param endDate   End date of the range.
+     * @return A list of product pairs and the number of times they were purchased
+     *         together.
+     */
     public static ArrayList<ArrayList<Object>> commonPairs(Connection conn, String startDate, String endDate) {
         ArrayList<ArrayList<Object>> pairList = new ArrayList<>();
         ArrayList<Object> product1 = new ArrayList<>();
