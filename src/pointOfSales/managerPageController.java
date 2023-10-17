@@ -182,6 +182,8 @@ public class managerPageController implements Initializable {
 
     @FXML
     public Label orderHistoryTotal;
+    @FXML
+    public Label orderHistoryNameLabel;
 
     private ToggleGroup teaGroup = new ToggleGroup();
     private ToggleGroup sugarGroup = new ToggleGroup();
@@ -1239,6 +1241,7 @@ public class managerPageController implements Initializable {
         }
         if(selectedRow != null)
         {
+            orderHistoryNameLabel.setText(selectedRow[1].toString());
             ArrayList <ArrayList<String>> values = new ArrayList<>();
             values = SystemFunctions.getOrderProductByID(Integer.parseInt(selectedRow[0].toString()));
             for (int i = 0; i < values.get(0).size(); i++) {
