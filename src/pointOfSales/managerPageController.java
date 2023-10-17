@@ -810,8 +810,15 @@ public class managerPageController implements Initializable {
         orderInfoPane.setVisible(true);
         menuItems.setVisible(true);
         if (!items.isEmpty()) {
-            orderTotal -= Double.parseDouble(items.get(items.size() - 1).getPrice());
-            items.remove(items.size() - 1);
+            orderTotal = 0.0;
+            items.clear();
+            data.clear();
+            Label checkoutSubTotal = (Label) orderInfoPane.lookup("#checkoutSubTotal");
+            checkoutSubTotal.setText("$0.00");
+            Label checkoutTax = (Label) orderInfoPane.lookup("#checkoutTax");
+            checkoutTax.setText("$0.00");
+            Label checkoutTrueTotal = (Label) orderInfoPane.lookup("#checkoutTrueTotal");
+            checkoutTrueTotal.setText("$0.00");
         }
     }
 
@@ -926,18 +933,25 @@ public class managerPageController implements Initializable {
 
     @FXML
     private void handleStatPage() {
-        editInventoryPage.setVisible(false);
-        editMenuPage.setVisible(false);
-        orderCustomizationMenu.setVisible(false);
-        orderInfoPane.setVisible(false);
-        menuItems.setVisible(false);
-        orderHistoryInfo.setVisible(false);
-        orderHistoryPage.setVisible(false);
-        statisticsPage.setVisible(true);
-        initializeExcessTable();
-        initializePairTable();
-        initializeRestockTable();
-        handleRestockReport();
+        if (orderCustomizationMenu.isVisible()) {
+            return;
+        } else if (editMenuPage.isVisible()) {
+            return;
+        } else{
+            editInventoryPage.setVisible(false);
+            editMenuPage.setVisible(false);
+            orderCustomizationMenu.setVisible(false);
+            orderInfoPane.setVisible(false);
+            menuItems.setVisible(false);
+            orderHistoryInfo.setVisible(false);
+            orderHistoryPage.setVisible(false);
+            statisticsPage.setVisible(true);
+            initializeExcessTable();
+            initializePairTable();
+            initializeRestockTable();
+            handleRestockReport();
+        }
+        
 
     }
 
@@ -1138,16 +1152,22 @@ public class managerPageController implements Initializable {
 
     @FXML 
     private void handleOrdersButton(){
-        statisticsPage.setVisible(false);
-        editInventoryPage.setVisible(false);
-        editMenuPage.setVisible(false);
-        orderCustomizationMenu.setVisible(false);
-        orderInfoPane.setVisible(false);
-        menuItems.setVisible(false);
-        orderHistoryInfo.setVisible(true);
-        orderHistoryPage.setVisible(true);
-        initializeOrderHistoryTable();
-        initializeHistoryInfoTable();
+        if (orderCustomizationMenu.isVisible()) {
+            return;
+        } else if (editMenuPage.isVisible()) {
+            return;
+        } else{
+            statisticsPage.setVisible(false);
+            editInventoryPage.setVisible(false);
+            editMenuPage.setVisible(false);
+            orderCustomizationMenu.setVisible(false);
+            orderInfoPane.setVisible(false);
+            menuItems.setVisible(false);
+            orderHistoryInfo.setVisible(true);
+            orderHistoryPage.setVisible(true);
+            initializeOrderHistoryTable();
+            initializeHistoryInfoTable();
+        }
     }
 
     @FXML

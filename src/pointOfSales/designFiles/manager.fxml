@@ -276,20 +276,20 @@
                                        <children>
                                           <VBox alignment="TOP_CENTER" prefHeight="152.0" prefWidth="366.0" spacing="10.0">
                                              <children>
-                                                <ToggleButton fx:id="pearl" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Pearl" />
-                                                <ToggleButton fx:id="miniPearl" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Mini Pearl" />
-                                                <ToggleButton fx:id="iceCream" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Ice Cream" />
-                                                <ToggleButton fx:id="pudding" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Pudding" />
-                                                <ToggleButton fx:id="aloeVera" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Aloe Vera" />
+                                                <ToggleButton fx:id="pearl" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Pearl" onAction="#handleToppingButtons"/>
+                                                <ToggleButton fx:id="miniPearl" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Mini Pearl" onAction="#handleToppingButtons" />
+                                                <ToggleButton fx:id="iceCream" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Ice Cream" onAction="#handleToppingButtons" />
+                                                <ToggleButton fx:id="pudding" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Pudding" onAction="#handleToppingButtons"/>
+                                                <ToggleButton fx:id="aloeVera" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Aloe Vera" onAction="#handleToppingButtons" />
                                              </children>
                                           </VBox>
                                           <VBox alignment="TOP_CENTER" prefHeight="158.0" prefWidth="366.0" spacing="10.0">
                                              <children>
-                                                <ToggleButton fx:id="redBean" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Red Bean" />
-                                                <ToggleButton fx:id="herbJelly" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Herb Jelly" />
-                                                <ToggleButton fx:id="aiyuJelly" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Aiyu Jelly" />
-                                                <ToggleButton fx:id="lycheeJelly" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Lychee Jelly" />
-                                                <ToggleButton fx:id="crystalBoba" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Crystal Boba" />
+                                                <ToggleButton fx:id="redBean" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Red Bean" onAction="#handleToppingButtons"/>
+                                                <ToggleButton fx:id="herbJelly" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Herb Jelly" onAction="#handleToppingButtons" />
+                                                <ToggleButton fx:id="aiyuJelly" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Aiyu Jelly" onAction="#handleToppingButtons"/>
+                                                <ToggleButton fx:id="lycheeJelly" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Lychee Jelly" onAction="#handleToppingButtons"/>
+                                                <ToggleButton fx:id="crystalBoba" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="346.0" styleClass="item-customization-buttons" text="Crystal Boba" onAction="#handleToppingButtons"/>
                                              </children>
                                           </VBox>
                                        </children>
