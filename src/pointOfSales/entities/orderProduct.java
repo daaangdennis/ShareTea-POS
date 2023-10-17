@@ -174,11 +174,11 @@ public class orderProduct {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 String name = resultSet.getString("name");
-                String quantity = resultSet.getInt("quantity") + "";
-                total += resultSet.getDouble("price");
-                String price = String.format("%.2f", resultSet.getDouble("price"));
+                Integer quantity = resultSet.getInt("quantity");
+                total += resultSet.getDouble("price") * quantity;
+                String price = String.format("%.2f", resultSet.getDouble("price") * quantity);
                 OrderProductList.get(0).add(name);
-                OrderProductList.get(1).add(quantity);
+                OrderProductList.get(1).add(quantity + "");
                 OrderProductList.get(2).add(price);
             }
             OrderProductList.get(3).add(String.format("%.2f", total));
