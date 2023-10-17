@@ -13,8 +13,7 @@ import javafx.stage.Screen;
 
 /**
  * The loginPage class loads the UI elements from the loginPage.fxml file, and performs some modifications to it.
- * 
- * This class has no logic for the loginPage in it, for the logic @see pointOfSales.loginPageController
+ * This class has no logic for the loginPage in it, for the logic @see {@link loginPageController}
  * 
  * @author Sam Trythall
  * @version v0.0.3
@@ -25,17 +24,20 @@ public class loginPage {
 
     private static sceneController controller;
 
-    public loginPage() {
-    }
+    /**
+     * The setController function sets the controller private member of the loginPage class.
+     * @param ctrl value of type sceneController that is set as the value of the private member controller.
+     */
 
     public static void setController(sceneController ctrl) {
         controller = ctrl;
     }
+    
     /**
-     * Loads the loginPage onto a scene object with all modifications set
+     * The getScene function loads the loginPage onto a scene object with all modifications set
      * 
      * @return a scene type with everything loaded from the loginPage.fxml file
-     * @throws Exception in case the fxml file fails to load.
+     * @throws IOException in case the fxml file fails to load.
      */
     public static Scene getScene() {
 
@@ -76,7 +78,8 @@ public class loginPage {
             passwordField.setScaleY(keypad.getScaleX());
             passwordField.setLayoutX(keypad.getLayoutX() - (14 * keypad.getScaleX()));
             passwordField.setLayoutY(keypad.getLayoutY() - (85 * keypad.getScaleY()));
-
+            
+            //Create and return scene with modified fxml 
             Scene loginScene = new Scene(root, screenWidth, screenHeight);
 
             loginPageController loginCtrl = loader.getController();

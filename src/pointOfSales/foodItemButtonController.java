@@ -14,7 +14,6 @@ import javafx.event.ActionEvent;
 
 /**
  * The foodItemButtonController class controls the logic for the food categories.
- * 
  * Loads the products that belong to the specific category when a category button is clicked.
  * 
  * @author Sam Trythall
@@ -27,9 +26,19 @@ public class foodItemButtonController {
     orderPageController orderPage;
     managerPageController managerPage;
 
+    /**
+     * The setOrderControl function sets the orderPage private member for the foodItemButtonController class.
+     * @param order value of type orderPageController to set private member's value to.
+     */
+
     public void setOrderControl(orderPageController order) {
         this.orderPage = order;
     }
+
+    /**
+     * The setManagerControl function sets the managerPage private member for the foodItemButtonController class.
+     * @param manage value of type managerPageController to set private member's value to.
+     */
 
     public void setManagerControl(managerPageController manage) {
         this.managerPage = manage;
@@ -37,11 +46,10 @@ public class foodItemButtonController {
 
     /**
      * The handleProductButton function is the handler for when the category buttons are clicked.
-     * 
      * This function checks the page the button was pressed on, and calls the database to create buttons for each product in the category.
      * 
      * @param event This parameter is used to figure out which category button was pressed
-     * @see pointOfSales.services.SystemFunctions#productsAndPriceByCategory()
+     * @see {@link pointOfSales.services.SystemFunctions#productsAndPriceByCategory()}
      * @throws Exception throws an exception if the fxml file is not correctly loaded.
      */
 
@@ -85,7 +93,7 @@ public class foodItemButtonController {
                     val2 = 1;
                 }
 
-                //Adds the buttons to 3 hashmaps for later access and adds the buttons to the grid pane.
+                //Adds the buttons to 3 hashmaps for later access of button elements and adds the buttons to the grid pane.
                 String pid = results.get(2).get(indexCount);
                 if (orderPage != null) {
                     orderPage.buttonLabelMap.put(button, label);

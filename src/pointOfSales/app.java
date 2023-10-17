@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 
  /**
  * This class is the main application class that launches the application
+ * 
  * @author Sam Trythall
  * @version v0.0.3
  * @since v0.0.1
@@ -14,6 +15,7 @@ import javafx.scene.Scene;
 public class app extends Application {
     /**
      * The start function starts the main application and sets all controllers to the main stage.
+     * 
      * @param primaryStage passes in the main Stage necessary for adding and changing scenes
      * @throws ExceptionType The start function throws a runtime exception if something goes wrong while the application is running.
      */
@@ -40,7 +42,10 @@ public class app extends Application {
         primaryStage.show();
 
     }
-
+    /**
+     * The main function loads all the libraries so the app can start
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
