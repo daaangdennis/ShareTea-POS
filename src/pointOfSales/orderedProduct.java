@@ -1,5 +1,7 @@
 package pointOfSales;
+
 import java.util.ArrayList;
+
 public class orderedProduct {
     private String teaType;
     private int quantity;
@@ -10,77 +12,77 @@ public class orderedProduct {
     private String note;
     private String pid;
 
-    public orderedProduct(){
+    public orderedProduct() {
         teaType = "NULL";
         quantity = 0;
         price = "NULL";
     }
 
-    public String getTeaType(){
+    public String getTeaType() {
         return this.teaType;
     }
 
-    public int getQuantity(){
+    public int getQuantity() {
         return this.quantity;
     }
 
-    public ArrayList<String> getToppings(){
+    public ArrayList<String> getToppings() {
         return this.toppings;
     }
 
-    public String getPrice(){
+    public String getPrice() {
         return this.price;
     }
 
-    public Double getSugar(){
+    public Double getSugar() {
         return this.sugarLevel;
     }
 
-    public String getIce(){
+    public String getIce() {
         return this.iceLevel;
     }
 
-    public String getNote(){
+    public String getNote() {
         return this.note;
     }
 
-    public String getId(){
+    public String getId() {
         return this.pid;
     }
 
-    public void setTeaType(String type){
+    public void setTeaType(String type) {
         teaType = type;
     }
 
-    public void setQuantity(int quant){
+    public void setQuantity(int quant) {
         quantity = quant;
     }
 
-    public void addToList(String value){
+    public void addToList(String value) {
         toppings.add(value);
     }
 
-    public void setPrice(String money){
+    public void setPrice(String money) {
         price = money;
     }
 
-    public void clearList(){
+    public void clearList() {
         toppings.clear();
     }
 
-    public void setSugar(Double sugar){
+    public void setSugar(Double sugar) {
         sugarLevel = sugar;
     }
 
-    public void setIce(String ice){
+    public void setIce(String ice) {
         iceLevel = ice;
     }
 
-    public void setNote(String message){
+    public void setNote(String message) {
         note = message;
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         pid = id;
     }
 }
