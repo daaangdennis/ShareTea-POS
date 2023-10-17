@@ -6,6 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import java.io.IOException;
 
+/**
+ * The orderPage class is the UI class for the checkoutPage.
+ * This class loads all the UI elements and modifies them a bit.
+ * 
+ * @author Sam Trythall
+ * @version v0.0.3
+ * @since v0.0.2
+ */
+
 public class orderPage {
 
     private static sceneController controller;

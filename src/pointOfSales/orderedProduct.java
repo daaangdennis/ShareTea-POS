@@ -2,6 +2,15 @@ package pointOfSales;
 
 import java.util.ArrayList;
 
+
+/**
+ * The orderedProduct class is a format class used to store the information that the backend needs.
+ * 
+ * @author Sam Trythall
+ * @version v0.0.3
+ * @since v0.0.2
+ */
+
 public class orderedProduct {
     private String teaType;
     private int quantity;
