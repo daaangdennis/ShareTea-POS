@@ -1193,6 +1193,8 @@ public class managerPageController implements Initializable {
             menuItems.setVisible(false);
             orderHistoryInfo.setVisible(false);
             orderHistoryPage.setVisible(false);
+            salesPane.setVisible(true);
+            productUsagePane.setVisible(false);
             statisticsPage.setVisible(true);
             initializeExcessTable();
             initializePairTable();
@@ -1679,19 +1681,34 @@ public class managerPageController implements Initializable {
         } 
     }
 
+    /**
+     * The handleProductUsage function switches the panes on the stat page
+     * between the sales report and the product usage report.
+     * @see {@link pointOfSales.managerPageController#initializeProductUsage()}
+     */
+
     @FXML 
     private void handleProductUsage(){
         salesPane.setVisible(false);
         productUsagePane.setVisible(true);
-        initializeProductUsage();
-        
+        initializeProductUsage();   
     }
+
+    /**
+     * The handleSalesButton function switches the panes on the stat page
+     * between the product usage report and the sales report
+     */
 
     @FXML
     private void handleSalesButton(){
         salesPane.setVisible(true);
         productUsagePane.setVisible(false);
     }
+
+    /**
+     * The initializeProductUsage function initializes the product usage table and 
+     * columns.
+     */
 
     private void initializeProductUsage(){
         //initializes the product name column
@@ -1725,6 +1742,12 @@ public class managerPageController implements Initializable {
         });
     }
 
+    /**
+     * The handleUsage function adds values to the Usage table.
+     * The table returns values of the change in the inventory over a time window
+     * @see {@link pointOfSales.services.SystemFunctions#getInventoryUsage()}
+     */
+
     @FXML 
     private void handleUsage(){
         String startDate = productUsageStartDate.getValue().toString();
@@ -1738,6 +1761,5 @@ public class managerPageController implements Initializable {
             usageData.add(new Object[] { values.get(0).get(i), values.get(1).get(i), values.get(2).get(i)});
         }
         productUsageTable.setItems(usageData);
-
     }
 }

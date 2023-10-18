@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
@@ -19,7 +19,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,10 +45,15 @@ import pointOfSales.entities.orderProduct;
 public class orderPageController implements Initializable {
     private sceneController sceneCtrl;
 
+    //GridPanes for adding buttons
+
     @FXML
     public GridPane menuItemsGridPane;
     @FXML
     private GridPane foodCategoryGridPane;
+
+    //Table for holding checkout information
+
     @FXML
     private TableView<Object[]> checkoutTable;
     @FXML
@@ -57,6 +62,8 @@ public class orderPageController implements Initializable {
     private TableColumn<Object[], String> quantityTableColumn;
     @FXML
     private TableColumn<Object[], String> priceTableColumn;
+
+     //Table for holding all inventory items
 
     @FXML
     private TableView<Object[]> orderHistoryTable;
@@ -67,6 +74,8 @@ public class orderPageController implements Initializable {
     @FXML 
     private TableColumn<Object[], String> historyOrderDate;
 
+    //Table for hodling all product items on the menu
+
     @FXML
     private TableView<Object[]> orderHistoryInfoTable;
     @FXML 
@@ -75,6 +84,8 @@ public class orderPageController implements Initializable {
     private TableColumn<Object[], String> quantityTableColumn1;
     @FXML 
     private TableColumn<Object[], String> priceTableColumn1;
+
+    //All AnchorPanes necessary for getting and displaying specific elements of fxml files
 
     @FXML
     private AnchorPane menuItems;
@@ -101,10 +112,14 @@ public class orderPageController implements Initializable {
     @FXML
     private AnchorPane orderHistoryPage;
 
+    //Calendars used to select dates for reports
+
     @FXML
     private DatePicker orderHistoryStartDate;
     @FXML
     private DatePicker orderHistoryEndDate;
+    
+    //Lables for orders page
 
     @FXML
     public Label orderHistoryTotal;
@@ -113,20 +128,33 @@ public class orderPageController implements Initializable {
     @FXML
     public Label orderHistoryNumberLabel;
 
+    //Toggle groups for order options
+
     private ToggleGroup teaGroup = new ToggleGroup();
     private ToggleGroup sugarGroup = new ToggleGroup();
     private ToggleGroup iceGroup = new ToggleGroup();
+
+    //Values of sugar and ice selections for a product ordered by a customer
+
     private String sugarSelection;
     private String iceSelection;
+
+    //Lists of data to add to tables and graphs
+
     private ObservableList<Object[]> data = FXCollections.observableArrayList();
     private ObservableList<Object[]> historyData = FXCollections.observableArrayList();
     private ObservableList<Object[]> selectedHistoryData = FXCollections.observableArrayList();
+
     private Double foodLabelCost = 0.0;
     public ArrayList<orderedProduct> items = new ArrayList<>();
     public ArrayList<String> categories = new ArrayList<>();
+
+    //Maps for keeping references to buttons created dynamically
+
     public Map<Button, Label> buttonLabelMap = new HashMap<>();
     public Map<Button, Label> buttonCostMap = new HashMap<>();
     public Map<Button, String> buttonIdMap = new HashMap<>();
+
     public Double orderTotal = 0.0;
     public String employPosition = "";
     private int historyCounter = 0;
@@ -276,6 +304,9 @@ public class orderPageController implements Initializable {
      */
     private void setUpTeaPane() {
         int numButtons = 1;
+
+        //clear and setup variables before loading data 
+
         categories.clear();
         categories = SystemFunctions.getCategories();
         numButtons = categories.size();
@@ -285,6 +316,7 @@ public class orderPageController implements Initializable {
         int swapper = 0;
         for (int i = 0; i < numButtons; i++) {
             try {
+                //load and setup buttons
                 FXMLLoader loader2 = new FXMLLoader(getClass().getResource("designFiles/foodCategoryButton.fxml"));
                 Node buttonNode = loader2.load();
                 ToggleButton button = (ToggleButton) buttonNode.lookup("#categoryButton");
@@ -293,11 +325,11 @@ public class orderPageController implements Initializable {
                 GridPane.setRowIndex(buttonNode, swapper);
                 GridPane.setColumnIndex(buttonNode, index);
 
-                // foodCategoryGridPane.add(buttonNode, index, swapper);
+                // add buttons to gridpane
                 foodCategoryGridPane.getChildren().add(buttonNode);
-                // GridPane.setHalignment(buttonNode, HPos.CENTER);
-                // Set Toggle Group to Tea Group When they become togglebuttons
                 button.setToggleGroup(teaGroup);
+
+                //Make sure there are only 2 rows of buttons to maintain format, and columns are dynamically created when needed
                 if (swapper == 1) {
                     swapper = 0;
                     index++;
@@ -305,6 +337,7 @@ public class orderPageController implements Initializable {
                     swapper = 1;
                 }
 
+                //set controllers 
                 foodItemButtonController buttonController = loader2.getController();
                 buttonController.setOrderControl(this);
             } catch (Exception e) {
@@ -324,11 +357,18 @@ public class orderPageController implements Initializable {
 
     @FXML
     private void handleCloseButton(ActionEvent event) {
+        //Make the current anchorpane invisible
+
         menuItems.setVisible(!menuItems.isVisible());
         orderCustomizationMenu.setVisible(!orderCustomizationMenu.isVisible());
+
+        //Remove the last item from the running list of products for current customers order
+
         if (items.size() > 0) {
             items.remove(items.size() - 1);
         }
+
+        //Resets sugar and ice toggles
         
         Toggle iceToggle = iceGroup.getSelectedToggle();
         Toggle sugarToggle = sugarGroup.getSelectedToggle();
@@ -339,7 +379,7 @@ public class orderPageController implements Initializable {
             sugarToggle.setSelected(false);
         }
         
-        
+        //Resets all topping toggles 
 
         ToggleButton pearlButton = (ToggleButton) toppingSelection.lookup("#pearl");
         ToggleButton miniPearlButton = (ToggleButton) toppingSelection.lookup("#miniPearl");
@@ -372,6 +412,9 @@ public class orderPageController implements Initializable {
     public String checkToggledButton(ToggleGroup toggleGroup) {
         String text = "";
         Toggle selectedToggle = toggleGroup.getSelectedToggle();
+
+        //Makes sure not to do any type casting without checking if the type casting can be performed.
+
         if (selectedToggle != null && selectedToggle instanceof ToggleButton) {
             ToggleButton selectedButton = (ToggleButton) selectedToggle;
             text = selectedButton.getText();
@@ -391,11 +434,16 @@ public class orderPageController implements Initializable {
 
     @FXML
     private void addItem(ActionEvent event) {
+
+        //Makes sure items can't be added without selecting both a sugar and an ice button
+
         sugarSelection = checkToggledButton(sugarGroup);
         iceSelection = checkToggledButton(iceGroup);
         if (sugarSelection == "" | iceSelection == "") {
             return;
         }
+
+        //Checks the sugar selected and converts it to a double
 
         items.get(items.size() - 1).setIce(iceSelection);
         Double sugarLevel = 0.0;
@@ -416,6 +464,8 @@ public class orderPageController implements Initializable {
         items.get(items.size() - 1).setSugar(sugarLevel);
         TextArea additionalNotes = (TextArea) notesPane.lookup("#additionalNotes");
         items.get(items.size() - 1).setNote(additionalNotes.getText());
+
+        //Turns off all selected toggle buttons so the next product starts off with a clean set of buttons
 
         Toggle iceToggle = iceGroup.getSelectedToggle();
         Toggle sugarToggle = sugarGroup.getSelectedToggle();
@@ -485,8 +535,12 @@ public class orderPageController implements Initializable {
             crystalBobaButton.setSelected(false);
         }
 
+        //gets the cost of the item with the toppings added
+
         double calculated_cost = Double.parseDouble(items.get(items.size() - 1).getPrice().substring(8));
         calculated_cost += toppingCost;
+
+        //adds the data to the checkoutTable
 
         data.add(new Object[] { items.get(items.size() - 1).getTeaType(), items.get(items.size() - 1).getQuantity(),
                 String.format("%.2f", calculated_cost) });
@@ -494,7 +548,9 @@ public class orderPageController implements Initializable {
         checkoutTable.setItems(data);
         menuItems.setVisible(!menuItems.isVisible());
         orderCustomizationMenu.setVisible(!orderCustomizationMenu.isVisible());
-        // String formattedNumber = String.format("%.2f", number);
+       
+        //changes labels for cost to reflect the current cost of the order
+
         Label checkoutSubTotal = (Label) orderInfoPane.lookup("#checkoutSubTotal");
         checkoutSubTotal.setText("$" + String.format("%.2f", orderTotal));
         Label checkoutTax = (Label) orderInfoPane.lookup("#checkoutTax");
@@ -536,6 +592,9 @@ public class orderPageController implements Initializable {
         } else {
             foodLabelCost += 0.75;
         }
+
+        //Enforces a format for how to display the price
+
         DecimalFormat df = new DecimalFormat("Food Item $0.00 ");
         String formattedCost = df.format(foodLabelCost);
         foodItemLabel.setText(formattedCost);
@@ -561,7 +620,7 @@ public class orderPageController implements Initializable {
 
     @FXML
     private void handleProceedButton(ActionEvent event) {
-        // Customer First and Last Name:
+        // Getting Customer First and Last Name:
         TextField customerName = (TextField) orderInfoPane.lookup("#customerNameTextField");
         String[] names = customerName.getText().split(" ");
         String customerFirstName = "";
@@ -572,6 +631,8 @@ public class orderPageController implements Initializable {
         }
         String employeeFirstName = loginPageController.getFirstName();
         String employeeLastName = loginPageController.getLastName();
+
+        //Adding orderProduct objects to an Array which represents the products and customizations in the order
 
         ArrayList<orderProduct> listOfItems = new ArrayList<>();
         // OrderProduct Details String Product, int ProductQuantity, ArrayList<String>
@@ -585,26 +646,12 @@ public class orderPageController implements Initializable {
             listOfItems.add(itemProduct);
         }
 
-        // System.out.println("Customer Name: " + customerFirstName + " " +
-        // customerLastName);
-        // System.out.println("Employee Name: " + employeeFirstName + " " +
-        // employeeLastName);
-        // for(int i = 0; i < listOfItems.size(); i++){
-        // System.out.println("Product: " + listOfItems.get(i).ProductID);
-        // System.out.println("Quantity: " + listOfItems.get(i).Quantity);
-        // System.out.println("Sugar: " + listOfItems.get(i).SugarLevel);
-        // System.out.println("Note: " + listOfItems.get(i).Note);
-        // for(int j = 0; j < (items.get(i).getToppings().size()); j++){
-        // System.out.println("Topping: " + listOfItems.get(i).Toppings.get(j));
-        // }
-
-        // }
-        // System.out.println("OrderCost: " + orderTotal);
         orderTotal += orderTotal * 0.0825;
-        // Customer First Name, Customer Last Name, Employee First Name, Employee Last
-        // Name, ArrayList of OrderProduct
+        
         SystemFunctions.addOrder(customerFirstName, customerLastName, employeeFirstName, employeeLastName, listOfItems,
                 orderTotal);
+
+        //Cleaning up variables and data for next order
         data.clear();
         orderTotal = 0.0;
         Label orderNumber = (Label) orderInfoPane.lookup("#orderNumberLabel");
@@ -627,6 +674,9 @@ public class orderPageController implements Initializable {
 
     @FXML
     private void checkoutButton(ActionEvent event) {
+
+        //Toggle visibility of AnchorPanes
+
         if (menuItems.isVisible()) {
             return;
         }
@@ -638,6 +688,9 @@ public class orderPageController implements Initializable {
         orderHistoryPage.setVisible(false);
         orderInfoPane.setVisible(true);
         menuItems.setVisible(true);
+
+        //Clear tables and labels in case any data was left over before navigating off of the page
+
         if (!items.isEmpty()) {
             orderTotal = 0.0;
             items.clear();
@@ -656,6 +709,9 @@ public class orderPageController implements Initializable {
      */
 
     private void initializeOrderHistoryTable(){
+
+        //initializes the Order ID column
+
         historyOrderID.setCellValueFactory(cellData -> {
             if (cellData.getValue() != null && cellData.getValue().length > 0) {
                 return new SimpleStringProperty(cellData.getValue()[0].toString());
@@ -664,6 +720,8 @@ public class orderPageController implements Initializable {
             }
         });
 
+        //initializes the Customer Name column
+
         historyCustomerName.setCellValueFactory(cellData -> {
             if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use index 1 for quantity
                 return new SimpleStringProperty(cellData.getValue()[1].toString());
@@ -671,6 +729,8 @@ public class orderPageController implements Initializable {
                 return new SimpleStringProperty("Customer Name");
             }
         });
+
+        //initializes the Order Date column
 
         historyOrderDate.setCellValueFactory(cellData -> {
             if (cellData.getValue() != null && cellData.getValue().length > 2) { // Useindex 2 for price
@@ -716,11 +776,17 @@ public class orderPageController implements Initializable {
 
     @FXML
     private void handleGenerateOrderHistory(){
+
+        //clear the data and list private members and get the dates
+
         historyData.clear();
         historyList.clear();
         historyCounter = 0;
         String orderHistoryStart = orderHistoryStartDate.getValue().toString();
         String orderHistoryEnd = orderHistoryEndDate.getValue().toString();
+
+        //populate the list with the array from the getOrdersByDates
+
         historyList = SystemFunctions.getOrdersByDates(orderHistoryStart, orderHistoryEnd);
         int buffer = 25;
         if(buffer > historyList.get(0).size()){
@@ -729,8 +795,10 @@ public class orderPageController implements Initializable {
         for (int i = 0; i < buffer; i++) {
             historyData.add(new Object[] { historyList.get(0).get(i), historyList.get(1).get(i), historyList.get(2).get(i)});
         }
+
+        //set the data to the table
+
         orderHistoryTable.setItems(historyData);
-        // System.out.println("Amount of entries: " + historyList.get(0).size());
     }
 
     /**
@@ -741,6 +809,9 @@ public class orderPageController implements Initializable {
 
     @FXML
     private void handleForwardHistory(){
+
+        //make sure there are more values to get
+
         historyCounter++;
         int bufferArray = (historyCounter + 1) * 25;
         int indexMod = 25;
@@ -753,6 +824,9 @@ public class orderPageController implements Initializable {
             indexMod = historyList.get(0).size() - bufferArray;
             bufferArray = historyList.get(0).size();
         }
+
+        //clear the table and add the next values in the range 1 <= x <= 25 to the table
+
         historyData.clear();
         // System.out.println("Buffer is at: " + bufferArray);
         for (int i = bufferArray - indexMod; i < bufferArray; i++) {
@@ -768,12 +842,17 @@ public class orderPageController implements Initializable {
 
     @FXML
     private void handleBackwardHistory(){
+
+        //make sure the index does not go below zero
+
         historyCounter--;
         if(historyCounter < 0){
             historyCounter++;
             return;
         }
         int bufferArray = (historyCounter + 1) * 25;
+
+        //clear the table and add the previous 25 entries to the table
         
         historyData.clear();
         for (int i = bufferArray - 25; i < bufferArray; i++) {
@@ -787,6 +866,9 @@ public class orderPageController implements Initializable {
      */
 
     private void initializeHistoryInfoTable(){
+
+        //initializes the product name column
+
         productTableColumn1.setCellValueFactory(cellData -> {
             if (cellData.getValue() != null && cellData.getValue().length > 0) {
                 return new SimpleStringProperty(cellData.getValue()[0].toString());
@@ -795,6 +877,8 @@ public class orderPageController implements Initializable {
             }
         });
 
+        //initializes the quantity column
+
         quantityTableColumn1.setCellValueFactory(cellData -> {
             if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use index 1 for quantity
                 return new SimpleStringProperty(cellData.getValue()[1].toString());
@@ -802,6 +886,8 @@ public class orderPageController implements Initializable {
                 return new SimpleStringProperty("Quantity");
             }
         });
+
+        //initializes the price column
 
         priceTableColumn1.setCellValueFactory(cellData -> {
             if (cellData.getValue() != null && cellData.getValue().length > 2) { // Useindex 2 for price
@@ -830,6 +916,9 @@ public class orderPageController implements Initializable {
         }
         if(selectedRow != null)
         {
+            //Changes the labels for the customer name, id, and total cost
+            //Also fills the table with the products that the orderId ordered
+
             orderHistoryNameLabel.setText(selectedRow[1].toString());
             orderHistoryNumberLabel.setText("Order #" + selectedRow[0].toString());
             ArrayList <ArrayList<String>> values = new ArrayList<>();
