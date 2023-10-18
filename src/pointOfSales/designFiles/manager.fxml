@@ -414,7 +414,7 @@
                                     <Label layoutX="90.0" layoutY="320.0" styleClass="red-main-labels" text="Start Date:" />
                                     <DatePicker fx:id="productUsageEndDate" layoutX="511.0" layoutY="321.0" promptText="Select Date" />
                                     <Label layoutX="415.0" layoutY="320.0" styleClass="red-main-labels" text="End Date:" />
-                                    <Button fx:id="generateProductUsage" layoutX="309.0" layoutY="356.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" styleClass="generate-report-button" text="Generate Report" AnchorPane.bottomAnchor="10.0" />
+                                    <Button fx:id="generateProductUsage" layoutX="309.0" layoutY="356.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" styleClass="generate-report-button" text="Generate Report" AnchorPane.bottomAnchor="10.0" onAction="#handleUsage"/>
                                     <TableView fx:id = "productUsageTable" prefHeight="200.0" prefWidth="200.0" styleClass="report-table" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
                                       <columns>
                                         <TableColumn fx:id = "usageInventoryID" prefWidth="75.0" text="Inventory ID" />

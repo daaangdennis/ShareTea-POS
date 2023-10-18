@@ -200,6 +200,10 @@ public class managerPageController implements Initializable {
     private DatePicker orderHistoryStartDate;
     @FXML
     private DatePicker orderHistoryEndDate;
+    @FXML
+    private DatePicker productUsageStartDate;
+    @FXML
+    private DatePicker productUsageEndDate;
 
     //Lables for orders page
     @FXML
@@ -227,6 +231,7 @@ public class managerPageController implements Initializable {
     private ObservableList<Object[]> restockData = FXCollections.observableArrayList();
     private ObservableList<Object[]> historyData = FXCollections.observableArrayList();
     private ObservableList<Object[]> selectedHistoryData = FXCollections.observableArrayList();
+    private ObservableList<Object[]> usageData = FXCollections.observableArrayList();
 
     private Double foodLabelCost = 0.0;
     public ArrayList<orderedProduct> items = new ArrayList<>();
@@ -1720,4 +1725,19 @@ public class managerPageController implements Initializable {
         });
     }
 
+    @FXML 
+    private void handleUsage(){
+        String startDate = productUsageStartDate.getValue().toString();
+        String endDate = productUsageEndDate.getValue().toString();
+        System.out.println(startDate);
+        System.out.println(endDate);
+        ArrayList <ArrayList<String>> values = new ArrayList<>();
+        values = SystemFunctions.getInventoryUsage(startDate, endDate);
+        usageData.clear();
+        for (int i = 0; i < values.get(0).size(); i++) {
+            usageData.add(new Object[] { values.get(0).get(i), values.get(1).get(i), values.get(2).get(i)});
+        }
+        productUsageTable.setItems(usageData);
+
+    }
 }
