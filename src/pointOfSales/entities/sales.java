@@ -153,16 +153,16 @@ public class sales {
         inventoryUsage.add(usedList);
 
         try {
-            String query = "SELECT ip.inventory_id, (SELECT i.name FROM inventory i WHERE i.inventory_id = ip.inventory_id) AS inventory_name,  SUM((SELECT COALESCE(SUM(op.quantity),0) FROM order_product op WHERE op.product_id = ip.product_id AND op.order_id IN(SELECT o.order_id FROM orders o WHERE o.order_date >= ? and o.order_date < date ? + 1))) AS quantity_used FROM inventory_product ip GROUP BY ip.inventory_id, inventory_name";
+            String query = "SELECT ip.inventory_id, (SELECT i.name FROM inventory i WHERE i.inventory_id = ip.inventory_id) AS inventory_name,  SUM((SELECT COALESCE(SUM(op.quantity),0) FROM order_product op WHERE op.product_id = ip.product_id AND op.order_id IN(SELECT o.order_id FROM orders o WHERE o.order_date >= ? and o.order_date < date (?) + 1))) AS quantity_used FROM inventory_product ip GROUP BY ip.inventory_id, inventory_name";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setDate(1, Date.valueOf(startDate));
             preparedStatement.setString(1, endDate);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Integer id = resultSet.getInt("inventory_id");
+                String id = resultSet.getInt("inventory_id") + "";
                 String name = resultSet.getString("inventory_name");
-                Integer used = resultSet.getInt("quantity_used");
+                String used = resultSet.getInt("quantity_used") + "";
                 inventoryUsage.get(0).add(id + "");
                 inventoryUsage.get(1).add(name);
                 inventoryUsage.get(2).add(used + "");
