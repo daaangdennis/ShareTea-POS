@@ -133,6 +133,15 @@ public class managerPageController implements Initializable {
     @FXML 
     private TableColumn<Object[], String> priceTableColumn1;
 
+    @FXML
+    private TableView<Object[]> productUsageTable;
+    @FXML 
+    private TableColumn<Object[], String> usageInventoryID;
+    @FXML 
+    private TableColumn<Object[], String> usageItemName;
+    @FXML 
+    private TableColumn<Object[], String> usageStockUsed;
+
     //All AnchorPanes necessary for getting and displaying specific elements of fxml files
     @FXML
     private AnchorPane menuItems;
@@ -166,6 +175,8 @@ public class managerPageController implements Initializable {
     private AnchorPane orderHistoryInfo;
     @FXML
     private AnchorPane orderHistoryPage;
+    @FXML
+    private AnchorPane productUsagePane;
 
     @FXML
     private TextArea additionalNotes;
@@ -1662,4 +1673,51 @@ public class managerPageController implements Initializable {
             orderHistoryTotal.setText("$"+ values.get(3).get(0));
         } 
     }
+
+    @FXML 
+    private void handleProductUsage(){
+        salesPane.setVisible(false);
+        productUsagePane.setVisible(true);
+        initializeProductUsage();
+        
+    }
+
+    @FXML
+    private void handleSalesButton(){
+        salesPane.setVisible(true);
+        productUsagePane.setVisible(false);
+    }
+
+    private void initializeProductUsage(){
+        //initializes the product name column
+
+        usageInventoryID.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 0) {
+                return new SimpleStringProperty(cellData.getValue()[0].toString());
+            } else {
+                return new SimpleStringProperty("Inventory ID");
+            }
+        });
+
+        //initializes the quantity column
+
+        usageItemName.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 1) { // Use index 1 for quantity
+                return new SimpleStringProperty(cellData.getValue()[1].toString());
+            } else {
+                return new SimpleStringProperty("Item Name");
+            }
+        });
+
+        //initializes the price column
+
+        usageStockUsed.setCellValueFactory(cellData -> {
+            if (cellData.getValue() != null && cellData.getValue().length > 2) { // Useindex 2 for price
+                return new SimpleStringProperty(cellData.getValue()[2].toString());
+            } else {
+                return new SimpleStringProperty("Stock Used");
+            }
+        });
+    }
+
 }
