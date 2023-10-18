@@ -16,16 +16,37 @@ import java.io.IOException;
  */
 
 public class orderPage {
-
+    /** The controller that handles scene interactions for the order page. */
     private static sceneController controller;
 
+    /**
+     * Default constructor for the orderPage class.
+     */
     public orderPage() {
     }
 
+    /**
+     * Sets the scene controller for the order page.
+     * 
+     * @param ctrl The controller to be set for this order page.
+     */
     public static void setController(sceneController ctrl) {
         controller = ctrl;
     }
 
+    /**
+     * Retrieves the Scene for the order page.
+     * <p>
+     * This method attempts to load the "cashier.fxml" file which contains the
+     * design
+     * of the order page. Upon successful loading, the scene is initialized and
+     * returned. In case of any IO failures during the loading process, an exception
+     * is printed and a null value is returned.
+     * </p>
+     * 
+     * @return The Scene containing the order page's UI, or null if there's an IO
+     *         error.
+     */
     public static Scene getScene() {
 
         try {
