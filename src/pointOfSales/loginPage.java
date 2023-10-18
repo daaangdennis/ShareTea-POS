@@ -37,7 +37,7 @@ public class loginPage {
      * The getScene function loads the loginPage onto a scene object with all modifications set
      * 
      * @return a scene type with everything loaded from the loginPage.fxml file
-     * @throws IOException in case the fxml file fails to load.
+     * 
      */
     public static Scene getScene() {
 

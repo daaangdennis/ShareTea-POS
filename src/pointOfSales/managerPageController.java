@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TableColumn;
@@ -251,9 +252,9 @@ public class managerPageController implements Initializable {
     /**
      * The initialize function initializes tables and and variables necessary when the page is loaded
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#nextOrderID()}
-     * @see {@link pointOfSales.loginPageController#getPosition()}
-     * @see {@link pointOfSales.managerPageController#setUpTeaPane()}
+     * @see pointOfSales.services.SystemFunctions#nextOrderID()
+     * @see pointOfSales.loginPageController#getPosition()
+     * @see pointOfSales.managerPageController#setUpTeaPane()
      */
     public void initialize(URL location, ResourceBundle resources) {
         productTableColumn.setCellValueFactory(cellData -> {
@@ -304,7 +305,7 @@ public class managerPageController implements Initializable {
 
     /**
      * The getTable function returns a reference to the checkoutTable private member of the managerPageController class.
-     * @return an object of type TableView<Object[]> to grab items from the table or modify values in the table
+     * @return an object of type TableView to grab items from the table or modify values in the table
      */
     public TableView<Object[]> getTable() {
         return this.checkoutTable;
@@ -365,10 +366,10 @@ public class managerPageController implements Initializable {
      * The function handleChangeScene is the handler for the logout button.
      * This function resets the current employee and changes back to the loginPage scene.
      * @param event used to confirm the logoutButton was pressed.
-     * @see {@link pointOfSales.sceneController#changeScene()}
+     * @see pointOfSales.sceneController#changeScene(Scene)
      */
     @FXML
-    private void handleChangeScene(ActionEvent event) {
+    public void handleChangeScene(ActionEvent event) {
         Button pressedButton = (Button) event.getSource();
         if (pressedButton.getId().equals("logoutButton")) {
             employPosition = "";
@@ -379,12 +380,12 @@ public class managerPageController implements Initializable {
     /**
      * The setUpTeaPane function handles loading all the categories of all products on the menu and adding them to a gridPane
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#getCategories()}
-     * @see {@link pointOfSales.menuItemButtonController#setManagerControl()}
-     * @throws Exception throws when the fxml file could not be loaded.
+     * @see pointOfSales.services.SystemFunctions#getCategories()
+     * @see pointOfSales.menuItemButtonController#setManagerControl(managerPageController)
+     * 
      */
 
-    private void setUpTeaPane() {
+    public void setUpTeaPane() {
         int numButtons = 1;
 
         //clear and setup variables before loading data 
@@ -435,11 +436,9 @@ public class managerPageController implements Initializable {
      * This function is used to reset all selected toggle buttons on menuItems anchorpane
      * The function also removes the last element from the list of products that a customer is ordering 
      * because that item was cancelled during customization.
-     * 
      */
-
     @FXML
-    private void handleCloseButton() {
+    public void handleCloseButton() {
         //Make the current anchorpane invisible
 
         menuItems.setVisible(!menuItems.isVisible());
@@ -508,15 +507,15 @@ public class managerPageController implements Initializable {
     /**
      * The addItem function adds the customized item to the checkoutTable.
      * It also creates a orderedProduct to add to an array keeping track of all customizations to the product.
-     * @see {@link pointOfSales.managerPageController#checkToggledButton(ToggleGroup)}
-     * @see {@link pointOfSales.orderedProduct#setIce(String)}
-     * @see {@link pointOfSales.orderedProduct#setSugar(Double)}
-     * @see {@link pointOfSales.orderedProduct#setNote(String)}
-     * @see {@link pointOfSales.orderedProduct#addToList(String)}
+     * @see pointOfSales.managerPageController#checkToggledButton(ToggleGroup)
+     * @see pointOfSales.orderedProduct#setIce(String)
+     * @see pointOfSales.orderedProduct#setSugar(Double)
+     * @see pointOfSales.orderedProduct#setNote(String)
+     * @see pointOfSales.orderedProduct#addToList(String)
      */
 
     @FXML
-    private void addItem() {
+    public void addItem() {
 
         //Makes sure items can't be added without selecting both a sugar and an ice button
 
@@ -650,7 +649,7 @@ public class managerPageController implements Initializable {
      */
 
     @FXML
-    private void handleCancelButton() {
+    public void handleCancelButton() {
         data.clear();
         orderTotal = 0.0;
         Label checkoutSubTotal = (Label) orderInfoPane.lookup("#checkoutSubTotal");
@@ -668,7 +667,7 @@ public class managerPageController implements Initializable {
      */
     
     @FXML
-    private void handleToppingButtons(ActionEvent event) {
+    public void handleToppingButtons(ActionEvent event) {
         ToggleButton sourceButton = (ToggleButton) event.getSource();
         if (!sourceButton.isSelected()) {
             foodLabelCost -= 0.75;
@@ -688,21 +687,21 @@ public class managerPageController implements Initializable {
      * This function grabs all the information about the current order and passes it to the backend
      * to add the order to the database.
      * 
-     * @see {@link pointOfSales.loginPageController#getFirstName()}
-     * @see {@link pointOfSales.loginPageController#getLastName()}
-     * @see {@link pointOfSales.entities.orderProduct#orderproduct(String, int, ArrayList<String>, double, String, String)}
-     * @see {@link pointOfSales.orderedProduct#getId()}
-     * @see {@link pointOfSales.orderedProduct#getQuantity()}
-     * @see {@link pointOfSales.orderedProduct#getToppings()}
-     * @see {@link pointOfSales.orderedProduct#getSugar()}
-     * @see {@link pointOfSales.orderedProduct#getIce()}
-     * @see {@link pointOfSales.orderedProduct#getNote()}
-     * @see {@link pointOfSales.services.SystemFunctions#addOrder(String, String, String, String, ArrayList, double)}
-     * @see {@link pointOfSales.services.SystemFunctions#nextOrderID()}
+     * @see pointOfSales.loginPageController#getFirstName()
+     * @see pointOfSales.loginPageController#getLastName()
+     * @see pointOfSales.entities.orderProduct#orderProduct(String, int, ArrayList<String>, double, String, String)
+     * @see pointOfSales.orderedProduct#getId()
+     * @see pointOfSales.orderedProduct#getQuantity()
+     * @see pointOfSales.orderedProduct#getToppings()
+     * @see pointOfSales.orderedProduct#getSugar()
+     * @see pointOfSales.orderedProduct#getIce()
+     * @see pointOfSales.orderedProduct#getNote()
+     * @see pointOfSales.services.SystemFunctions#addOrder(String, String, String, String, ArrayList, double)
+     * @see pointOfSales.services.SystemFunctions#nextOrderID()
      */
 
     @FXML
-    private void handleProceedButton() {
+    public void handleProceedButton() {
         // Getting Customer First and Last Name:
         TextField customerName = (TextField) orderInfoPane.lookup("#customerNameTextField");
         String[] names = customerName.getText().split(" ");
@@ -753,12 +752,12 @@ public class managerPageController implements Initializable {
      * The handleInventoryButton function changes the active UI to the inventory menu.
      * This function also loads the inventory table, so the table is filled when the page is loaded.
      * 
-     * @see {@link pointOfSales.managerPageController#initializeInventoryEditTable()}
-     * @see {@link pointOfSales.services.SystemFunctions#getInventory()}
+     * @see pointOfSales.managerPageController#initializeInventoryEditTable()
+     * @see pointOfSales.services.SystemFunctions#getInventory()
      */
 
     @FXML
-    private void handleInventoryButton() {
+    public void handleInventoryButton() {
         // Toggle Visibility of pretty much everything on the page (OrderInfoPane,
         // menuItems Pane, ordercustomization Pane)
         if (orderCustomizationMenu.isVisible()) {
@@ -794,12 +793,12 @@ public class managerPageController implements Initializable {
     /**
      * The handleEditMenuButton function changes to the editMenu page where products on the menu can be added or deleted
      * 
-     * @see {@link pointOfSales.managerPageController#initializeMenuEditTable()}
-     * @see {@link pointOfSales.services.SystemFunctions#getProducts()}
+     * @see pointOfSales.managerPageController#initializeMenuEditTable()
+     * @see pointOfSales.services.SystemFunctions#getProducts()
      */
 
     @FXML
-    private void handleEditMenuButton() {
+    public void handleEditMenuButton() {
         //clear data fields and change the visiblity of the active UI
         productData.clear();
         editInventoryPage.setVisible(false);
@@ -826,7 +825,7 @@ public class managerPageController implements Initializable {
      */
 
     @FXML
-    private void handleEditInventoryButton() {
+    public void handleEditInventoryButton() {
         editMenuPage.setVisible(false);
         editInventoryPage.setVisible(true);
     }
@@ -835,7 +834,7 @@ public class managerPageController implements Initializable {
      * The initializeInventoryEditTable function initializes the inventory table to add values to it later.
      */
 
-    private void initializeInventoryEditTable() {
+    public void initializeInventoryEditTable() {
 
         //initializes the Inventory ID column
 
@@ -882,7 +881,7 @@ public class managerPageController implements Initializable {
      * The initializeMenuEditTable function initializes the product table to add values to it later
      */
 
-    private void initializeMenuEditTable() {
+    public void initializeMenuEditTable() {
 
         //initializes the Product ID column
 
@@ -930,11 +929,11 @@ public class managerPageController implements Initializable {
      * This function turns the visibilty of all other UI elements off and all of the UI for the checkout menu on.
      * The function also clears any left over values in the table that may be there before navigating off the checkout menu.
      * 
-     * @see {@link pointOfSales.managerPageController#setUpTeaPane()}
+     * @see pointOfSales.managerPageController#setUpTeaPane()
      */
 
     @FXML
-    private void checkoutButton() {
+    public void checkoutButton() {
 
         //Toggle visibility of AnchorPanes
 
@@ -972,13 +971,13 @@ public class managerPageController implements Initializable {
      * The handleAddInventory function is the handler for the add inventory button on the inventory management page.
      * This function adds whatever values were entered into the textfields to the database and refreshes the table
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#getInventory()}
-     * @see {@link pointOfSales.services.SystemFunctions#updateInventory()}
+     * @see pointOfSales.services.SystemFunctions#getInventory()
+     * @see pointOfSales.services.SystemFunctions#updateInventory(String, Integer)
      * @throws NumberFormatException if the values that were pulled from the database cannot be converted to doubles.
      */
 
     @FXML
-    private void handleAddInventory() {
+    public void handleAddInventory() {
 
         //grabs the textfields information
 
@@ -1016,12 +1015,12 @@ public class managerPageController implements Initializable {
     /**
      * The handleDeleteInventory function deletes an item from the inventory based off of the values in the text fields
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#deleteInventory(String))}
-     * @see {@link pointOfSales.services.SystemFunctions#getInventory()}
+     * @see pointOfSales.services.SystemFunctions#deleteInventory(String)
+     * @see pointOfSales.services.SystemFunctions#getInventory()
      */
 
     @FXML
-    private void handleDeleteInventory() {
+    public void handleDeleteInventory() {
 
         //get the text from the text fields
 
@@ -1054,13 +1053,13 @@ public class managerPageController implements Initializable {
      * The handleAddProduct function is the handler for the add product button.
      * This function adds a new product to the database and updates the table immediately to display the new item
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#updateAddProduct(String, String, Double)}
-     * @see {@link pointOfSales.services.SystemFunctions#getProducts()}
+     * @see pointOfSales.services.SystemFunctions#updateAddProduct(String, String, Double)
+     * @see pointOfSales.services.SystemFunctions#getProducts()
      * @throws NumberFormatException if the data from the database cannot be converted to a value of double
      */
 
     @FXML
-    private void handleAddProduct() {
+    public void handleAddProduct() {
 
         //grabs the information from the text fields
 
@@ -1098,13 +1097,13 @@ public class managerPageController implements Initializable {
      * The handleDeleteProduct function is the handler for the delete button on the product management page.
      * This function deletes a product from the database and updates the table to show the change in the UI.
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#deleteProduct()}
-     * @see {@link pointOfSales.services.SystemFunctions#getProducts()}
+     * @see pointOfSales.services.SystemFunctions#deleteProduct(String)
+     * @see pointOfSales.services.SystemFunctions#getProducts()
      * @throws NumberFormatException in case a value cannot be converted to a double
      */
 
     @FXML
-    private void handleDeleteProduct() {
+    public void handleDeleteProduct() {
 
         //grabs the information from the text fields
 
@@ -1145,7 +1144,7 @@ public class managerPageController implements Initializable {
      */
 
     @FXML
-    private void handleClearInventory() {
+    public void handleClearInventory() {
         TextField itemName = (TextField) inventoryPane.lookup("#itemNameTextField");
         TextField itemQuantity = (TextField) inventoryPane.lookup("#invQuantityTextField");
 
@@ -1159,7 +1158,7 @@ public class managerPageController implements Initializable {
      */
 
     @FXML
-    private void handleClearProduct() {
+    public void handleClearProduct() {
         TextField name = (TextField) editProductPage.lookup("#productNameTextField");
         TextField category = (TextField) editProductPage.lookup("#stockTextField");
         TextField price = (TextField) editProductPage.lookup("#priceTextField");
@@ -1173,14 +1172,14 @@ public class managerPageController implements Initializable {
      * The handleStatPage function is the handler for the statistics button on the right nav bar.
      * This function turns off the visibility of all UI elements and turns on the UI elements that the stat page should only display
      * 
-     * @see {@link pointOfSales.managerPageController#initializeExcessTable()}
-     * @see {@link pointOfSales.managerPageController#initializePairTable()}
-     * @see {@link pointOfSales.managerPageController#initializeRestockTable()}
-     * @see {@link pointOfSales.managerPageController#handleRestockReport()}
+     * @see pointOfSales.managerPageController#initializeExcessTable()
+     * @see pointOfSales.managerPageController#initializePairTable()
+     * @see pointOfSales.managerPageController#initializeRestockTable()
+     * @see pointOfSales.managerPageController#handleRestockReport()
      */
 
     @FXML
-    private void handleStatPage() {
+    public void handleStatPage() {
         if (orderCustomizationMenu.isVisible()) {
             return;
         } else if (editMenuPage.isVisible()) {
@@ -1208,12 +1207,12 @@ public class managerPageController implements Initializable {
      * This function takes the entries from the 2 dates the user entered in the UI and creates
      * a bar graph displaying how each product performed in sales over that given time period
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#getProductSales(String, String)}
+     * @see pointOfSales.services.SystemFunctions#getProductSales(String, String)
      * @throws NumberFormatException fails in formatting the dates correctly
      */
 
     @FXML
-    private void handleSalesReport() {
+    public void handleSalesReport() {
 
         //grabs data from the date entries and clears the bar graph
 
@@ -1264,11 +1263,11 @@ public class managerPageController implements Initializable {
      * The handleExcessReport function is the handler for the date entry field.
      * This function when a date is entered attempts to display the excess stock for that day in the excess table
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#getExcessStock(String)}
+     * @see pointOfSales.services.SystemFunctions#getExcessStock(String)
      */
 
     @FXML
-    private void handleExcessReport() {
+    public void handleExcessReport() {
 
         //clears the table and calls the function to grab the excess stock
 
@@ -1294,11 +1293,11 @@ public class managerPageController implements Initializable {
      * This function takes 2 dates from datefields and ranks the 2 most often sold products together from greatest to least.
      * Then it displays the ranking in a table
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#getPairs(String, String)}
+     * @see pointOfSales.services.SystemFunctions#getPairs(String, String)
      */
 
     @FXML
-    private void handlePopularPair() {
+    public void handlePopularPair() {
         pairData.clear();
         String pairStartText = pairingStartDate.getValue().toString();
         String pairEndText = pairingEndDate.getValue().toString();
@@ -1317,10 +1316,10 @@ public class managerPageController implements Initializable {
      * The handleRestockReport function determines whether or not items are
      * passed the threshold determined in the database to be restocked and if there are any items, then they are displayed in a table.
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#getLowStock()}
+     * @see pointOfSales.services.SystemFunctions#getLowStock()
      */
 
-    private void handleRestockReport(){
+    public void handleRestockReport(){
         restockData.clear();
         ArrayList<ArrayList<Object>> restockList = new ArrayList<>();
 
@@ -1337,7 +1336,7 @@ public class managerPageController implements Initializable {
      * The initializeExcessTable function initializes the excess table so data can be added to it.
      */
 
-    private void initializeExcessTable() {
+    public void initializeExcessTable() {
 
         //initializes the Inventory ID column
 
@@ -1385,7 +1384,7 @@ public class managerPageController implements Initializable {
      * The initializePairTable function initializes the pair table so data can be added to it.
      */
 
-    private void initializePairTable() {
+    public void initializePairTable() {
 
         //initializes the ranking column
 
@@ -1413,7 +1412,7 @@ public class managerPageController implements Initializable {
      * The initializeRestockTable function initializes the restock table so data can be added to it.
      */
     
-    private void initializeRestockTable(){
+    public void initializeRestockTable(){
 
         //initializes the Inventory ID column
 
@@ -1450,7 +1449,7 @@ public class managerPageController implements Initializable {
      * The initializeOrderHistoryTable function initializes the orderHistory table so data can be added to it.
      */
 
-    private void initializeOrderHistoryTable(){
+    public void initializeOrderHistoryTable(){
 
         //initializes the Order ID column
 
@@ -1489,12 +1488,12 @@ public class managerPageController implements Initializable {
      * and toggles on all the UI elements that are on the page.
      * It also initializes the tables on the page.
      * 
-     * @see {@link pointOfSales.managerPageController#initializeOrderHistoryTable()}
-     * @see {@link pointOfSales.managerPageController#initializeHistoryInfoTable()}
+     * @see pointOfSales.managerPageController#initializeOrderHistoryTable()
+     * @see pointOfSales.managerPageController#initializeHistoryInfoTable()
      */
 
     @FXML 
-    private void handleOrdersButton(){
+    public void handleOrdersButton(){
         if (orderCustomizationMenu.isVisible()) {
             return;
         } else if (editMenuPage.isVisible()) {
@@ -1517,12 +1516,12 @@ public class managerPageController implements Initializable {
      * The handleGenerateOrderHistory function is the handler for the generate button on the orders page.
      * This function takes a date window and adds 25 orders to the orderHistory table.
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#getOrdersByDates(String, String)}
+     * @see pointOfSales.services.SystemFunctions#getOrdersByDates(String, String)
      * 
      */
 
     @FXML
-    private void handleGenerateOrderHistory(){
+    public void handleGenerateOrderHistory(){
 
         //clear the data and list private members and get the dates
 
@@ -1550,12 +1549,12 @@ public class managerPageController implements Initializable {
 
     /**
      * The handleForwardHistory function is the handler for the next button on the orders page.
-     * This function grabs the next 1 <= x <= 25 values from the array that was generated by handleGenerateOrderHistory.
+     * This function grabs the next 1 &lt;= x &lt;= 25 values from the array that was generated by handleGenerateOrderHistory.
      * Then it clears the table and displays the next 25 values.
      */
 
     @FXML
-    private void handleForwardHistory(){
+    public void handleForwardHistory(){
 
         //make sure there are more values to get
 
@@ -1587,7 +1586,7 @@ public class managerPageController implements Initializable {
      */
 
     @FXML
-    private void handleBackwardHistory(){
+    public void handleBackwardHistory(){
 
         //make sure the index does not go below zero
 
@@ -1611,7 +1610,7 @@ public class managerPageController implements Initializable {
      * The initializeHistoryInfoTable function initializes the historyInfoTable so values can be added to it.
      */
 
-    private void initializeHistoryInfoTable(){
+    public void initializeHistoryInfoTable(){
 
         //initializes the product name column
 
@@ -1649,11 +1648,11 @@ public class managerPageController implements Initializable {
      * This function whenever a row is selected on the table, it adds the details of the order to the
      * order history info table to show what was ordered and how much it cost.
      * @param event is used to make sure that a row was clicked
-     * @see {@link pointOfSales.services.SystemFunctions#getOrderProductByID(Integer)}
+     * @see pointOfSales.services.SystemFunctions#getOrderProductByID(Integer)
      */
 
     @FXML
-    private void handleHistoryTableClick(MouseEvent event){
+    public void handleHistoryTableClick(MouseEvent event){
 
         //clears table and grabs the info from the selected row
 
@@ -1684,11 +1683,11 @@ public class managerPageController implements Initializable {
     /**
      * The handleProductUsage function switches the panes on the stat page
      * between the sales report and the product usage report.
-     * @see {@link pointOfSales.managerPageController#initializeProductUsage()}
+     * @see pointOfSales.managerPageController#initializeProductUsage()
      */
 
     @FXML 
-    private void handleProductUsage(){
+    public void handleProductUsage(){
         salesPane.setVisible(false);
         productUsagePane.setVisible(true);
         initializeProductUsage();   
@@ -1700,7 +1699,7 @@ public class managerPageController implements Initializable {
      */
 
     @FXML
-    private void handleSalesButton(){
+    public void handleSalesButton(){
         salesPane.setVisible(true);
         productUsagePane.setVisible(false);
     }
@@ -1710,7 +1709,7 @@ public class managerPageController implements Initializable {
      * columns.
      */
 
-    private void initializeProductUsage(){
+    public void initializeProductUsage(){
         //initializes the product name column
 
         usageInventoryID.setCellValueFactory(cellData -> {
@@ -1745,11 +1744,11 @@ public class managerPageController implements Initializable {
     /**
      * The handleUsage function adds values to the Usage table.
      * The table returns values of the change in the inventory over a time window
-     * @see {@link pointOfSales.services.SystemFunctions#getInventoryUsage()}
+     * @see pointOfSales.services.SystemFunctions#getInventoryUsage(String, String)
      */
 
     @FXML 
-    private void handleUsage(){
+    public void handleUsage(){
         String startDate = productUsageStartDate.getValue().toString();
         String endDate = productUsageEndDate.getValue().toString();
         ArrayList <ArrayList<String>> values = new ArrayList<>();

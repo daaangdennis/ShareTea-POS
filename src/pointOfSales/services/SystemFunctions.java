@@ -11,7 +11,7 @@ public class SystemFunctions {
     /** 
      * Looks in the database and gets the lowest available order_id 
      * @return String of next order ID
-     * @see {@link  entities.product#nextAvailableOrder()  nextAvailableOrder()}
+     * @see pointOfSales.entities.order#nextAvailableOrder(Connection)  
      */
     public static String nextOrderID(){
         dbconnect dbconn = new dbconnect();
@@ -60,7 +60,7 @@ public class SystemFunctions {
 
     /**
      * Fetches information from all products in database
-     * @return ArrayList<ArrayList<String> with 4 indexes, for IDs, Names, Categories, and Prices
+     * @return ArrayList&lt;ArrayList&lt;String> with 4 indexes, for IDs, Names, Categories, and Prices
      */
     public static ArrayList<ArrayList<String>> getProducts(){
         dbconnect dbconn = new dbconnect();
@@ -71,7 +71,7 @@ public class SystemFunctions {
     /**
      * Fetches information from all products in database given a category
      * @param Category
-     * @return ArrayList<ArrayList<String> with 3 indexes, for Names, Prices, and IDs
+     * @return ArrayList&lt;ArrayList&lt;String> with 3 indexes, for Names, Prices, and IDs
      */
     public static ArrayList<ArrayList<String>> productsAndPriceByCategory(String Category){
         dbconnect dbconn = new dbconnect();
@@ -91,7 +91,7 @@ public class SystemFunctions {
 
     /**
      * Fetches all inventory data from database
-     * @return ArrayList<ArrayList<String>> with 4 indexes, for IDs, Names, Quantities, and Last Updated 
+     * @return ArrayList&lt;ArrayList&lt;String>> with 4 indexes, for IDs, Names, Quantities, and Last Updated 
      */
     public static ArrayList<ArrayList<String>> getInventory(){
         dbconnect dbconn = new dbconnect();
@@ -174,7 +174,7 @@ public class SystemFunctions {
      * Given a timeframe, returns the number of products sold for all products in the database
      * @param startDate
      * @param endDate
-     * @return ArrayList<ArrayList<Object>> with 2 lists, one having the product name and the other the number of products sold
+     * @return ArrayList&lt;ArrayList&lt;Object>> with 2 lists, one having the product name and the other the number of products sold
      */
     public static ArrayList<ArrayList<Object>> getProductSales(String startDate, String endDate){
         dbconnect dbconn = new dbconnect();
@@ -184,7 +184,7 @@ public class SystemFunctions {
 
     /**
      * Fetches inventory information for items with less than or equal to 25 in stock
-     * @return ArrayList<ArrayList<Object>> with 3 lists, IDs, names, and quantity remaining
+     * @return ArrayList&lt;ArrayList&lt;Object>> with 3 lists, IDs, names, and quantity remaining
      */
     public static ArrayList<ArrayList<Object>> getLowStock(){
         dbconnect dbconn = new dbconnect();
@@ -195,7 +195,7 @@ public class SystemFunctions {
     /**
      * Given a date, returns a list of inventory items that have sold less than 10% of their stock from the last inventory update
      * @param startDate
-     * @return ArrayList<ArrayList<Object>> with 4 lists, IDs, names, quantity used, and quantity remaining
+     * @return ArrayList&lt;ArrayList&lt;Object>> with 4 lists, IDs, names, quantity used, and quantity remaining
      */
     public static ArrayList<ArrayList<Object>> getExcessStock(String startDate){
         dbconnect dbconn = new dbconnect();
@@ -207,7 +207,7 @@ public class SystemFunctions {
      * Returns most common product pairings given a timeframe
      * @param startDate
      * @param endDate
-     * @return ArrayList<ArrayList<Object>> with 3 lists, product 1, product 2, and the combination count
+     * @return ArrayList&lt;ArrayList&lt;Object>> with 3 lists, product 1, product 2, and the combination count
      */
     public static ArrayList<ArrayList<Object>> getPairs(String startDate, String endDate){
         dbconnect dbconn = new dbconnect();
@@ -220,7 +220,7 @@ public class SystemFunctions {
      * Returns inventory usage information given a timeframe
      * @param startDate
      * @param endDate
-     * @return ArrayList<ArrayList<Object>> with 3 lists about an inventory item, ID, Name, and Usage over a time period
+     * @return ArrayList&lt;ArrayList&lt;Object>> with 3 lists about an inventory item, ID, Name, and Usage over a time period
      */
     public static ArrayList<ArrayList<String>> getInventoryUsage(String startDate, String endDate){
         dbconnect dbconn = new dbconnect();

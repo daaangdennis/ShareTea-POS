@@ -29,10 +29,10 @@ public class managerPage {
      * The getScene function loads the fxml file and creates a scene with dimensions 1280 x 720.
      * 
      * @return The function returns a scene with elements defined in manager.fxml
-     * @throws IOException throws exception if the fxml file does not load correctly
+     *
      */
 
-    public static Scene getScene() {
+    public static Scene getScene(){
 
         try {
             //Load the manager.fxml

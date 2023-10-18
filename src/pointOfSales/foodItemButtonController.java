@@ -49,12 +49,12 @@ public class foodItemButtonController {
      * This function checks the page the button was pressed on, and calls the database to create buttons for each product in the category.
      * 
      * @param event This parameter is used to figure out which category button was pressed
-     * @see {@link pointOfSales.services.SystemFunctions#productsAndPriceByCategory()}
-     * @throws Exception throws an exception if the fxml file is not correctly loaded.
+     * @see pointOfSales.services.SystemFunctions#productsAndPriceByCategory(String)
+     * 
      */
 
     @FXML
-    private void handleProductButton(ActionEvent event) {
+    public void handleProductButton(ActionEvent event) {
         int num_buttons = 1;
         int indexCount = 0;
         ToggleButton sourceButton = (ToggleButton) event.getSource();

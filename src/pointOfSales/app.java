@@ -17,7 +17,7 @@ public class app extends Application {
      * The start function starts the main application and sets all controllers to the main stage.
      * 
      * @param primaryStage passes in the main Stage necessary for adding and changing scenes
-     * @throws ExceptionType The start function throws a runtime exception if something goes wrong while the application is running.
+     * @throws Exception The start function throws a runtime exception if something goes wrong while the application is running.
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -44,7 +44,7 @@ public class app extends Application {
     }
     /**
      * The main function loads all the libraries so the app can start
-     * @param args
+     * @param args this is the main function arguments
      */
     public static void main(String[] args) {
         launch(args);

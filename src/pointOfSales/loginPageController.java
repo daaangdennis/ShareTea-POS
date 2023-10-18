@@ -95,7 +95,7 @@ public class loginPageController {
      */
 
     @FXML
-    private void handleNumberButtonClick(ActionEvent event) {
+    public void handleNumberButtonClick(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
         String buttonName = clickedButton.getId();
         char value = buttonName.charAt(buttonName.length() - 1);
@@ -109,7 +109,7 @@ public class loginPageController {
      */
 
     @FXML
-    private void handleDelButtonClick() {
+    public void handleDelButtonClick() {
         if(passwordField.getLength() != 0){
             passwordField.deleteText(passwordField.getLength() - 1, passwordField.getLength());
         }
@@ -122,18 +122,18 @@ public class loginPageController {
      */
 
     @FXML
-    private void handleClearButtonClick() {
+    public void handleClearButtonClick() {
         passwordField.clear();
     }
 
     /**
      * The handleEnterButtonClick function is the handler for the enter button
      * This handler will check if the password matches a password for an employee and either clear the field or log the employee in.
-     * @see {@link pointOfSales.services.SystemFunctions#verify()}
+     * @see pointOfSales.services.SystemFunctions#verify(String)
      */
 
     @FXML
-    private void handleEnterButtonClick() {
+    public void handleEnterButtonClick() {
         //Check if the password exists in the database
         ArrayList<String> values = SystemFunctions.verify(passwordField.getText());
 

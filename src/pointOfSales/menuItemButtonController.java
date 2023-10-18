@@ -45,18 +45,18 @@ public class menuItemButtonController {
      * holds all the information about the order that the customer made.
      * @param event this uses the source button to search the maps to get the values of the labels on the button
      * 
-     * @see setId()
-     * @see setTeaType
-     * @see setQuantity
-     * @see setPrice
-     * @see setFoodCost
-     * @see getFoodLabel
-     * @see setFoodCost
-     * @see setFoodLabel
+     * @see pointOfSales.orderedProduct#setId(String)
+     * @see pointOfSales.orderedProduct#setTeaType(String)
+     * @see pointOfSales.orderedProduct#setQuantity(int)
+     * @see pointOfSales.orderedProduct#setPrice(String)
+     * @see pointOfSales.orderPageController#setFoodCost(Double)
+     * @see pointOfSales.orderPageController#getFoodLabel()
+     * @see pointOfSales.managerPageController#setFoodCost(Double)
+     * @see pointOfSales.managerPageController#getFoodLabel()
      */
 
     @FXML
-    private void handleSubButton(ActionEvent event) {
+    public void handleSubButton(ActionEvent event) {
         Button sourceButton = (Button) event.getSource();
         Label foodType = null;
         Label cost = null;

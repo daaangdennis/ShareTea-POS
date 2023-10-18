@@ -119,7 +119,7 @@ public class customer {
      * customer will be created.
      * 
      * @param conn     The database connection.
-     * @param FirstNam The first name of the customer.
+     * @param FirstName The first name of the customer.
      * @param LastName The last name of the customer.
      * 
      * @return The ID of the found or created customer, -1 if not found or failed,

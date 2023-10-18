@@ -163,9 +163,9 @@ public class orderPageController implements Initializable {
     /**
      * The initialize function initializes tables and and variables necessary when the page is loaded
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#nextOrderID()}
-     * @see {@link pointOfSales.loginPageController#getPosition()}
-     * @see {@link pointOfSales.orderPageController#setUpTeaPane()}
+     * @see pointOfSales.services.SystemFunctions#nextOrderID()
+     * @see pointOfSales.loginPageController#getPosition()
+     * @see pointOfSales.orderPageController#setUpTeaPane()
      */
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -217,7 +217,7 @@ public class orderPageController implements Initializable {
 
     /**
      * The getTable function returns a reference to the checkoutTable private member of the orderPageController class.
-     * @return an object of type TableView<Object[]> to grab items from the table or modify values in the table
+     * @return an object of type TableView&lt;Object[]> to grab items from the table or modify values in the table
      */
 
     public TableView<Object[]> getTable() {
@@ -282,11 +282,11 @@ public class orderPageController implements Initializable {
      * The function handleChangeScene is the handler for the logout button.
      * This function resets the current employee and changes back to the loginPage scene.
      * @param event used to confirm the logoutButton was pressed.
-     * @see {@link pointOfSales.sceneController#changeScene()}
+     * @see pointOfSales.sceneController#changeScene(Scene)
      */
 
     @FXML
-    private void handleChangeScene(ActionEvent event) {
+    public void handleChangeScene(ActionEvent event) {
         Button pressedButton = (Button) event.getSource();
         if (pressedButton.getId().equals("logoutButton")) {
             employPosition = "";
@@ -298,11 +298,11 @@ public class orderPageController implements Initializable {
     /**
      * The setUpTeaPane function handles loading all the categories of all products on the menu and adding them to a gridPane
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#getCategories()}
-     * @see {@link pointOfSales.menuItemButtonController#setManagerControl()}
-     * @throws Exception throws when the fxml file could not be loaded.
+     * @see pointOfSales.services.SystemFunctions#getCategories()
+     * @see pointOfSales.menuItemButtonController#setManagerControl(managerPageController)
+     * 
      */
-    private void setUpTeaPane() {
+    public void setUpTeaPane() {
         int numButtons = 1;
 
         //clear and setup variables before loading data 
@@ -356,7 +356,7 @@ public class orderPageController implements Initializable {
      */
 
     @FXML
-    private void handleCloseButton(ActionEvent event) {
+    public void handleCloseButton(ActionEvent event) {
         //Make the current anchorpane invisible
 
         menuItems.setVisible(!menuItems.isVisible());
@@ -425,15 +425,15 @@ public class orderPageController implements Initializable {
     /**
      * The addItem function adds the customized item to the checkoutTable.
      * It also creates a orderedProduct to add to an array keeping track of all customizations to the product.
-     * @see {@link pointOfSales.orderPageController#checkToggledButton(ToggleGroup)}
-     * @see {@link pointOfSales.orderedProduct#setIce(String)}
-     * @see {@link pointOfSales.orderedProduct#setSugar(Double)}
-     * @see {@link pointOfSales.orderedProduct#setNote(String)}
-     * @see {@link pointOfSales.orderedProduct#addToList(String)}
+     * @see pointOfSales.orderPageController#checkToggledButton(ToggleGroup)
+     * @see pointOfSales.orderedProduct#setIce(String)
+     * @see pointOfSales.orderedProduct#setSugar(Double)
+     * @see pointOfSales.orderedProduct#setNote(String)
+     * @see pointOfSales.orderedProduct#addToList(String)
      */
 
     @FXML
-    private void addItem(ActionEvent event) {
+    public void addItem(ActionEvent event) {
 
         //Makes sure items can't be added without selecting both a sugar and an ice button
 
@@ -567,7 +567,7 @@ public class orderPageController implements Initializable {
      */
 
     @FXML
-    private void handleCancelButton(ActionEvent event) {
+    public void handleCancelButton(ActionEvent event) {
         data.clear();
         Label checkoutSubTotal = (Label) orderInfoPane.lookup("#checkoutSubTotal");
         checkoutSubTotal.setText("$0.00");
@@ -585,7 +585,7 @@ public class orderPageController implements Initializable {
      */
 
     @FXML
-    private void handleToppingButtons(ActionEvent event) {
+    public void handleToppingButtons(ActionEvent event) {
         ToggleButton sourceButton = (ToggleButton) event.getSource();
         if (!sourceButton.isSelected()) {
             foodLabelCost -= 0.75;
@@ -605,21 +605,21 @@ public class orderPageController implements Initializable {
      * This function grabs all the information about the current order and passes it to the backend
      * to add the order to the database.
      * 
-     * @see {@link pointOfSales.loginPageController#getFirstName()}
-     * @see {@link pointOfSales.loginPageController#getLastName()}
-     * @see {@link pointOfSales.entities.orderProduct#orderproduct(String, int, ArrayList<String>, double, String, String)}
-     * @see {@link pointOfSales.orderedProduct#getId()}
-     * @see {@link pointOfSales.orderedProduct#getQuantity()}
-     * @see {@link pointOfSales.orderedProduct#getToppings()}
-     * @see {@link pointOfSales.orderedProduct#getSugar()}
-     * @see {@link pointOfSales.orderedProduct#getIce()}
-     * @see {@link pointOfSales.orderedProduct#getNote()}
-     * @see {@link pointOfSales.services.SystemFunctions#addOrder(String, String, String, String, ArrayList, double)}
-     * @see {@link pointOfSales.services.SystemFunctions#nextOrderID()}
+     * @see pointOfSales.loginPageController#getFirstName()
+     * @see pointOfSales.loginPageController#getLastName()
+     * @see pointOfSales.entities.orderProduct#orderProduct(String, int, ArrayList<String>, double, String, String)
+     * @see pointOfSales.orderedProduct#getId()
+     * @see pointOfSales.orderedProduct#getQuantity()
+     * @see pointOfSales.orderedProduct#getToppings()
+     * @see pointOfSales.orderedProduct#getSugar()
+     * @see pointOfSales.orderedProduct#getIce()
+     * @see pointOfSales.orderedProduct#getNote()
+     * @see pointOfSales.services.SystemFunctions#addOrder(String, String, String, String, ArrayList, double)
+     * @see pointOfSales.services.SystemFunctions#nextOrderID()
      */
 
     @FXML
-    private void handleProceedButton(ActionEvent event) {
+    public void handleProceedButton(ActionEvent event) {
         // Getting Customer First and Last Name:
         TextField customerName = (TextField) orderInfoPane.lookup("#customerNameTextField");
         String[] names = customerName.getText().split(" ");
@@ -669,11 +669,11 @@ public class orderPageController implements Initializable {
      * This function turns the visibilty of all other UI elements off and all of the UI for the checkout menu on.
      * The function also clears any left over values in the table that may be there before navigating off the checkout menu.
      * 
-     * @see {@link pointOfSales.orderPageController#setUpTeaPane()}
+     * @see pointOfSales.orderPageController#setUpTeaPane()
      */
 
     @FXML
-    private void checkoutButton(ActionEvent event) {
+    public void checkoutButton(ActionEvent event) {
 
         //Toggle visibility of AnchorPanes
 
@@ -708,7 +708,7 @@ public class orderPageController implements Initializable {
      * The initializeOrderHistoryTable function initializes the orderHistory table so data can be added to it.
      */
 
-    private void initializeOrderHistoryTable(){
+    public void initializeOrderHistoryTable(){
 
         //initializes the Order ID column
 
@@ -747,12 +747,12 @@ public class orderPageController implements Initializable {
      * and toggles on all the UI elements that are on the page.
      * It also initializes the tables on the page.
      * 
-     * @see {@link pointOfSales.orderPageController#initializeOrderHistoryTable()}
-     * @see {@link pointOfSales.orderPageController#initializeHistoryInfoTable()}
+     * @see pointOfSales.orderPageController#initializeOrderHistoryTable()
+     * @see pointOfSales.orderPageController#initializeHistoryInfoTable()
      */
 
     @FXML 
-    private void handleOrdersButton(){
+    public void handleOrdersButton(){
         if (orderCustomizationMenu.isVisible()) {
             return;
         } else{
@@ -770,12 +770,12 @@ public class orderPageController implements Initializable {
      * The handleGenerateOrderHistory function is the handler for the generate button on the orders page.
      * This function takes a date window and adds 25 orders to the orderHistory table.
      * 
-     * @see {@link pointOfSales.services.SystemFunctions#getOrdersByDates(String, String)}
+     * @see pointOfSales.services.SystemFunctions#getOrdersByDates(String, String)
      * 
      */
 
     @FXML
-    private void handleGenerateOrderHistory(){
+    public void handleGenerateOrderHistory(){
 
         //clear the data and list private members and get the dates
 
@@ -803,12 +803,12 @@ public class orderPageController implements Initializable {
 
     /**
      * The handleForwardHistory function is the handler for the next button on the orders page.
-     * This function grabs the next 1 <= x <= 25 values from the array that was generated by handleGenerateOrderHistory.
+     * This function grabs the next 1 &lt;= x &lt;= 25 values from the array that was generated by handleGenerateOrderHistory.
      * Then it clears the table and displays the next 25 values.
      */
 
     @FXML
-    private void handleForwardHistory(){
+    public void handleForwardHistory(){
 
         //make sure there are more values to get
 
@@ -841,7 +841,7 @@ public class orderPageController implements Initializable {
      */
 
     @FXML
-    private void handleBackwardHistory(){
+    public void handleBackwardHistory(){
 
         //make sure the index does not go below zero
 
@@ -865,7 +865,7 @@ public class orderPageController implements Initializable {
      * The initializeHistoryInfoTable function initializes the historyInfoTable so values can be added to it.
      */
 
-    private void initializeHistoryInfoTable(){
+    public void initializeHistoryInfoTable(){
 
         //initializes the product name column
 
@@ -903,11 +903,11 @@ public class orderPageController implements Initializable {
      * This function whenever a row is selected on the table, it adds the details of the order to the
      * order history info table to show what was ordered and how much it cost.
      * @param event is used to make sure that a row was clicked
-     * @see {@link pointOfSales.services.SystemFunctions#getOrderProductByID(Integer)}
+     * @see pointOfSales.services.SystemFunctions#getOrderProductByID(Integer)
      */
 
     @FXML
-    private void handleHistoryTableClick(MouseEvent event){
+    public void handleHistoryTableClick(MouseEvent event){
         selectedHistoryData.clear();
         Object[] selectedRow = null;
         if(event.getClickCount() == 1){
