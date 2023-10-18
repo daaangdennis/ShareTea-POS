@@ -1,18 +1,24 @@
-## Getting Started
+# Point of Sales System For Sharetea.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
-## Folder Structure
+## User Interface
 
-The workspace contains two folders by default, where:
+- The GUI allows the user to interact with the Point of Sale (POS) system to input and manage orders as well as manage the store inventory.
+- To ensure that the GUI launches correctly, follow the steps below:
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+Go to `JAVA PROJECTS` view, find the `Referenced Libraries` node and click the `+` icon:
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+![Reference JAR Files](docs/referenceLibraries.PNG)
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+Go into the `lib` folder and choose either the `javafx-sdk-21-macos` or `javafx-sdk-21-windows` depending on your oprating system. Then navigate into the `lib` folder of the
+folder that you selected, select all of the JAR files, and click `Select Jar Libraries`.
 
-## Dependency Management
+![Adding JAR Files](docs/addingLibraries.PNG)
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+To launch the app, go to `Run and Debug` and click the green play button.
+
+![Launching App](docs/launchApp.PNG)
+
+## SQL schema and Entities 
+- The project defines a Point of Sale (POS) system for managing customer orders, employees, products, and inventory. In the entity-relationship structure, the primary entities are Customer, Employee, Order, OrderProduct, Product, InventoryProduct, and Inventory. Key relationships include a Customer placing multiple orders, each order being processed by one Employee, and orders comprising multiple products. An essential bridge entity is OrderProduct, connecting the many-to-many relationship between Order and Product. The InventoryProduct entity links available products with the actual inventory items.
+- SQL schemas for each entity are provided, detailing columns, data types, and relationships. These schemas form the foundation for database creation and subsequent operations. This modular and scalable design ensures smooth addition of new records while preserving data integrity and representation. For a detailed view of the schemas and relationships, refer to the [SQL Documentation](docs/sqlp2.pdf)
