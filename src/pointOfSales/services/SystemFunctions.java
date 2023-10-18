@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 public class SystemFunctions {
 
-    // ------------------ ORDER FUNCTIONS ----------------------//
-
     // ------------------ ORDER FUNCTIONS ----------------------// 
 
     /** 
@@ -44,7 +42,6 @@ public class SystemFunctions {
         }
     }
 
-    // ------------------ SYSTEM FUNCTIONS ----------------------//
 
 
 
@@ -216,6 +213,19 @@ public class SystemFunctions {
         dbconnect dbconn = new dbconnect();
         Connection conn = dbconn.conn;
         return sales.commonPairs(conn, startDate, endDate);
+    }
+
+
+    /**
+     * Returns inventory usage information given a timeframe
+     * @param startDate
+     * @param endDate
+     * @return ArrayList<ArrayList<Object>> with 3 lists about an inventory item, ID, Name, and Usage over a time period
+     */
+    public static ArrayList<ArrayList<String>> getInventoryUsage(String startDate, String endDate){
+        dbconnect dbconn = new dbconnect();
+        Connection conn = dbconn.conn;
+        return sales.inventoryUsage(conn, startDate, endDate);
     }
 
 }
