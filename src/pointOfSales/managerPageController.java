@@ -1752,8 +1752,6 @@ public class managerPageController implements Initializable {
     private void handleUsage(){
         String startDate = productUsageStartDate.getValue().toString();
         String endDate = productUsageEndDate.getValue().toString();
-        System.out.println(startDate);
-        System.out.println(endDate);
         ArrayList <ArrayList<String>> values = new ArrayList<>();
         values = SystemFunctions.getInventoryUsage(startDate, endDate);
         usageData.clear();
