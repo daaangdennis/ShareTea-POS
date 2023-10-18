@@ -1,19 +1,44 @@
 package pointOfSales.entities;
+
 import java.sql.*;
 
+/**
+ * Represents a customer in the point of sales system.
+ */
 public class customer {
+    /** The first name of the customer. */
     String FirstName = null;
+    /** The last name of the customer. */
     String LastName = null;
+    /** The email of the customer. */
     String Email = null;
+    /** The phone number of the customer. */
     String PhoneNumber = null;
+    /** The count of orders associated with the customer. */
     int OrderCount = 1;
+    /** The database connection used for customer operations. */
     Connection conn = null;
+    /** The ID of the customer. */
     public int CustomerID = -1;
 
+    /**
+     * Constructs a customer object with a given database connection.
+     *
+     * @param conn The database connection.
+     */
     public customer(Connection conn) {
         this.conn = conn;
     }
 
+    /**
+     * Constructs a customer object with details and a database connection.
+     *
+     * @param conn        The database connection.
+     * @param FirstName   The first name of the customer.
+     * @param LastName    The last name of the customer.
+     * @param Email       The email of the customer.
+     * @param PhoneNumber The phone number of the customer.
+     */
     public customer(Connection conn, String FirstName, String LastName, String Email, String PhoneNumber) {
         this.FirstName = FirstName;
         this.LastName = LastName;
@@ -22,6 +47,14 @@ public class customer {
         this.conn = conn;
     }
 
+    /**
+     * Creates a new customer in the database with the given first and last name.
+     *
+     * @param conn  The database connection.
+     * @param First The first name of the new customer.
+     * @param Last  The last name of the new customer.
+     * @return The ID of the created customer or -1 if the creation fails.
+     */
     public static int createCustomer(Connection conn, String First, String Last) {
         int customer_id = -1;
         try {
@@ -39,7 +72,7 @@ public class customer {
             while (resultSet.next()) {
                 customer_id = resultSet.getInt("max");
                 return customer_id;
-            } 
+            }
 
         } catch (Exception e) {
             System.out.println(
@@ -48,6 +81,12 @@ public class customer {
         return customer_id;
     }
 
+    /**
+     * Retrieves a customer from the database by their ID.
+     *
+     * @param CustomerID The ID of the customer.
+     * @return The customer object or null if not found.
+     */
     public customer getCustomerByID(int CustomerID) {
         customer resultCustomer = null;
         try {
@@ -73,6 +112,19 @@ public class customer {
         return resultCustomer;
     }
 
+    /**
+     * Retrieves a customer ID from the database by their first and last name.
+     * If the customer does not exist and the provided names are not empty, a new
+     * 
+     * customer will be created.
+     * 
+     * @param conn     The database connection.
+     * @param FirstNam The first name of the customer.
+     * @param LastName The last name of the customer.
+     * 
+     * @return The ID of the found or created customer, -1 if not found or failed,
+     *         or -2 if first name is empty.
+     */
     public static int getCustomerByName(Connection conn, String FirstName, String LastName) {
         int customerID = -1;
         try {
@@ -89,11 +141,9 @@ public class customer {
                 addCountST.setInt(1, customerID);
                 addCountST.executeUpdate();
                 return customerID;
-            } 
-            else if(FirstName.isEmpty()){
+            } else if (FirstName.isEmpty()) {
                 return -2;
-            }
-            else {
+            } else {
                 customerID = customer.createCustomer(conn, FirstName, LastName);
                 return customerID;
             }

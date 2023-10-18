@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ToggleButton?>
+
+
+<ToggleButton fx:id="categoryButton" minHeight="70.0" minWidth="180.0" mnemonicParsing="false" onAction="#handleProductButton" styleClass="food-category-button" stylesheets="@../stylesheets/style.css" text="ToggleButton" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pointOfSales.foodItemButtonController" />
